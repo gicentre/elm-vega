@@ -1841,9 +1841,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.as,
-		impl.aA,
-		impl.ay,
+		impl.ar,
+		impl.az,
+		impl.ax,
 		function() { return function() {} }
 	);
 });
@@ -2295,6 +2295,1996 @@ function _Platform_mergeExportsDebug(moduleName, obj, exports)
 			: (obj[name] = exports[name]);
 	}
 }
+
+
+
+
+// HELPERS
+
+
+var _VirtualDom_divertHrefToApp;
+
+var _VirtualDom_doc = typeof document !== 'undefined' ? document : {};
+
+
+function _VirtualDom_appendChild(parent, child)
+{
+	parent.appendChild(child);
+}
+
+var _VirtualDom_init = F4(function(virtualNode, flagDecoder, debugMetadata, args)
+{
+	// NOTE: this function needs _Platform_export available to work
+
+	/**/
+	var node = args['node'];
+	//*/
+	/**_UNUSED/
+	var node = args && args['node'] ? args['node'] : _Debug_crash(0);
+	//*/
+
+	node.parentNode.replaceChild(
+		_VirtualDom_render(virtualNode, function() {}),
+		node
+	);
+
+	return {};
+});
+
+
+
+// TEXT
+
+
+function _VirtualDom_text(string)
+{
+	return {
+		$: 0,
+		a: string
+	};
+}
+
+
+
+// NODE
+
+
+var _VirtualDom_nodeNS = F2(function(namespace, tag)
+{
+	return F2(function(factList, kidList)
+	{
+		for (var kids = [], descendantsCount = 0; kidList.b; kidList = kidList.b) // WHILE_CONS
+		{
+			var kid = kidList.a;
+			descendantsCount += (kid.b || 0);
+			kids.push(kid);
+		}
+		descendantsCount += kids.length;
+
+		return {
+			$: 1,
+			c: tag,
+			d: _VirtualDom_organizeFacts(factList),
+			e: kids,
+			f: namespace,
+			b: descendantsCount
+		};
+	});
+});
+
+
+var _VirtualDom_node = _VirtualDom_nodeNS(undefined);
+
+
+
+// KEYED NODE
+
+
+var _VirtualDom_keyedNodeNS = F2(function(namespace, tag)
+{
+	return F2(function(factList, kidList)
+	{
+		for (var kids = [], descendantsCount = 0; kidList.b; kidList = kidList.b) // WHILE_CONS
+		{
+			var kid = kidList.a;
+			descendantsCount += (kid.b.b || 0);
+			kids.push(kid);
+		}
+		descendantsCount += kids.length;
+
+		return {
+			$: 2,
+			c: tag,
+			d: _VirtualDom_organizeFacts(factList),
+			e: kids,
+			f: namespace,
+			b: descendantsCount
+		};
+	});
+});
+
+
+var _VirtualDom_keyedNode = _VirtualDom_keyedNodeNS(undefined);
+
+
+
+// CUSTOM
+
+
+function _VirtualDom_custom(factList, model, render, diff)
+{
+	return {
+		$: 3,
+		d: _VirtualDom_organizeFacts(factList),
+		g: model,
+		h: render,
+		i: diff
+	};
+}
+
+
+
+// MAP
+
+
+var _VirtualDom_map = F2(function(tagger, node)
+{
+	return {
+		$: 4,
+		j: tagger,
+		k: node,
+		b: 1 + (node.b || 0)
+	};
+});
+
+
+
+// LAZY
+
+
+function _VirtualDom_thunk(refs, thunk)
+{
+	return {
+		$: 5,
+		l: refs,
+		m: thunk,
+		k: undefined
+	};
+}
+
+var _VirtualDom_lazy = F2(function(func, a)
+{
+	return _VirtualDom_thunk([func, a], function() {
+		return func(a);
+	});
+});
+
+var _VirtualDom_lazy2 = F3(function(func, a, b)
+{
+	return _VirtualDom_thunk([func, a, b], function() {
+		return A2(func, a, b);
+	});
+});
+
+var _VirtualDom_lazy3 = F4(function(func, a, b, c)
+{
+	return _VirtualDom_thunk([func, a, b, c], function() {
+		return A3(func, a, b, c);
+	});
+});
+
+var _VirtualDom_lazy4 = F5(function(func, a, b, c, d)
+{
+	return _VirtualDom_thunk([func, a, b, c, d], function() {
+		return A4(func, a, b, c, d);
+	});
+});
+
+var _VirtualDom_lazy5 = F6(function(func, a, b, c, d, e)
+{
+	return _VirtualDom_thunk([func, a, b, c, d, e], function() {
+		return A5(func, a, b, c, d, e);
+	});
+});
+
+var _VirtualDom_lazy6 = F7(function(func, a, b, c, d, e, f)
+{
+	return _VirtualDom_thunk([func, a, b, c, d, e, f], function() {
+		return A6(func, a, b, c, d, e, f);
+	});
+});
+
+var _VirtualDom_lazy7 = F8(function(func, a, b, c, d, e, f, g)
+{
+	return _VirtualDom_thunk([func, a, b, c, d, e, f, g], function() {
+		return A7(func, a, b, c, d, e, f, g);
+	});
+});
+
+var _VirtualDom_lazy8 = F9(function(func, a, b, c, d, e, f, g, h)
+{
+	return _VirtualDom_thunk([func, a, b, c, d, e, f, g, h], function() {
+		return A8(func, a, b, c, d, e, f, g, h);
+	});
+});
+
+
+
+// FACTS
+
+
+var _VirtualDom_on = F2(function(key, handler)
+{
+	return {
+		$: 'a0',
+		n: key,
+		o: handler
+	};
+});
+var _VirtualDom_style = F2(function(key, value)
+{
+	return {
+		$: 'a1',
+		n: key,
+		o: value
+	};
+});
+var _VirtualDom_property = F2(function(key, value)
+{
+	return {
+		$: 'a2',
+		n: key,
+		o: value
+	};
+});
+var _VirtualDom_attribute = F2(function(key, value)
+{
+	return {
+		$: 'a3',
+		n: key,
+		o: value
+	};
+});
+var _VirtualDom_attributeNS = F3(function(namespace, key, value)
+{
+	return {
+		$: 'a4',
+		n: key,
+		o: { f: namespace, o: value }
+	};
+});
+
+
+
+// XSS ATTACK VECTOR CHECKS
+
+
+function _VirtualDom_noScript(tag)
+{
+	return tag == 'script' ? 'p' : tag;
+}
+
+function _VirtualDom_noOnOrFormAction(key)
+{
+	return /^(on|formAction$)/i.test(key) ? 'data-' + key : key;
+}
+
+function _VirtualDom_noInnerHtmlOrFormAction(key)
+{
+	return key == 'innerHTML' || key == 'formAction' ? 'data-' + key : key;
+}
+
+function _VirtualDom_noJavaScriptUri(value)
+{
+	return /^javascript:/i.test(value.replace(/\s/g,'')) ? '' : value;
+}
+
+function _VirtualDom_noJavaScriptUri_UNUSED(value)
+{
+	return /^javascript:/i.test(value.replace(/\s/g,''))
+		? 'javascript:alert("This is an XSS vector. Please use ports or web components instead.")'
+		: value;
+}
+
+function _VirtualDom_noJavaScriptOrHtmlUri(value)
+{
+	return /^\s*(javascript:|data:text\/html)/i.test(value) ? '' : value;
+}
+
+function _VirtualDom_noJavaScriptOrHtmlUri_UNUSED(value)
+{
+	return /^\s*(javascript:|data:text\/html)/i.test(value)
+		? 'javascript:alert("This is an XSS vector. Please use ports or web components instead.")'
+		: value;
+}
+
+
+
+// MAP FACTS
+
+
+var _VirtualDom_mapAttribute = F2(function(func, attr)
+{
+	return (attr.$ === 'a0')
+		? A2(_VirtualDom_on, attr.n, _VirtualDom_mapHandler(func, attr.o))
+		: attr;
+});
+
+function _VirtualDom_mapHandler(func, handler)
+{
+	var tag = $elm$virtual_dom$VirtualDom$toHandlerInt(handler);
+
+	// 0 = Normal
+	// 1 = MayStopPropagation
+	// 2 = MayPreventDefault
+	// 3 = Custom
+
+	return {
+		$: handler.$,
+		a:
+			!tag
+				? A2($elm$json$Json$Decode$map, func, handler.a)
+				:
+			A3($elm$json$Json$Decode$map2,
+				tag < 3
+					? _VirtualDom_mapEventTuple
+					: _VirtualDom_mapEventRecord,
+				$elm$json$Json$Decode$succeed(func),
+				handler.a
+			)
+	};
+}
+
+var _VirtualDom_mapEventTuple = F2(function(func, tuple)
+{
+	return _Utils_Tuple2(func(tuple.a), tuple.b);
+});
+
+var _VirtualDom_mapEventRecord = F2(function(func, record)
+{
+	return {
+		k: func(record.k),
+		M: record.M,
+		J: record.J
+	}
+});
+
+
+
+// ORGANIZE FACTS
+
+
+function _VirtualDom_organizeFacts(factList)
+{
+	for (var facts = {}; factList.b; factList = factList.b) // WHILE_CONS
+	{
+		var entry = factList.a;
+
+		var tag = entry.$;
+		var key = entry.n;
+		var value = entry.o;
+
+		if (tag === 'a2')
+		{
+			(key === 'className')
+				? _VirtualDom_addClass(facts, key, _Json_unwrap(value))
+				: facts[key] = _Json_unwrap(value);
+
+			continue;
+		}
+
+		var subFacts = facts[tag] || (facts[tag] = {});
+		(tag === 'a3' && key === 'class')
+			? _VirtualDom_addClass(subFacts, key, value)
+			: subFacts[key] = value;
+	}
+
+	return facts;
+}
+
+function _VirtualDom_addClass(object, key, newClass)
+{
+	var classes = object[key];
+	object[key] = classes ? classes + ' ' + newClass : newClass;
+}
+
+
+
+// RENDER
+
+
+function _VirtualDom_render(vNode, eventNode)
+{
+	var tag = vNode.$;
+
+	if (tag === 5)
+	{
+		return _VirtualDom_render(vNode.k || (vNode.k = vNode.m()), eventNode);
+	}
+
+	if (tag === 0)
+	{
+		return _VirtualDom_doc.createTextNode(vNode.a);
+	}
+
+	if (tag === 4)
+	{
+		var subNode = vNode.k;
+		var tagger = vNode.j;
+
+		while (subNode.$ === 4)
+		{
+			typeof tagger !== 'object'
+				? tagger = [tagger, subNode.j]
+				: tagger.push(subNode.j);
+
+			subNode = subNode.k;
+		}
+
+		var subEventRoot = { j: tagger, p: eventNode };
+		var domNode = _VirtualDom_render(subNode, subEventRoot);
+		domNode.elm_event_node_ref = subEventRoot;
+		return domNode;
+	}
+
+	if (tag === 3)
+	{
+		var domNode = vNode.h(vNode.g);
+		_VirtualDom_applyFacts(domNode, eventNode, vNode.d);
+		return domNode;
+	}
+
+	// at this point `tag` must be 1 or 2
+
+	var domNode = vNode.f
+		? _VirtualDom_doc.createElementNS(vNode.f, vNode.c)
+		: _VirtualDom_doc.createElement(vNode.c);
+
+	if (_VirtualDom_divertHrefToApp && vNode.c == 'a')
+	{
+		domNode.addEventListener('click', _VirtualDom_divertHrefToApp(domNode));
+	}
+
+	_VirtualDom_applyFacts(domNode, eventNode, vNode.d);
+
+	for (var kids = vNode.e, i = 0; i < kids.length; i++)
+	{
+		_VirtualDom_appendChild(domNode, _VirtualDom_render(tag === 1 ? kids[i] : kids[i].b, eventNode));
+	}
+
+	return domNode;
+}
+
+
+
+// APPLY FACTS
+
+
+function _VirtualDom_applyFacts(domNode, eventNode, facts)
+{
+	for (var key in facts)
+	{
+		var value = facts[key];
+
+		key === 'a1'
+			? _VirtualDom_applyStyles(domNode, value)
+			:
+		key === 'a0'
+			? _VirtualDom_applyEvents(domNode, eventNode, value)
+			:
+		key === 'a3'
+			? _VirtualDom_applyAttrs(domNode, value)
+			:
+		key === 'a4'
+			? _VirtualDom_applyAttrsNS(domNode, value)
+			:
+		(key !== 'value' || key !== 'checked' || domNode[key] !== value) && (domNode[key] = value);
+	}
+}
+
+
+
+// APPLY STYLES
+
+
+function _VirtualDom_applyStyles(domNode, styles)
+{
+	var domNodeStyle = domNode.style;
+
+	for (var key in styles)
+	{
+		domNodeStyle[key] = styles[key];
+	}
+}
+
+
+
+// APPLY ATTRS
+
+
+function _VirtualDom_applyAttrs(domNode, attrs)
+{
+	for (var key in attrs)
+	{
+		var value = attrs[key];
+		value
+			? domNode.setAttribute(key, value)
+			: domNode.removeAttribute(key);
+	}
+}
+
+
+
+// APPLY NAMESPACED ATTRS
+
+
+function _VirtualDom_applyAttrsNS(domNode, nsAttrs)
+{
+	for (var key in nsAttrs)
+	{
+		var pair = nsAttrs[key];
+		var namespace = pair.f;
+		var value = pair.o;
+
+		value
+			? domNode.setAttributeNS(namespace, key, value)
+			: domNode.removeAttributeNS(namespace, key);
+	}
+}
+
+
+
+// APPLY EVENTS
+
+
+function _VirtualDom_applyEvents(domNode, eventNode, events)
+{
+	var allCallbacks = domNode.elmFs || (domNode.elmFs = {});
+
+	for (var key in events)
+	{
+		var newHandler = events[key];
+		var oldCallback = allCallbacks[key];
+
+		if (!newHandler)
+		{
+			domNode.removeEventListener(key, oldCallback);
+			allCallbacks[key] = undefined;
+			continue;
+		}
+
+		if (oldCallback)
+		{
+			var oldHandler = oldCallback.q;
+			if (oldHandler.$ === newHandler.$)
+			{
+				oldCallback.q = newHandler;
+				continue;
+			}
+			domNode.removeEventListener(key, oldCallback);
+		}
+
+		oldCallback = _VirtualDom_makeCallback(eventNode, newHandler);
+		domNode.addEventListener(key, oldCallback,
+			_VirtualDom_passiveSupported
+			&& { passive: $elm$virtual_dom$VirtualDom$toHandlerInt(newHandler) < 2 }
+		);
+		allCallbacks[key] = oldCallback;
+	}
+}
+
+
+
+// PASSIVE EVENTS
+
+
+var _VirtualDom_passiveSupported;
+
+try
+{
+	window.addEventListener('t', null, Object.defineProperty({}, 'passive', {
+		get: function() { _VirtualDom_passiveSupported = true; }
+	}));
+}
+catch(e) {}
+
+
+
+// EVENT HANDLERS
+
+
+function _VirtualDom_makeCallback(eventNode, initialHandler)
+{
+	function callback(event)
+	{
+		var handler = callback.q;
+		var result = _Json_runHelp(handler.a, event);
+
+		if (!$elm$core$Result$isOk(result))
+		{
+			return;
+		}
+
+		var tag = $elm$virtual_dom$VirtualDom$toHandlerInt(handler);
+
+		// 0 = Normal
+		// 1 = MayStopPropagation
+		// 2 = MayPreventDefault
+		// 3 = Custom
+
+		var value = result.a;
+		var message = !tag ? value : tag < 3 ? value.a : value.k;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.M;
+		var currentEventNode = (
+			stopPropagation && event.stopPropagation(),
+			(tag == 2 ? value.b : tag == 3 && value.J) && event.preventDefault(),
+			eventNode
+		);
+		var tagger;
+		var i;
+		while (tagger = currentEventNode.j)
+		{
+			if (typeof tagger == 'function')
+			{
+				message = tagger(message);
+			}
+			else
+			{
+				for (var i = tagger.length; i--; )
+				{
+					message = tagger[i](message);
+				}
+			}
+			currentEventNode = currentEventNode.p;
+		}
+		currentEventNode(message, stopPropagation); // stopPropagation implies isSync
+	}
+
+	callback.q = initialHandler;
+
+	return callback;
+}
+
+function _VirtualDom_equalEvents(x, y)
+{
+	return x.$ == y.$ && _Json_equality(x.a, y.a);
+}
+
+
+
+// DIFF
+
+
+// TODO: Should we do patches like in iOS?
+//
+// type Patch
+//   = At Int Patch
+//   | Batch (List Patch)
+//   | Change ...
+//
+// How could it not be better?
+//
+function _VirtualDom_diff(x, y)
+{
+	var patches = [];
+	_VirtualDom_diffHelp(x, y, patches, 0);
+	return patches;
+}
+
+
+function _VirtualDom_pushPatch(patches, type, index, data)
+{
+	var patch = {
+		$: type,
+		r: index,
+		s: data,
+		t: undefined,
+		u: undefined
+	};
+	patches.push(patch);
+	return patch;
+}
+
+
+function _VirtualDom_diffHelp(x, y, patches, index)
+{
+	if (x === y)
+	{
+		return;
+	}
+
+	var xType = x.$;
+	var yType = y.$;
+
+	// Bail if you run into different types of nodes. Implies that the
+	// structure has changed significantly and it's not worth a diff.
+	if (xType !== yType)
+	{
+		if (xType === 1 && yType === 2)
+		{
+			y = _VirtualDom_dekey(y);
+			yType = 1;
+		}
+		else
+		{
+			_VirtualDom_pushPatch(patches, 0, index, y);
+			return;
+		}
+	}
+
+	// Now we know that both nodes are the same $.
+	switch (yType)
+	{
+		case 5:
+			var xRefs = x.l;
+			var yRefs = y.l;
+			var i = xRefs.length;
+			var same = i === yRefs.length;
+			while (same && i--)
+			{
+				same = xRefs[i] === yRefs[i];
+			}
+			if (same)
+			{
+				y.k = x.k;
+				return;
+			}
+			y.k = y.m();
+			var subPatches = [];
+			_VirtualDom_diffHelp(x.k, y.k, subPatches, 0);
+			subPatches.length > 0 && _VirtualDom_pushPatch(patches, 1, index, subPatches);
+			return;
+
+		case 4:
+			// gather nested taggers
+			var xTaggers = x.j;
+			var yTaggers = y.j;
+			var nesting = false;
+
+			var xSubNode = x.k;
+			while (xSubNode.$ === 4)
+			{
+				nesting = true;
+
+				typeof xTaggers !== 'object'
+					? xTaggers = [xTaggers, xSubNode.j]
+					: xTaggers.push(xSubNode.j);
+
+				xSubNode = xSubNode.k;
+			}
+
+			var ySubNode = y.k;
+			while (ySubNode.$ === 4)
+			{
+				nesting = true;
+
+				typeof yTaggers !== 'object'
+					? yTaggers = [yTaggers, ySubNode.j]
+					: yTaggers.push(ySubNode.j);
+
+				ySubNode = ySubNode.k;
+			}
+
+			// Just bail if different numbers of taggers. This implies the
+			// structure of the virtual DOM has changed.
+			if (nesting && xTaggers.length !== yTaggers.length)
+			{
+				_VirtualDom_pushPatch(patches, 0, index, y);
+				return;
+			}
+
+			// check if taggers are "the same"
+			if (nesting ? !_VirtualDom_pairwiseRefEqual(xTaggers, yTaggers) : xTaggers !== yTaggers)
+			{
+				_VirtualDom_pushPatch(patches, 2, index, yTaggers);
+			}
+
+			// diff everything below the taggers
+			_VirtualDom_diffHelp(xSubNode, ySubNode, patches, index + 1);
+			return;
+
+		case 0:
+			if (x.a !== y.a)
+			{
+				_VirtualDom_pushPatch(patches, 3, index, y.a);
+			}
+			return;
+
+		case 1:
+			_VirtualDom_diffNodes(x, y, patches, index, _VirtualDom_diffKids);
+			return;
+
+		case 2:
+			_VirtualDom_diffNodes(x, y, patches, index, _VirtualDom_diffKeyedKids);
+			return;
+
+		case 3:
+			if (x.h !== y.h)
+			{
+				_VirtualDom_pushPatch(patches, 0, index, y);
+				return;
+			}
+
+			var factsDiff = _VirtualDom_diffFacts(x.d, y.d);
+			factsDiff && _VirtualDom_pushPatch(patches, 4, index, factsDiff);
+
+			var patch = y.i(x.g, y.g);
+			patch && _VirtualDom_pushPatch(patches, 5, index, patch);
+
+			return;
+	}
+}
+
+// assumes the incoming arrays are the same length
+function _VirtualDom_pairwiseRefEqual(as, bs)
+{
+	for (var i = 0; i < as.length; i++)
+	{
+		if (as[i] !== bs[i])
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+function _VirtualDom_diffNodes(x, y, patches, index, diffKids)
+{
+	// Bail if obvious indicators have changed. Implies more serious
+	// structural changes such that it's not worth it to diff.
+	if (x.c !== y.c || x.f !== y.f)
+	{
+		_VirtualDom_pushPatch(patches, 0, index, y);
+		return;
+	}
+
+	var factsDiff = _VirtualDom_diffFacts(x.d, y.d);
+	factsDiff && _VirtualDom_pushPatch(patches, 4, index, factsDiff);
+
+	diffKids(x, y, patches, index);
+}
+
+
+
+// DIFF FACTS
+
+
+// TODO Instead of creating a new diff object, it's possible to just test if
+// there *is* a diff. During the actual patch, do the diff again and make the
+// modifications directly. This way, there's no new allocations. Worth it?
+function _VirtualDom_diffFacts(x, y, category)
+{
+	var diff;
+
+	// look for changes and removals
+	for (var xKey in x)
+	{
+		if (xKey === 'a1' || xKey === 'a0' || xKey === 'a3' || xKey === 'a4')
+		{
+			var subDiff = _VirtualDom_diffFacts(x[xKey], y[xKey] || {}, xKey);
+			if (subDiff)
+			{
+				diff = diff || {};
+				diff[xKey] = subDiff;
+			}
+			continue;
+		}
+
+		// remove if not in the new facts
+		if (!(xKey in y))
+		{
+			diff = diff || {};
+			diff[xKey] =
+				!category
+					? (typeof x[xKey] === 'string' ? '' : null)
+					:
+				(category === 'a1')
+					? ''
+					:
+				(category === 'a0' || category === 'a3')
+					? undefined
+					:
+				{ f: x[xKey].f, o: undefined };
+
+			continue;
+		}
+
+		var xValue = x[xKey];
+		var yValue = y[xKey];
+
+		// reference equal, so don't worry about it
+		if (xValue === yValue && xKey !== 'value' && xKey !== 'checked'
+			|| category === 'a0' && _VirtualDom_equalEvents(xValue, yValue))
+		{
+			continue;
+		}
+
+		diff = diff || {};
+		diff[xKey] = yValue;
+	}
+
+	// add new stuff
+	for (var yKey in y)
+	{
+		if (!(yKey in x))
+		{
+			diff = diff || {};
+			diff[yKey] = y[yKey];
+		}
+	}
+
+	return diff;
+}
+
+
+
+// DIFF KIDS
+
+
+function _VirtualDom_diffKids(xParent, yParent, patches, index)
+{
+	var xKids = xParent.e;
+	var yKids = yParent.e;
+
+	var xLen = xKids.length;
+	var yLen = yKids.length;
+
+	// FIGURE OUT IF THERE ARE INSERTS OR REMOVALS
+
+	if (xLen > yLen)
+	{
+		_VirtualDom_pushPatch(patches, 6, index, {
+			v: yLen,
+			i: xLen - yLen
+		});
+	}
+	else if (xLen < yLen)
+	{
+		_VirtualDom_pushPatch(patches, 7, index, {
+			v: xLen,
+			e: yKids
+		});
+	}
+
+	// PAIRWISE DIFF EVERYTHING ELSE
+
+	for (var minLen = xLen < yLen ? xLen : yLen, i = 0; i < minLen; i++)
+	{
+		var xKid = xKids[i];
+		_VirtualDom_diffHelp(xKid, yKids[i], patches, ++index);
+		index += xKid.b || 0;
+	}
+}
+
+
+
+// KEYED DIFF
+
+
+function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex)
+{
+	var localPatches = [];
+
+	var changes = {}; // Dict String Entry
+	var inserts = []; // Array { index : Int, entry : Entry }
+	// type Entry = { tag : String, vnode : VNode, index : Int, data : _ }
+
+	var xKids = xParent.e;
+	var yKids = yParent.e;
+	var xLen = xKids.length;
+	var yLen = yKids.length;
+	var xIndex = 0;
+	var yIndex = 0;
+
+	var index = rootIndex;
+
+	while (xIndex < xLen && yIndex < yLen)
+	{
+		var x = xKids[xIndex];
+		var y = yKids[yIndex];
+
+		var xKey = x.a;
+		var yKey = y.a;
+		var xNode = x.b;
+		var yNode = y.b;
+
+		// check if keys match
+
+		if (xKey === yKey)
+		{
+			index++;
+			_VirtualDom_diffHelp(xNode, yNode, localPatches, index);
+			index += xNode.b || 0;
+
+			xIndex++;
+			yIndex++;
+			continue;
+		}
+
+		// look ahead 1 to detect insertions and removals.
+
+		var xNext = xKids[xIndex + 1];
+		var yNext = yKids[yIndex + 1];
+
+		if (xNext)
+		{
+			var xNextKey = xNext.a;
+			var xNextNode = xNext.b;
+			var oldMatch = yKey === xNextKey;
+		}
+
+		if (yNext)
+		{
+			var yNextKey = yNext.a;
+			var yNextNode = yNext.b;
+			var newMatch = xKey === yNextKey;
+		}
+
+
+		// swap x and y
+		if (newMatch && oldMatch)
+		{
+			index++;
+			_VirtualDom_diffHelp(xNode, yNextNode, localPatches, index);
+			_VirtualDom_insertNode(changes, localPatches, xKey, yNode, yIndex, inserts);
+			index += xNode.b || 0;
+
+			index++;
+			_VirtualDom_removeNode(changes, localPatches, xKey, xNextNode, index);
+			index += xNextNode.b || 0;
+
+			xIndex += 2;
+			yIndex += 2;
+			continue;
+		}
+
+		// insert y
+		if (newMatch)
+		{
+			index++;
+			_VirtualDom_insertNode(changes, localPatches, yKey, yNode, yIndex, inserts);
+			_VirtualDom_diffHelp(xNode, yNextNode, localPatches, index);
+			index += xNode.b || 0;
+
+			xIndex += 1;
+			yIndex += 2;
+			continue;
+		}
+
+		// remove x
+		if (oldMatch)
+		{
+			index++;
+			_VirtualDom_removeNode(changes, localPatches, xKey, xNode, index);
+			index += xNode.b || 0;
+
+			index++;
+			_VirtualDom_diffHelp(xNextNode, yNode, localPatches, index);
+			index += xNextNode.b || 0;
+
+			xIndex += 2;
+			yIndex += 1;
+			continue;
+		}
+
+		// remove x, insert y
+		if (xNext && xNextKey === yNextKey)
+		{
+			index++;
+			_VirtualDom_removeNode(changes, localPatches, xKey, xNode, index);
+			_VirtualDom_insertNode(changes, localPatches, yKey, yNode, yIndex, inserts);
+			index += xNode.b || 0;
+
+			index++;
+			_VirtualDom_diffHelp(xNextNode, yNextNode, localPatches, index);
+			index += xNextNode.b || 0;
+
+			xIndex += 2;
+			yIndex += 2;
+			continue;
+		}
+
+		break;
+	}
+
+	// eat up any remaining nodes with removeNode and insertNode
+
+	while (xIndex < xLen)
+	{
+		index++;
+		var x = xKids[xIndex];
+		var xNode = x.b;
+		_VirtualDom_removeNode(changes, localPatches, x.a, xNode, index);
+		index += xNode.b || 0;
+		xIndex++;
+	}
+
+	while (yIndex < yLen)
+	{
+		var endInserts = endInserts || [];
+		var y = yKids[yIndex];
+		_VirtualDom_insertNode(changes, localPatches, y.a, y.b, undefined, endInserts);
+		yIndex++;
+	}
+
+	if (localPatches.length > 0 || inserts.length > 0 || endInserts)
+	{
+		_VirtualDom_pushPatch(patches, 8, rootIndex, {
+			w: localPatches,
+			x: inserts,
+			y: endInserts
+		});
+	}
+}
+
+
+
+// CHANGES FROM KEYED DIFF
+
+
+var _VirtualDom_POSTFIX = '_elmW6BL';
+
+
+function _VirtualDom_insertNode(changes, localPatches, key, vnode, yIndex, inserts)
+{
+	var entry = changes[key];
+
+	// never seen this key before
+	if (!entry)
+	{
+		entry = {
+			c: 0,
+			z: vnode,
+			r: yIndex,
+			s: undefined
+		};
+
+		inserts.push({ r: yIndex, A: entry });
+		changes[key] = entry;
+
+		return;
+	}
+
+	// this key was removed earlier, a match!
+	if (entry.c === 1)
+	{
+		inserts.push({ r: yIndex, A: entry });
+
+		entry.c = 2;
+		var subPatches = [];
+		_VirtualDom_diffHelp(entry.z, vnode, subPatches, entry.r);
+		entry.r = yIndex;
+		entry.s.s = {
+			w: subPatches,
+			A: entry
+		};
+
+		return;
+	}
+
+	// this key has already been inserted or moved, a duplicate!
+	_VirtualDom_insertNode(changes, localPatches, key + _VirtualDom_POSTFIX, vnode, yIndex, inserts);
+}
+
+
+function _VirtualDom_removeNode(changes, localPatches, key, vnode, index)
+{
+	var entry = changes[key];
+
+	// never seen this key before
+	if (!entry)
+	{
+		var patch = _VirtualDom_pushPatch(localPatches, 9, index, undefined);
+
+		changes[key] = {
+			c: 1,
+			z: vnode,
+			r: index,
+			s: patch
+		};
+
+		return;
+	}
+
+	// this key was inserted earlier, a match!
+	if (entry.c === 0)
+	{
+		entry.c = 2;
+		var subPatches = [];
+		_VirtualDom_diffHelp(vnode, entry.z, subPatches, index);
+
+		_VirtualDom_pushPatch(localPatches, 9, index, {
+			w: subPatches,
+			A: entry
+		});
+
+		return;
+	}
+
+	// this key has already been removed or moved, a duplicate!
+	_VirtualDom_removeNode(changes, localPatches, key + _VirtualDom_POSTFIX, vnode, index);
+}
+
+
+
+// ADD DOM NODES
+//
+// Each DOM node has an "index" assigned in order of traversal. It is important
+// to minimize our crawl over the actual DOM, so these indexes (along with the
+// descendantsCount of virtual nodes) let us skip touching entire subtrees of
+// the DOM if we know there are no patches there.
+
+
+function _VirtualDom_addDomNodes(domNode, vNode, patches, eventNode)
+{
+	_VirtualDom_addDomNodesHelp(domNode, vNode, patches, 0, 0, vNode.b, eventNode);
+}
+
+
+// assumes `patches` is non-empty and indexes increase monotonically.
+function _VirtualDom_addDomNodesHelp(domNode, vNode, patches, i, low, high, eventNode)
+{
+	var patch = patches[i];
+	var index = patch.r;
+
+	while (index === low)
+	{
+		var patchType = patch.$;
+
+		if (patchType === 1)
+		{
+			_VirtualDom_addDomNodes(domNode, vNode.k, patch.s, eventNode);
+		}
+		else if (patchType === 8)
+		{
+			patch.t = domNode;
+			patch.u = eventNode;
+
+			var subPatches = patch.s.w;
+			if (subPatches.length > 0)
+			{
+				_VirtualDom_addDomNodesHelp(domNode, vNode, subPatches, 0, low, high, eventNode);
+			}
+		}
+		else if (patchType === 9)
+		{
+			patch.t = domNode;
+			patch.u = eventNode;
+
+			var data = patch.s;
+			if (data)
+			{
+				data.A.s = domNode;
+				var subPatches = data.w;
+				if (subPatches.length > 0)
+				{
+					_VirtualDom_addDomNodesHelp(domNode, vNode, subPatches, 0, low, high, eventNode);
+				}
+			}
+		}
+		else
+		{
+			patch.t = domNode;
+			patch.u = eventNode;
+		}
+
+		i++;
+
+		if (!(patch = patches[i]) || (index = patch.r) > high)
+		{
+			return i;
+		}
+	}
+
+	var tag = vNode.$;
+
+	if (tag === 4)
+	{
+		var subNode = vNode.k;
+
+		while (subNode.$ === 4)
+		{
+			subNode = subNode.k;
+		}
+
+		return _VirtualDom_addDomNodesHelp(domNode, subNode, patches, i, low + 1, high, domNode.elm_event_node_ref);
+	}
+
+	// tag must be 1 or 2 at this point
+
+	var vKids = vNode.e;
+	var childNodes = domNode.childNodes;
+	for (var j = 0; j < vKids.length; j++)
+	{
+		low++;
+		var vKid = tag === 1 ? vKids[j] : vKids[j].b;
+		var nextLow = low + (vKid.b || 0);
+		if (low <= index && index <= nextLow)
+		{
+			i = _VirtualDom_addDomNodesHelp(childNodes[j], vKid, patches, i, low, nextLow, eventNode);
+			if (!(patch = patches[i]) || (index = patch.r) > high)
+			{
+				return i;
+			}
+		}
+		low = nextLow;
+	}
+	return i;
+}
+
+
+
+// APPLY PATCHES
+
+
+function _VirtualDom_applyPatches(rootDomNode, oldVirtualNode, patches, eventNode)
+{
+	if (patches.length === 0)
+	{
+		return rootDomNode;
+	}
+
+	_VirtualDom_addDomNodes(rootDomNode, oldVirtualNode, patches, eventNode);
+	return _VirtualDom_applyPatchesHelp(rootDomNode, patches);
+}
+
+function _VirtualDom_applyPatchesHelp(rootDomNode, patches)
+{
+	for (var i = 0; i < patches.length; i++)
+	{
+		var patch = patches[i];
+		var localDomNode = patch.t
+		var newNode = _VirtualDom_applyPatch(localDomNode, patch);
+		if (localDomNode === rootDomNode)
+		{
+			rootDomNode = newNode;
+		}
+	}
+	return rootDomNode;
+}
+
+function _VirtualDom_applyPatch(domNode, patch)
+{
+	switch (patch.$)
+	{
+		case 0:
+			return _VirtualDom_applyPatchRedraw(domNode, patch.s, patch.u);
+
+		case 4:
+			_VirtualDom_applyFacts(domNode, patch.u, patch.s);
+			return domNode;
+
+		case 3:
+			domNode.replaceData(0, domNode.length, patch.s);
+			return domNode;
+
+		case 1:
+			return _VirtualDom_applyPatchesHelp(domNode, patch.s);
+
+		case 2:
+			if (domNode.elm_event_node_ref)
+			{
+				domNode.elm_event_node_ref.j = patch.s;
+			}
+			else
+			{
+				domNode.elm_event_node_ref = { j: patch.s, p: patch.u };
+			}
+			return domNode;
+
+		case 6:
+			var data = patch.s;
+			for (var i = 0; i < data.i; i++)
+			{
+				domNode.removeChild(domNode.childNodes[data.v]);
+			}
+			return domNode;
+
+		case 7:
+			var data = patch.s;
+			var kids = data.e;
+			var i = data.v;
+			var theEnd = domNode.childNodes[i];
+			for (; i < kids.length; i++)
+			{
+				domNode.insertBefore(_VirtualDom_render(kids[i], patch.u), theEnd);
+			}
+			return domNode;
+
+		case 9:
+			var data = patch.s;
+			if (!data)
+			{
+				domNode.parentNode.removeChild(domNode);
+				return domNode;
+			}
+			var entry = data.A;
+			if (typeof entry.r !== 'undefined')
+			{
+				domNode.parentNode.removeChild(domNode);
+			}
+			entry.s = _VirtualDom_applyPatchesHelp(domNode, data.w);
+			return domNode;
+
+		case 8:
+			return _VirtualDom_applyPatchReorder(domNode, patch);
+
+		case 5:
+			return patch.s(domNode);
+
+		default:
+			_Debug_crash(10); // 'Ran into an unknown patch!'
+	}
+}
+
+
+function _VirtualDom_applyPatchRedraw(domNode, vNode, eventNode)
+{
+	var parentNode = domNode.parentNode;
+	var newNode = _VirtualDom_render(vNode, eventNode);
+
+	if (!newNode.elm_event_node_ref)
+	{
+		newNode.elm_event_node_ref = domNode.elm_event_node_ref;
+	}
+
+	if (parentNode && newNode !== domNode)
+	{
+		parentNode.replaceChild(newNode, domNode);
+	}
+	return newNode;
+}
+
+
+function _VirtualDom_applyPatchReorder(domNode, patch)
+{
+	var data = patch.s;
+
+	// remove end inserts
+	var frag = _VirtualDom_applyPatchReorderEndInsertsHelp(data.y, patch);
+
+	// removals
+	domNode = _VirtualDom_applyPatchesHelp(domNode, data.w);
+
+	// inserts
+	var inserts = data.x;
+	for (var i = 0; i < inserts.length; i++)
+	{
+		var insert = inserts[i];
+		var entry = insert.A;
+		var node = entry.c === 2
+			? entry.s
+			: _VirtualDom_render(entry.z, patch.u);
+		domNode.insertBefore(node, domNode.childNodes[insert.r]);
+	}
+
+	// add end inserts
+	if (frag)
+	{
+		_VirtualDom_appendChild(domNode, frag);
+	}
+
+	return domNode;
+}
+
+
+function _VirtualDom_applyPatchReorderEndInsertsHelp(endInserts, patch)
+{
+	if (!endInserts)
+	{
+		return;
+	}
+
+	var frag = _VirtualDom_doc.createDocumentFragment();
+	for (var i = 0; i < endInserts.length; i++)
+	{
+		var insert = endInserts[i];
+		var entry = insert.A;
+		_VirtualDom_appendChild(frag, entry.c === 2
+			? entry.s
+			: _VirtualDom_render(entry.z, patch.u)
+		);
+	}
+	return frag;
+}
+
+
+function _VirtualDom_virtualize(node)
+{
+	// TEXT NODES
+
+	if (node.nodeType === 3)
+	{
+		return _VirtualDom_text(node.textContent);
+	}
+
+
+	// WEIRD NODES
+
+	if (node.nodeType !== 1)
+	{
+		return _VirtualDom_text('');
+	}
+
+
+	// ELEMENT NODES
+
+	var attrList = _List_Nil;
+	var attrs = node.attributes;
+	for (var i = attrs.length; i--; )
+	{
+		var attr = attrs[i];
+		var name = attr.name;
+		var value = attr.value;
+		attrList = _List_Cons( A2(_VirtualDom_attribute, name, value), attrList );
+	}
+
+	var tag = node.tagName.toLowerCase();
+	var kidList = _List_Nil;
+	var kids = node.childNodes;
+
+	for (var i = kids.length; i--; )
+	{
+		kidList = _List_Cons(_VirtualDom_virtualize(kids[i]), kidList);
+	}
+	return A3(_VirtualDom_node, tag, attrList, kidList);
+}
+
+function _VirtualDom_dekey(keyedNode)
+{
+	var keyedKids = keyedNode.e;
+	var len = keyedKids.length;
+	var kids = new Array(len);
+	for (var i = 0; i < len; i++)
+	{
+		kids[i] = keyedKids[i].b;
+	}
+
+	return {
+		$: 1,
+		c: keyedNode.c,
+		d: keyedNode.d,
+		e: kids,
+		f: keyedNode.f,
+		b: keyedNode.b
+	};
+}
+
+
+
+// ELEMENT
+
+
+var _Debugger_element;
+
+var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debugMetadata, args)
+{
+	return _Platform_initialize(
+		flagDecoder,
+		args,
+		impl.ar,
+		impl.az,
+		impl.ax,
+		function(sendToApp, initialModel) {
+			var view = impl.aA;
+			/**/
+			var domNode = args['node'];
+			//*/
+			/**_UNUSED/
+			var domNode = args && args['node'] ? args['node'] : _Debug_crash(0);
+			//*/
+			var currNode = _VirtualDom_virtualize(domNode);
+
+			return _Browser_makeAnimator(initialModel, function(model)
+			{
+				var nextNode = view(model);
+				var patches = _VirtualDom_diff(currNode, nextNode);
+				domNode = _VirtualDom_applyPatches(domNode, currNode, patches, sendToApp);
+				currNode = nextNode;
+			});
+		}
+	);
+});
+
+
+
+// DOCUMENT
+
+
+var _Debugger_document;
+
+var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, debugMetadata, args)
+{
+	return _Platform_initialize(
+		flagDecoder,
+		args,
+		impl.ar,
+		impl.az,
+		impl.ax,
+		function(sendToApp, initialModel) {
+			var divertHrefToApp = impl.K && impl.K(sendToApp)
+			var view = impl.aA;
+			var title = _VirtualDom_doc.title;
+			var bodyNode = _VirtualDom_doc.body;
+			var currNode = _VirtualDom_virtualize(bodyNode);
+			return _Browser_makeAnimator(initialModel, function(model)
+			{
+				_VirtualDom_divertHrefToApp = divertHrefToApp;
+				var doc = view(model);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.al);
+				var patches = _VirtualDom_diff(currNode, nextNode);
+				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
+				currNode = nextNode;
+				_VirtualDom_divertHrefToApp = 0;
+				(title !== doc.ay) && (_VirtualDom_doc.title = title = doc.ay);
+			});
+		}
+	);
+});
+
+
+
+// ANIMATION
+
+
+var _Browser_requestAnimationFrame =
+	typeof requestAnimationFrame !== 'undefined'
+		? requestAnimationFrame
+		: function(callback) { setTimeout(callback, 1000 / 60); };
+
+
+function _Browser_makeAnimator(model, draw)
+{
+	draw(model);
+
+	var state = 0;
+
+	function updateIfNeeded()
+	{
+		state = state === 1
+			? 0
+			: ( _Browser_requestAnimationFrame(updateIfNeeded), draw(model), 1 );
+	}
+
+	return function(nextModel, isSync)
+	{
+		model = nextModel;
+
+		isSync
+			? ( draw(model),
+				state === 2 && (state = 1)
+				)
+			: ( state === 0 && _Browser_requestAnimationFrame(updateIfNeeded),
+				state = 2
+				);
+	};
+}
+
+
+
+// APPLICATION
+
+
+function _Browser_application(impl)
+{
+	var onUrlChange = impl.at;
+	var onUrlRequest = impl.au;
+	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
+
+	return _Browser_document({
+		K: function(sendToApp)
+		{
+			key.a = sendToApp;
+			_Browser_window.addEventListener('popstate', key);
+			_Browser_window.navigator.userAgent.indexOf('Trident') < 0 || _Browser_window.addEventListener('hashchange', key);
+
+			return F2(function(domNode, event)
+			{
+				if (!event.ctrlKey && !event.metaKey && !event.shiftKey && event.button < 1 && !domNode.target && !domNode.download)
+				{
+					event.preventDefault();
+					var href = domNode.href;
+					var curr = _Browser_getUrl();
+					var next = $elm$url$Url$fromString(href).a;
+					sendToApp(onUrlRequest(
+						(next
+							&& curr.ab === next.ab
+							&& curr.T === next.T
+							&& curr.Z.a === next.Z.a
+						)
+							? $elm$browser$Browser$Internal(next)
+							: $elm$browser$Browser$External(href)
+					));
+				}
+			});
+		},
+		ar: function(flags)
+		{
+			return A3(impl.ar, flags, _Browser_getUrl(), key);
+		},
+		aA: impl.aA,
+		az: impl.az,
+		ax: impl.ax
+	});
+}
+
+function _Browser_getUrl()
+{
+	return $elm$url$Url$fromString(_VirtualDom_doc.location.href).a || _Debug_crash(1);
+}
+
+var _Browser_go = F2(function(key, n)
+{
+	return A2($elm$core$Task$perform, $elm$core$Basics$never, _Scheduler_binding(function() {
+		n && history.go(n);
+		key();
+	}));
+});
+
+var _Browser_pushUrl = F2(function(key, url)
+{
+	return A2($elm$core$Task$perform, $elm$core$Basics$never, _Scheduler_binding(function() {
+		history.pushState({}, '', url);
+		key();
+	}));
+});
+
+var _Browser_replaceUrl = F2(function(key, url)
+{
+	return A2($elm$core$Task$perform, $elm$core$Basics$never, _Scheduler_binding(function() {
+		history.replaceState({}, '', url);
+		key();
+	}));
+});
+
+
+
+// GLOBAL EVENTS
+
+
+var _Browser_fakeNode = { addEventListener: function() {}, removeEventListener: function() {} };
+var _Browser_doc = typeof document !== 'undefined' ? document : _Browser_fakeNode;
+var _Browser_window = typeof window !== 'undefined' ? window : _Browser_fakeNode;
+
+var _Browser_on = F3(function(node, eventName, sendToSelf)
+{
+	return _Scheduler_spawn(_Scheduler_binding(function(callback)
+	{
+		function handler(event)	{ _Scheduler_rawSpawn(sendToSelf(event)); }
+		node.addEventListener(eventName, handler, _VirtualDom_passiveSupported && { passive: true });
+		return function() { node.removeEventListener(eventName, handler); };
+	}));
+});
+
+var _Browser_decodeEvent = F2(function(decoder, event)
+{
+	var result = _Json_runHelp(decoder, event);
+	return $elm$core$Result$isOk(result) ? $elm$core$Maybe$Just(result.a) : $elm$core$Maybe$Nothing;
+});
+
+
+
+// PAGE VISIBILITY
+
+
+function _Browser_visibilityInfo()
+{
+	return (typeof _VirtualDom_doc.hidden !== 'undefined')
+		? { ap: 'hidden', z: 'visibilitychange' }
+		:
+	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
+		? { ap: 'mozHidden', z: 'mozvisibilitychange' }
+		:
+	(typeof _VirtualDom_doc.msHidden !== 'undefined')
+		? { ap: 'msHidden', z: 'msvisibilitychange' }
+		:
+	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
+		? { ap: 'webkitHidden', z: 'webkitvisibilitychange' }
+		: { ap: 'hidden', z: 'visibilitychange' };
+}
+
+
+
+// ANIMATION FRAMES
+
+
+function _Browser_rAF()
+{
+	return _Scheduler_binding(function(callback)
+	{
+		var id = requestAnimationFrame(function() {
+			callback(_Scheduler_succeed(Date.now()));
+		});
+
+		return function() {
+			cancelAnimationFrame(id);
+		};
+	});
+}
+
+
+function _Browser_now()
+{
+	return _Scheduler_binding(function(callback)
+	{
+		callback(_Scheduler_succeed(Date.now()));
+	});
+}
+
+
+
+// DOM STUFF
+
+
+function _Browser_withNode(id, doStuff)
+{
+	return _Scheduler_binding(function(callback)
+	{
+		_Browser_requestAnimationFrame(function() {
+			var node = document.getElementById(id);
+			callback(node
+				? _Scheduler_succeed(doStuff(node))
+				: _Scheduler_fail($elm$browser$Browser$Dom$NotFound(id))
+			);
+		});
+	});
+}
+
+
+function _Browser_withWindow(doStuff)
+{
+	return _Scheduler_binding(function(callback)
+	{
+		_Browser_requestAnimationFrame(function() {
+			callback(_Scheduler_succeed(doStuff()));
+		});
+	});
+}
+
+
+// FOCUS and BLUR
+
+
+var _Browser_call = F2(function(functionName, id)
+{
+	return _Browser_withNode(id, function(node) {
+		node[functionName]();
+		return _Utils_Tuple0;
+	});
+});
+
+
+
+// WINDOW VIEWPORT
+
+
+function _Browser_getViewport()
+{
+	return {
+		af: _Browser_getScene(),
+		ai: {
+			F: _Browser_window.pageXOffset,
+			G: _Browser_window.pageYOffset,
+			x: _Browser_doc.documentElement.clientWidth,
+			s: _Browser_doc.documentElement.clientHeight
+		}
+	};
+}
+
+function _Browser_getScene()
+{
+	var body = _Browser_doc.body;
+	var elem = _Browser_doc.documentElement;
+	return {
+		x: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		s: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+	};
+}
+
+var _Browser_setViewport = F2(function(x, y)
+{
+	return _Browser_withWindow(function()
+	{
+		_Browser_window.scroll(x, y);
+		return _Utils_Tuple0;
+	});
+});
+
+
+
+// ELEMENT VIEWPORT
+
+
+function _Browser_getViewportOf(id)
+{
+	return _Browser_withNode(id, function(node)
+	{
+		return {
+			af: {
+				x: node.scrollWidth,
+				s: node.scrollHeight
+			},
+			ai: {
+				F: node.scrollLeft,
+				G: node.scrollTop,
+				x: node.clientWidth,
+				s: node.clientHeight
+			}
+		};
+	});
+}
+
+
+var _Browser_setViewportOf = F3(function(id, x, y)
+{
+	return _Browser_withNode(id, function(node)
+	{
+		node.scrollLeft = x;
+		node.scrollTop = y;
+		return _Utils_Tuple0;
+	});
+});
+
+
+
+// ELEMENT
+
+
+function _Browser_getElement(id)
+{
+	return _Browser_withNode(id, function(node)
+	{
+		var rect = node.getBoundingClientRect();
+		var x = _Browser_window.pageXOffset;
+		var y = _Browser_window.pageYOffset;
+		return {
+			af: _Browser_getScene(),
+			ai: {
+				F: x,
+				G: y,
+				x: _Browser_doc.documentElement.clientWidth,
+				s: _Browser_doc.documentElement.clientHeight
+			},
+			an: {
+				F: x + rect.left,
+				G: y + rect.top,
+				x: rect.width,
+				s: rect.height
+			}
+		};
+	});
+}
+
+
+
+// LOAD and RELOAD
+
+
+function _Browser_reload(skipCache)
+{
+	return A2($elm$core$Task$perform, $elm$core$Basics$never, _Scheduler_binding(function(callback)
+	{
+		_VirtualDom_doc.location.reload(skipCache);
+	}));
+}
+
+function _Browser_load(url)
+{
+	return A2($elm$core$Task$perform, $elm$core$Basics$never, _Scheduler_binding(function(callback)
+	{
+		try
+		{
+			_Browser_window.location = url;
+		}
+		catch(err)
+		{
+			// Only Firefox can throw a NS_ERROR_MALFORMED_URI exception here.
+			// Other browsers reload the page, so let's be consistent about that.
+			_VirtualDom_doc.location.reload(false);
+		}
+	}));
+}
 var $elm$core$Basics$EQ = 1;
 var $elm$core$Basics$LT = 0;
 var $elm$core$List$cons = _List_cons;
@@ -2379,11 +4369,10 @@ var $elm$core$Basics$always = F2(
 	function (a, _v0) {
 		return a;
 	});
-var $elm$core$Basics$identity = function (x) {
-	return x;
-};
-var $author$project$Barchart$elmToJS = _Platform_outgoingPort('elmToJS', $elm$core$Basics$identity);
-var $author$project$Vega$VAxes = 11;
+var $elm$core$Basics$apR = F2(
+	function (x, f) {
+		return f(x);
+	});
 var $elm$core$Result$Err = function (a) {
 	return {$: 1, a: a};
 };
@@ -2649,10 +4638,6 @@ var $elm$core$Basics$apL = F2(
 	function (f, x) {
 		return f(x);
 	});
-var $elm$core$Basics$apR = F2(
-	function (x, f) {
-		return f(x);
-	});
 var $elm$core$Basics$eq = _Utils_equal;
 var $elm$core$Basics$floor = _Basics_floor;
 var $elm$core$Elm$JsArray$length = _JsArray_length;
@@ -2779,6 +4764,347 @@ var $elm$core$Result$isOk = function (result) {
 		return false;
 	}
 };
+var $elm$json$Json$Encode$object = function (pairs) {
+	return _Json_wrap(
+		A3(
+			$elm$core$List$foldl,
+			F2(
+				function (_v0, obj) {
+					var k = _v0.a;
+					var v = _v0.b;
+					return A3(_Json_addField, k, v, obj);
+				}),
+			_Json_emptyObject(0),
+			pairs));
+};
+var $author$project$Vega$combineSpecs = function (specs) {
+	return $elm$json$Json$Encode$object(specs);
+};
+var $elm$json$Json$Decode$map = _Json_map1;
+var $elm$json$Json$Decode$map2 = _Json_map2;
+var $elm$json$Json$Decode$succeed = _Json_succeed;
+var $elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
+	switch (handler.$) {
+		case 0:
+			return 0;
+		case 1:
+			return 1;
+		case 2:
+			return 2;
+		default:
+			return 3;
+	}
+};
+var $elm$browser$Browser$External = function (a) {
+	return {$: 1, a: a};
+};
+var $elm$browser$Browser$Internal = function (a) {
+	return {$: 0, a: a};
+};
+var $elm$core$Basics$identity = function (x) {
+	return x;
+};
+var $elm$browser$Browser$Dom$NotFound = $elm$core$Basics$identity;
+var $elm$url$Url$Http = 0;
+var $elm$url$Url$Https = 1;
+var $elm$url$Url$Url = F6(
+	function (protocol, host, port_, path, query, fragment) {
+		return {S: fragment, T: host, X: path, Z: port_, ab: protocol, ac: query};
+	});
+var $elm$core$String$contains = _String_contains;
+var $elm$core$String$length = _String_length;
+var $elm$core$String$slice = _String_slice;
+var $elm$core$String$dropLeft = F2(
+	function (n, string) {
+		return (n < 1) ? string : A3(
+			$elm$core$String$slice,
+			n,
+			$elm$core$String$length(string),
+			string);
+	});
+var $elm$core$String$indexes = _String_indexes;
+var $elm$core$String$isEmpty = function (string) {
+	return string === '';
+};
+var $elm$core$String$left = F2(
+	function (n, string) {
+		return (n < 1) ? '' : A3($elm$core$String$slice, 0, n, string);
+	});
+var $elm$core$String$toInt = _String_toInt;
+var $elm$url$Url$chompBeforePath = F5(
+	function (protocol, path, params, frag, str) {
+		if ($elm$core$String$isEmpty(str) || A2($elm$core$String$contains, '@', str)) {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var _v0 = A2($elm$core$String$indexes, ':', str);
+			if (!_v0.b) {
+				return $elm$core$Maybe$Just(
+					A6($elm$url$Url$Url, protocol, str, $elm$core$Maybe$Nothing, path, params, frag));
+			} else {
+				if (!_v0.b.b) {
+					var i = _v0.a;
+					var _v1 = $elm$core$String$toInt(
+						A2($elm$core$String$dropLeft, i + 1, str));
+					if (_v1.$ === 1) {
+						return $elm$core$Maybe$Nothing;
+					} else {
+						var port_ = _v1;
+						return $elm$core$Maybe$Just(
+							A6(
+								$elm$url$Url$Url,
+								protocol,
+								A2($elm$core$String$left, i, str),
+								port_,
+								path,
+								params,
+								frag));
+					}
+				} else {
+					return $elm$core$Maybe$Nothing;
+				}
+			}
+		}
+	});
+var $elm$url$Url$chompBeforeQuery = F4(
+	function (protocol, params, frag, str) {
+		if ($elm$core$String$isEmpty(str)) {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var _v0 = A2($elm$core$String$indexes, '/', str);
+			if (!_v0.b) {
+				return A5($elm$url$Url$chompBeforePath, protocol, '/', params, frag, str);
+			} else {
+				var i = _v0.a;
+				return A5(
+					$elm$url$Url$chompBeforePath,
+					protocol,
+					A2($elm$core$String$dropLeft, i, str),
+					params,
+					frag,
+					A2($elm$core$String$left, i, str));
+			}
+		}
+	});
+var $elm$url$Url$chompBeforeFragment = F3(
+	function (protocol, frag, str) {
+		if ($elm$core$String$isEmpty(str)) {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var _v0 = A2($elm$core$String$indexes, '?', str);
+			if (!_v0.b) {
+				return A4($elm$url$Url$chompBeforeQuery, protocol, $elm$core$Maybe$Nothing, frag, str);
+			} else {
+				var i = _v0.a;
+				return A4(
+					$elm$url$Url$chompBeforeQuery,
+					protocol,
+					$elm$core$Maybe$Just(
+						A2($elm$core$String$dropLeft, i + 1, str)),
+					frag,
+					A2($elm$core$String$left, i, str));
+			}
+		}
+	});
+var $elm$url$Url$chompAfterProtocol = F2(
+	function (protocol, str) {
+		if ($elm$core$String$isEmpty(str)) {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var _v0 = A2($elm$core$String$indexes, '#', str);
+			if (!_v0.b) {
+				return A3($elm$url$Url$chompBeforeFragment, protocol, $elm$core$Maybe$Nothing, str);
+			} else {
+				var i = _v0.a;
+				return A3(
+					$elm$url$Url$chompBeforeFragment,
+					protocol,
+					$elm$core$Maybe$Just(
+						A2($elm$core$String$dropLeft, i + 1, str)),
+					A2($elm$core$String$left, i, str));
+			}
+		}
+	});
+var $elm$core$String$startsWith = _String_startsWith;
+var $elm$url$Url$fromString = function (str) {
+	return A2($elm$core$String$startsWith, 'http://', str) ? A2(
+		$elm$url$Url$chompAfterProtocol,
+		0,
+		A2($elm$core$String$dropLeft, 7, str)) : (A2($elm$core$String$startsWith, 'https://', str) ? A2(
+		$elm$url$Url$chompAfterProtocol,
+		1,
+		A2($elm$core$String$dropLeft, 8, str)) : $elm$core$Maybe$Nothing);
+};
+var $elm$core$Basics$never = function (_v0) {
+	never:
+	while (true) {
+		var nvr = _v0;
+		var $temp$_v0 = nvr;
+		_v0 = $temp$_v0;
+		continue never;
+	}
+};
+var $elm$core$Task$Perform = $elm$core$Basics$identity;
+var $elm$core$Task$succeed = _Scheduler_succeed;
+var $elm$core$Task$init = $elm$core$Task$succeed(0);
+var $elm$core$List$foldrHelper = F4(
+	function (fn, acc, ctr, ls) {
+		if (!ls.b) {
+			return acc;
+		} else {
+			var a = ls.a;
+			var r1 = ls.b;
+			if (!r1.b) {
+				return A2(fn, a, acc);
+			} else {
+				var b = r1.a;
+				var r2 = r1.b;
+				if (!r2.b) {
+					return A2(
+						fn,
+						a,
+						A2(fn, b, acc));
+				} else {
+					var c = r2.a;
+					var r3 = r2.b;
+					if (!r3.b) {
+						return A2(
+							fn,
+							a,
+							A2(
+								fn,
+								b,
+								A2(fn, c, acc)));
+					} else {
+						var d = r3.a;
+						var r4 = r3.b;
+						var res = (ctr > 500) ? A3(
+							$elm$core$List$foldl,
+							fn,
+							acc,
+							$elm$core$List$reverse(r4)) : A4($elm$core$List$foldrHelper, fn, acc, ctr + 1, r4);
+						return A2(
+							fn,
+							a,
+							A2(
+								fn,
+								b,
+								A2(
+									fn,
+									c,
+									A2(fn, d, res))));
+					}
+				}
+			}
+		}
+	});
+var $elm$core$List$foldr = F3(
+	function (fn, acc, ls) {
+		return A4($elm$core$List$foldrHelper, fn, acc, 0, ls);
+	});
+var $elm$core$List$map = F2(
+	function (f, xs) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, acc) {
+					return A2(
+						$elm$core$List$cons,
+						f(x),
+						acc);
+				}),
+			_List_Nil,
+			xs);
+	});
+var $elm$core$Task$andThen = _Scheduler_andThen;
+var $elm$core$Task$map = F2(
+	function (func, taskA) {
+		return A2(
+			$elm$core$Task$andThen,
+			function (a) {
+				return $elm$core$Task$succeed(
+					func(a));
+			},
+			taskA);
+	});
+var $elm$core$Task$map2 = F3(
+	function (func, taskA, taskB) {
+		return A2(
+			$elm$core$Task$andThen,
+			function (a) {
+				return A2(
+					$elm$core$Task$andThen,
+					function (b) {
+						return $elm$core$Task$succeed(
+							A2(func, a, b));
+					},
+					taskB);
+			},
+			taskA);
+	});
+var $elm$core$Task$sequence = function (tasks) {
+	return A3(
+		$elm$core$List$foldr,
+		$elm$core$Task$map2($elm$core$List$cons),
+		$elm$core$Task$succeed(_List_Nil),
+		tasks);
+};
+var $elm$core$Platform$sendToApp = _Platform_sendToApp;
+var $elm$core$Task$spawnCmd = F2(
+	function (router, _v0) {
+		var task = _v0;
+		return _Scheduler_spawn(
+			A2(
+				$elm$core$Task$andThen,
+				$elm$core$Platform$sendToApp(router),
+				task));
+	});
+var $elm$core$Task$onEffects = F3(
+	function (router, commands, state) {
+		return A2(
+			$elm$core$Task$map,
+			function (_v0) {
+				return 0;
+			},
+			$elm$core$Task$sequence(
+				A2(
+					$elm$core$List$map,
+					$elm$core$Task$spawnCmd(router),
+					commands)));
+	});
+var $elm$core$Task$onSelfMsg = F3(
+	function (_v0, _v1, _v2) {
+		return $elm$core$Task$succeed(0);
+	});
+var $elm$core$Task$cmdMap = F2(
+	function (tagger, _v0) {
+		var task = _v0;
+		return A2($elm$core$Task$map, tagger, task);
+	});
+_Platform_effectManagers['Task'] = _Platform_createManager($elm$core$Task$init, $elm$core$Task$onEffects, $elm$core$Task$onSelfMsg, $elm$core$Task$cmdMap);
+var $elm$core$Task$command = _Platform_leaf('Task');
+var $elm$core$Task$perform = F2(
+	function (toMessage, task) {
+		return $elm$core$Task$command(
+			A2($elm$core$Task$map, toMessage, task));
+	});
+var $elm$browser$Browser$element = _Browser_element;
+var $author$project$AriaTests$elmToJS = _Platform_outgoingPort('elmToJS', $elm$core$Basics$identity);
+var $elm$core$Platform$Sub$batch = _Platform_batch;
+var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
+var $elm$json$Json$Encode$null = _Json_encodeNull;
+var $author$project$Vega$AxGrid = function (a) {
+	return {$: 16, a: a};
+};
+var $author$project$Vega$axGrid = $author$project$Vega$AxGrid;
+var $author$project$Vega$AxTickCount = function (a) {
+	return {$: 51, a: a};
+};
+var $author$project$Vega$axTickCount = $author$project$Vega$AxTickCount;
+var $author$project$Vega$AxTitle = function (a) {
+	return {$: 62, a: a};
+};
+var $author$project$Vega$axTitle = $author$project$Vega$AxTitle;
+var $author$project$Vega$VAxes = 11;
 var $elm$json$Json$Encode$list = F2(
 	function (func, entries) {
 		return _Json_wrap(
@@ -2803,19 +5129,6 @@ var $author$project$Vega$ArAria = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Vega$Month = {$: 2};
-var $elm$json$Json$Encode$object = function (pairs) {
-	return _Json_wrap(
-		A3(
-			$elm$core$List$foldl,
-			F2(
-				function (_v0, obj) {
-					var k = _v0.a;
-					var v = _v0.b;
-					return A3(_Json_addField, k, v, obj);
-				}),
-			_Json_emptyObject(0),
-			pairs));
-};
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $author$project$Vega$signalReferenceProperty = function (sigRef) {
 	return _Utils_Tuple2(
@@ -2854,7 +5167,6 @@ var $author$project$Vega$exprProperty = function (ex) {
 			$author$project$Vega$expressionSpec(e));
 	}
 };
-var $elm$json$Json$Encode$null = _Json_encodeNull;
 var $author$project$Vega$strSpec = function (string) {
 	switch (string.$) {
 		case 0:
@@ -2968,75 +5280,6 @@ var $author$project$Vega$booSpec = function (boo) {
 					]));
 	}
 };
-var $elm$core$List$foldrHelper = F4(
-	function (fn, acc, ctr, ls) {
-		if (!ls.b) {
-			return acc;
-		} else {
-			var a = ls.a;
-			var r1 = ls.b;
-			if (!r1.b) {
-				return A2(fn, a, acc);
-			} else {
-				var b = r1.a;
-				var r2 = r1.b;
-				if (!r2.b) {
-					return A2(
-						fn,
-						a,
-						A2(fn, b, acc));
-				} else {
-					var c = r2.a;
-					var r3 = r2.b;
-					if (!r3.b) {
-						return A2(
-							fn,
-							a,
-							A2(
-								fn,
-								b,
-								A2(fn, c, acc)));
-					} else {
-						var d = r3.a;
-						var r4 = r3.b;
-						var res = (ctr > 500) ? A3(
-							$elm$core$List$foldl,
-							fn,
-							acc,
-							$elm$core$List$reverse(r4)) : A4($elm$core$List$foldrHelper, fn, acc, ctr + 1, r4);
-						return A2(
-							fn,
-							a,
-							A2(
-								fn,
-								b,
-								A2(
-									fn,
-									c,
-									A2(fn, d, res))));
-					}
-				}
-			}
-		}
-	});
-var $elm$core$List$foldr = F3(
-	function (fn, acc, ls) {
-		return A4($elm$core$List$foldrHelper, fn, acc, 0, ls);
-	});
-var $elm$core$List$map = F2(
-	function (f, xs) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, acc) {
-					return A2(
-						$elm$core$List$cons,
-						f(x),
-						acc);
-				}),
-			_List_Nil,
-			xs);
-	});
 var $author$project$Vega$VGradientScale = F2(
 	function (a, b) {
 		return {$: 12, a: a, b: b};
@@ -5061,96 +7304,10 @@ var $author$project$Vega$DField = function (a) {
 	return {$: 1, a: a};
 };
 var $author$project$Vega$daField = $author$project$Vega$DField;
-var $author$project$Vega$dataColumn = F2(
-	function (colName, val) {
-		switch (val.$) {
-			case 3:
-				var ns = val.a;
-				return $elm$core$List$cons(
-					A2(
-						$elm$core$List$map,
-						function (n) {
-							return _Utils_Tuple2(
-								colName,
-								$elm$json$Json$Encode$float(n));
-						},
-						ns));
-			case 2:
-				var n = val.a;
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							colName,
-							$elm$json$Json$Encode$float(n))
-						]));
-			case 5:
-				var bs = val.a;
-				return $elm$core$List$cons(
-					A2(
-						$elm$core$List$map,
-						function (b) {
-							return _Utils_Tuple2(
-								colName,
-								$elm$json$Json$Encode$bool(b));
-						},
-						bs));
-			case 4:
-				var b = val.a;
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							colName,
-							$elm$json$Json$Encode$bool(b))
-						]));
-			case 1:
-				var ss = val.a;
-				return $elm$core$List$cons(
-					A2(
-						$elm$core$List$map,
-						function (s) {
-							return _Utils_Tuple2(
-								colName,
-								$elm$json$Json$Encode$string(s));
-						},
-						ss));
-			case 0:
-				var s = val.a;
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							colName,
-							$elm$json$Json$Encode$string(s))
-						]));
-			case 6:
-				var vals = val.a;
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							colName,
-							$elm$json$Json$Encode$object(
-								A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, vals)))
-						]));
-			case 8:
-				var vals = val.a;
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							colName,
-							A2($elm$json$Json$Encode$list, $author$project$Vega$valueSpec, vals))
-						]));
-			default:
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(colName, $elm$json$Json$Encode$null)
-						]));
-		}
-	});
+var $author$project$Vega$DaUrl = function (a) {
+	return {$: 6, a: a};
+};
+var $author$project$Vega$daUrl = $author$project$Vega$DaUrl;
 var $author$project$Vega$foDataTypeSpec = function (dType) {
 	switch (dType.$) {
 		case 0:
@@ -5300,89 +7457,59 @@ var $author$project$Vega$formatProperty = function (fmt) {
 				]);
 	}
 };
-var $elm$core$Basics$composeR = F3(
-	function (f, g, x) {
-		return g(
-			f(x));
-	});
-var $elm$core$List$head = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(x);
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
-var $elm$core$List$repeatHelp = F3(
-	function (result, n, value) {
-		repeatHelp:
-		while (true) {
-			if (n <= 0) {
-				return result;
-			} else {
-				var $temp$result = A2($elm$core$List$cons, value, result),
-					$temp$n = n - 1,
-					$temp$value = value;
-				result = $temp$result;
-				n = $temp$n;
-				value = $temp$value;
-				continue repeatHelp;
-			}
-		}
-	});
-var $elm$core$List$repeat = F2(
-	function (n, value) {
-		return A3($elm$core$List$repeatHelp, _List_Nil, n, value);
-	});
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (!maybe.$) {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
-		}
-	});
-var $author$project$Vega$transpose = function (xss) {
-	var numCols = A2(
-		$elm$core$Basics$composeR,
-		$elm$core$List$head,
-		A2(
-			$elm$core$Basics$composeR,
-			$elm$core$Maybe$withDefault(_List_Nil),
-			$elm$core$List$length));
-	return A3(
-		$elm$core$List$foldr,
-		$elm$core$List$map2($elm$core$List$cons),
-		A2(
-			$elm$core$List$repeat,
-			numCols(xss),
-			_List_Nil),
-		xss);
-};
-var $author$project$Vega$dataFromColumns = F3(
-	function (name, fmts, cols) {
-		var fmt = _Utils_eq(fmts, _List_Nil) ? _List_Nil : _List_fromArray(
-			[
-				_Utils_Tuple2(
+var $author$project$Vega$dataProperty = function (dProp) {
+	switch (dProp.$) {
+		case 0:
+			var fmts = dProp.a;
+			return _Utils_Tuple2(
 				'format',
 				$elm$json$Json$Encode$object(
-					A2($elm$core$List$concatMap, $author$project$Vega$formatProperty, fmts)))
-			]);
-		var dataArray = A2(
-			$elm$json$Json$Encode$list,
-			$elm$json$Json$Encode$object,
-			$author$project$Vega$transpose(cols));
-		return _Utils_ap(
-			_List_fromArray(
-				[
-					_Utils_Tuple2(
-					'name',
-					$elm$json$Json$Encode$string(name)),
-					_Utils_Tuple2('values', dataArray)
-				]),
-			fmt);
+					A2($elm$core$List$concatMap, $author$project$Vega$formatProperty, fmts)));
+		case 1:
+			var src = dProp.a;
+			return _Utils_Tuple2(
+				'source',
+				$elm$json$Json$Encode$string(src));
+		case 2:
+			var srcs = dProp.a;
+			return _Utils_Tuple2(
+				'source',
+				A2($elm$json$Json$Encode$list, $elm$json$Json$Encode$string, srcs));
+		case 5:
+			var triggers = dProp.a;
+			return _Utils_Tuple2(
+				'on',
+				A2($elm$json$Json$Encode$list, $elm$core$Basics$identity, triggers));
+		case 6:
+			var url = dProp.a;
+			return _Utils_Tuple2(
+				'url',
+				$author$project$Vega$strSpec(url));
+		case 3:
+			var val = dProp.a;
+			return _Utils_Tuple2(
+				'values',
+				$author$project$Vega$valueSpec(val));
+		default:
+			return _Utils_Tuple2(
+				'values',
+				$elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							'type',
+							$elm$json$Json$Encode$string('Sphere'))
+						])));
+	}
+};
+var $author$project$Vega$data = F2(
+	function (name, dProps) {
+		return A2(
+			$elm$core$List$cons,
+			_Utils_Tuple2(
+				'name',
+				$elm$json$Json$Encode$string(name)),
+			A2($elm$core$List$map, $author$project$Vega$dataProperty, dProps));
 	});
 var $author$project$Vega$VData = 8;
 var $author$project$Vega$dataSource = function (dataTables) {
@@ -5394,62 +7521,773 @@ var $author$project$Vega$DoData = function (a) {
 	return {$: 2, a: a};
 };
 var $author$project$Vega$doData = $author$project$Vega$DoData;
-var $author$project$Vega$Enter = function (a) {
-	return {$: 0, a: a};
-};
-var $author$project$Vega$enEnter = $author$project$Vega$Enter;
-var $author$project$Vega$Hover = function (a) {
+var $author$project$Vega$EnSymbols = function (a) {
 	return {$: 3, a: a};
 };
-var $author$project$Vega$enHover = $author$project$Vega$Hover;
+var $author$project$Vega$enSymbols = $author$project$Vega$EnSymbols;
 var $author$project$Vega$Update = function (a) {
 	return {$: 1, a: a};
 };
 var $author$project$Vega$enUpdate = $author$project$Vega$Update;
-var $author$project$Vega$ESMark = function (a) {
-	return {$: 7, a: a};
-};
-var $author$project$Vega$esMark = $author$project$Vega$ESMark;
-var $author$project$Vega$ESObject = function (a) {
-	return {$: 0, a: a};
-};
-var $author$project$Vega$esObject = $author$project$Vega$ESObject;
-var $author$project$Vega$ESType = function (a) {
-	return {$: 1, a: a};
-};
-var $author$project$Vega$esType = $author$project$Vega$ESType;
-var $author$project$Vega$MouseOut = 10;
-var $author$project$Vega$etMouseOut = 10;
-var $author$project$Vega$MouseOver = 11;
-var $author$project$Vega$etMouseOver = 11;
-var $author$project$Vega$EEvents = function (a) {
-	return {$: 0, a: a};
-};
-var $author$project$Vega$evHandler = F2(
-	function (ess, eHandlers) {
-		return A2(
-			$elm$core$List$cons,
-			$author$project$Vega$EEvents(ess),
-			eHandlers);
-	});
-var $author$project$Vega$EUpdate = function (a) {
-	return {$: 1, a: a};
-};
-var $author$project$Vega$evUpdate = $author$project$Vega$EUpdate;
 var $author$project$Vega$FName = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Vega$field = $author$project$Vega$FName;
-var $author$project$Vega$VStr = function (a) {
-	return {$: 0, a: a};
-};
-var $author$project$Vega$vStr = $author$project$Vega$VStr;
-var $author$project$Vega$hCenter = $author$project$Vega$vStr('center');
 var $author$project$Vega$VHeight = 3;
 var $author$project$Vega$height = function (h) {
 	return _Utils_Tuple2(
 		3,
 		$elm$json$Json$Encode$float(h));
+};
+var $author$project$Vega$LeEncode = function (a) {
+	return {$: 12, a: a};
+};
+var $author$project$Vega$leEncode = $author$project$Vega$LeEncode;
+var $author$project$Vega$LeFill = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Vega$leFill = $author$project$Vega$LeFill;
+var $author$project$Vega$LeTitle = function (a) {
+	return {$: 66, a: a};
+};
+var $author$project$Vega$leTitle = $author$project$Vega$LeTitle;
+var $author$project$Vega$gridAlignSpec = function (ga) {
+	switch (ga.$) {
+		case 0:
+			return $elm$json$Json$Encode$string('all');
+		case 1:
+			return $elm$json$Json$Encode$string('each');
+		case 2:
+			return $elm$json$Json$Encode$string('none');
+		case 3:
+			var align = ga.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(
+						'row',
+						$author$project$Vega$gridAlignSpec(align))
+					]));
+		case 4:
+			var align = ga.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(
+						'column',
+						$author$project$Vega$gridAlignSpec(align))
+					]));
+		default:
+			var sig = ga.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						$author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var $author$project$Vega$legendEncodingProperty = function (le) {
+	switch (le.$) {
+		case 0:
+			var eps = le.a;
+			return _Utils_Tuple2(
+				'legend',
+				$elm$json$Json$Encode$object(
+					A2($elm$core$List$map, $author$project$Vega$encodingProperty, eps)));
+		case 1:
+			var eps = le.a;
+			return _Utils_Tuple2(
+				'title',
+				$elm$json$Json$Encode$object(
+					A2($elm$core$List$map, $author$project$Vega$encodingProperty, eps)));
+		case 2:
+			var eps = le.a;
+			return _Utils_Tuple2(
+				'labels',
+				$elm$json$Json$Encode$object(
+					A2($elm$core$List$map, $author$project$Vega$encodingProperty, eps)));
+		case 3:
+			var eps = le.a;
+			return _Utils_Tuple2(
+				'symbols',
+				$elm$json$Json$Encode$object(
+					A2($elm$core$List$map, $author$project$Vega$encodingProperty, eps)));
+		default:
+			var eps = le.a;
+			return _Utils_Tuple2(
+				'gradient',
+				$elm$json$Json$Encode$object(
+					A2($elm$core$List$map, $author$project$Vega$encodingProperty, eps)));
+	}
+};
+var $author$project$Vega$boundsCalculationSpec = function (bc) {
+	switch (bc.$) {
+		case 0:
+			return $elm$json$Json$Encode$string('full');
+		case 1:
+			return $elm$json$Json$Encode$string('flush');
+		default:
+			var sigName = bc.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						$author$project$Vega$signalReferenceProperty(sigName)
+					]));
+	}
+};
+var $author$project$Vega$orientationSpec = function (orient) {
+	switch (orient.$) {
+		case 0:
+			return $elm$json$Json$Encode$string('horizontal');
+		case 1:
+			return $elm$json$Json$Encode$string('vertical');
+		case 2:
+			return $elm$json$Json$Encode$string('radial');
+		default:
+			var sig = orient.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						$author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var $author$project$Vega$legendLayoutProperty = function (ll) {
+	switch (ll.$) {
+		case 0:
+			var an = ll.a;
+			return _Utils_Tuple2(
+				'anchor',
+				$author$project$Vega$anchorSpec(an));
+		case 1:
+			var bc = ll.a;
+			return _Utils_Tuple2(
+				'bounds',
+				$author$project$Vega$boundsCalculationSpec(bc));
+		case 2:
+			var b = ll.a;
+			return _Utils_Tuple2(
+				'center',
+				$author$project$Vega$booSpec(b));
+		case 3:
+			var o = ll.a;
+			return _Utils_Tuple2(
+				'direction',
+				$author$project$Vega$orientationSpec(o));
+		case 4:
+			var n = ll.a;
+			return _Utils_Tuple2(
+				'margin',
+				$author$project$Vega$numSpec(n));
+		default:
+			var n = ll.a;
+			return _Utils_Tuple2(
+				'offset',
+				$author$project$Vega$numSpec(n));
+	}
+};
+var $author$project$Vega$legendOrientLabel = function (orient) {
+	switch (orient.$) {
+		case 0:
+			return 'left';
+		case 1:
+			return 'top-left';
+		case 2:
+			return 'top';
+		case 3:
+			return 'top-right';
+		case 4:
+			return 'right';
+		case 5:
+			return 'bottom-right';
+		case 6:
+			return 'bottom';
+		case 7:
+			return 'bottom-left';
+		case 8:
+			return 'none';
+		default:
+			var sig = orient.a;
+			return sig;
+	}
+};
+var $author$project$Vega$legendOrientSpec = function (orient) {
+	if (orient.$ === 9) {
+		var sig = orient.a;
+		return $elm$json$Json$Encode$object(
+			_List_fromArray(
+				[
+					$author$project$Vega$signalReferenceProperty(sig)
+				]));
+	} else {
+		return $elm$json$Json$Encode$string(
+			$author$project$Vega$legendOrientLabel(orient));
+	}
+};
+var $author$project$Vega$legendTypeSpec = function (lt) {
+	switch (lt.$) {
+		case 0:
+			return $elm$json$Json$Encode$string('symbol');
+		case 1:
+			return $elm$json$Json$Encode$string('gradient');
+		default:
+			var sig = lt.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						$author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var $author$project$Vega$symbolLabel = function (sym) {
+	switch (sym.$) {
+		case 0:
+			return 'circle';
+		case 1:
+			return 'square';
+		case 2:
+			return 'cross';
+		case 3:
+			return 'wedge';
+		case 4:
+			return 'arrow';
+		case 5:
+			return 'stroke';
+		case 6:
+			return 'diamond';
+		case 7:
+			return 'triangle';
+		case 8:
+			return 'triangle-up';
+		case 9:
+			return 'triangle-down';
+		case 11:
+			return 'triangle-right';
+		case 10:
+			return 'triangle-left';
+		case 12:
+			var svgPath = sym.a;
+			return svgPath;
+		default:
+			var sig = sym.a;
+			return sig;
+	}
+};
+var $author$project$Vega$symbolSpec = function (sym) {
+	if (sym.$ === 13) {
+		var sig = sym.a;
+		return $elm$json$Json$Encode$object(
+			_List_fromArray(
+				[
+					$author$project$Vega$signalReferenceProperty(sig)
+				]));
+	} else {
+		return $elm$json$Json$Encode$string(
+			$author$project$Vega$symbolLabel(sym));
+	}
+};
+var $author$project$Vega$legendProperty = function (lp) {
+	switch (lp.$) {
+		case 0:
+			var lt = lp.a;
+			return _Utils_Tuple2(
+				'type',
+				$author$project$Vega$legendTypeSpec(lt));
+		case 48:
+			var ll = lp.a;
+			return _Utils_Tuple2(
+				'layout',
+				$elm$json$Json$Encode$object(
+					A2($elm$core$List$map, $author$project$Vega$legendLayoutProperty, ll)));
+		case 49:
+			var oLayouts = lp.a;
+			return _Utils_Tuple2(
+				'layout',
+				$elm$json$Json$Encode$object(
+					A2(
+						$elm$core$List$map,
+						function (_v1) {
+							var lo = _v1.a;
+							var ll = _v1.b;
+							return _Utils_Tuple2(
+								$author$project$Vega$legendOrientLabel(lo),
+								$elm$json$Json$Encode$object(
+									A2($elm$core$List$map, $author$project$Vega$legendLayoutProperty, ll)));
+						},
+						oLayouts)));
+		case 1:
+			var o = lp.a;
+			return _Utils_Tuple2(
+				'direction',
+				$author$project$Vega$orientationSpec(o));
+		case 2:
+			var lo = lp.a;
+			return _Utils_Tuple2(
+				'orient',
+				$author$project$Vega$legendOrientSpec(lo));
+		case 3:
+			var fScale = lp.a;
+			return _Utils_Tuple2(
+				'fill',
+				$elm$json$Json$Encode$string(fScale));
+		case 4:
+			var oScale = lp.a;
+			return _Utils_Tuple2(
+				'opacity',
+				$elm$json$Json$Encode$string(oScale));
+		case 5:
+			var sScale = lp.a;
+			return _Utils_Tuple2(
+				'shape',
+				$elm$json$Json$Encode$string(sScale));
+		case 6:
+			var sScale = lp.a;
+			return _Utils_Tuple2(
+				'size',
+				$elm$json$Json$Encode$string(sScale));
+		case 7:
+			var sScale = lp.a;
+			return _Utils_Tuple2(
+				'stroke',
+				$elm$json$Json$Encode$string(sScale));
+		case 8:
+			var sdScale = lp.a;
+			return _Utils_Tuple2(
+				'strokeDash',
+				$elm$json$Json$Encode$string(sdScale));
+		case 10:
+			var vals = lp.a;
+			return _Utils_Tuple2(
+				'strokeDash',
+				$author$project$Vega$valRef(vals));
+		case 12:
+			var les = lp.a;
+			return _Utils_Tuple2(
+				'encode',
+				$elm$json$Json$Encode$object(
+					A2($elm$core$List$map, $author$project$Vega$legendEncodingProperty, les)));
+		case 13:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'format',
+				$author$project$Vega$strSpec(s));
+		case 14:
+			return _Utils_Tuple2(
+				'formatType',
+				$elm$json$Json$Encode$string('number'));
+		case 15:
+			return _Utils_Tuple2(
+				'formatType',
+				$elm$json$Json$Encode$string('time'));
+		case 16:
+			return _Utils_Tuple2(
+				'formatType',
+				$elm$json$Json$Encode$string('utc'));
+		case 17:
+			var ga = lp.a;
+			return _Utils_Tuple2(
+				'gridAlign',
+				$author$project$Vega$gridAlignSpec(ga));
+		case 18:
+			var h = lp.a;
+			return _Utils_Tuple2(
+				'clipHeight',
+				$author$project$Vega$numSpec(h));
+		case 19:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'columns',
+				$author$project$Vega$numSpec(n));
+		case 20:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'columnPadding',
+				$author$project$Vega$numSpec(x));
+		case 21:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'rowPadding',
+				$author$project$Vega$numSpec(x));
+		case 22:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'cornerRadius',
+				$author$project$Vega$numSpec(x));
+		case 23:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'fillColor',
+				$author$project$Vega$strSpec(s));
+		case 24:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'offset',
+				$author$project$Vega$numSpec(n));
+		case 25:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'padding',
+				$author$project$Vega$numSpec(n));
+		case 26:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'strokeColor',
+				$author$project$Vega$strSpec(s));
+		case 9:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'strokeWidth',
+				$elm$json$Json$Encode$string(s));
+		case 11:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'strokeWidth',
+				$author$project$Vega$numSpec(n));
+		case 30:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'gradientOpacity',
+				$author$project$Vega$numSpec(n));
+		case 27:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'gradientLabelLimit',
+				$author$project$Vega$numSpec(x));
+		case 28:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'gradientLabelOffset',
+				$author$project$Vega$numSpec(x));
+		case 29:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'gradientLength',
+				$author$project$Vega$numSpec(x));
+		case 31:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'gradientThickness',
+				$author$project$Vega$numSpec(x));
+		case 32:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'gradientStrokeColor',
+				$author$project$Vega$strSpec(s));
+		case 33:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'gradientStrokeWidth',
+				$author$project$Vega$numSpec(x));
+		case 34:
+			var ha = lp.a;
+			return _Utils_Tuple2(
+				'labelAlign',
+				$author$project$Vega$hAlignSpec(ha));
+		case 35:
+			var va = lp.a;
+			return _Utils_Tuple2(
+				'labelBaseline',
+				$author$project$Vega$vAlignSpec(va));
+		case 36:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'labelColor',
+				$author$project$Vega$strSpec(s));
+		case 43:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'labelOpacity',
+				$author$project$Vega$numSpec(n));
+		case 37:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'labelFont',
+				$author$project$Vega$strSpec(s));
+		case 38:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'labelFontSize',
+				$author$project$Vega$numSpec(x));
+		case 39:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'labelFontStyle',
+				$author$project$Vega$strSpec(s));
+		case 40:
+			var val = lp.a;
+			return _Utils_Tuple2(
+				'labelFontWeight',
+				$author$project$Vega$valueSpec(val));
+		case 41:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'labelLimit',
+				$author$project$Vega$numSpec(x));
+		case 42:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'labelOffset',
+				$author$project$Vega$numSpec(x));
+		case 44:
+			var os = lp.a;
+			return _Utils_Tuple2(
+				'labelOverlap',
+				$author$project$Vega$overlapStrategySpec(os));
+		case 45:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'labelSeparation',
+				$author$project$Vega$numSpec(x));
+		case 50:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'symbolBaseFillColor',
+				$author$project$Vega$strSpec(s));
+		case 51:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'symbolBaseStrokeColor',
+				$author$project$Vega$strSpec(s));
+		case 52:
+			var vals = lp.a;
+			return _Utils_Tuple2(
+				'symbolDash',
+				$author$project$Vega$valRef(vals));
+		case 53:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'symbolDashOffset',
+				$author$project$Vega$numSpec(n));
+		case 54:
+			var o = lp.a;
+			return _Utils_Tuple2(
+				'symbolDirection',
+				$author$project$Vega$orientationSpec(o));
+		case 55:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'symbolFillColor',
+				$author$project$Vega$strSpec(s));
+		case 56:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'symbolLimit',
+				$author$project$Vega$numSpec(n));
+		case 57:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'symbolOffset',
+				$author$project$Vega$numSpec(x));
+		case 59:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'symbolSize',
+				$author$project$Vega$numSpec(x));
+		case 60:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'symbolStrokeColor',
+				$author$project$Vega$strSpec(s));
+		case 61:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'symbolStrokeWidth',
+				$author$project$Vega$numSpec(x));
+		case 58:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'symbolOpacity',
+				$author$project$Vega$numSpec(n));
+		case 62:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'symbolType',
+				$author$project$Vega$symbolSpec(s));
+		case 63:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'tickCount',
+				$author$project$Vega$numSpec(n));
+		case 65:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'tickMinStep',
+				$author$project$Vega$numSpec(n));
+		case 64:
+			var tu = lp.a;
+			var n = lp.b;
+			switch (n.$) {
+				case 0:
+					var step = n.a;
+					return (step <= 0) ? (_Utils_eq(tu, $author$project$Vega$quarter) ? _Utils_Tuple2(
+						'tickCount',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									$author$project$Vega$timeUnitSpecShort($author$project$Vega$Month)),
+									_Utils_Tuple2(
+									'step',
+									$elm$json$Json$Encode$int(3))
+								]))) : _Utils_Tuple2(
+						'tickCount',
+						$author$project$Vega$timeUnitSpecShort(tu))) : (_Utils_eq(tu, $author$project$Vega$quarter) ? _Utils_Tuple2(
+						'tickCount',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									$author$project$Vega$timeUnitSpecShort($author$project$Vega$Month)),
+									_Utils_Tuple2(
+									'step',
+									$elm$json$Json$Encode$float(step * 3))
+								]))) : _Utils_Tuple2(
+						'tickCount',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									$author$project$Vega$timeUnitSpecShort(tu)),
+									_Utils_Tuple2(
+									'step',
+									$author$project$Vega$numSpec(n))
+								]))));
+				case 2:
+					return _Utils_Tuple2(
+						'tickCount',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									$author$project$Vega$timeUnitSpecShort(tu)),
+									_Utils_Tuple2(
+									'step',
+									$author$project$Vega$numSpec(n))
+								])));
+				case 5:
+					return _Utils_Tuple2(
+						'tickCount',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									$author$project$Vega$timeUnitSpecShort(tu)),
+									_Utils_Tuple2(
+									'step',
+									$author$project$Vega$numSpec(n))
+								])));
+				default:
+					return _Utils_Tuple2(
+						'tickCount',
+						$author$project$Vega$timeUnitSpecShort(tu));
+			}
+		case 79:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'titlePadding',
+				$author$project$Vega$numSpec(n));
+		case 66:
+			var t = lp.a;
+			return _Utils_Tuple2(
+				'title',
+				$author$project$Vega$strSpec(t));
+		case 68:
+			var ha = lp.a;
+			return _Utils_Tuple2(
+				'titleAlign',
+				$author$project$Vega$hAlignSpec(ha));
+		case 67:
+			var an = lp.a;
+			return _Utils_Tuple2(
+				'titleAnchor',
+				$author$project$Vega$anchorSpec(an));
+		case 69:
+			var va = lp.a;
+			return _Utils_Tuple2(
+				'titleBaseline',
+				$author$project$Vega$vAlignSpec(va));
+		case 70:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'titleColor',
+				$author$project$Vega$strSpec(s));
+		case 71:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'titleFont',
+				$author$project$Vega$strSpec(s));
+		case 72:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'titleFontSize',
+				$author$project$Vega$numSpec(x));
+		case 73:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'titleFontStyle',
+				$author$project$Vega$strSpec(s));
+		case 74:
+			var val = lp.a;
+			return _Utils_Tuple2(
+				'titleFontWeight',
+				$author$project$Vega$valueSpec(val));
+		case 75:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'titleLimit',
+				$author$project$Vega$numSpec(x));
+		case 76:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'titleLineHeight',
+				$author$project$Vega$numSpec(n));
+		case 77:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'titleOpacity',
+				$author$project$Vega$numSpec(n));
+		case 78:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'titleOrient',
+				$author$project$Vega$sideSpec(s));
+		case 80:
+			var vals = lp.a;
+			return _Utils_Tuple2(
+				'values',
+				A2($elm$json$Json$Encode$list, $author$project$Vega$valueSpec, vals));
+		case 46:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'legendX',
+				$author$project$Vega$numSpec(n));
+		case 47:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'legendY',
+				$author$project$Vega$numSpec(n));
+		default:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'zindex',
+				$author$project$Vega$numSpec(n));
+	}
+};
+var $author$project$Vega$legend = function (lps) {
+	return $elm$core$List$cons(
+		$elm$json$Json$Encode$object(
+			A2($elm$core$List$map, $author$project$Vega$legendProperty, lps)));
+};
+var $author$project$Vega$VLegends = 12;
+var $author$project$Vega$legends = function (lgs) {
+	return _Utils_Tuple2(
+		12,
+		A2($elm$json$Json$Encode$list, $elm$core$Basics$identity, lgs));
 };
 var $author$project$Vega$MEncode = function (a) {
 	return {$: 3, a: a};
@@ -5459,26 +8297,14 @@ var $author$project$Vega$MFrom = function (a) {
 	return {$: 4, a: a};
 };
 var $author$project$Vega$mFrom = $author$project$Vega$MFrom;
-var $author$project$Vega$MAlign = function (a) {
-	return {$: 23, a: a};
-};
-var $author$project$Vega$maAlign = $author$project$Vega$MAlign;
-var $author$project$Vega$MBaseline = function (a) {
-	return {$: 24, a: a};
-};
-var $author$project$Vega$maBaseline = $author$project$Vega$MBaseline;
 var $author$project$Vega$MFill = function (a) {
 	return {$: 9, a: a};
 };
 var $author$project$Vega$maFill = $author$project$Vega$MFill;
-var $author$project$Vega$MText = function (a) {
-	return {$: 65, a: a};
+var $author$project$Vega$MShape = function (a) {
+	return {$: 50, a: a};
 };
-var $author$project$Vega$maText = $author$project$Vega$MText;
-var $author$project$Vega$MWidth = function (a) {
-	return {$: 3, a: a};
-};
-var $author$project$Vega$maWidth = $author$project$Vega$MWidth;
+var $author$project$Vega$maShape = $author$project$Vega$MShape;
 var $author$project$Vega$MX = function (a) {
 	return {$: 0, a: a};
 };
@@ -5487,10 +8313,6 @@ var $author$project$Vega$MY = function (a) {
 	return {$: 4, a: a};
 };
 var $author$project$Vega$maY = $author$project$Vega$MY;
-var $author$project$Vega$MY2 = function (a) {
-	return {$: 5, a: a};
-};
-var $author$project$Vega$maY2 = $author$project$Vega$MY2;
 var $author$project$Vega$MType = function (a) {
 	return {$: 0, a: a};
 };
@@ -6725,23 +9547,6 @@ var $author$project$Vega$linkShapeSpec = function (ls) {
 			return $elm$json$Json$Encode$string('orthogonal');
 		default:
 			var sig = ls.a;
-			return $elm$json$Json$Encode$object(
-				_List_fromArray(
-					[
-						$author$project$Vega$signalReferenceProperty(sig)
-					]));
-	}
-};
-var $author$project$Vega$orientationSpec = function (orient) {
-	switch (orient.$) {
-		case 0:
-			return $elm$json$Json$Encode$string('horizontal');
-		case 1:
-			return $elm$json$Json$Encode$string('vertical');
-		case 2:
-			return $elm$json$Json$Encode$string('radial');
-		default:
-			var sig = orient.a;
 			return $elm$json$Json$Encode$object(
 				_List_fromArray(
 					[
@@ -8894,45 +11699,46 @@ var $author$project$Vega$marks = function (axs) {
 		15,
 		A2($elm$json$Json$Encode$list, $elm$core$Basics$identity, axs));
 };
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
+var $author$project$Vega$NTrue = {$: 9};
+var $author$project$Vega$niTrue = $author$project$Vega$NTrue;
 var $author$project$Vega$Num = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Vega$num = $author$project$Vega$Num;
-var $author$project$Vega$VPadding = 4;
-var $author$project$Vega$padding = function (p) {
-	return _Utils_Tuple2(
-		4,
-		$elm$json$Json$Encode$float(p));
-};
+var $author$project$Vega$RaCategory = {$: 9};
+var $author$project$Vega$raCategory = $author$project$Vega$RaCategory;
 var $author$project$Vega$RaHeight = {$: 7};
 var $author$project$Vega$raHeight = $author$project$Vega$RaHeight;
 var $author$project$Vega$RaWidth = {$: 6};
 var $author$project$Vega$raWidth = $author$project$Vega$RaWidth;
-var $author$project$Vega$Rect = 6;
-var $author$project$Vega$rect = 6;
-var $author$project$Vega$ScBand = {$: 8};
-var $author$project$Vega$scBand = $author$project$Vega$ScBand;
 var $author$project$Vega$SDomain = function (a) {
 	return {$: 1, a: a};
 };
 var $author$project$Vega$scDomain = $author$project$Vega$SDomain;
 var $author$project$Vega$ScLinear = {$: 0};
 var $author$project$Vega$scLinear = $author$project$Vega$ScLinear;
-var $author$project$Vega$SPadding = function (a) {
-	return {$: 12, a: a};
+var $author$project$Vega$SNice = function (a) {
+	return {$: 13, a: a};
 };
-var $author$project$Vega$scPadding = $author$project$Vega$SPadding;
+var $author$project$Vega$scNice = $author$project$Vega$SNice;
+var $author$project$Vega$ScOrdinal = {$: 7};
+var $author$project$Vega$scOrdinal = $author$project$Vega$ScOrdinal;
 var $author$project$Vega$SRange = function (a) {
 	return {$: 6, a: a};
 };
 var $author$project$Vega$scRange = $author$project$Vega$SRange;
+var $author$project$Vega$SRound = function (a) {
+	return {$: 9, a: a};
+};
+var $author$project$Vega$scRound = $author$project$Vega$SRound;
 var $author$project$Vega$SType = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Vega$scType = $author$project$Vega$SType;
+var $author$project$Vega$SZero = function (a) {
+	return {$: 14, a: a};
+};
+var $author$project$Vega$scZero = $author$project$Vega$SZero;
 var $author$project$Vega$BnsStep = function (a) {
 	return {$: 0, a: a};
 };
@@ -9514,382 +12320,6 @@ var $author$project$Vega$SBottom = {$: 3};
 var $author$project$Vega$siBottom = $author$project$Vega$SBottom;
 var $author$project$Vega$SLeft = {$: 0};
 var $author$project$Vega$siLeft = $author$project$Vega$SLeft;
-var $author$project$Vega$SiOn = function (a) {
-	return {$: 4, a: a};
-};
-var $author$project$Vega$siOn = $author$project$Vega$SiOn;
-var $author$project$Vega$SiValue = function (a) {
-	return {$: 7, a: a};
-};
-var $author$project$Vega$siValue = $author$project$Vega$SiValue;
-var $author$project$Vega$SiName = function (a) {
-	return {$: 0, a: a};
-};
-var $author$project$Vega$inputProperty = function (prop) {
-	switch (prop.$) {
-		case 4:
-			var x = prop.a;
-			return _Utils_Tuple2(
-				'min',
-				$elm$json$Json$Encode$float(x));
-		case 5:
-			var x = prop.a;
-			return _Utils_Tuple2(
-				'max',
-				$elm$json$Json$Encode$float(x));
-		case 6:
-			var x = prop.a;
-			return _Utils_Tuple2(
-				'step',
-				$elm$json$Json$Encode$float(x));
-		case 0:
-			var x = prop.a;
-			return _Utils_Tuple2(
-				'debounce',
-				$elm$json$Json$Encode$float(x));
-		case 2:
-			var opts = prop.a;
-			return _Utils_Tuple2(
-				'options',
-				$author$project$Vega$valueSpec(opts));
-		case 3:
-			var labels = prop.a;
-			return _Utils_Tuple2(
-				'labels',
-				$author$project$Vega$valueSpec(labels));
-		case 7:
-			var el = prop.a;
-			return _Utils_Tuple2(
-				'placeholder',
-				$elm$json$Json$Encode$string(el));
-		case 1:
-			var el = prop.a;
-			return _Utils_Tuple2(
-				'element',
-				$elm$json$Json$Encode$string(el));
-		default:
-			var b = prop.a;
-			return b ? _Utils_Tuple2(
-				'autocomplete',
-				$elm$json$Json$Encode$string('on')) : _Utils_Tuple2(
-				'autocomplete',
-				$elm$json$Json$Encode$string('off'));
-	}
-};
-var $author$project$Vega$bindingProperty = function (bnd) {
-	var bSpec = F2(
-		function (iType, props) {
-			return _Utils_Tuple2(
-				'bind',
-				$elm$json$Json$Encode$object(
-					A2(
-						$elm$core$List$cons,
-						_Utils_Tuple2(
-							'input',
-							$elm$json$Json$Encode$string(iType)),
-						A2($elm$core$List$map, $author$project$Vega$inputProperty, props))));
-		});
-	switch (bnd.$) {
-		case 0:
-			var props = bnd.a;
-			return A2(bSpec, 'range', props);
-		case 1:
-			var props = bnd.a;
-			return A2(bSpec, 'checkbox', props);
-		case 2:
-			var props = bnd.a;
-			return A2(bSpec, 'radio', props);
-		case 3:
-			var props = bnd.a;
-			return A2(bSpec, 'select', props);
-		case 4:
-			var props = bnd.a;
-			return A2(bSpec, 'text', props);
-		case 5:
-			var props = bnd.a;
-			return A2(bSpec, 'number', props);
-		case 6:
-			var props = bnd.a;
-			return A2(bSpec, 'date', props);
-		case 7:
-			var props = bnd.a;
-			return A2(bSpec, 'time', props);
-		case 8:
-			var props = bnd.a;
-			return A2(bSpec, 'month', props);
-		case 9:
-			var props = bnd.a;
-			return A2(bSpec, 'week', props);
-		case 10:
-			var props = bnd.a;
-			return A2(bSpec, 'datetimelocal', props);
-		case 11:
-			var props = bnd.a;
-			return A2(bSpec, 'tel', props);
-		default:
-			var props = bnd.a;
-			return A2(bSpec, 'color', props);
-	}
-};
-var $author$project$Vega$eventSourceLabel = function (es) {
-	switch (es.$) {
-		case 0:
-			return '*';
-		case 1:
-			return 'view';
-		case 2:
-			return 'scope';
-		case 3:
-			return 'window';
-		default:
-			var s = es.a;
-			return s;
-	}
-};
-var $author$project$Vega$eventTypeLabel = function (et) {
-	switch (et) {
-		case 0:
-			return 'click';
-		case 1:
-			return 'dblclick';
-		case 2:
-			return 'dragenter';
-		case 3:
-			return 'dragleave';
-		case 4:
-			return 'dragover';
-		case 5:
-			return 'keydown';
-		case 6:
-			return 'keypress';
-		case 7:
-			return 'keyup';
-		case 8:
-			return 'mousedown';
-		case 9:
-			return 'mousemove';
-		case 10:
-			return 'mouseout';
-		case 11:
-			return 'mouseover';
-		case 12:
-			return 'mouseup';
-		case 13:
-			return 'mousewheel';
-		case 14:
-			return 'touchend';
-		case 15:
-			return 'touchmove';
-		case 16:
-			return 'touchstart';
-		case 17:
-			return 'wheel';
-		default:
-			return 'timer';
-	}
-};
-var $author$project$Vega$eventStreamObjectSpec = function (ess) {
-	var esProperty = function (es) {
-		switch (es.$) {
-			case 0:
-				var src = es.a;
-				return _Utils_Tuple2(
-					'source',
-					$elm$json$Json$Encode$string(
-						$author$project$Vega$eventSourceLabel(src)));
-			case 1:
-				var et = es.a;
-				return _Utils_Tuple2(
-					'type',
-					$elm$json$Json$Encode$string(
-						$author$project$Vega$eventTypeLabel(et)));
-			case 2:
-				var ess1 = es.a;
-				var ess2 = es.b;
-				return _Utils_Tuple2(
-					'between',
-					A2(
-						$elm$json$Json$Encode$list,
-						$author$project$Vega$eventStreamObjectSpec,
-						_List_fromArray(
-							[ess1, ess2])));
-			case 3:
-				var b = es.a;
-				return _Utils_Tuple2(
-					'consume',
-					$author$project$Vega$booSpec(b));
-			case 4:
-				var ex = es.a;
-				if (ex.b && (!ex.b.b)) {
-					var s = ex.a;
-					return _Utils_Tuple2(
-						'filter',
-						$elm$json$Json$Encode$string(s));
-				} else {
-					return _Utils_Tuple2(
-						'filter',
-						A2($elm$json$Json$Encode$list, $elm$json$Json$Encode$string, ex));
-				}
-			case 5:
-				var n = es.a;
-				return _Utils_Tuple2(
-					'debounce',
-					$author$project$Vega$numSpec(n));
-			case 6:
-				var s = es.a;
-				return _Utils_Tuple2(
-					'markname',
-					$elm$json$Json$Encode$string(s));
-			case 7:
-				var mk = es.a;
-				return _Utils_Tuple2(
-					'marktype',
-					$elm$json$Json$Encode$string(
-						$author$project$Vega$markLabel(mk)));
-			case 8:
-				var n = es.a;
-				return _Utils_Tuple2(
-					'throttle',
-					$author$project$Vega$numSpec(n));
-			default:
-				var evStream = es.a;
-				return _Utils_Tuple2(
-					'stream',
-					$author$project$Vega$eventStreamSpec(evStream));
-		}
-	};
-	return $elm$json$Json$Encode$object(
-		A2($elm$core$List$map, esProperty, ess));
-};
-var $author$project$Vega$eventStreamSpec = function (es) {
-	switch (es.$) {
-		case 1:
-			var s = es.a;
-			return $author$project$Vega$strSpec(s);
-		case 0:
-			var ess = es.a;
-			return $author$project$Vega$eventStreamObjectSpec(ess);
-		case 2:
-			var esSig = es.a;
-			return $elm$json$Json$Encode$object(
-				_List_fromArray(
-					[
-						_Utils_Tuple2(
-						'signal',
-						$elm$json$Json$Encode$string(esSig))
-					]));
-		default:
-			var ess = es.a;
-			return $elm$json$Json$Encode$object(
-				_List_fromArray(
-					[
-						_Utils_Tuple2(
-						'merge',
-						A2($elm$json$Json$Encode$list, $author$project$Vega$eventStreamSpec, ess))
-					]));
-	}
-};
-var $author$project$Vega$eventHandlerSpec = function (ehs) {
-	var eventHandler = function (eh) {
-		switch (eh.$) {
-			case 0:
-				var ess = eh.a;
-				if (ess.b && (!ess.b.b)) {
-					var es = ess.a;
-					return _Utils_Tuple2(
-						'events',
-						$author$project$Vega$eventStreamSpec(es));
-				} else {
-					return _Utils_Tuple2(
-						'events',
-						A2($elm$json$Json$Encode$list, $author$project$Vega$eventStreamSpec, ess));
-				}
-			case 1:
-				var s = eh.a;
-				return (s === '') ? _Utils_Tuple2(
-					'update',
-					$elm$json$Json$Encode$string('{}')) : _Utils_Tuple2(
-					'update',
-					$elm$json$Json$Encode$string(s));
-			case 2:
-				var s = eh.a;
-				return _Utils_Tuple2(
-					'encode',
-					$elm$json$Json$Encode$string(s));
-			default:
-				var b = eh.a;
-				return _Utils_Tuple2(
-					'force',
-					$author$project$Vega$booSpec(b));
-		}
-	};
-	return $elm$json$Json$Encode$object(
-		A2($elm$core$List$map, eventHandler, ehs));
-};
-var $author$project$Vega$signalProperty = function (sigProp) {
-	switch (sigProp.$) {
-		case 0:
-			var s = sigProp.a;
-			return _Utils_Tuple2(
-				'name',
-				$elm$json$Json$Encode$string(s));
-		case 1:
-			var bd = sigProp.a;
-			return $author$project$Vega$bindingProperty(bd);
-		case 2:
-			var s = sigProp.a;
-			return _Utils_Tuple2(
-				'description',
-				$elm$json$Json$Encode$string(s));
-		case 3:
-			var ex = sigProp.a;
-			return _Utils_Tuple2(
-				'init',
-				$author$project$Vega$expressionSpec(ex));
-		case 5:
-			var ex = sigProp.a;
-			return _Utils_Tuple2(
-				'update',
-				$author$project$Vega$expressionSpec(ex));
-		case 4:
-			var ehs = sigProp.a;
-			return _Utils_Tuple2(
-				'on',
-				A2($elm$json$Json$Encode$list, $author$project$Vega$eventHandlerSpec, ehs));
-		case 6:
-			var b = sigProp.a;
-			return _Utils_Tuple2(
-				'react',
-				$author$project$Vega$booSpec(b));
-		case 7:
-			var v = sigProp.a;
-			return _Utils_Tuple2(
-				'value',
-				$author$project$Vega$valueSpec(v));
-		default:
-			return _Utils_Tuple2(
-				'push',
-				$elm$json$Json$Encode$string('outer'));
-	}
-};
-var $author$project$Vega$signal = F2(
-	function (sigName, sps) {
-		return $elm$core$List$cons(
-			$elm$json$Json$Encode$object(
-				A2(
-					$elm$core$List$map,
-					$author$project$Vega$signalProperty,
-					A2(
-						$elm$core$List$cons,
-						$author$project$Vega$SiName(sigName),
-						sps))));
-	});
-var $author$project$Vega$VSignals = 7;
-var $author$project$Vega$signals = function (sigs) {
-	return _Utils_Tuple2(
-		7,
-		A2($elm$json$Json$Encode$list, $elm$core$Basics$identity, sigs));
-};
 var $author$project$Vega$SData = function (a) {
 	return {$: 0, a: a};
 };
@@ -9898,8 +12328,247 @@ var $author$project$Vega$Str = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Vega$str = $author$project$Vega$Str;
-var $author$project$Vega$Text = 10;
-var $author$project$Vega$text = 10;
+var $author$project$Vega$Strs = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$strs = $author$project$Vega$Strs;
+var $author$project$Vega$SymCircle = {$: 0};
+var $author$project$Vega$symCircle = $author$project$Vega$SymCircle;
+var $author$project$Vega$Symbol = 9;
+var $author$project$Vega$symbol = 9;
+var $author$project$Vega$VStr = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$vStr = $author$project$Vega$VStr;
+var $author$project$Vega$symbolValue = function (sym) {
+	return $author$project$Vega$vStr(
+		$author$project$Vega$symbolLabel(sym));
+};
+var $author$project$Vega$TSubtitle = function (a) {
+	return {$: 22, a: a};
+};
+var $author$project$Vega$tiSubtitle = $author$project$Vega$TSubtitle;
+var $author$project$Vega$TText = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$VTitle = 13;
+var $author$project$Vega$TeTitle = 0;
+var $author$project$Vega$teTitle = 0;
+var $author$project$Vega$titleElementLabel = function (te) {
+	switch (te) {
+		case 0:
+			return 'title';
+		case 1:
+			return 'subtitle';
+		default:
+			return 'group';
+	}
+};
+var $author$project$Vega$titleEncodingSpec = function (encs) {
+	return $elm$json$Json$Encode$object(
+		A2(
+			$elm$core$List$map,
+			function (_v0) {
+				var el = _v0.a;
+				var eps = _v0.b;
+				return _Utils_Tuple2(
+					$author$project$Vega$titleElementLabel(el),
+					$elm$json$Json$Encode$object(
+						A2($elm$core$List$map, $author$project$Vega$encodingProperty, eps)));
+			},
+			encs));
+};
+var $author$project$Vega$titleFrameSpec = function (tf) {
+	switch (tf.$) {
+		case 1:
+			return $elm$json$Json$Encode$string('group');
+		case 0:
+			return $elm$json$Json$Encode$string('bounds');
+		default:
+			var sig = tf.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						$author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var $author$project$Vega$titleProperty = function (tProp) {
+	switch (tProp.$) {
+		case 0:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'text',
+				$author$project$Vega$strSpec(s));
+		case 19:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'orient',
+				$author$project$Vega$sideSpec(s));
+		case 1:
+			var ha = tProp.a;
+			return _Utils_Tuple2(
+				'align',
+				$author$project$Vega$hAlignSpec(ha));
+		case 2:
+			var a = tProp.a;
+			return _Utils_Tuple2(
+				'anchor',
+				$author$project$Vega$anchorSpec(a));
+		case 3:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'angle',
+				$author$project$Vega$numSpec(n));
+		case 4:
+			var va = tProp.a;
+			return _Utils_Tuple2(
+				'baseline',
+				$author$project$Vega$vAlignSpec(va));
+		case 5:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'color',
+				$author$project$Vega$strSpec(s));
+		case 6:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'dx',
+				$author$project$Vega$numSpec(n));
+		case 7:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'dy',
+				$author$project$Vega$numSpec(n));
+		case 8:
+			var eps = tProp.a;
+			return _Utils_Tuple2(
+				'encode',
+				$author$project$Vega$titleEncodingSpec(
+					_List_fromArray(
+						[
+							_Utils_Tuple2($author$project$Vega$teTitle, eps)
+						])));
+		case 9:
+			var encs = tProp.a;
+			return _Utils_Tuple2(
+				'encode',
+				$author$project$Vega$titleEncodingSpec(encs));
+		case 10:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'font',
+				$author$project$Vega$strSpec(s));
+		case 11:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'fontSize',
+				$author$project$Vega$numSpec(n));
+		case 12:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'fontStyle',
+				$author$project$Vega$strSpec(s));
+		case 13:
+			var v = tProp.a;
+			return _Utils_Tuple2(
+				'fontWeight',
+				$author$project$Vega$valueSpec(v));
+		case 14:
+			var fr = tProp.a;
+			return _Utils_Tuple2(
+				'frame',
+				$author$project$Vega$titleFrameSpec(fr));
+		case 15:
+			var b = tProp.a;
+			return _Utils_Tuple2(
+				'interactive',
+				$author$project$Vega$booSpec(b));
+		case 16:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'limit',
+				$author$project$Vega$numSpec(n));
+		case 17:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'lineHeight',
+				$author$project$Vega$numSpec(n));
+		case 20:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'name',
+				$elm$json$Json$Encode$string(s));
+		case 21:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'style',
+				$author$project$Vega$strSpec(s));
+		case 22:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'subtitle',
+				$author$project$Vega$strSpec(s));
+		case 23:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'subtitleColor',
+				$author$project$Vega$strSpec(s));
+		case 24:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'subtitleFont',
+				$author$project$Vega$strSpec(s));
+		case 25:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'subtitleFontSize',
+				$author$project$Vega$numSpec(n));
+		case 26:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'subtitleFontStyle',
+				$author$project$Vega$strSpec(s));
+		case 27:
+			var v = tProp.a;
+			return _Utils_Tuple2(
+				'subtitleFontWeight',
+				$author$project$Vega$valueSpec(v));
+		case 28:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'subtitleLineHeight',
+				$author$project$Vega$numSpec(n));
+		case 29:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'subtitlePadding',
+				$author$project$Vega$numSpec(n));
+		case 18:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'offset',
+				$author$project$Vega$numSpec(n));
+		default:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'zindex',
+				$author$project$Vega$numSpec(n));
+	}
+};
+var $author$project$Vega$title = F2(
+	function (s, tps) {
+		return _Utils_Tuple2(
+			13,
+			$elm$json$Json$Encode$object(
+				A2(
+					$elm$core$List$map,
+					$author$project$Vega$titleProperty,
+					A2(
+						$elm$core$List$cons,
+						$author$project$Vega$TText(s),
+						tps))));
+	});
 var $author$project$Vega$toVega = function (spec) {
 	return $elm$json$Json$Encode$object(
 		A2(
@@ -9918,27 +12587,29 @@ var $author$project$Vega$toVega = function (spec) {
 				},
 				spec)));
 };
-var $author$project$Vega$VBand = function (a) {
-	return {$: 15, a: a};
+var $author$project$Vega$TFilter = function (a) {
+	return {$: 12, a: a};
 };
-var $author$project$Vega$vBand = $author$project$Vega$VBand;
-var $author$project$Vega$vBottom = $author$project$Vega$vStr('bottom');
+var $author$project$Vega$trFilter = $author$project$Vega$TFilter;
+var $author$project$Vega$transform = F2(
+	function (transforms, dTable) {
+		return _Utils_ap(
+			dTable,
+			_List_fromArray(
+				[
+					_Utils_Tuple2(
+					'transform',
+					A2($elm$json$Json$Encode$list, $author$project$Vega$transformSpec, transforms))
+				]));
+	});
+var $author$project$Vega$Boo = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$true = $author$project$Vega$Boo(true);
 var $author$project$Vega$VField = function (a) {
 	return {$: 13, a: a};
 };
 var $author$project$Vega$vField = $author$project$Vega$VField;
-var $author$project$Vega$VNum = function (a) {
-	return {$: 2, a: a};
-};
-var $author$project$Vega$vNum = $author$project$Vega$VNum;
-var $author$project$Vega$VNums = function (a) {
-	return {$: 3, a: a};
-};
-var $author$project$Vega$vNums = $author$project$Vega$VNums;
-var $author$project$Vega$VOffset = function (a) {
-	return {$: 18, a: a};
-};
-var $author$project$Vega$vOffset = $author$project$Vega$VOffset;
 var $author$project$Vega$VScale = function (a) {
 	return {$: 14, a: a};
 };
@@ -9946,198 +12617,103 @@ var $author$project$Vega$vScale = function (s) {
 	return $author$project$Vega$VScale(
 		$author$project$Vega$field(s));
 };
-var $author$project$Vega$VSignal = function (a) {
-	return {$: 9, a: a};
-};
-var $author$project$Vega$vSignal = $author$project$Vega$VSignal;
-var $author$project$Vega$VStrs = function (a) {
-	return {$: 1, a: a};
-};
-var $author$project$Vega$vStrs = $author$project$Vega$VStrs;
 var $author$project$Vega$VWidth = 2;
 var $author$project$Vega$width = function (w) {
 	return _Utils_Tuple2(
 		2,
 		$elm$json$Json$Encode$float(w));
 };
-var $author$project$Barchart$barchart = function () {
-	var si = A2(
-		$elm$core$Basics$composeL,
-		$author$project$Vega$signals,
-		A2(
-			$author$project$Vega$signal,
-			'myTooltip',
+var $author$project$AriaTests$scatter = function (axps) {
+	var ti = A2(
+		$author$project$Vega$title,
+		$author$project$Vega$strs(
 			_List_fromArray(
-				[
-					$author$project$Vega$siValue(
-					$author$project$Vega$vStr('')),
-					$author$project$Vega$siOn(
+				['Engine Efficiency'])),
+		_List_fromArray(
+			[
+				$author$project$Vega$tiSubtitle(
+				$author$project$Vega$strs(
 					_List_fromArray(
-						[
-							A2(
-							$author$project$Vega$evHandler,
-							_List_fromArray(
-								[
-									$author$project$Vega$esObject(
-									_List_fromArray(
-										[
-											$author$project$Vega$esMark($author$project$Vega$rect),
-											$author$project$Vega$esType($author$project$Vega$etMouseOver)
-										]))
-								]),
-							_List_fromArray(
-								[
-									$author$project$Vega$evUpdate('datum')
-								])),
-							A2(
-							$author$project$Vega$evHandler,
-							_List_fromArray(
-								[
-									$author$project$Vega$esObject(
-									_List_fromArray(
-										[
-											$author$project$Vega$esMark($author$project$Vega$rect),
-											$author$project$Vega$esType($author$project$Vega$etMouseOut)
-										]))
-								]),
-							_List_fromArray(
-								[
-									$author$project$Vega$evUpdate('')
-								]))
-						]))
-				])));
+						['Size vs efficiency'])))
+			]));
 	var sc = A2(
 		$elm$core$Basics$composeL,
 		A2(
 			$elm$core$Basics$composeL,
-			$author$project$Vega$scales,
+			A2(
+				$elm$core$Basics$composeL,
+				$author$project$Vega$scales,
+				A2(
+					$author$project$Vega$scale,
+					'xScale',
+					_List_fromArray(
+						[
+							$author$project$Vega$scType($author$project$Vega$scLinear),
+							$author$project$Vega$scRound($author$project$Vega$true),
+							$author$project$Vega$scNice($author$project$Vega$niTrue),
+							$author$project$Vega$scZero($author$project$Vega$true),
+							$author$project$Vega$scDomain(
+							$author$project$Vega$doData(
+								_List_fromArray(
+									[
+										$author$project$Vega$daDataset('cars'),
+										$author$project$Vega$daField(
+										$author$project$Vega$field('Horsepower'))
+									]))),
+							$author$project$Vega$scRange($author$project$Vega$raWidth)
+						]))),
 			A2(
 				$author$project$Vega$scale,
-				'xScale',
+				'yScale',
 				_List_fromArray(
 					[
-						$author$project$Vega$scType($author$project$Vega$scBand),
+						$author$project$Vega$scType($author$project$Vega$scLinear),
+						$author$project$Vega$scRound($author$project$Vega$true),
+						$author$project$Vega$scNice($author$project$Vega$niTrue),
+						$author$project$Vega$scZero($author$project$Vega$true),
 						$author$project$Vega$scDomain(
 						$author$project$Vega$doData(
 							_List_fromArray(
 								[
-									$author$project$Vega$daDataset('table'),
+									$author$project$Vega$daDataset('cars'),
 									$author$project$Vega$daField(
-									$author$project$Vega$field('category'))
+									$author$project$Vega$field('Miles_per_Gallon'))
 								]))),
-						$author$project$Vega$scRange($author$project$Vega$raWidth),
-						$author$project$Vega$scPadding(
-						$author$project$Vega$num(0.05))
+						$author$project$Vega$scRange($author$project$Vega$raHeight)
 					]))),
 		A2(
 			$author$project$Vega$scale,
-			'yScale',
+			'cScale',
 			_List_fromArray(
 				[
-					$author$project$Vega$scType($author$project$Vega$scLinear),
+					$author$project$Vega$scType($author$project$Vega$scOrdinal),
+					$author$project$Vega$scRange($author$project$Vega$raCategory),
 					$author$project$Vega$scDomain(
 					$author$project$Vega$doData(
 						_List_fromArray(
 							[
-								$author$project$Vega$daDataset('table'),
+								$author$project$Vega$daDataset('cars'),
 								$author$project$Vega$daField(
-								$author$project$Vega$field('amount'))
-							]))),
-					$author$project$Vega$scRange($author$project$Vega$raHeight)
+								$author$project$Vega$field('Origin'))
+							])))
 				])));
 	var mk = A2(
 		$elm$core$Basics$composeL,
-		A2(
-			$elm$core$Basics$composeL,
-			$author$project$Vega$marks,
-			A2(
-				$author$project$Vega$mark,
-				$author$project$Vega$rect,
-				_List_fromArray(
-					[
-						$author$project$Vega$mFrom(
-						_List_fromArray(
-							[
-								$author$project$Vega$srData(
-								$author$project$Vega$str('table'))
-							])),
-						$author$project$Vega$mEncode(
-						_List_fromArray(
-							[
-								$author$project$Vega$enEnter(
-								_List_fromArray(
-									[
-										$author$project$Vega$maX(
-										_List_fromArray(
-											[
-												$author$project$Vega$vScale('xScale'),
-												$author$project$Vega$vField(
-												$author$project$Vega$field('category'))
-											])),
-										$author$project$Vega$maWidth(
-										_List_fromArray(
-											[
-												$author$project$Vega$vScale('xScale'),
-												$author$project$Vega$vBand(
-												$author$project$Vega$num(1))
-											])),
-										$author$project$Vega$maY(
-										_List_fromArray(
-											[
-												$author$project$Vega$vScale('yScale'),
-												$author$project$Vega$vField(
-												$author$project$Vega$field('amount'))
-											])),
-										$author$project$Vega$maY2(
-										_List_fromArray(
-											[
-												$author$project$Vega$vScale('yScale'),
-												$author$project$Vega$vNum(0)
-											]))
-									])),
-								$author$project$Vega$enUpdate(
-								_List_fromArray(
-									[
-										$author$project$Vega$maFill(
-										_List_fromArray(
-											[
-												$author$project$Vega$vStr('steelblue')
-											]))
-									])),
-								$author$project$Vega$enHover(
-								_List_fromArray(
-									[
-										$author$project$Vega$maFill(
-										_List_fromArray(
-											[
-												$author$project$Vega$vStr('red')
-											]))
-									]))
-							]))
-					]))),
+		$author$project$Vega$marks,
 		A2(
 			$author$project$Vega$mark,
-			$author$project$Vega$text,
+			$author$project$Vega$symbol,
 			_List_fromArray(
 				[
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('cars'))
+						])),
 					$author$project$Vega$mEncode(
 					_List_fromArray(
 						[
-							$author$project$Vega$enEnter(
-							_List_fromArray(
-								[
-									$author$project$Vega$maAlign(
-									_List_fromArray(
-										[$author$project$Vega$hCenter])),
-									$author$project$Vega$maBaseline(
-									_List_fromArray(
-										[$author$project$Vega$vBottom])),
-									$author$project$Vega$maFill(
-									_List_fromArray(
-										[
-											$author$project$Vega$vStr('grey')
-										]))
-								])),
 							$author$project$Vega$enUpdate(
 							_List_fromArray(
 								[
@@ -10145,95 +12721,458 @@ var $author$project$Barchart$barchart = function () {
 									_List_fromArray(
 										[
 											$author$project$Vega$vScale('xScale'),
-											$author$project$Vega$vSignal('myTooltip.category'),
-											$author$project$Vega$vBand(
-											$author$project$Vega$num(0.5))
+											$author$project$Vega$vField(
+											$author$project$Vega$field('Horsepower'))
 										])),
 									$author$project$Vega$maY(
 									_List_fromArray(
 										[
 											$author$project$Vega$vScale('yScale'),
-											$author$project$Vega$vSignal('myTooltip.amount'),
-											$author$project$Vega$vOffset(
-											$author$project$Vega$vNum(-2))
+											$author$project$Vega$vField(
+											$author$project$Vega$field('Miles_per_Gallon'))
 										])),
-									$author$project$Vega$maText(
+									$author$project$Vega$maFill(
 									_List_fromArray(
 										[
-											$author$project$Vega$vSignal('myTooltip.amount')
+											$author$project$Vega$vScale('cScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$field('Origin'))
+										])),
+									$author$project$Vega$maShape(
+									_List_fromArray(
+										[
+											$author$project$Vega$symbolValue($author$project$Vega$symCircle)
 										]))
 								]))
 						]))
 				])));
-	var ds = function () {
-		var table = A2(
-			$elm$core$Basics$composeL,
-			A2(
-				$elm$core$Basics$composeL,
-				A2($author$project$Vega$dataFromColumns, 'table', _List_Nil),
-				A2(
-					$author$project$Vega$dataColumn,
-					'category',
-					$author$project$Vega$vStrs(
-						_List_fromArray(
-							['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'])))),
-			A2(
-				$author$project$Vega$dataColumn,
-				'amount',
-				$author$project$Vega$vNums(
-					_List_fromArray(
-						[28, 55, 43, 91, 81, 53, 19, 87]))));
-		return $author$project$Vega$dataSource(
+	var lg = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$legends,
+		$author$project$Vega$legend(
 			_List_fromArray(
 				[
-					table(_List_Nil)
-				]));
-	}();
+					$author$project$Vega$leFill('cScale'),
+					$author$project$Vega$leTitle(
+					$author$project$Vega$strs(
+						_List_fromArray(
+							['Country of Manufacture']))),
+					$author$project$Vega$leEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enSymbols(
+							_List_fromArray(
+								[
+									$author$project$Vega$enUpdate(
+									_List_fromArray(
+										[
+											$author$project$Vega$maShape(
+											_List_fromArray(
+												[
+													$author$project$Vega$symbolValue($author$project$Vega$symCircle)
+												]))
+										]))
+								]))
+						]))
+				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						$author$project$Vega$trFilter(
+						$author$project$Vega$expr('datum[\'Horsepower\'] != null && datum[\'Miles_per_Gallon\'] != null && datum[\'Acceleration\'] != null'))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'cars',
+					_List_fromArray(
+						[
+							$author$project$Vega$daUrl(
+							$author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
+						])))
+			]));
 	var ax = A2(
 		$elm$core$Basics$composeL,
 		A2(
 			$elm$core$Basics$composeL,
 			$author$project$Vega$axes,
-			A3($author$project$Vega$axis, 'xScale', $author$project$Vega$siBottom, _List_Nil)),
-		A3($author$project$Vega$axis, 'yScale', $author$project$Vega$siLeft, _List_Nil));
+			A3(
+				$author$project$Vega$axis,
+				'xScale',
+				$author$project$Vega$siBottom,
+				_Utils_ap(
+					axps,
+					_List_fromArray(
+						[
+							$author$project$Vega$axGrid($author$project$Vega$true),
+							$author$project$Vega$axTickCount(
+							$author$project$Vega$num(6)),
+							$author$project$Vega$axTitle(
+							$author$project$Vega$str('Horsepower'))
+						])))),
+		A3(
+			$author$project$Vega$axis,
+			'yScale',
+			$author$project$Vega$siLeft,
+			_Utils_ap(
+				axps,
+				_List_fromArray(
+					[
+						$author$project$Vega$axGrid($author$project$Vega$true),
+						$author$project$Vega$axTickCount(
+						$author$project$Vega$num(6)),
+						$author$project$Vega$axTitle(
+						$author$project$Vega$strs(
+							_List_fromArray(
+								['Efficiency'])))
+					]))));
 	return $author$project$Vega$toVega(
 		_List_fromArray(
 			[
 				$author$project$Vega$width(400),
-				$author$project$Vega$height(200),
-				$author$project$Vega$padding(5),
+				$author$project$Vega$height(300),
+				ti,
 				ds,
-				si(_List_Nil),
 				sc(_List_Nil),
 				ax(_List_Nil),
+				lg(_List_Nil),
 				mk(_List_Nil)
 			]));
-}();
-var $author$project$Vega$combineSpecs = function (specs) {
-	return $elm$json$Json$Encode$object(specs);
 };
-var $author$project$Barchart$mySpecs = $author$project$Vega$combineSpecs(
+var $author$project$AriaTests$ariaTest1 = $author$project$AriaTests$scatter(_List_Nil);
+var $author$project$Vega$AxAria = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$axAria = $author$project$Vega$AxAria;
+var $author$project$AriaTests$ariaTest2 = $author$project$AriaTests$scatter(
 	_List_fromArray(
 		[
-			_Utils_Tuple2('barchart', $author$project$Barchart$barchart)
+			$author$project$Vega$axAria(_List_Nil)
 		]));
+var $author$project$Vega$arDisable = $author$project$Vega$ArAria(false);
+var $author$project$AriaTests$ariaTest3 = $author$project$AriaTests$scatter(
+	_List_fromArray(
+		[
+			$author$project$Vega$axAria(
+			_List_fromArray(
+				[$author$project$Vega$arDisable]))
+		]));
+var $author$project$Vega$ArDescription = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$arDescription = $author$project$Vega$ArDescription;
+var $author$project$AriaTests$ariaTest4 = $author$project$AriaTests$scatter(
+	_List_fromArray(
+		[
+			$author$project$Vega$axAria(
+			_List_fromArray(
+				[
+					$author$project$Vega$arDescription(
+					$author$project$Vega$str('my ARIA description'))
+				]))
+		]));
+var $author$project$AriaTests$specs = _List_fromArray(
+	[
+		_Utils_Tuple2('ariaTest1', $author$project$AriaTests$ariaTest1),
+		_Utils_Tuple2('ariaTest2', $author$project$AriaTests$ariaTest2),
+		_Utils_Tuple2('ariaTest3', $author$project$AriaTests$ariaTest3),
+		_Utils_Tuple2('ariaTest4', $author$project$AriaTests$ariaTest4)
+	]);
+var $elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
+var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;
+var $elm$core$Dict$Black = 1;
+var $elm$core$Dict$RBNode_elm_builtin = F5(
+	function (a, b, c, d, e) {
+		return {$: -1, a: a, b: b, c: c, d: d, e: e};
+	});
+var $elm$core$Dict$Red = 0;
+var $elm$core$Dict$balance = F5(
+	function (color, key, value, left, right) {
+		if ((right.$ === -1) && (!right.a)) {
+			var _v1 = right.a;
+			var rK = right.b;
+			var rV = right.c;
+			var rLeft = right.d;
+			var rRight = right.e;
+			if ((left.$ === -1) && (!left.a)) {
+				var _v3 = left.a;
+				var lK = left.b;
+				var lV = left.c;
+				var lLeft = left.d;
+				var lRight = left.e;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					0,
+					key,
+					value,
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, rK, rV, rLeft, rRight));
+			} else {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					color,
+					rK,
+					rV,
+					A5($elm$core$Dict$RBNode_elm_builtin, 0, key, value, left, rLeft),
+					rRight);
+			}
+		} else {
+			if ((((left.$ === -1) && (!left.a)) && (left.d.$ === -1)) && (!left.d.a)) {
+				var _v5 = left.a;
+				var lK = left.b;
+				var lV = left.c;
+				var _v6 = left.d;
+				var _v7 = _v6.a;
+				var llK = _v6.b;
+				var llV = _v6.c;
+				var llLeft = _v6.d;
+				var llRight = _v6.e;
+				var lRight = left.e;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					0,
+					lK,
+					lV,
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, llK, llV, llLeft, llRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, 1, key, value, lRight, right));
+			} else {
+				return A5($elm$core$Dict$RBNode_elm_builtin, color, key, value, left, right);
+			}
+		}
+	});
+var $elm$core$Basics$compare = _Utils_compare;
+var $elm$core$Dict$insertHelp = F3(
+	function (key, value, dict) {
+		if (dict.$ === -2) {
+			return A5($elm$core$Dict$RBNode_elm_builtin, 0, key, value, $elm$core$Dict$RBEmpty_elm_builtin, $elm$core$Dict$RBEmpty_elm_builtin);
+		} else {
+			var nColor = dict.a;
+			var nKey = dict.b;
+			var nValue = dict.c;
+			var nLeft = dict.d;
+			var nRight = dict.e;
+			var _v1 = A2($elm$core$Basics$compare, key, nKey);
+			switch (_v1) {
+				case 0:
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						A3($elm$core$Dict$insertHelp, key, value, nLeft),
+						nRight);
+				case 1:
+					return A5($elm$core$Dict$RBNode_elm_builtin, nColor, nKey, value, nLeft, nRight);
+				default:
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						nLeft,
+						A3($elm$core$Dict$insertHelp, key, value, nRight));
+			}
+		}
+	});
+var $elm$core$Dict$insert = F3(
+	function (key, value, dict) {
+		var _v0 = A3($elm$core$Dict$insertHelp, key, value, dict);
+		if ((_v0.$ === -1) && (!_v0.a)) {
+			var _v1 = _v0.a;
+			var k = _v0.b;
+			var v = _v0.c;
+			var l = _v0.d;
+			var r = _v0.e;
+			return A5($elm$core$Dict$RBNode_elm_builtin, 1, k, v, l, r);
+		} else {
+			var x = _v0;
+			return x;
+		}
+	});
+var $elm$core$Dict$fromList = function (assocs) {
+	return A3(
+		$elm$core$List$foldl,
+		F2(
+			function (_v0, dict) {
+				var key = _v0.a;
+				var value = _v0.b;
+				return A3($elm$core$Dict$insert, key, value, dict);
+			}),
+		$elm$core$Dict$empty,
+		assocs);
+};
+var $elm$core$Dict$get = F2(
+	function (targetKey, dict) {
+		get:
+		while (true) {
+			if (dict.$ === -2) {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
+				switch (_v1) {
+					case 0:
+						var $temp$targetKey = targetKey,
+							$temp$dict = left;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+					case 1:
+						return $elm$core$Maybe$Just(value);
+					default:
+						var $temp$targetKey = targetKey,
+							$temp$dict = right;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+				}
+			}
+		}
+	});
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $elm$core$Platform$Sub$batch = _Platform_batch;
-var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $elm$json$Json$Decode$succeed = _Json_succeed;
-var $elm$core$Platform$worker = _Platform_worker;
-var $author$project$Barchart$main = $elm$core$Platform$worker(
-	{
-		as: $elm$core$Basics$always(
-			_Utils_Tuple2(
-				$author$project$Barchart$mySpecs,
-				$author$project$Barchart$elmToJS($author$project$Barchart$mySpecs))),
-		ay: $elm$core$Basics$always($elm$core$Platform$Sub$none),
-		aA: F2(
-			function (_v0, model) {
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-			})
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (!maybe.$) {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
 	});
-_Platform_export({'Barchart':{'init':$author$project$Barchart$main(
+var $author$project$AriaTests$update = F2(
+	function (msg, model) {
+		if (!msg.$) {
+			var srcName = msg.a;
+			return _Utils_Tuple2(
+				A2(
+					$elm$core$Maybe$withDefault,
+					$elm$json$Json$Encode$null,
+					A2(
+						$elm$core$Dict$get,
+						srcName,
+						$elm$core$Dict$fromList($author$project$AriaTests$specs))),
+				$elm$core$Platform$Cmd$none);
+		} else {
+			return _Utils_Tuple2($elm$json$Json$Encode$null, $elm$core$Platform$Cmd$none);
+		}
+	});
+var $author$project$AriaTests$NewSource = function (a) {
+	return {$: 0, a: a};
+};
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 1, a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
+var $elm$html$Html$option = _VirtualDom_node('option');
+var $elm$html$Html$pre = _VirtualDom_node('pre');
+var $elm$html$Html$select = _VirtualDom_node('select');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $author$project$AriaTests$view = function (spec) {
+	return A2(
+		$elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$select,
+				_List_fromArray(
+					[
+						$elm$html$Html$Events$onInput($author$project$AriaTests$NewSource)
+					]),
+				A2(
+					$elm$core$List$map,
+					function (_v0) {
+						var s = _v0.a;
+						return A2(
+							$elm$html$Html$option,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$value(s)
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text(s)
+								]));
+					},
+					A2(
+						$elm$core$List$cons,
+						_Utils_Tuple2('Select source', $elm$json$Json$Encode$null),
+						$author$project$AriaTests$specs))),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$id('specSource')
+					]),
+				_List_Nil),
+				_Utils_eq(spec, $elm$json$Json$Encode$null) ? A2($elm$html$Html$div, _List_Nil, _List_Nil) : A2(
+				$elm$html$Html$pre,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						A2($elm$json$Json$Encode$encode, 2, spec))
+					]))
+			]));
+};
+var $author$project$AriaTests$main = $elm$browser$Browser$element(
+	{
+		ar: $elm$core$Basics$always(
+			_Utils_Tuple2(
+				$elm$json$Json$Encode$null,
+				$author$project$AriaTests$elmToJS(
+					$author$project$Vega$combineSpecs($author$project$AriaTests$specs)))),
+		ax: $elm$core$Basics$always($elm$core$Platform$Sub$none),
+		az: $author$project$AriaTests$update,
+		aA: $author$project$AriaTests$view
+	});
+_Platform_export({'AriaTests':{'init':$author$project$AriaTests$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
