@@ -162,6 +162,10 @@ configTest3 =
                     , axDomainCap (strokeCapStr caSquare)
                     , axGridCap (strokeCapStr caRound)
                     ]
+                , cfAxis axX
+                    [ axLabelBaseline vaLineTop
+                    , axLabelFontSize (numSignal "baseFontSize*2")
+                    ]
                 , cfLegend
                     [ leTitleColor (strSignal "textColor")
                     , leTitleFont (strSignal "font")
