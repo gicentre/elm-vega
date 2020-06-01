@@ -3,18 +3,31 @@
 ## Additions
 
 - `dayOfYear` time unit (V5.11).
-- `axDomainCap`, `axGridCap` and `axTickCap` with convenience function `strokeCapStr` for axis line cap styling (V5.11).
+
+* `axDomainCap`, `axGridCap` and `axTickCap` with convenience function `strokeCapStr` for axis line cap styling (V5.11).
+
 - `axAria`, `leAria`, `mAria` with associated properties `arEnable`, `arDisable` and `arDescription` for setting ARIA support on a per axis/legend/mark basis (V5.11).
-- `tiAria` for setting/unsetting ARIA description from title (V5.11).
+
+* `tiAria` for setting/unsetting ARIA description from title (V5.11).
+
+- `maBlend` and associated convenience methods `bmLighten`, `bmDarken` etc.) for setting the blend mode for overlaying drawing (V5.10).
 
 * `vaLineTop` and `vaLineBottom` for vertical alignment relative to line height (V5.10).
-* `axLabelLineHeight` for multi-lined or line-aligned axis labels (V5.10).
+
+- `axLabelLineHeight` for multi-lined or line-aligned axis labels (V5.10).
+
 * `axLabelOffset` for displacing axis labels relative to tick marks (V5.10).
-* `widthSignal`, `heightSignal` and `paddingSignal` to allow dimensions and padding to be specified via signal expressions that are used as the `update` property (V5.10).
+
+- `widthSignal`, `heightSignal` and `paddingSignal` to allow dimensions and padding to be specified via signal expressions that are used as the `update` property (V5.10).
+
 * `cfPadding`, `cfPaddings` and `cfPaddingSignal` for configuring default padding (V5.10).
-* `cfWidth`, `cfWidthSignal`, `cfHeight` and `cfHeightSignal` for configuring default dimensions (V5.10).
+
+- `cfWidth`, `cfWidthSignal`, `cfHeight` and `cfHeightSignal` for configuring default dimensions (V5.10).
+
 * `cfDescription` for configuring default ARIA-friendly description for visualizations (V5.10).
-* `cfLineBreak` for setting default line break character(s) (V5.10).
+
+- `cfLineBreak` for setting default line break character(s) (V5.10).
+
 * `opProduct` for aggregation of numeric values by their product (V5.10).
 
 ---

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vega Colour Tests</title>
+    <meta charset="utf-8" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      #elmContainer {
+        background-color: rgb(252, 247, 236);
+      }
+      .view > * {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1.6;
+        margin-left: 1em;
+      }
+    </style>
+
+    <!-- These scripts link to the Vega runtime -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@5"></script>
+
+    <!-- This is the script generated from Elm -->
+    <script src="js/colorTests.js"></script>
+  </head>
+
+  <body>
+    <h1>Vega Colour Tests</h1>
+
+    <div id="colorTest1" class="view"></div>
+
+    <h2>Source</h2>
+    <div id="elmContainer"></div>
+
+    <script>
+      Elm.ColorTests.init({
+        node: document.getElementById("elmContainer"),
+      }).ports.elmToJS.subscribe(function (namedSpecs) {
+        for (let name of Object.keys(namedSpecs)) {
+          vegaEmbed(`#${name}`, namedSpecs[name], {
+            actions: true,
+            logLevel: vega.Warn,
+          }).catch(console.warn);
+        }
+      });
+    </script>
+  </body>
+</html>
