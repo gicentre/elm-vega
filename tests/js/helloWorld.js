@@ -3967,7 +3967,7 @@ var $author$project$Vega$MFrom = function (a) {
 };
 var $author$project$Vega$mFrom = $author$project$Vega$MFrom;
 var $author$project$Vega$MText = function (a) {
-	return {$: 65, a: a};
+	return {$: 66, a: a};
 };
 var $author$project$Vega$maText = $author$project$Vega$MText;
 var $author$project$Vega$MX = function (a) {
@@ -4246,7 +4246,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'stroke',
+					'blend',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 12:
@@ -4254,7 +4254,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'strokeOpacity',
+					'stroke',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 13:
@@ -4262,7 +4262,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'strokeWidth',
+					'strokeOpacity',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 14:
@@ -4270,7 +4270,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'strokeCap',
+					'strokeWidth',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 15:
@@ -4278,7 +4278,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'strokeDash',
+					'strokeCap',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 16:
@@ -4286,7 +4286,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'strokeDashOffset',
+					'strokeDash',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 17:
@@ -4294,7 +4294,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'strokeJoin',
+					'strokeDashOffset',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 18:
@@ -4302,7 +4302,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'strokeMiterLimit',
+					'strokeJoin',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 19:
@@ -4310,7 +4310,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'cursor',
+					'strokeMiterLimit',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 20:
@@ -4318,7 +4318,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'href',
+					'cursor',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 21:
@@ -4326,7 +4326,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'tooltip',
+					'href',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 22:
@@ -4334,15 +4334,15 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'zindex',
+					'tooltip',
 					$author$project$Vega$valRef(vals))
 				]);
-		case 36:
+		case 23:
 			var vals = mProp.a;
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'startAngle',
+					'zindex',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 37:
@@ -4350,7 +4350,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'endAngle',
+					'startAngle',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 38:
@@ -4358,7 +4358,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'padAngle',
+					'endAngle',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 39:
@@ -4366,7 +4366,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'innerRadius',
+					'padAngle',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 40:
@@ -4374,63 +4374,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'outerRadius',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 25:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'cornerRadius',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 26:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'cornerRadiusTopLeft',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 27:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'cornerRadiusTopRight',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 28:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'cornerRadiusBottomLeft',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 29:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'cornerRadiusBottomRight',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 30:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'strokeForeground',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 31:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'strokeOffset',
+					'innerRadius',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 41:
@@ -4438,7 +4382,55 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'orient',
+					'outerRadius',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 26:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'cornerRadius',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 27:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'cornerRadiusTopLeft',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 28:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'cornerRadiusTopRight',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 29:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'cornerRadiusBottomLeft',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 30:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'cornerRadiusBottomRight',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 31:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'strokeForeground',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 32:
@@ -4446,23 +4438,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'interpolate',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 33:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'tension',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 34:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'defined',
+					'strokeOffset',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 42:
@@ -4470,71 +4446,23 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'clip',
+					'orient',
 					$author$project$Vega$valRef(vals))
 				]);
-		case 44:
+		case 33:
 			var vals = mProp.a;
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'aspect',
+					'interpolate',
 					$author$project$Vega$valRef(vals))
 				]);
-		case 45:
+		case 34:
 			var vals = mProp.a;
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'image',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 46:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'smooth',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 43:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'url',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 47:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'path',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 48:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'scaleX',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 49:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'scaleY',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 50:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'shape',
+					'tension',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 35:
@@ -4542,7 +4470,71 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'size',
+					'defined',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 43:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'clip',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 45:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'aspect',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 46:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'image',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 47:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'smooth',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 44:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'url',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 48:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'path',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 49:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'scaleX',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 50:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'scaleY',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 51:
@@ -4553,12 +4545,12 @@ var $author$project$Vega$markProperty = function (mProp) {
 					'shape',
 					$author$project$Vega$valRef(vals))
 				]);
-		case 23:
+		case 36:
 			var vals = mProp.a;
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'align',
+					'size',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 52:
@@ -4566,7 +4558,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'angle',
+					'shape',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 24:
@@ -4574,7 +4566,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'baseline',
+					'align',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 53:
@@ -4582,7 +4574,15 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'dir',
+					'angle',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 25:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'baseline',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 54:
@@ -4590,7 +4590,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'dx',
+					'dir',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 55:
@@ -4598,7 +4598,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'dy',
+					'dx',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 56:
@@ -4606,7 +4606,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'ellipsis',
+					'dy',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 57:
@@ -4614,7 +4614,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'font',
+					'ellipsis',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 58:
@@ -4622,7 +4622,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'fontSize',
+					'font',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 59:
@@ -4630,7 +4630,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'fontWeight',
+					'fontSize',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 60:
@@ -4638,15 +4638,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'fontStyle',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 63:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'limit',
+					'fontWeight',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 61:
@@ -4654,15 +4646,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'lineBreak',
-					$author$project$Vega$valRef(vals))
-				]);
-		case 62:
-			var vals = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'lineHeight',
+					'fontStyle',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 64:
@@ -4670,7 +4654,23 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'radius',
+					'limit',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 62:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'lineBreak',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 63:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'lineHeight',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 65:
@@ -4678,10 +4678,18 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
-					'text',
+					'radius',
 					$author$project$Vega$valRef(vals))
 				]);
 		case 66:
+			var vals = mProp.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'text',
+					$author$project$Vega$valRef(vals))
+				]);
+		case 67:
 			var vals = mProp.a;
 			return _List_fromArray(
 				[
