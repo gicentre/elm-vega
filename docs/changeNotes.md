@@ -1,6 +1,12 @@
 # Pending changes
 
-## Additions
+---
+
+## V5.4 ➡ V5.5
+
+_Minor release supporting Vega releases up to and including 5.13.x_
+
+### Additions
 
 - `cfeGlobalCursor` for setting global or local cursor properties (V5.13)
 
