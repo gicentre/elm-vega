@@ -391,6 +391,98 @@ configTest9 =
     toVega [ width 400, height 200, cf, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
+scatter2 : ( VProperty, Spec ) -> Spec
+scatter2 cf =
+    let
+        ds =
+            dataSource [ table [] ]
+
+        table =
+            dataFromColumns "table" [ parse [ ( "dt", foDate "" ) ] ]
+                << dataColumn "dt" (vStrs [ "2020-01-15 09:00", "2020-02-29 10:30", "2020-03-31 14:45", "2020-04-30 18:15" ])
+                << dataColumn "x" (vNums [ 15, 45, 95, 105 ])
+                << dataColumn "y" (vNums [ 40000, 20000, 10000, 5000 ])
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scDomain (doData [ daDataset "table", daField (field "x") ])
+                    , scRange raWidth
+                    ]
+                << scale "yScale"
+                    [ scDomain (doData [ daDataset "table", daField (field "y") ])
+                    , scRange raHeight
+                    ]
+                << scale "cScale"
+                    [ scType scTime
+                    , scDomain (doData [ daDataset "table", daField (field "dt") ])
+                    , scRange raRamp
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom [ axFormat (str "$.2f"), axTickCount (num 5) ]
+                << axis "yScale" siLeft []
+
+        le =
+            legends
+                << legend
+                    [ leTitle (str "When")
+                    , leOrient loLeft
+                    , leFill "cScale"
+                    ]
+
+        mk =
+            marks
+                << mark symbol
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "x") ]
+                            , maY [ vScale "yScale", vField (field "y") ]
+                            , maFill [ vScale "cScale", vField (field "dt") ]
+                            , maShape [ symbolValue symCircle ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega [ width 500, height 300, cf, ds, sc [], ax [], le [], mk [] ]
+
+
+configTest10 : Spec
+configTest10 =
+    scatter2 (config [])
+
+
+configTest11 : Spec
+configTest11 =
+    scatter2 (config [ cfLocale [] ])
+
+
+configTest12 : Spec
+configTest12 =
+    let
+        cf =
+            config
+                [ cfLocale
+                    [ loCurrency (str "") (str " €")
+                    , loGrouping (num 3)
+                    , loThousands (str ".")
+                    , loDecimal (str ",")
+                    , loDate (str "%d.%m.%Y")
+                    , loTime (str "%H:%M:%S")
+                    , loDateTime (str "%A, der %e. %B %Y, %X")
+                    , loPeriods (str "AM") (str "PM")
+                    , loDays (strs [ "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag" ])
+                    , loShortDays (strs [ "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa" ])
+                    , loMonths (strs [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ])
+                    , loShortMonths (strs [ "Jan", "Feb", "Mrz", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez" ])
+                    ]
+                ]
+    in
+    scatter2 cf
+
+
 
 {- This list comprises the specifications to be provided to the Vega runtime. -}
 
@@ -406,6 +498,9 @@ specs =
     , ( "configTest7", configTest7 )
     , ( "configTest8", configTest8 )
     , ( "configTest9", configTest9 )
+    , ( "configTest10", configTest10 )
+    , ( "configTest11", configTest11 )
+    , ( "configTest12", configTest12 )
     ]
 
 
