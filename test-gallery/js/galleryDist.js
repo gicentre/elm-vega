@@ -7527,7 +7527,7 @@ var $author$project$Vega$vStr = $author$project$Vega$VStr;
 var $author$project$Vega$black = $author$project$Vega$vStr('black');
 var $author$project$Vega$CfAxis = F2(
 	function (a, b) {
-		return {$: 16, a: a, b: b};
+		return {$: 17, a: a, b: b};
 	});
 var $author$project$Vega$cfAxis = $author$project$Vega$CfAxis;
 var $elm$core$Basics$composeL = F3(
@@ -9037,6 +9037,169 @@ var $author$project$Vega$legendProperty = function (lp) {
 				]);
 	}
 };
+var $author$project$Vega$Nums = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$StrList = function (a) {
+	return {$: 4, a: a};
+};
+var $author$project$Vega$localeProperty = function (lp) {
+	switch (lp.$) {
+		case 0:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'decimal',
+				$author$project$Vega$strSpec(s));
+		case 1:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'thousands',
+				$author$project$Vega$strSpec(s));
+		case 2:
+			var grp = lp.a;
+			if (!grp.$) {
+				var n = grp.a;
+				return _Utils_Tuple2(
+					'grouping',
+					$author$project$Vega$numSpec(
+						$author$project$Vega$Nums(
+							_List_fromArray(
+								[n]))));
+			} else {
+				return _Utils_Tuple2(
+					'grouping',
+					$author$project$Vega$numSpec(grp));
+			}
+		case 3:
+			var s0 = lp.a;
+			var s1 = lp.b;
+			return _Utils_Tuple2(
+				'currency',
+				$author$project$Vega$strSpec(
+					$author$project$Vega$StrList(
+						_List_fromArray(
+							[s0, s1]))));
+		case 4:
+			var ss = lp.a;
+			return _Utils_Tuple2(
+				'numerals',
+				$author$project$Vega$strSpec(ss));
+		case 5:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'percent',
+				$author$project$Vega$strSpec(s));
+		case 6:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'minus',
+				$author$project$Vega$strSpec(s));
+		case 7:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'nan',
+				$author$project$Vega$strSpec(s));
+		case 8:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'dateTime',
+				$author$project$Vega$strSpec(s));
+		case 9:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'date',
+				$author$project$Vega$strSpec(s));
+		case 10:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'time',
+				$author$project$Vega$strSpec(s));
+		case 11:
+			var p0 = lp.a;
+			var p1 = lp.b;
+			return _Utils_Tuple2(
+				'periods',
+				$author$project$Vega$strSpec(
+					$author$project$Vega$StrList(
+						_List_fromArray(
+							[p0, p1]))));
+		case 12:
+			var ss = lp.a;
+			return _Utils_Tuple2(
+				'days',
+				$author$project$Vega$strSpec(ss));
+		case 13:
+			var ss = lp.a;
+			return _Utils_Tuple2(
+				'shortDays',
+				$author$project$Vega$strSpec(ss));
+		case 14:
+			var ss = lp.a;
+			return _Utils_Tuple2(
+				'months',
+				$author$project$Vega$strSpec(ss));
+		default:
+			var ss = lp.a;
+			return _Utils_Tuple2(
+				'shortMonths',
+				$author$project$Vega$strSpec(ss));
+	}
+};
+var $elm$core$Tuple$mapBoth = F3(
+	function (funcA, funcB, _v0) {
+		var x = _v0.a;
+		var y = _v0.b;
+		return _Utils_Tuple2(
+			funcA(x),
+			funcB(y));
+	});
+var $elm$core$List$partition = F2(
+	function (pred, list) {
+		var step = F2(
+			function (x, _v0) {
+				var trues = _v0.a;
+				var falses = _v0.b;
+				return pred(x) ? _Utils_Tuple2(
+					A2($elm$core$List$cons, x, trues),
+					falses) : _Utils_Tuple2(
+					trues,
+					A2($elm$core$List$cons, x, falses));
+			});
+		return A3(
+			$elm$core$List$foldr,
+			step,
+			_Utils_Tuple2(_List_Nil, _List_Nil),
+			list);
+	});
+var $author$project$Vega$localeProperties = function (lps) {
+	var splitNumDate = function (lp) {
+		switch (lp.$) {
+			case 0:
+				return true;
+			case 1:
+				return true;
+			case 2:
+				return true;
+			case 3:
+				return true;
+			case 4:
+				return true;
+			case 5:
+				return true;
+			case 6:
+				return true;
+			case 7:
+				return true;
+			default:
+				return false;
+		}
+	};
+	return A3(
+		$elm$core$Tuple$mapBoth,
+		$elm$core$List$map($author$project$Vega$localeProperty),
+		$elm$core$List$map($author$project$Vega$localeProperty),
+		A2($elm$core$List$partition, splitNumDate, lps));
+};
 var $author$project$Vega$markLabel = function (m) {
 	switch (m) {
 		case 0:
@@ -9309,12 +9472,12 @@ var $author$project$Vega$configProperty = function (cp) {
 			return _Utils_Tuple2(
 				'description',
 				$elm$json$Json$Encode$string(s));
-		case 3:
+		case 4:
 			var f = cp.a;
 			return _Utils_Tuple2(
 				'padding',
 				$elm$json$Json$Encode$float(f));
-		case 4:
+		case 5:
 			var l = cp.a;
 			var t = cp.b;
 			var r = cp.c;
@@ -9337,7 +9500,7 @@ var $author$project$Vega$configProperty = function (cp) {
 							'bottom',
 							$elm$json$Json$Encode$float(b))
 						])));
-		case 5:
+		case 6:
 			var s = cp.a;
 			return _Utils_Tuple2(
 				'padding',
@@ -9346,12 +9509,12 @@ var $author$project$Vega$configProperty = function (cp) {
 						[
 							$author$project$Vega$signalReferenceProperty(s)
 						])));
-		case 6:
+		case 7:
 			var w = cp.a;
 			return _Utils_Tuple2(
 				'width',
 				$elm$json$Json$Encode$float(w));
-		case 7:
+		case 8:
 			var s = cp.a;
 			return _Utils_Tuple2(
 				'width',
@@ -9360,12 +9523,12 @@ var $author$project$Vega$configProperty = function (cp) {
 						[
 							$author$project$Vega$signalReferenceProperty(s)
 						])));
-		case 8:
+		case 9:
 			var h = cp.a;
 			return _Utils_Tuple2(
 				'height',
 				$elm$json$Json$Encode$float(h));
-		case 9:
+		case 10:
 			var s = cp.a;
 			return _Utils_Tuple2(
 				'height',
@@ -9374,37 +9537,84 @@ var $author$project$Vega$configProperty = function (cp) {
 						[
 							$author$project$Vega$signalReferenceProperty(s)
 						])));
-		case 12:
+		case 13:
 			var ceps = cp.a;
 			return _Utils_Tuple2(
 				'events',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$map, $author$project$Vega$configEventProperty, ceps)));
-		case 10:
+		case 11:
 			var mps = cp.a;
 			return _Utils_Tuple2(
 				'group',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$concatMap, $author$project$Vega$groupMarkProperty, mps)));
-		case 11:
+		case 12:
 			var s = cp.a;
 			return _Utils_Tuple2(
 				'lineBreak',
 				$author$project$Vega$strSpec(s));
-		case 13:
+		case 3:
+			var lps = cp.a;
+			var _v1 = $author$project$Vega$localeProperties(lps);
+			if (!_v1.a.b) {
+				if (!_v1.b.b) {
+					return _Utils_Tuple2('locale', $elm$json$Json$Encode$null);
+				} else {
+					var dtps = _v1.b;
+					return _Utils_Tuple2(
+						'locale',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'time',
+									$elm$json$Json$Encode$object(dtps))
+								])));
+				}
+			} else {
+				if (!_v1.b.b) {
+					var nps = _v1.a;
+					return _Utils_Tuple2(
+						'locale',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'number',
+									$elm$json$Json$Encode$object(nps))
+								])));
+				} else {
+					var nps = _v1.a;
+					var dtps = _v1.b;
+					return _Utils_Tuple2(
+						'locale',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'number',
+									$elm$json$Json$Encode$object(nps)),
+									_Utils_Tuple2(
+									'time',
+									$elm$json$Json$Encode$object(dtps))
+								])));
+				}
+			}
+		case 14:
 			var mk = cp.a;
 			var mps = cp.b;
 			return _Utils_Tuple2(
 				$author$project$Vega$markLabel(mk),
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$concatMap, $author$project$Vega$markProperty, mps)));
-		case 14:
+		case 15:
 			var mps = cp.a;
 			return _Utils_Tuple2(
 				'mark',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$concatMap, $author$project$Vega$markProperty, mps)));
-		case 15:
+		case 16:
 			var sName = cp.a;
 			var mps = cp.b;
 			return _Utils_Tuple2(
@@ -9417,26 +9627,26 @@ var $author$project$Vega$configProperty = function (cp) {
 							$elm$json$Json$Encode$object(
 								A2($elm$core$List$concatMap, $author$project$Vega$markProperty, mps)))
 						])));
-		case 16:
+		case 17:
 			var axType = cp.a;
 			var aps = cp.b;
 			return _Utils_Tuple2(
 				$author$project$Vega$axTypeLabel(axType),
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$concatMap, $author$project$Vega$axisProperty, aps)));
-		case 17:
+		case 18:
 			var lps = cp.a;
 			return _Utils_Tuple2(
 				'legend',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$concatMap, $author$project$Vega$legendProperty, lps)));
-		case 18:
+		case 19:
 			var tps = cp.a;
 			return _Utils_Tuple2(
 				'title',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$map, $author$project$Vega$titleProperty, tps)));
-		case 19:
+		case 20:
 			var ra1 = cp.a;
 			var ra2 = cp.b;
 			var raVals = function () {
@@ -15303,7 +15513,7 @@ var $author$project$GalleryDist$contour1 = function () {
 }();
 var $author$project$Vega$CfScaleRange = F2(
 	function (a, b) {
-		return {$: 19, a: a, b: b};
+		return {$: 20, a: a, b: b};
 	});
 var $author$project$Vega$cfScaleRange = $author$project$Vega$CfScaleRange;
 var $author$project$Vega$CnCount = function (a) {
@@ -16202,9 +16412,6 @@ var $author$project$Vega$MText = function (a) {
 	return {$: 66, a: a};
 };
 var $author$project$Vega$maText = $author$project$Vega$MText;
-var $author$project$Vega$Nums = function (a) {
-	return {$: 1, a: a};
-};
 var $author$project$Vega$nums = $author$project$Vega$Nums;
 var $author$project$Vega$Rule = 7;
 var $author$project$Vega$rule = 7;
