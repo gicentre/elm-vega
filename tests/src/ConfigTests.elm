@@ -302,8 +302,8 @@ configTest8 =
     dragSpec (config [ cfEventHandling [ cfeView [] ] ])
 
 
-configTest9 : Spec
-configTest9 =
+barInteractive : ( VProperty, Spec ) -> Spec
+barInteractive cf =
     let
         ds =
             let
@@ -357,7 +357,7 @@ configTest9 =
                         , enUpdate
                             [ maFill [ vStr "steelblue" ] ]
                         , enHover
-                            [ maFill [ vStr "red" ] ]
+                            [ maFill [ vStr "red" ], maCursor [ cursorValue cuCrosshair ] ]
                         ]
                     ]
                 << mark text
@@ -374,7 +374,13 @@ configTest9 =
                             ]
                         ]
                     ]
+    in
+    toVega [ width 400, height 200, cf, padding 5, ds, si [], sc [], ax [], mk [] ]
 
+
+configTest9 : Spec
+configTest9 =
+    let
         cf =
             config
                 [ cfAxis axBottom
@@ -388,7 +394,27 @@ configTest9 =
                     ]
                 ]
     in
-    toVega [ width 400, height 200, cf, padding 5, ds, si [], sc [], ax [], mk [] ]
+    barInteractive cf
+
+
+configTest10 : Spec
+configTest10 =
+    let
+        cf =
+            config
+                [ cfAxis axBottom
+                    [ axTitleFontWeight (vStr "normal")
+                    , axTitleColor (str "red")
+                    , axLabelFont (str "monospace")
+                    , axLabelColor (str "red")
+                    , axLabelFontSize (num 18)
+                    , axTickBand abExtent
+                    , axTranslate (num 4)
+                    ]
+                , cfEventHandling [ cfeGlobalCursor true ]
+                ]
+    in
+    barInteractive cf
 
 
 scatter2 : ( VProperty, Spec ) -> Spec
@@ -449,18 +475,18 @@ scatter2 cf =
     toVega [ width 500, height 300, cf, ds, sc [], ax [], le [], mk [] ]
 
 
-configTest10 : Spec
-configTest10 =
-    scatter2 (config [])
-
-
 configTest11 : Spec
 configTest11 =
-    scatter2 (config [ cfLocale [] ])
+    scatter2 (config [])
 
 
 configTest12 : Spec
 configTest12 =
+    scatter2 (config [ cfLocale [] ])
+
+
+configTest13 : Spec
+configTest13 =
     let
         cf =
             config
@@ -501,6 +527,7 @@ specs =
     , ( "configTest10", configTest10 )
     , ( "configTest11", configTest11 )
     , ( "configTest12", configTest12 )
+    , ( "configTest13", configTest13 )
     ]
 
 

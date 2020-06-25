@@ -2,6 +2,8 @@
 
 ## Additions
 
+- `cfeGlobalCursor` for setting global or local cursor properties (V5.13)
+
 - `cfLocale` and associated properties `loDecimal`, `loThousands`, `loGrouping`, `loCurrency`, `loNumerals`, `loPercent`, `loMinus`, `loNan`, `loDateTime`, `loDate`, `loTime`, `loPeriods`, `loDays`, `loShortDays`, `loMonths` and `loShortMonths` for specifying locales (V5.12).
 
 * `dayOfYear` time unit (V5.11).
