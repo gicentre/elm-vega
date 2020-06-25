@@ -15199,7 +15199,7 @@ var $author$project$Vega$configEventProperty = function (ceh) {
 						[
 							_Utils_Tuple2(filterLabel, listSpec)
 						])));
-		case 2:
+		case 3:
 			var ets = ceh.a;
 			var listSpec = _Utils_eq(ets, _List_Nil) ? $elm$json$Json$Encode$bool(false) : A2(
 				$elm$json$Json$Encode$list,
@@ -15209,12 +15209,17 @@ var $author$project$Vega$configEventProperty = function (ceh) {
 				},
 				ets);
 			return _Utils_Tuple2('selector', listSpec);
-		case 3:
+		case 4:
 			var b = ceh.a;
 			return _Utils_Tuple2(
 				'timer',
 				$author$project$Vega$booSpec(b));
-		case 4:
+		case 2:
+			var b = ceh.a;
+			return _Utils_Tuple2(
+				'globalCursor',
+				$author$project$Vega$booSpec(b));
+		case 5:
 			var ets = ceh.a;
 			var listSpec = _Utils_eq(ets, _List_Nil) ? $elm$json$Json$Encode$bool(false) : A2(
 				$elm$json$Json$Encode$list,
