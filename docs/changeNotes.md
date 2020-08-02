@@ -1,5 +1,11 @@
 # Pending changes
 
+---
+
+## V5.5.0 ➡ V5.5.1
+
+_Patch release with updated data sources and bug fix for empty mark property lists_
+
 ## Bug Fixes
 
 - Empty mark properties now generate null values rather than empty objects for schema compatibility.
