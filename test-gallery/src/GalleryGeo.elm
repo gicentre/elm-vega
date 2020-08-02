@@ -14,6 +14,11 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 standardProjections : Value
 standardProjections =
     List.map projectionValue
@@ -42,14 +47,8 @@ geo1 =
     let
         ds =
             dataSource
-                [ data "unemp"
-                    [ daUrl (str "https://vega.github.io/vega/data/unemployment.tsv")
-                    , daFormat [ tsv ]
-                    ]
-                , data "counties"
-                    [ daUrl (str "https://vega.github.io/vega/data/us-10m.json")
-                    , daFormat [ topojsonFeature (str "counties") ]
-                    ]
+                [ data "unemp" [ daUrl (str (dPath ++ "unemployment.tsv")), daFormat [ tsv ] ]
+                , data "counties" [ daUrl (str (dPath ++ "us-10m.json")), daFormat [ topojsonFeature (str "counties") ] ]
                     |> transform
                         [ trLookup "unemp" (field "id") [ field "id" ] [ luValues [ field "rate" ] ]
                         , trFilter (expr "datum.rate != null")
@@ -108,12 +107,8 @@ geo2 =
 
         ds =
             dataSource
-                [ data "states"
-                    [ daUrl (str "https://vega.github.io/vega/data/us-10m.json")
-                    , daFormat [ topojsonFeature (str "states") ]
-                    ]
-                , data "obesity"
-                    [ daUrl (str "https://vega.github.io/vega/data/obesity.json") ]
+                [ data "states" [ daUrl (str (dPath ++ "us-10m.json")), daFormat [ topojsonFeature (str "states") ] ]
+                , data "obesity" [ daUrl (str (dPath ++ "obesity.json")) ]
                     |> transform
                         [ trLookup "states" (field "id") [ field "id" ] [ luAs [ "geo" ] ]
                         , trFilter (expr "datum.geo")
@@ -209,10 +204,7 @@ geo3 =
     let
         ds =
             dataSource
-                [ data "world"
-                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
-                    , daFormat [ topojsonFeature (str "countries") ]
-                    ]
+                [ data "world" [ daUrl (str (dPath ++ "world-110m.json")), daFormat [ topojsonFeature (str "countries") ] ]
                 , data "graticule" []
                     |> transform [ trGraticule [] ]
                 ]
@@ -235,18 +227,20 @@ geo3 =
                 << signal "borderWidth" [ siValue (vNum 1), siBind (iText []) ]
                 << signal "background" [ siValue (vStr "#ffffff"), siBind (iColor []) ]
                 << signal "invert" [ siValue vFalse, siBind (iCheckbox []) ]
+                << signal "reflY" [ siUpdate "pType == 'identity'" ]
+                << signal "scCoeff" [ siUpdate "pType == 'identity' ? 0.01 : 1" ]
 
         pr =
             projections
                 << projection "myProjection"
                     [ prType (prSignal "pType")
-                    , prScale (numSignal "pScale")
+                    , prScale (numSignal "pScale * scCoeff")
                     , prRotate (numSignals [ "pRotate0", "pRotate1", "pRotate2" ])
                     , prCenter (numSignals [ "pCentre0", "pCentre1" ])
                     , prTranslate (numSignals [ "pTranslate0", "pTranslate1" ])
 
                     -- y-reflection applies only to the identity projection
-                    , prReflectY true
+                    , prReflectY (booSignal "reflY")
                     ]
 
         mk =
@@ -294,14 +288,8 @@ geo4 =
         ds =
             dataSource
                 [ data "sphere" [ daSphere ]
-                , data "world"
-                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
-                    , daFormat [ topojsonFeature (str "countries") ]
-                    ]
-                , data "earthquakes"
-                    [ daUrl (str "https://vega.github.io/vega/data/earthquakes.json")
-                    , daFormat [ jsonProperty (str "features") ]
-                    ]
+                , data "world" [ daUrl (str (dPath ++ "world-110m.json")), daFormat [ topojsonFeature (str "countries") ] ]
+                , data "earthquakes" [ daUrl (str (dPath ++ "earthquakes.json")), daFormat [ jsonProperty (str "features") ] ]
                 ]
 
         si =
@@ -412,11 +400,9 @@ geo5 =
                             ]
                         )
                     ]
-                , data "world"
-                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
-                    , daFormat [ topojsonFeature (str "countries") ]
-                    ]
-                , data "graticule" [] |> transform [ trGraticule [] ]
+                , data "world" [ daUrl (str (dPath ++ "world-110m.json")), daFormat [ topojsonFeature (str "countries") ] ]
+                , data "graticule" []
+                    |> transform [ trGraticule [] ]
                 , dataFromRows "sphere" [] (dataRow [ ( "type", vStr "Sphere" ) ] [])
                 , (dataFromColumns "labelOffsets" []
                     << dataColumn "dx" (vNums [ -1, -1, 1, 1 ])
@@ -520,10 +506,7 @@ geo6 =
     let
         ds =
             dataSource
-                [ data "world"
-                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
-                    , daFormat [ topojsonFeature (str "countries") ]
-                    ]
+                [ data "world" [ daUrl (str (dPath ++ "world-110m.json")), daFormat [ topojsonFeature (str "countries") ] ]
                 , data "graticule" []
                     |> transform [ trGraticule [ grStep (nums [ 15, 15 ]) ] ]
                 ]
@@ -621,10 +604,7 @@ geo7 =
     let
         ds =
             dataSource
-                [ data "world"
-                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
-                    , daFormat [ topojsonFeature (str "countries") ]
-                    ]
+                [ data "world" [ daUrl (str (dPath ++ "world-110m.json")), daFormat [ topojsonFeature (str "countries") ] ]
                     |> transform
                         [ trFormula "geoCentroid('projection1', datum)" "myCentroid"
                         , trFormula "geoArea('projection1', datum)" "area1"
@@ -740,7 +720,7 @@ geo8 =
     let
         ds =
             dataSource
-                [ data "volcano" [ daUrl (str "https://vega.github.io/vega/data/volcano.json") ]
+                [ data "volcano" [ daUrl (str (dPath ++ "volcano.json")) ]
                 , data "contours" [ daSource "volcano" ]
                     |> transform
                         [ trIsocontour
@@ -790,12 +770,7 @@ geo9 : Spec
 geo9 =
     let
         ds =
-            dataSource
-                [ data "vectors"
-                    [ daUrl (str "https://vega.github.io/vega/data/windvectors.csv")
-                    , daFormat [ csv, parseAuto ]
-                    ]
-                ]
+            dataSource [ data "vectors" [ daUrl (str (dPath ++ "windvectors.csv")), daFormat [ csv, parseAuto ] ] ]
 
         si =
             signals
@@ -872,14 +847,10 @@ geo10 =
 
         ds =
             dataSource
-                [ data "precipitation"
-                    [ daUrl (str "https://vega.github.io/vega/data/annual-precip.json") ]
+                [ data "precipitation" [ daUrl (str (dPath ++ "annual-precip.json")) ]
                 , data "contours" [ daSource "precipitation" ]
                     |> transform [ trIsocontour [ icThresholds (numSignal "sequence(step, stop, step)") ] ]
-                , data "world"
-                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
-                    , daFormat [ topojsonFeature (str "countries") ]
-                    ]
+                , data "world" [ daUrl (str (dPath ++ "world-110m.json")), daFormat [ topojsonFeature (str "countries") ] ]
                 ]
 
         si =
