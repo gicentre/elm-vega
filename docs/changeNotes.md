@@ -4,6 +4,12 @@
 
 - Empty mark properties now generate null values rather than empty objects for schema compatibility.
 
+## Other changes
+
+- Use versioned Vega data sets for examples and tests.
+
+- Replaced iris with penguin dataset in examples.
+
 ---
 
 ## V5.4 ➡ V5.5

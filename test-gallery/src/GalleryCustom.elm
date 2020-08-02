@@ -13,6 +13,11 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 custom1 : Spec
 custom1 =
     let
@@ -21,7 +26,7 @@ custom1 =
 
         ds =
             dataSource
-                [ data "budgets" [ daUrl (str "https://vega.github.io/vega/data/budgets.json") ]
+                [ data "budgets" [ daUrl (str (dPath ++ "budgets.json")) ]
                     |> transform
                         [ trFormula "abs(datum.value)" "abs"
                         , trFormula "datum.value < 0 ? 'deficit' : 'surplus'" "type"
@@ -273,9 +278,9 @@ custom2 =
     let
         ds =
             dataSource
-                [ data "wheat" [ daUrl (str "https://vega.github.io/vega/data/wheat.json") ]
+                [ data "wheat" [ daUrl (str (dPath ++ "wheat.json")) ]
                 , data "wheat-filtered" [ daSource "wheat" ] |> transform [ trFilter (expr "!!datum.wages") ]
-                , data "monarchs" [ daUrl (str "https://vega.github.io/vega/data/monarchs.json") ]
+                , data "monarchs" [ daUrl (str (dPath ++ "monarchs.json")) ]
                     |> transform [ trFormula "((!datum.commonwealth && datum.index % 2) ? -1: 1) * 2 + 95" "offset" ]
                 ]
 
@@ -535,8 +540,8 @@ custom4 =
         ds =
             dataSource
                 [ data "temperature"
-                    [ daUrl (str "https://vega.github.io/vega/data/seattle-temps.csv")
-                    , daFormat [ csv, parse [ ( "temp", foNum ), ( "date", foDate "" ) ] ]
+                    [ daUrl (str (dPath ++ "seattle-weather-hourly-normals.csv"))
+                    , daFormat [ csv, parse [ ( "temperature", foNum ), ( "date", foDate "" ) ] ]
                     ]
                     |> transform
                         [ trFormulaInitOnly "hours(datum.date)" "hour"
@@ -565,7 +570,7 @@ custom4 =
                     [ scType scLinear
                     , scRange (raValues [ vSignal "rangeStep", vNum 1 ])
                     , scZero false
-                    , scDomain (doData [ daDataset "temperature", daField (field "temp") ])
+                    , scDomain (doData [ daDataset "temperature", daField (field "temperature") ])
                     ]
 
         ax =
@@ -601,7 +606,7 @@ custom4 =
                     , mEncode
                         [ enEnter
                             [ maX [ vScale "xScale", vField (field "date") ]
-                            , maY [ vScale "yScale", vField (field "temp") ]
+                            , maY [ vScale "yScale", vField (field "temperature") ]
                             , maY2 [ vSignal "rangeStep" ]
                             ]
                         ]
@@ -617,7 +622,7 @@ custom5 =
         ds =
             dataSource
                 [ data "weather"
-                    [ daUrl (str "https://vega.github.io/vega/data/weather.json") ]
+                    [ daUrl (str (dPath ++ "weather.json")) ]
                 , data "actual"
                     [ daSource "weather" ]
                     |> transform [ trFilter (expr "datum.actual") ]
@@ -782,7 +787,7 @@ custom6 =
         ds =
             dataSource
                 [ data "source"
-                    [ daUrl (str "https://vega.github.io/vega/data/udistrict.json") ]
+                    [ daUrl (str (dPath ++ "udistrict.json")) ]
                 , (dataFromColumns "annotation" []
                     << dataColumn "name" (vStrs [ "Boat St", "40th St.", "42nd St.", "45th St.", "50th St.", "55th St." ])
                     << dataColumn "align" (vStrs [ "left", "center", "center", "center", "center", "center" ])

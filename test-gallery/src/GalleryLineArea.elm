@@ -13,6 +13,11 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 lineChart1 : Spec
 lineChart1 =
     let
@@ -316,7 +321,7 @@ areaChart4 : Spec
 areaChart4 =
     let
         table =
-            data "jobs" [ daUrl (str "https://vega.github.io/vega/data/jobs.json") ]
+            data "jobs" [ daUrl (str (dPath ++ "jobs.json")) ]
                 |> transform
                     [ trFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , trStack

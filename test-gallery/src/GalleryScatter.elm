@@ -13,12 +13,17 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 scatterplot1 : Spec
 scatterplot1 =
     let
         ds =
             dataSource
-                [ data "cars" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
+                [ data "cars" [ daUrl (str (dPath ++ "cars.json")) ]
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
                 ]
 
@@ -94,7 +99,7 @@ scatterplot2 =
     let
         ds =
             dataSource
-                [ data "movies" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ] |> transform [ trFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" ]
+                [ data "movies" [ daUrl (str (dPath ++ "movies.json")) ] |> transform [ trFormula "datum.Title + ' (' + (year(datum['Release Date']) || '?') + ')'" "tooltip" ]
                 , data "valid" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] != null && datum[yField] != null") ]
                 , data "nullXY" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] == null && datum[yField] == null"), trAggregate [] ]
                 , data "nullY" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] != null && datum[yField] == null") ]
@@ -103,8 +108,8 @@ scatterplot2 =
 
         si =
             signals
-                << signal "yField" [ siValue (vStr "IMDB_Rating"), siBind (iSelect [ inOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
-                << signal "xField" [ siValue (vStr "Rotten_Tomatoes_Rating"), siBind (iSelect [ inOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
+                << signal "yField" [ siValue (vStr "IMDB Rating"), siBind (iSelect [ inOptions (vStrs [ "IMDB Rating", "Rotten Tomatoes Rating", "US Gross", "Worldwide Gross" ]) ]) ]
+                << signal "xField" [ siValue (vStr "Rotten Tomatoes Rating"), siBind (iSelect [ inOptions (vStrs [ "IMDB Rating", "Rotten Tomatoes Rating", "US Gross", "Worldwide Gross" ]) ]) ]
                 << signal "nullSize" [ siValue (vNum 8) ]
                 << signal "nullGap" [ siUpdate "nullSize + 10" ]
 
@@ -214,7 +219,7 @@ scatterplot3 : Spec
 scatterplot3 =
     let
         ds =
-            dataSource [ data "drive" [ daUrl (str "https://vega.github.io/vega/data/driving.json") ] ]
+            dataSource [ data "drive" [ daUrl (str (dPath ++ "driving.json")) ] ]
 
         sc =
             scales
@@ -366,7 +371,7 @@ scatterplot4 =
 
         ds =
             dataSource
-                [ data "barley" [ daUrl (str "https://vega.github.io/vega/data/barley.json") ]
+                [ data "barley" [ daUrl (str (dPath ++ "barley.json")) ]
                 , data "summary" [ daSource "barley" ]
                     |> transform
                         [ trAggregate
@@ -459,7 +464,7 @@ scatterplot5 : Spec
 scatterplot5 =
     let
         ds =
-            dataSource [ data "barley" [ daUrl (str "https://vega.github.io/vega/data/barley.json") ] ]
+            dataSource [ data "barley" [ daUrl (str (dPath ++ "barley.json")) ] ]
 
         si =
             signals

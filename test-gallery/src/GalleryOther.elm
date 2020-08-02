@@ -13,6 +13,11 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 heatmap1 : Spec
 heatmap1 =
     let
@@ -61,13 +66,13 @@ heatmap1 =
         ds =
             dataSource
                 [ data "temperature"
-                    [ daUrl (str "https://vega.github.io/vega/data/seattle-temps.csv")
-                    , daFormat [ csv, parse [ ( "temp", foNum ), ( "date", foDate "" ) ] ]
+                    [ daUrl (str (dPath ++ "seattle-weather-hourly-normals.csv"))
+                    , daFormat [ csv, parse [ ( "temperature", foNum ), ( "date", foDate "" ) ] ]
                     ]
                     |> transform
                         [ trFormulaInitOnly "hours(datum.date)" "hour"
                         , trFormulaInitOnly "datetime(year(datum.date), month(datum.date), date(datum.date))" "day"
-                        , trFormulaInitOnly "(datum.temp - 32) / 1.8" "celsius"
+                        , trFormulaInitOnly "(datum.temperature - 32) / 1.8" "celsius"
                         ]
                 ]
 
@@ -150,8 +155,7 @@ heatmap2 =
     let
         ds =
             dataSource
-                [ data "source"
-                    [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
+                [ data "source" [ daUrl (str (dPath ++ "cars.json")) ]
                     |> transform
                         [ trFilter (expr "datum[fieldX] != null && datum.Miles_per_Gallon != null") ]
                 , data "density" [ daSource "source" ]
@@ -317,7 +321,7 @@ parallel1 =
         ds =
             dataSource
                 [ data "cars"
-                    [ daUrl (str "https://vega.github.io/vega/data/cars.json")
+                    [ daUrl (str (dPath ++ "cars.json"))
                     , daFormat [ json, parse [ ( "Year", foDate "%Y-%m-%d" ) ] ]
                     ]
                     |> transform
@@ -565,9 +569,7 @@ beeswarm1 =
         ds =
             dataSource
                 [ data "people"
-                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty (str "nodes") ]
-                    ]
+                    [ daUrl (str (dPath ++ "miserables.json")), daFormat [ jsonProperty (str "nodes") ] ]
                 ]
 
         si =

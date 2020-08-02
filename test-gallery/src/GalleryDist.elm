@@ -13,12 +13,17 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 histo1 : Spec
 histo1 =
     let
         ds =
             dataSource
-                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
+                [ data "points" [ daUrl (str (dPath ++ "normal-2d.json")) ]
                 , data "binned" [ daSource "points" ]
                     |> transform
                         [ trBin (field "u")
@@ -106,10 +111,10 @@ histo2 =
     let
         ds =
             dataSource
-                [ data "table" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
+                [ data "table" [ daUrl (str (dPath ++ "movies.json")) ]
                     |> transform
-                        [ trExtentAsSignal (field "IMDB_Rating") "extent"
-                        , trBin (field "IMDB_Rating")
+                        [ trExtentAsSignal (field "IMDB Rating") "extent"
+                        , trBin (field "IMDB Rating")
                             (numSignal "extent")
                             [ bnSignal "bins"
                             , bnMaxBins (numSignal "maxBins")
@@ -117,12 +122,12 @@ histo2 =
                         ]
                 , data "counts" [ daSource "table" ]
                     |> transform
-                        [ trFilter (expr "datum['IMDB_Rating'] != null")
+                        [ trFilter (expr "datum['IMDB Rating'] != null")
                         , trAggregate [ agGroupBy [ field "bin0", field "bin1" ] ]
                         ]
                 , data "nulls" [ daSource "table" ]
                     |> transform
-                        [ trFilter (expr "datum['IMDB_Rating'] == null")
+                        [ trFilter (expr "datum['IMDB Rating'] == null")
                         , trAggregate []
                         ]
                 ]
@@ -208,7 +213,7 @@ density1 =
     let
         ds =
             dataSource
-                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
+                [ data "points" [ daUrl (str (dPath ++ "normal-2d.json")) ]
                 , data "summary" [ daSource "points" ]
                     |> transform
                         [ trAggregate
@@ -324,7 +329,7 @@ boxplot1 =
 
         ds =
             dataSource
-                [ data "iris" [ daUrl (str "https://vega.github.io/vega/data/iris.json") ]
+                [ data "iris" [ daUrl (str (dPath ++ "iris.json")) ]
                     |> transform [ trFoldAs [ fSignal "fields" ] "organ" "value" ]
                 ]
 
@@ -440,7 +445,7 @@ violinplot1 =
 
         ds =
             dataSource
-                [ data "iris" [ daUrl (str "https://vega.github.io/vega/data/iris.json") ]
+                [ data "iris" [ daUrl (str (dPath ++ "iris.json")) ]
                     |> transform [ trFoldAs [ fSignal "fields" ] "organ" "value" ]
                 ]
 
@@ -570,13 +575,13 @@ window1 =
     let
         ds =
             dataSource
-                [ data "directors" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
+                [ data "directors" [ daUrl (str (dPath ++ "movies.json")) ]
                     |> transform
-                        [ trFilter (expr "datum.Director != null && datum.Worldwide_Gross != null")
+                        [ trFilter (expr "datum.Director != null && datum['Worldwide Gross'] != null")
                         , trAggregate
                             [ agGroupBy [ field "Director" ]
                             , agOps [ opSignal "op" ]
-                            , agFields [ field "Worldwide_Gross" ]
+                            , agFields [ field "Worldwide Gross" ]
                             , agAs [ "Gross" ]
                             ]
                         , trWindow [ wnOperation woRowNumber "rank" ]
@@ -657,14 +662,14 @@ window2 =
     let
         ds =
             dataSource
-                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
-                    |> transform [ trFilter (expr "datum.Director != null && datum.Worldwide_Gross != null") ]
+                [ data "source" [ daUrl (str (dPath ++ "movies.json")) ]
+                    |> transform [ trFilter (expr "datum.Director != null && datum['Worldwide Gross'] != null") ]
                 , data "ranks" [ daSource "source" ]
                     |> transform
                         [ trAggregate
                             [ agGroupBy [ field "Director" ]
                             , agOps [ opSignal "op" ]
-                            , agFields [ field "Worldwide_Gross" ]
+                            , agFields [ field "Worldwide Gross" ]
                             , agAs [ "Gross" ]
                             ]
                         , trWindow [ wnOperation woRowNumber "rank" ]
@@ -677,7 +682,7 @@ window2 =
                         , trAggregate
                             [ agGroupBy [ field "Category" ]
                             , agOps [ opSignal "op" ]
-                            , agFields [ field "Worldwide_Gross" ]
+                            , agFields [ field "Worldwide Gross" ]
                             , agAs [ "Gross" ]
                             ]
                         ]
@@ -755,7 +760,7 @@ scatter1 =
     let
         ds =
             dataSource
-                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
+                [ data "source" [ daUrl (str (dPath ++ "cars.json")) ]
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null") ]
                 , data "summary" [ daSource "source" ]
                     |> transform
@@ -852,7 +857,7 @@ contour1 =
     let
         ds =
             dataSource
-                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
+                [ data "source" [ daUrl (str (dPath ++ "cars.json")) ]
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null") ]
                 , data "density" [ daSource "source" ]
                     |> transform
@@ -984,7 +989,7 @@ contour2 =
 
         ds =
             dataSource
-                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
+                [ data "source" [ daUrl (str (dPath ++ "cars.json")) ]
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null") ]
                 , data "contours" [ daSource "source" ]
                     |> transform
@@ -1081,7 +1086,7 @@ wheat1 =
     let
         ds =
             dataSource
-                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
+                [ data "points" [ daUrl (str (dPath ++ "normal-2d.json")) ]
                     |> transform
                         [ trBin (field "u")
                             (nums [ -1, 1 ])
@@ -1280,17 +1285,8 @@ quantile1 =
                     , siBind (iRange [ inMin 20, inMax 200, inStep 1 ])
                     ]
                 << signal "url"
-                    [ siValue (vStr "https://vega.github.io/vega/data/normal-2d.json")
-                    , siBind
-                        (iSelect
-                            [ inOptions
-                                (vStrs
-                                    [ "https://vega.github.io/vega/data/normal-2d.json"
-                                    , "https://vega.github.io/vega/data/uniform-2d.json"
-                                    ]
-                                )
-                            ]
-                        )
+                    [ siValue (vStr (dPath ++ "normal-2d.json"))
+                    , siBind (iSelect [ inOptions (vStrs [ dPath ++ "normal-2d.json", dPath ++ "uniform-2d.json" ]) ])
                     ]
 
         sc =
@@ -1458,13 +1454,13 @@ regression1 =
     let
         ds =
             dataSource
-                [ data "movies" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
-                    |> transform [ trFilter (expr "datum.Rotten_Tomatoes_Rating != null && datum.IMDB_Rating != null") ]
+                [ data "movies" [ daUrl (str (dPath ++ "movies.json")) ]
+                    |> transform [ trFilter (expr "datum.['Rotten Tomatoes Rating'] != null && datum['IMDB Rating'] != null") ]
                 , data "trend" [ daSource "movies" ]
                     |> transform
-                        [ trRegression (field "Rotten_Tomatoes_Rating")
-                            (field "IMDB_Rating")
-                            [ reGroupBy [ fSignal "groupby === 'genre' ? 'Major_Genre' : 'foo'" ]
+                        [ trRegression (field "Rotten Tomatoes Rating")
+                            (field "IMDB Rating")
+                            [ reGroupBy [ fSignal "groupby === 'genre' ? 'Major Genre' : 'foo'" ]
                             , reMethod (reSignal "method")
                             , reOrder (numSignal "polyOrder")
                             , reExtent (numSignal "domain('xScale')")
@@ -1486,11 +1482,11 @@ regression1 =
             scales
                 << scale "xScale"
                     [ scRange raWidth
-                    , scDomain (doData [ daDataset "movies", daField (field "Rotten_Tomatoes_Rating") ])
+                    , scDomain (doData [ daDataset "movies", daField (field "Rotten Tomatoes Rating") ])
                     ]
                 << scale "yScale"
                     [ scRange raHeight
-                    , scDomain (doData [ daDataset "movies", daField (field "IMDB_Rating") ])
+                    , scDomain (doData [ daDataset "movies", daField (field "IMDB Rating") ])
                     ]
 
         mk =
@@ -1499,15 +1495,15 @@ regression1 =
                     [ mFrom [ srData (str "movies") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale "xScale", vField (field "Rotten_Tomatoes_Rating") ]
-                            , maY [ vScale "yScale", vField (field "IMDB_Rating") ]
+                            [ maX [ vScale "xScale", vField (field "Rotten Tomatoes Rating") ]
+                            , maY [ vScale "yScale", vField (field "IMDB Rating") ]
                             , maFillOpacity [ vNum 0.2 ]
                             , maSize [ vNum 12 ]
                             ]
                         ]
                     ]
                 << mark group
-                    [ mFrom [ srFacet (str "trend") "curve" [ faGroupBy [ field "Major_Genre" ] ] ]
+                    [ mFrom [ srFacet (str "trend") "curve" [ faGroupBy [ field "Major Genre" ] ] ]
                     , mGroup [ nestedMk [] ]
                     ]
 
@@ -1535,13 +1531,13 @@ regression2 =
     let
         ds =
             dataSource
-                [ data "movies" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
-                    |> transform [ trFilter (expr "datum.Rotten_Tomatoes_Rating != null && datum.IMDB_Rating != null") ]
+                [ data "movies" [ daUrl (str (dPath ++ "movies.json")) ]
+                    |> transform [ trFilter (expr "datum['Rotten Tomatoes Rating'] != null && datum['IMDB Rating'] != null") ]
                 , data "trend" [ daSource "movies" ]
                     |> transform
-                        [ trLoess (field "Rotten_Tomatoes_Rating")
-                            (field "IMDB_Rating")
-                            [ lsGroupBy [ fSignal "groupby === 'genre' ? 'Major_Genre' : 'foo'" ]
+                        [ trLoess (field "Rotten Tomatoes Rating")
+                            (field "IMDB Rating")
+                            [ lsGroupBy [ fSignal "groupby === 'genre' ? 'Major Genre' : 'foo'" ]
                             , lsBandwidth (numSignal "bandwidth")
                             , lsAs "u" "v"
                             ]
@@ -1557,11 +1553,11 @@ regression2 =
             scales
                 << scale "xScale"
                     [ scRange raWidth
-                    , scDomain (doData [ daDataset "movies", daField (field "Rotten_Tomatoes_Rating") ])
+                    , scDomain (doData [ daDataset "movies", daField (field "Rotten Tomatoes Rating") ])
                     ]
                 << scale "yScale"
                     [ scRange raHeight
-                    , scDomain (doData [ daDataset "movies", daField (field "IMDB_Rating") ])
+                    , scDomain (doData [ daDataset "movies", daField (field "IMDB Rating") ])
                     ]
 
         mk =
@@ -1570,15 +1566,15 @@ regression2 =
                     [ mFrom [ srData (str "movies") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale "xScale", vField (field "Rotten_Tomatoes_Rating") ]
-                            , maY [ vScale "yScale", vField (field "IMDB_Rating") ]
+                            [ maX [ vScale "xScale", vField (field "Rotten Tomatoes Rating") ]
+                            , maY [ vScale "yScale", vField (field "IMDB Rating") ]
                             , maFillOpacity [ vNum 0.2 ]
                             , maSize [ vNum 12 ]
                             ]
                         ]
                     ]
                 << mark group
-                    [ mFrom [ srFacet (str "trend") "curve" [ faGroupBy [ field "Major_Genre" ] ] ]
+                    [ mFrom [ srFacet (str "trend") "curve" [ faGroupBy [ field "Major Genre" ] ] ]
                     , mGroup [ nestedMk [] ]
                     ]
 
@@ -1617,9 +1613,7 @@ timeUnits1 =
         ds =
             dataSource
                 [ data "flights"
-                    [ daUrl (str "https://vega.github.io/vega/data/flights-20k.json")
-                    , daFormat [ json, parseAuto ]
-                    ]
+                    [ daUrl (str (dPath ++ "flights-20k.json")), daFormat [ json, parseAuto ] ]
                     |> transform
                         [ trTimeUnit (field "date") [ tbUnits [ tuSignal "timeunit" ], tbSignal "tbin" ]
                         , trAggregate

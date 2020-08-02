@@ -13,12 +13,17 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 tree1 : Spec
 tree1 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
+                [ data "tree" [ daUrl (str (dPath ++ "flare.json")) ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
@@ -103,7 +108,7 @@ tree2 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
+                [ data "tree" [ daUrl (str (dPath ++ "flare.json")) ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
@@ -203,7 +208,7 @@ tree3 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
+                [ data "tree" [ daUrl (str (dPath ++ "flare.json")) ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTreemap
@@ -305,7 +310,7 @@ tree4 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
+                [ data "tree" [ daUrl (str (dPath ++ "flare.json")) ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trPack
@@ -349,7 +354,7 @@ tree5 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
+                [ data "tree" [ daUrl (str (dPath ++ "flare.json")) ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trPartition

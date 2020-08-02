@@ -13,12 +13,17 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 bundle1 : Spec
 bundle1 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
+                [ data "tree" [ daUrl (str (dPath ++ "flare.json")) ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
@@ -33,7 +38,7 @@ bundle1 =
                         ]
                 , data "leaves" [ daSource "tree" ]
                     |> transform [ trFilter (expr "!datum.children") ]
-                , data "dependencies" [ daUrl (str "https://vega.github.io/vega/data/flare-dependencies.json") ]
+                , data "dependencies" [ daUrl (str (dPath ++ "flare-dependencies.json")) ]
                     |> transform
                         [ trFormulaInitOnly "treePath('tree', datum.source, datum.target)" "treepath" ]
                 , data "selected" [ daSource "dependencies" ]
@@ -161,14 +166,8 @@ force1 =
     let
         ds =
             dataSource
-                [ data "node-data"
-                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty (str "nodes") ]
-                    ]
-                , data "link-data"
-                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty (str "links") ]
-                    ]
+                [ data "node-data" [ daUrl (str (dPath ++ "miserables.json")), daFormat [ jsonProperty (str "nodes") ] ]
+                , data "link-data" [ daUrl (str (dPath ++ "miserables.json")), daFormat [ jsonProperty (str "links") ] ]
                 ]
 
         si =
@@ -279,19 +278,13 @@ matrix1 =
     let
         ds =
             dataSource
-                [ data "nodes"
-                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty (str "nodes") ]
-                    ]
+                [ data "nodes" [ daUrl (str (dPath ++ "miserables.json")), daFormat [ jsonProperty (str "nodes") ] ]
                     |> transform
                         [ trFormula "datum.group" "order"
                         , trFormula "dest >= 0 && datum === src ? dest : datum.order" "score"
                         , trWindow [ wnOperation woRowNumber "order" ] [ wnSort [ ( field "score", ascend ) ] ]
                         ]
-                , data "edges"
-                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty (str "links") ]
-                    ]
+                , data "edges" [ daUrl (str (dPath ++ "miserables.json")), daFormat [ jsonProperty (str "links") ] ]
                     |> transform
                         [ trLookup "nodes" (field "index") [ field "source", field "target" ] [ luAs [ "sourceNode", "targetNode" ] ]
                         , trFormula "datum.sourceNode.group === datum.targetNode.group ? datum.sourceNode.group : count" "group"
@@ -432,17 +425,13 @@ arc1 =
         ds =
             dataSource
                 [ data "edges"
-                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty (str "links") ]
-                    ]
+                    [ daUrl (str (dPath ++ "miserables.json")), daFormat [ jsonProperty (str "links") ] ]
                 , data "sourceDegree" [ daSource "edges" ]
                     |> transform [ trAggregate [ agGroupBy [ field "source" ] ] ]
                 , data "targetDegree" [ daSource "edges" ]
                     |> transform [ trAggregate [ agGroupBy [ field "target" ] ] ]
                 , data "nodes"
-                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty (str "nodes") ]
-                    ]
+                    [ daUrl (str (dPath ++ "miserables.json")), daFormat [ jsonProperty (str "nodes") ] ]
                     |> transform
                         [ trWindow [ wnOperation woRank "order" ] []
                         , trLookup "sourceDegree"
@@ -545,14 +534,10 @@ map1 =
         ds =
             dataSource
                 [ data "states"
-                    [ daUrl (str "https://vega.github.io/vega/data/us-10m.json")
-                    , daFormat [ topojsonFeature (str "states") ]
-                    ]
+                    [ daUrl (str (dPath ++ "us-10m.json")), daFormat [ topojsonFeature (str "states") ] ]
                     |> transform [ trGeoPath "myProjection" [] ]
                 , data "traffic"
-                    [ daUrl (str "https://vega.github.io/vega/data/flights-airport.csv")
-                    , daFormat [ csv, parseAuto ]
-                    ]
+                    [ daUrl (str (dPath ++ "flights-airport.csv")), daFormat [ csv, parseAuto ] ]
                     |> transform
                         [ trAggregate
                             [ agGroupBy [ field "origin" ]
@@ -562,9 +547,7 @@ map1 =
                             ]
                         ]
                 , data "airports"
-                    [ daUrl (str "https://vega.github.io/vega/data/airports.csv")
-                    , daFormat [ csv, parseAuto ]
-                    ]
+                    [ daUrl (str (dPath ++ "airports.csv")), daFormat [ csv, parseAuto ] ]
                     |> transform
                         [ trLookup "traffic" (field "origin") [ field "iata" ] [ luAs [ "traffic" ] ]
                         , trFilter (expr "datum.traffic != null")
@@ -574,9 +557,7 @@ map1 =
                         , trCollect [ ( field "traffic.flights", descend ) ]
                         ]
                 , data "routes"
-                    [ daUrl (str "https://vega.github.io/vega/data/flights-airport.csv")
-                    , daFormat [ csv, parseAuto ]
-                    ]
+                    [ daUrl (str (dPath ++ "flights-airport.csv")), daFormat [ csv, parseAuto ] ]
                     |> transform
                         [ trFilter (expr "hover && hover.iata == datum.origin")
                         , trLookup "airports" (field "iata") [ field "origin", field "destination" ] [ luAs [ "source", "target" ] ]

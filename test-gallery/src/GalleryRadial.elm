@@ -13,6 +13,11 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 pieDonut : Maybe Float -> Spec
 pieDonut maybeR =
     let
