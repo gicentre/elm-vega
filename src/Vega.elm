@@ -3228,7 +3228,7 @@ See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/mark
 @docs maZIndex
 
 
-### Mark Coloring
+### Mark Colouring
 
 @docs maOpacity
 @docs maFill
@@ -7083,7 +7083,7 @@ bcSignal =
 
 
 {-| Convenience function for specifying a black color setting for marks that can
-be colored (e.g. with [maStroke](#maStroke))
+be coloured (e.g. with [maStroke](#maStroke))
 -}
 black : Value
 black =
@@ -9918,7 +9918,7 @@ grRadial =
     GrRadial
 
 
-{-| The radius, normalized to [0, 1], of the inner circle for a radial color gradient.
+{-| The radius, normalised to [0, 1], of the inner circle for a radial color gradient.
 Default is 0.
 -}
 grR1 : Num -> GradientProperty
@@ -9926,7 +9926,7 @@ grR1 =
     GrR1
 
 
-{-| The radius, normalized to [0, 1], of the outer circle for a radial color gradient.
+{-| The radius, normalised to [0, 1], of the outer circle for a radial color gradient.
 Default is 0.5.
 -}
 grR2 : Num -> GradientProperty
@@ -9958,16 +9958,16 @@ grStepMinor =
     GrStepMinor
 
 
-{-| Starting coordinate for the gradient as an [x, y] list normalized to [0, 1].
-This coordinate is relative to the bounds of the item being colored (default is [0, 0]).
+{-| Starting coordinate for the gradient as an [x, y] list normalised to [0, 1].
+This coordinate is relative to the bounds of the item being coloured (default is [0, 0]).
 -}
 grStart : Num -> GradientScaleProperty
 grStart =
     GrStart
 
 
-{-| Stopping coordinate for the gradient as an [x, y] list normalized to [0, 1].
-This coordinate is relative to the bounds of the item being colored (default is [1, 0]
+{-| Stopping coordinate for the gradient as an [x, y] list normalised to [0, 1].
+This coordinate is relative to the bounds of the item being coloured (default is [1, 0]
 indicating a horizontal gradient).
 -}
 grStop : Num -> GradientScaleProperty
@@ -9983,7 +9983,7 @@ grStops =
     GrStops
 
 
-{-| The x-coordinate, normalized to [0, 1], for the start of a color gradient. If
+{-| The x-coordinate, normalised to [0, 1], for the start of a color gradient. If
 the gradient is linear the default is 0; if radial, it is the x-position of the
 centre of the inner circle with a default of 0.5.
 -}
@@ -9992,7 +9992,7 @@ grX1 =
     GrX1
 
 
-{-| The x-coordinate, normalized to [0, 1], for the end of a color gradient. If
+{-| The x-coordinate, normalised to [0, 1], for the end of a color gradient. If
 the gradient is linear the default is 1; if radial, it is the x-position of the
 centre of the outer circle with a default of 0.5.
 -}
@@ -10001,7 +10001,7 @@ grX2 =
     GrX2
 
 
-{-| The y-coordinate, normalized to [0, 1], for the start of a color gradient. If
+{-| The y-coordinate, normalised to [0, 1], for the start of a color gradient. If
 the gradient is linear the default is 0; if radial, it is the y-position of the
 centre of the inner circle with a default of 0.5.
 -}
@@ -10010,7 +10010,7 @@ grY1 =
     GrY1
 
 
-{-| The y-coordinate, normalized to [0, 1], for the end of a color gradient. If
+{-| The y-coordinate, normalised to [0, 1], for the end of a color gradient. If
 the gradient is linear the default is 1; if radial, it is the y-position of the
 centre of the outer circle with a default of 0.5.
 -}
@@ -10559,7 +10559,7 @@ joBevel =
     JBevel
 
 
-{-| Mitered stroke join.
+{-| Mitred stroke join.
 -}
 joMiter : StrokeJoin
 joMiter =
@@ -12108,7 +12108,7 @@ maCursor =
         ]
 
 See the
-[Vega Beeswarm plot example](https://vega.github.io/vega/examples/beeswarm-plot/).
+[Vega beeswarm plot example](https://vega.github.io/vega/examples/beeswarm-plot/).
 
 -}
 maCustom : String -> List Value -> MarkProperty
@@ -12552,7 +12552,7 @@ maSymbol =
 
 
 {-| The interpolation tension in the range 0 to 1 of a linear mark. Applies only
-to cardinal and catmull-rom interpolators.
+to cardinal and Catmull-Rom interpolators.
 -}
 maTension : List Value -> MarkProperty
 maTension =
@@ -12886,7 +12886,7 @@ mOn =
     MOn
 
 
-{-| A mollweide global map projection.
+{-| A Mollweide global map projection.
 -}
 mollweide : Projection
 mollweide =
@@ -14605,7 +14605,7 @@ siPushOuter =
 
 {-| Whether a signal update expression should be automatically re-evaluated
 when any upstream signal dependencies update. If false, the update expression will
-only be run upon initialization.
+only be run upon initialisation.
 -}
 siReact : Boo -> SignalProperty
 siReact =
@@ -15367,7 +15367,7 @@ tiEncode =
 {-| Specify the appearance of a title with a custom encoding. Should provide a list
 of tuples, each being the title element to encode (one of [teTitle](#teTitle),
 [teSubtitle](#teSubtitle) or [teGroup](#teGroup)) and the encodings to apply to it.
-This can be useful when a part of a title needs more dynamic customization than that
+This can be useful when a part of a title needs more dynamic customisation than that
 offered by simple title property functions ([tiColor](#tiColor), [tiFont](#tiFont) etc.).
 For example,
 
@@ -15789,7 +15789,7 @@ toVega spec =
         |> JE.object
 
 
-{-| Group and summarize an input data stream to produce a derived output stream.
+{-| Group and summarise an input data stream to produce a derived output stream.
 Aggregate transforms can be used to compute counts, sums, averages and other
 descriptive statistics over groups of data objects.
 -}
@@ -15815,7 +15815,7 @@ transform transforms dTable =
 
 
 {-| Convenience function for specifying a transparent setting for marks that can
-be colored (e.g. with [maFill](#maFill))
+be coloured (e.g. with [maFill](#maFill))
 -}
 transparent : Value
 transparent =
@@ -16028,7 +16028,7 @@ formula calculation use [trFormulaInitOnly](#trFormulaInitOnly).
 
     dataSource
         [ data "world"
-            [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
+            [ daUrl (str "world-110m.json")
             , daFormat [ topojsonFeature "countries" ]
             ]
             |> transform
@@ -16157,7 +16157,7 @@ trIsocontour =
     TIsocontour
 
 
-{-| Group and summarize an input data stream in a similar way to [trAggregate](#trAggregate)
+{-| Group and summarise an input data stream in a similar way to [trAggregate](#trAggregate)
 but which is then joined back to the input stream. Helpful for creating derived
 values that combine both raw data and aggregate calculations, such as percentages
 of group totals.
@@ -16988,7 +16988,7 @@ week =
 
 
 {-| Convenience function for specifying a white color setting for marks that can
-be colored (e.g. with [maStroke](#maStroke))
+be coloured (e.g. with [maStroke](#maStroke))
 -}
 white : Value
 white =
