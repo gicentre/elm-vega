@@ -22157,6 +22157,9 @@ vAlignSpec align =
 valRef : List Value -> Spec
 valRef vs =
     case vs of
+        [] ->
+            JE.object [ ( "value", JE.null ) ]
+
         [ VIfElse ex ifs elses ] ->
             JE.list identity (valIfElse ex ifs elses [ JE.object (( "test", JE.string ex ) :: List.concatMap valueProperties ifs) ])
 
