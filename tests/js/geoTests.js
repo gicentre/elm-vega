@@ -11060,6 +11060,7 @@ var $author$project$GeoTests$geoTest1 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$GeoTests$dPath = 'https://gicentre.github.io/data/geoTutorials/';
 var $author$project$Vega$DaUrl = function (a) {
 	return {$: 6, a: a};
 };
@@ -11212,7 +11213,7 @@ var $author$project$GeoTests$geoTest2 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/geoJson1.json'))
+						$author$project$Vega$str($author$project$GeoTests$dPath + 'geoJson1.json'))
 					]))
 			]));
 	return $author$project$Vega$toVega(
@@ -13094,7 +13095,7 @@ var $author$project$GeoTests$geoTest3 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/topoJson3.json')),
+						$author$project$Vega$str($author$project$GeoTests$dPath + 'topoJson3.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -13115,7 +13116,7 @@ var $author$project$GeoTests$geoTest4 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/topoJson6.json')),
+						$author$project$Vega$str($author$project$GeoTests$dPath + 'topoJson6.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -13206,7 +13207,7 @@ var $author$project$GeoTests$geoTest5 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/topoJson6.json')),
+						$author$project$Vega$str($author$project$GeoTests$dPath + 'topoJson6.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -13231,7 +13232,7 @@ var $author$project$GeoTests$geoTest6 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/topoJson6.json')),
+						$author$project$Vega$str($author$project$GeoTests$dPath + 'topoJson6.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -13256,7 +13257,7 @@ var $author$project$GeoTests$geoTest7 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/topoJson6.json')),
+						$author$project$Vega$str($author$project$GeoTests$dPath + 'topoJson6.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -13390,7 +13391,7 @@ var $author$project$GeoTests$geoTest8 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/londonBoroughs.json')),
+						$author$project$Vega$str($author$project$GeoTests$dPath + 'londonBoroughs.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -13404,7 +13405,7 @@ var $author$project$GeoTests$geoTest8 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/londonBoroughs.json')),
+						$author$project$Vega$str($author$project$GeoTests$dPath + 'londonBoroughs.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -13418,7 +13419,7 @@ var $author$project$GeoTests$geoTest8 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/londonBoroughs.json')),
+						$author$project$Vega$str($author$project$GeoTests$dPath + 'londonBoroughs.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[

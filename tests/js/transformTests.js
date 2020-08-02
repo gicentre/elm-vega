@@ -9735,6 +9735,7 @@ var $author$project$Vega$config = function (cps) {
 		$elm$json$Json$Encode$object(
 			A2($elm$core$List$map, $author$project$Vega$configProperty, cps)));
 };
+var $author$project$TransformTests$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -14705,7 +14706,7 @@ var $author$project$TransformTests$contourTest1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
+							$author$project$Vega$str($author$project$TransformTests$dPath + 'cars.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -15183,7 +15184,7 @@ var $author$project$TransformTests$densityTest1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/normal-2d.json'))
+						$author$project$Vega$str($author$project$TransformTests$dPath + 'normal-2d.json'))
 					])),
 				A2(
 				$author$project$Vega$transform,
@@ -16101,7 +16102,7 @@ var $author$project$TransformTests$forceTest1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/miserables.json')),
+						$author$project$Vega$str($author$project$TransformTests$dPath + 'miserables.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -16115,7 +16116,7 @@ var $author$project$TransformTests$forceTest1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/miserables.json')),
+						$author$project$Vega$str($author$project$TransformTests$dPath + 'miserables.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -16557,7 +16558,7 @@ var $author$project$TransformTests$kdeTest1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/normal-2d.json'))
+						$author$project$Vega$str($author$project$TransformTests$dPath + 'normal-2d.json'))
 					])),
 				A2(
 				$author$project$Vega$transform,
@@ -18411,6 +18412,7 @@ var $author$project$Vega$ClPath = function (a) {
 var $author$project$Vega$clPath = $author$project$Vega$ClPath;
 var $author$project$Vega$CSV = {$: 2};
 var $author$project$Vega$csv = $author$project$Vega$CSV;
+var $author$project$TransformTests$giCentrePath = 'https://gicentre.github.io/data/uk/';
 var $author$project$Vega$MClip = function (a) {
 	return {$: 2, a: a};
 };
@@ -19070,7 +19072,7 @@ var $author$project$TransformTests$voronoiTest1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://gicentre.github.io/data/uk/ukConvexHull.json')),
+							$author$project$Vega$str($author$project$TransformTests$giCentrePath + 'ukConvexHull.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -19106,7 +19108,7 @@ var $author$project$TransformTests$voronoiTest1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://gicentre.github.io/data/uk/constituencyCentroids.csv')),
+							$author$project$Vega$str($author$project$TransformTests$giCentrePath + 'constituencyCentroids.csv')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[$author$project$Vega$csv, $author$project$Vega$parseAuto]))
@@ -19143,7 +19145,7 @@ var $author$project$TransformTests$voronoiTest2 = function () {
 						_List_fromArray(
 							[
 								$author$project$Vega$siValue(
-								$author$project$Vega$vStr('https://gicentre.github.io/data/uk/constituencyCentroidsWithSpacers.csv')),
+								$author$project$Vega$vStr($author$project$TransformTests$giCentrePath + 'constituencyCentroidsWithSpacers.csv')),
 								$author$project$Vega$siBind(
 								$author$project$Vega$iSelect(
 									_List_fromArray(
@@ -19151,7 +19153,7 @@ var $author$project$TransformTests$voronoiTest2 = function () {
 											$author$project$Vega$inOptions(
 											$author$project$Vega$vStrs(
 												_List_fromArray(
-													['https://gicentre.github.io/data/uk/constituencyCentroidsWithSpacers.csv', 'https://gicentre.github.io/data/uk/constituencySpacedCentroidsWithSpacers.csv'])))
+													[$author$project$TransformTests$giCentrePath + 'constituencyCentroidsWithSpacers.csv', $author$project$TransformTests$giCentrePath + 'constituencySpacedCentroidsWithSpacers.csv'])))
 										])))
 							]))),
 				A2(
@@ -19349,7 +19351,7 @@ var $author$project$TransformTests$voronoiTest2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://gicentre.github.io/data/uk/ukConstituencies.json')),
+							$author$project$Vega$str($author$project$TransformTests$giCentrePath + 'ukConstituencies.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -19369,7 +19371,7 @@ var $author$project$TransformTests$voronoiTest2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://gicentre.github.io/data/uk/ukConvexHull.json')),
+							$author$project$Vega$str($author$project$TransformTests$giCentrePath + 'ukConvexHull.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[

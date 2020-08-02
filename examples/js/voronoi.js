@@ -2801,6 +2801,7 @@ var $elm$core$Basics$composeL = F3(
 	});
 var $author$project$Vega$CSV = {$: 2};
 var $author$project$Vega$csv = $author$project$Vega$CSV;
+var $author$project$Voronoi$dPath = 'https://gicentre.github.io/data/uk/';
 var $author$project$Vega$DaFormat = function (a) {
 	return {$: 0, a: a};
 };
@@ -9293,7 +9294,7 @@ var $author$project$Voronoi$voronoi = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://gicentre.github.io/data/uk/constituencySpacedCentroidsWithSpacers.csv')),
+							$author$project$Vega$str($author$project$Voronoi$dPath + 'constituencySpacedCentroidsWithSpacers.csv')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[$author$project$Vega$csv, $author$project$Vega$parseAuto]))

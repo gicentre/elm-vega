@@ -7516,6 +7516,7 @@ var $elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
+var $author$project$AriaTests$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -13312,7 +13313,7 @@ var $author$project$AriaTests$scatter = F4(
 						_List_fromArray(
 							[
 								$author$project$Vega$daUrl(
-								$author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
+								$author$project$Vega$str($author$project$AriaTests$dPath + 'cars.json'))
 							])))
 				]));
 		var ax = A2(

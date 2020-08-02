@@ -5165,6 +5165,7 @@ var $author$project$Vega$Proj = function (a) {
 	return {$: 17, a: a};
 };
 var $author$project$Vega$customProjection = $author$project$Vega$Proj;
+var $author$project$ProjectionTests$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DaFormat = function (a) {
 	return {$: 0, a: a};
 };
@@ -12053,7 +12054,7 @@ var $author$project$ProjectionTests$projTest = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
+						$author$project$Vega$str($author$project$ProjectionTests$dPath + 'world-110m.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[

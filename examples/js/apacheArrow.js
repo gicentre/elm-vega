@@ -2407,6 +2407,7 @@ var $elm$core$Basics$apR = F2(
 	function (x, f) {
 		return f(x);
 	});
+var $elm$core$Basics$append = _Utils_append;
 var $author$project$Vega$Arrow = {$: 5};
 var $author$project$Vega$arrow = $author$project$Vega$Arrow;
 var $author$project$Vega$AFit = {$: 1};
@@ -2444,7 +2445,6 @@ var $elm$core$Maybe$Just = function (a) {
 var $elm$core$Maybe$Nothing = {$: 1};
 var $elm$core$String$all = _String_all;
 var $elm$core$Basics$and = _Basics_and;
-var $elm$core$Basics$append = _Utils_append;
 var $elm$json$Json$Encode$encode = _Json_encode;
 var $elm$core$String$fromInt = _String_fromNumber;
 var $elm$core$String$join = F2(
@@ -5357,6 +5357,7 @@ var $elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
+var $author$project$ApacheArrow$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -10335,7 +10336,7 @@ var $author$project$ApacheArrow$arrow1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega-datasets/data/flights-200k.arrow')),
+							$author$project$Vega$str($author$project$ApacheArrow$dPath + 'flights-200k.arrow')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[$author$project$Vega$arrow]))

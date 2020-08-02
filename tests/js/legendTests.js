@@ -7509,6 +7509,7 @@ var $elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
+var $author$project$LegendTests$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -12297,7 +12298,7 @@ var $author$project$LegendTests$chartCore = F2(
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega-lite/data/cars.json')),
+							$author$project$Vega$str($author$project$LegendTests$dPath + 'cars.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[$author$project$Vega$json]))

@@ -7533,6 +7533,7 @@ var $elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
+var $author$project$TemporalTests$dPath = 'https://gicentre.github.io/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -12071,7 +12072,7 @@ var $author$project$TemporalTests$temporalTest1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://gicentre.github.io/data/timeTest.tsv')),
+							$author$project$Vega$str($author$project$TemporalTests$dPath + 'timeTest.tsv')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -12292,7 +12293,7 @@ var $author$project$TemporalTests$temporalTest2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://gicentre.github.io/data/timeTest.tsv')),
+							$author$project$Vega$str($author$project$TemporalTests$dPath + 'timeTest.tsv')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -12466,7 +12467,7 @@ var $author$project$TemporalTests$temporalTest3 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://gicentre.github.io/data/timeTest.tsv')),
+							$author$project$Vega$str($author$project$TemporalTests$dPath + 'timeTest.tsv')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -13722,7 +13723,7 @@ var $author$project$TemporalTests$temporalTest4 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://gicentre.github.io/data/timeTest.tsv')),
+						$author$project$Vega$str($author$project$TemporalTests$dPath + 'timeTest.tsv')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
