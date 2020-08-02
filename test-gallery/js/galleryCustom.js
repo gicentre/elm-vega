@@ -5993,44 +5993,52 @@ var $author$project$Vega$valIfElse = F4(
 		}
 	});
 var $author$project$Vega$valRef = function (vs) {
-	_v0$2:
+	_v0$3:
 	while (true) {
-		if (vs.b && (!vs.b.b)) {
-			switch (vs.a.$) {
-				case 21:
-					var _v1 = vs.a;
-					var ex = _v1.a;
-					var ifs = _v1.b;
-					var elses = _v1.c;
-					return A2(
-						$elm$json$Json$Encode$list,
-						$elm$core$Basics$identity,
-						A4(
-							$author$project$Vega$valIfElse,
-							ex,
-							ifs,
-							elses,
-							_List_fromArray(
-								[
-									$elm$json$Json$Encode$object(
-									A2(
-										$elm$core$List$cons,
-										_Utils_Tuple2(
-											'test',
-											$elm$json$Json$Encode$string(ex)),
-										A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
-								])));
-				case 12:
-					var _v2 = vs.a;
-					var v = _v2.a;
-					var gps = _v2.b;
-					return $author$project$Vega$valueSpec(
-						A2($author$project$Vega$VGradientScale, v, gps));
-				default:
-					break _v0$2;
-			}
+		if (!vs.b) {
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2('value', $elm$json$Json$Encode$null)
+					]));
 		} else {
-			break _v0$2;
+			if (!vs.b.b) {
+				switch (vs.a.$) {
+					case 21:
+						var _v1 = vs.a;
+						var ex = _v1.a;
+						var ifs = _v1.b;
+						var elses = _v1.c;
+						return A2(
+							$elm$json$Json$Encode$list,
+							$elm$core$Basics$identity,
+							A4(
+								$author$project$Vega$valIfElse,
+								ex,
+								ifs,
+								elses,
+								_List_fromArray(
+									[
+										$elm$json$Json$Encode$object(
+										A2(
+											$elm$core$List$cons,
+											_Utils_Tuple2(
+												'test',
+												$elm$json$Json$Encode$string(ex)),
+											A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
+									])));
+					case 12:
+						var _v2 = vs.a;
+						var v = _v2.a;
+						var gps = _v2.b;
+						return $author$project$Vega$valueSpec(
+							A2($author$project$Vega$VGradientScale, v, gps));
+					default:
+						break _v0$3;
+				}
+			} else {
+				break _v0$3;
+			}
 		}
 	}
 	return $elm$json$Json$Encode$object(
@@ -9822,6 +9830,7 @@ var $author$project$Vega$cursorValue = function (cur) {
 			return $author$project$Vega$vStr('grabbing');
 	}
 };
+var $author$project$GalleryCustom$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -15418,7 +15427,7 @@ var $author$project$GalleryCustom$custom1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/budgets.json'))
+							$author$project$Vega$str($author$project$GalleryCustom$dPath + 'budgets.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -16151,7 +16160,7 @@ var $author$project$GalleryCustom$custom2 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/wheat.json'))
+						$author$project$Vega$str($author$project$GalleryCustom$dPath + 'wheat.json'))
 					])),
 				A2(
 				$author$project$Vega$transform,
@@ -16179,7 +16188,7 @@ var $author$project$GalleryCustom$custom2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/monarchs.json'))
+							$author$project$Vega$str($author$project$GalleryCustom$dPath + 'monarchs.json'))
 						])))
 			]));
 	var ax = A2(
@@ -17076,7 +17085,7 @@ var $author$project$GalleryCustom$custom4 = function () {
 							[
 								$author$project$Vega$daDataset('temperature'),
 								$author$project$Vega$daField(
-								$author$project$Vega$field('temp'))
+								$author$project$Vega$field('temperature'))
 							])))
 				])));
 	var nestedMk = A2(
@@ -17111,7 +17120,7 @@ var $author$project$GalleryCustom$custom4 = function () {
 										[
 											$author$project$Vega$vScale('yScale'),
 											$author$project$Vega$vField(
-											$author$project$Vega$field('temp'))
+											$author$project$Vega$field('temperature'))
 										])),
 									$author$project$Vega$maY2(
 									_List_fromArray(
@@ -17197,7 +17206,7 @@ var $author$project$GalleryCustom$custom4 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/seattle-temps.csv')),
+							$author$project$Vega$str($author$project$GalleryCustom$dPath + 'seattle-weather-hourly-normals.csv')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -17205,7 +17214,7 @@ var $author$project$GalleryCustom$custom4 = function () {
 									$author$project$Vega$parse(
 									_List_fromArray(
 										[
-											_Utils_Tuple2('temp', $author$project$Vega$foNum),
+											_Utils_Tuple2('temperature', $author$project$Vega$foNum),
 											_Utils_Tuple2(
 											'date',
 											$author$project$Vega$foDate(''))
@@ -17761,7 +17770,7 @@ var $author$project$GalleryCustom$custom5 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/weather.json'))
+						$author$project$Vega$str($author$project$GalleryCustom$dPath + 'weather.json'))
 					])),
 				A2(
 				$author$project$Vega$transform,
@@ -18615,7 +18624,7 @@ var $author$project$GalleryCustom$custom6 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/udistrict.json'))
+						$author$project$Vega$str($author$project$GalleryCustom$dPath + 'udistrict.json'))
 					])),
 				A2(
 				$elm$core$Basics$composeL,

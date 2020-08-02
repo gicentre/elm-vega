@@ -5959,44 +5959,52 @@ var $author$project$Vega$valIfElse = F4(
 		}
 	});
 var $author$project$Vega$valRef = function (vs) {
-	_v0$2:
+	_v0$3:
 	while (true) {
-		if (vs.b && (!vs.b.b)) {
-			switch (vs.a.$) {
-				case 21:
-					var _v1 = vs.a;
-					var ex = _v1.a;
-					var ifs = _v1.b;
-					var elses = _v1.c;
-					return A2(
-						$elm$json$Json$Encode$list,
-						$elm$core$Basics$identity,
-						A4(
-							$author$project$Vega$valIfElse,
-							ex,
-							ifs,
-							elses,
-							_List_fromArray(
-								[
-									$elm$json$Json$Encode$object(
-									A2(
-										$elm$core$List$cons,
-										_Utils_Tuple2(
-											'test',
-											$elm$json$Json$Encode$string(ex)),
-										A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
-								])));
-				case 12:
-					var _v2 = vs.a;
-					var v = _v2.a;
-					var gps = _v2.b;
-					return $author$project$Vega$valueSpec(
-						A2($author$project$Vega$VGradientScale, v, gps));
-				default:
-					break _v0$2;
-			}
+		if (!vs.b) {
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2('value', $elm$json$Json$Encode$null)
+					]));
 		} else {
-			break _v0$2;
+			if (!vs.b.b) {
+				switch (vs.a.$) {
+					case 21:
+						var _v1 = vs.a;
+						var ex = _v1.a;
+						var ifs = _v1.b;
+						var elses = _v1.c;
+						return A2(
+							$elm$json$Json$Encode$list,
+							$elm$core$Basics$identity,
+							A4(
+								$author$project$Vega$valIfElse,
+								ex,
+								ifs,
+								elses,
+								_List_fromArray(
+									[
+										$elm$json$Json$Encode$object(
+										A2(
+											$elm$core$List$cons,
+											_Utils_Tuple2(
+												'test',
+												$elm$json$Json$Encode$string(ex)),
+											A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
+									])));
+					case 12:
+						var _v2 = vs.a;
+						var v = _v2.a;
+						var gps = _v2.b;
+						return $author$project$Vega$valueSpec(
+							A2($author$project$Vega$VGradientScale, v, gps));
+					default:
+						break _v0$3;
+				}
+			} else {
+				break _v0$3;
+			}
 		}
 	}
 	return $elm$json$Json$Encode$object(
@@ -7510,6 +7518,7 @@ var $elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
+var $author$project$GalleryScatter$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -13105,7 +13114,7 @@ var $author$project$GalleryScatter$scatterplot1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
+							$author$project$Vega$str($author$project$GalleryScatter$dPath + 'cars.json'))
 						])))
 			]));
 	var ax = A2(
@@ -13652,7 +13661,7 @@ var $author$project$GalleryScatter$scatterplot2 = function () {
 						_List_fromArray(
 							[
 								$author$project$Vega$siValue(
-								$author$project$Vega$vStr('IMDB_Rating')),
+								$author$project$Vega$vStr('IMDB Rating')),
 								$author$project$Vega$siBind(
 								$author$project$Vega$iSelect(
 									_List_fromArray(
@@ -13660,7 +13669,7 @@ var $author$project$GalleryScatter$scatterplot2 = function () {
 											$author$project$Vega$inOptions(
 											$author$project$Vega$vStrs(
 												_List_fromArray(
-													['IMDB_Rating', 'Rotten_Tomatoes_Rating', 'US_Gross', 'Worldwide_Gross'])))
+													['IMDB Rating', 'Rotten Tomatoes Rating', 'US Gross', 'Worldwide Gross'])))
 										])))
 							]))),
 				A2(
@@ -13669,7 +13678,7 @@ var $author$project$GalleryScatter$scatterplot2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$siValue(
-							$author$project$Vega$vStr('Rotten_Tomatoes_Rating')),
+							$author$project$Vega$vStr('Rotten Tomatoes Rating')),
 							$author$project$Vega$siBind(
 							$author$project$Vega$iSelect(
 								_List_fromArray(
@@ -13677,7 +13686,7 @@ var $author$project$GalleryScatter$scatterplot2 = function () {
 										$author$project$Vega$inOptions(
 										$author$project$Vega$vStrs(
 											_List_fromArray(
-												['IMDB_Rating', 'Rotten_Tomatoes_Rating', 'US_Gross', 'Worldwide_Gross'])))
+												['IMDB Rating', 'Rotten Tomatoes Rating', 'US Gross', 'Worldwide Gross'])))
 									])))
 						]))),
 			A2(
@@ -14048,7 +14057,7 @@ var $author$project$GalleryScatter$scatterplot2 = function () {
 				$author$project$Vega$transform,
 				_List_fromArray(
 					[
-						A2($author$project$Vega$trFormula, 'datum.Title + \' (\' + (year(datum.Release_Date) || \'?\') + \')\'', 'tooltip')
+						A2($author$project$Vega$trFormula, 'datum.Title + \' (\' + (year(datum[\'Release Date\']) || \'?\') + \')\'', 'tooltip')
 					]),
 				A2(
 					$author$project$Vega$data,
@@ -14056,7 +14065,7 @@ var $author$project$GalleryScatter$scatterplot2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/movies.json'))
+							$author$project$Vega$str($author$project$GalleryScatter$dPath + 'movies.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -14552,7 +14561,7 @@ var $author$project$GalleryScatter$scatterplot3 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/driving.json'))
+						$author$project$Vega$str($author$project$GalleryScatter$dPath + 'driving.json'))
 					]))
 			]));
 	var ax = A2(
@@ -16150,7 +16159,7 @@ var $author$project$GalleryScatter$scatterplot4 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/barley.json'))
+						$author$project$Vega$str($author$project$GalleryScatter$dPath + 'barley.json'))
 					])),
 				A2(
 				$author$project$Vega$transform,
@@ -16714,7 +16723,7 @@ var $author$project$GalleryScatter$scatterplot5 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/barley.json'))
+						$author$project$Vega$str($author$project$GalleryScatter$dPath + 'barley.json'))
 					]))
 			]));
 	var ax = A2(

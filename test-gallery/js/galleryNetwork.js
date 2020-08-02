@@ -5087,6 +5087,7 @@ var $elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
+var $author$project$GalleryNetwork$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -6344,44 +6345,52 @@ var $author$project$Vega$valIfElse = F4(
 		}
 	});
 var $author$project$Vega$valRef = function (vs) {
-	_v0$2:
+	_v0$3:
 	while (true) {
-		if (vs.b && (!vs.b.b)) {
-			switch (vs.a.$) {
-				case 21:
-					var _v1 = vs.a;
-					var ex = _v1.a;
-					var ifs = _v1.b;
-					var elses = _v1.c;
-					return A2(
-						$elm$json$Json$Encode$list,
-						$elm$core$Basics$identity,
-						A4(
-							$author$project$Vega$valIfElse,
-							ex,
-							ifs,
-							elses,
-							_List_fromArray(
-								[
-									$elm$json$Json$Encode$object(
-									A2(
-										$elm$core$List$cons,
-										_Utils_Tuple2(
-											'test',
-											$elm$json$Json$Encode$string(ex)),
-										A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
-								])));
-				case 12:
-					var _v2 = vs.a;
-					var v = _v2.a;
-					var gps = _v2.b;
-					return $author$project$Vega$valueSpec(
-						A2($author$project$Vega$VGradientScale, v, gps));
-				default:
-					break _v0$2;
-			}
+		if (!vs.b) {
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2('value', $elm$json$Json$Encode$null)
+					]));
 		} else {
-			break _v0$2;
+			if (!vs.b.b) {
+				switch (vs.a.$) {
+					case 21:
+						var _v1 = vs.a;
+						var ex = _v1.a;
+						var ifs = _v1.b;
+						var elses = _v1.c;
+						return A2(
+							$elm$json$Json$Encode$list,
+							$elm$core$Basics$identity,
+							A4(
+								$author$project$Vega$valIfElse,
+								ex,
+								ifs,
+								elses,
+								_List_fromArray(
+									[
+										$elm$json$Json$Encode$object(
+										A2(
+											$elm$core$List$cons,
+											_Utils_Tuple2(
+												'test',
+												$elm$json$Json$Encode$string(ex)),
+											A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
+									])));
+					case 12:
+						var _v2 = vs.a;
+						var v = _v2.a;
+						var gps = _v2.b;
+						return $author$project$Vega$valueSpec(
+							A2($author$project$Vega$VGradientScale, v, gps));
+					default:
+						break _v0$3;
+				}
+			} else {
+				break _v0$3;
+			}
 		}
 	}
 	return $elm$json$Json$Encode$object(
@@ -11375,7 +11384,7 @@ var $author$project$GalleryNetwork$arc1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/miserables.json')),
+						$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'miserables.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -11490,7 +11499,7 @@ var $author$project$GalleryNetwork$arc1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/miserables.json')),
+							$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'miserables.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -13765,7 +13774,7 @@ var $author$project$GalleryNetwork$bundle1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/flare.json'))
+							$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'flare.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -13793,7 +13802,7 @@ var $author$project$GalleryNetwork$bundle1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/flare-dependencies.json'))
+							$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'flare-dependencies.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -14549,7 +14558,7 @@ var $author$project$GalleryNetwork$force1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/miserables.json')),
+						$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'miserables.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -14563,7 +14572,7 @@ var $author$project$GalleryNetwork$force1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/miserables.json')),
+						$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'miserables.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -15610,7 +15619,7 @@ var $author$project$GalleryNetwork$map1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/us-10m.json')),
+							$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'us-10m.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -15649,7 +15658,7 @@ var $author$project$GalleryNetwork$map1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/flights-airport.csv')),
+							$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'flights-airport.csv')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[$author$project$Vega$csv, $author$project$Vega$parseAuto]))
@@ -15700,7 +15709,7 @@ var $author$project$GalleryNetwork$map1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/airports.csv')),
+							$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'airports.csv')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[$author$project$Vega$csv, $author$project$Vega$parseAuto]))
@@ -15741,7 +15750,7 @@ var $author$project$GalleryNetwork$map1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/flights-airport.csv')),
+							$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'flights-airport.csv')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[$author$project$Vega$csv, $author$project$Vega$parseAuto]))
@@ -16369,7 +16378,7 @@ var $author$project$GalleryNetwork$matrix1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/miserables.json')),
+							$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'miserables.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -16404,7 +16413,7 @@ var $author$project$GalleryNetwork$matrix1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/miserables.json')),
+							$author$project$Vega$str($author$project$GalleryNetwork$dPath + 'miserables.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[

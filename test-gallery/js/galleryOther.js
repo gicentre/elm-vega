@@ -5988,44 +5988,52 @@ var $author$project$Vega$valIfElse = F4(
 		}
 	});
 var $author$project$Vega$valRef = function (vs) {
-	_v0$2:
+	_v0$3:
 	while (true) {
-		if (vs.b && (!vs.b.b)) {
-			switch (vs.a.$) {
-				case 21:
-					var _v1 = vs.a;
-					var ex = _v1.a;
-					var ifs = _v1.b;
-					var elses = _v1.c;
-					return A2(
-						$elm$json$Json$Encode$list,
-						$elm$core$Basics$identity,
-						A4(
-							$author$project$Vega$valIfElse,
-							ex,
-							ifs,
-							elses,
-							_List_fromArray(
-								[
-									$elm$json$Json$Encode$object(
-									A2(
-										$elm$core$List$cons,
-										_Utils_Tuple2(
-											'test',
-											$elm$json$Json$Encode$string(ex)),
-										A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
-								])));
-				case 12:
-					var _v2 = vs.a;
-					var v = _v2.a;
-					var gps = _v2.b;
-					return $author$project$Vega$valueSpec(
-						A2($author$project$Vega$VGradientScale, v, gps));
-				default:
-					break _v0$2;
-			}
+		if (!vs.b) {
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2('value', $elm$json$Json$Encode$null)
+					]));
 		} else {
-			break _v0$2;
+			if (!vs.b.b) {
+				switch (vs.a.$) {
+					case 21:
+						var _v1 = vs.a;
+						var ex = _v1.a;
+						var ifs = _v1.b;
+						var elses = _v1.c;
+						return A2(
+							$elm$json$Json$Encode$list,
+							$elm$core$Basics$identity,
+							A4(
+								$author$project$Vega$valIfElse,
+								ex,
+								ifs,
+								elses,
+								_List_fromArray(
+									[
+										$elm$json$Json$Encode$object(
+										A2(
+											$elm$core$List$cons,
+											_Utils_Tuple2(
+												'test',
+												$elm$json$Json$Encode$string(ex)),
+											A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
+									])));
+					case 12:
+						var _v2 = vs.a;
+						var v = _v2.a;
+						var gps = _v2.b;
+						return $author$project$Vega$valueSpec(
+							A2($author$project$Vega$VGradientScale, v, gps));
+					default:
+						break _v0$3;
+				}
+			} else {
+				break _v0$3;
+			}
 		}
 	}
 	return $elm$json$Json$Encode$object(
@@ -7543,6 +7551,7 @@ var $elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
+var $author$project$GalleryOther$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -12680,7 +12689,7 @@ var $author$project$GalleryOther$beeswarm1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/miserables.json')),
+						$author$project$Vega$str($author$project$GalleryOther$dPath + 'miserables.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -14271,7 +14280,7 @@ var $author$project$GalleryOther$heatmap1 = function () {
 					[
 						A2($author$project$Vega$trFormulaInitOnly, 'hours(datum.date)', 'hour'),
 						A2($author$project$Vega$trFormulaInitOnly, 'datetime(year(datum.date), month(datum.date), date(datum.date))', 'day'),
-						A2($author$project$Vega$trFormulaInitOnly, '(datum.temp - 32) / 1.8', 'celsius')
+						A2($author$project$Vega$trFormulaInitOnly, '(datum.temperature - 32) / 1.8', 'celsius')
 					]),
 				A2(
 					$author$project$Vega$data,
@@ -14279,7 +14288,7 @@ var $author$project$GalleryOther$heatmap1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/seattle-temps.csv')),
+							$author$project$Vega$str($author$project$GalleryOther$dPath + 'seattle-weather-hourly-normals.csv')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -14287,7 +14296,7 @@ var $author$project$GalleryOther$heatmap1 = function () {
 									$author$project$Vega$parse(
 									_List_fromArray(
 										[
-											_Utils_Tuple2('temp', $author$project$Vega$foNum),
+											_Utils_Tuple2('temperature', $author$project$Vega$foNum),
 											_Utils_Tuple2(
 											'date',
 											$author$project$Vega$foDate(''))
@@ -15026,7 +15035,7 @@ var $author$project$GalleryOther$heatmap2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
+							$author$project$Vega$str($author$project$GalleryOther$dPath + 'cars.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -16112,7 +16121,7 @@ var $author$project$GalleryOther$parallel1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/cars.json')),
+							$author$project$Vega$str($author$project$GalleryOther$dPath + 'cars.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[

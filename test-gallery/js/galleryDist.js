@@ -5974,44 +5974,52 @@ var $author$project$Vega$valIfElse = F4(
 		}
 	});
 var $author$project$Vega$valRef = function (vs) {
-	_v0$2:
+	_v0$3:
 	while (true) {
-		if (vs.b && (!vs.b.b)) {
-			switch (vs.a.$) {
-				case 21:
-					var _v1 = vs.a;
-					var ex = _v1.a;
-					var ifs = _v1.b;
-					var elses = _v1.c;
-					return A2(
-						$elm$json$Json$Encode$list,
-						$elm$core$Basics$identity,
-						A4(
-							$author$project$Vega$valIfElse,
-							ex,
-							ifs,
-							elses,
-							_List_fromArray(
-								[
-									$elm$json$Json$Encode$object(
-									A2(
-										$elm$core$List$cons,
-										_Utils_Tuple2(
-											'test',
-											$elm$json$Json$Encode$string(ex)),
-										A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
-								])));
-				case 12:
-					var _v2 = vs.a;
-					var v = _v2.a;
-					var gps = _v2.b;
-					return $author$project$Vega$valueSpec(
-						A2($author$project$Vega$VGradientScale, v, gps));
-				default:
-					break _v0$2;
-			}
+		if (!vs.b) {
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2('value', $elm$json$Json$Encode$null)
+					]));
 		} else {
-			break _v0$2;
+			if (!vs.b.b) {
+				switch (vs.a.$) {
+					case 21:
+						var _v1 = vs.a;
+						var ex = _v1.a;
+						var ifs = _v1.b;
+						var elses = _v1.c;
+						return A2(
+							$elm$json$Json$Encode$list,
+							$elm$core$Basics$identity,
+							A4(
+								$author$project$Vega$valIfElse,
+								ex,
+								ifs,
+								elses,
+								_List_fromArray(
+									[
+										$elm$json$Json$Encode$object(
+										A2(
+											$elm$core$List$cons,
+											_Utils_Tuple2(
+												'test',
+												$elm$json$Json$Encode$string(ex)),
+											A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
+									])));
+					case 12:
+						var _v2 = vs.a;
+						var v = _v2.a;
+						var gps = _v2.b;
+						return $author$project$Vega$valueSpec(
+							A2($author$project$Vega$VGradientScale, v, gps));
+					default:
+						break _v0$3;
+				}
+			} else {
+				break _v0$3;
+			}
 		}
 	}
 	return $elm$json$Json$Encode$object(
@@ -9719,6 +9727,7 @@ var $author$project$Vega$config = function (cps) {
 		$elm$json$Json$Encode$object(
 			A2($elm$core$List$map, $author$project$Vega$configProperty, cps)));
 };
+var $author$project$GalleryDist$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -14816,7 +14825,7 @@ var $author$project$GalleryDist$boxplot1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/iris.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'iris.json'))
 						])))
 			]));
 	var cf = $author$project$Vega$config(
@@ -15411,7 +15420,7 @@ var $author$project$GalleryDist$contour1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'cars.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -15798,7 +15807,7 @@ var $author$project$GalleryDist$contour2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'cars.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -16262,7 +16271,7 @@ var $author$project$GalleryDist$density1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/normal-2d.json'))
+						$author$project$Vega$str($author$project$GalleryDist$dPath + 'normal-2d.json'))
 					])),
 				A2(
 				$author$project$Vega$transform,
@@ -17018,7 +17027,7 @@ var $author$project$GalleryDist$histo1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/normal-2d.json'))
+						$author$project$Vega$str($author$project$GalleryDist$dPath + 'normal-2d.json'))
 					])),
 				A2(
 				$author$project$Vega$transform,
@@ -17399,11 +17408,11 @@ var $author$project$GalleryDist$histo2 = function () {
 					[
 						A2(
 						$author$project$Vega$trExtentAsSignal,
-						$author$project$Vega$field('IMDB_Rating'),
+						$author$project$Vega$field('IMDB Rating'),
 						'extent'),
 						A3(
 						$author$project$Vega$trBin,
-						$author$project$Vega$field('IMDB_Rating'),
+						$author$project$Vega$field('IMDB Rating'),
 						$author$project$Vega$numSignal('extent'),
 						_List_fromArray(
 							[
@@ -17418,14 +17427,14 @@ var $author$project$GalleryDist$histo2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/movies.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'movies.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
 				_List_fromArray(
 					[
 						$author$project$Vega$trFilter(
-						$author$project$Vega$expr('datum[\'IMDB_Rating\'] != null')),
+						$author$project$Vega$expr('datum[\'IMDB Rating\'] != null')),
 						$author$project$Vega$trAggregate(
 						_List_fromArray(
 							[
@@ -17449,7 +17458,7 @@ var $author$project$GalleryDist$histo2 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$trFilter(
-						$author$project$Vega$expr('datum[\'IMDB_Rating\'] == null')),
+						$author$project$Vega$expr('datum[\'IMDB Rating\'] == null')),
 						$author$project$Vega$trAggregate(_List_Nil)
 					]),
 				A2(
@@ -17950,7 +17959,7 @@ var $author$project$GalleryDist$quantile1 = function () {
 			_List_fromArray(
 				[
 					$author$project$Vega$siValue(
-					$author$project$Vega$vStr('https://vega.github.io/vega/data/normal-2d.json')),
+					$author$project$Vega$vStr($author$project$GalleryDist$dPath + 'normal-2d.json')),
 					$author$project$Vega$siBind(
 					$author$project$Vega$iSelect(
 						_List_fromArray(
@@ -17958,7 +17967,7 @@ var $author$project$GalleryDist$quantile1 = function () {
 								$author$project$Vega$inOptions(
 								$author$project$Vega$vStrs(
 									_List_fromArray(
-										['https://vega.github.io/vega/data/normal-2d.json', 'https://vega.github.io/vega/data/uniform-2d.json'])))
+										[$author$project$GalleryDist$dPath + 'normal-2d.json', $author$project$GalleryDist$dPath + 'uniform-2d.json'])))
 							])))
 				])));
 	var sc2 = A2(
@@ -18349,7 +18358,7 @@ var $author$project$GalleryDist$regression1 = function () {
 								[
 									$author$project$Vega$daDataset('movies'),
 									$author$project$Vega$daField(
-									$author$project$Vega$field('Rotten_Tomatoes_Rating'))
+									$author$project$Vega$field('Rotten Tomatoes Rating'))
 								])))
 					]))),
 		A2(
@@ -18364,7 +18373,7 @@ var $author$project$GalleryDist$regression1 = function () {
 							[
 								$author$project$Vega$daDataset('movies'),
 								$author$project$Vega$daField(
-								$author$project$Vega$field('IMDB_Rating'))
+								$author$project$Vega$field('IMDB Rating'))
 							])))
 				])));
 	var nestedMk = A2(
@@ -18446,14 +18455,14 @@ var $author$project$GalleryDist$regression1 = function () {
 											[
 												$author$project$Vega$vScale('xScale'),
 												$author$project$Vega$vField(
-												$author$project$Vega$field('Rotten_Tomatoes_Rating'))
+												$author$project$Vega$field('Rotten Tomatoes Rating'))
 											])),
 										$author$project$Vega$maY(
 										_List_fromArray(
 											[
 												$author$project$Vega$vScale('yScale'),
 												$author$project$Vega$vField(
-												$author$project$Vega$field('IMDB_Rating'))
+												$author$project$Vega$field('IMDB Rating'))
 											])),
 										$author$project$Vega$maFillOpacity(
 										_List_fromArray(
@@ -18485,7 +18494,7 @@ var $author$project$GalleryDist$regression1 = function () {
 									$author$project$Vega$faGroupBy(
 									_List_fromArray(
 										[
-											$author$project$Vega$field('Major_Genre')
+											$author$project$Vega$field('Major Genre')
 										]))
 								]))
 						])),
@@ -18563,7 +18572,7 @@ var $author$project$GalleryDist$regression1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$trFilter(
-						$author$project$Vega$expr('datum.Rotten_Tomatoes_Rating != null && datum.IMDB_Rating != null'))
+						$author$project$Vega$expr('datum.[\'Rotten Tomatoes Rating\'] != null && datum[\'IMDB Rating\'] != null'))
 					]),
 				A2(
 					$author$project$Vega$data,
@@ -18571,7 +18580,7 @@ var $author$project$GalleryDist$regression1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/movies.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'movies.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -18579,14 +18588,14 @@ var $author$project$GalleryDist$regression1 = function () {
 					[
 						A3(
 						$author$project$Vega$trRegression,
-						$author$project$Vega$field('Rotten_Tomatoes_Rating'),
-						$author$project$Vega$field('IMDB_Rating'),
+						$author$project$Vega$field('Rotten Tomatoes Rating'),
+						$author$project$Vega$field('IMDB Rating'),
 						_List_fromArray(
 							[
 								$author$project$Vega$reGroupBy(
 								_List_fromArray(
 									[
-										$author$project$Vega$fSignal('groupby === \'genre\' ? \'Major_Genre\' : \'foo\'')
+										$author$project$Vega$fSignal('groupby === \'genre\' ? \'Major Genre\' : \'foo\'')
 									])),
 								$author$project$Vega$reMethod(
 								$author$project$Vega$reSignal('method')),
@@ -18723,7 +18732,7 @@ var $author$project$GalleryDist$regression2 = function () {
 								[
 									$author$project$Vega$daDataset('movies'),
 									$author$project$Vega$daField(
-									$author$project$Vega$field('Rotten_Tomatoes_Rating'))
+									$author$project$Vega$field('Rotten Tomatoes Rating'))
 								])))
 					]))),
 		A2(
@@ -18738,7 +18747,7 @@ var $author$project$GalleryDist$regression2 = function () {
 							[
 								$author$project$Vega$daDataset('movies'),
 								$author$project$Vega$daField(
-								$author$project$Vega$field('IMDB_Rating'))
+								$author$project$Vega$field('IMDB Rating'))
 							])))
 				])));
 	var nestedMk = A2(
@@ -18825,14 +18834,14 @@ var $author$project$GalleryDist$regression2 = function () {
 											[
 												$author$project$Vega$vScale('xScale'),
 												$author$project$Vega$vField(
-												$author$project$Vega$field('Rotten_Tomatoes_Rating'))
+												$author$project$Vega$field('Rotten Tomatoes Rating'))
 											])),
 										$author$project$Vega$maY(
 										_List_fromArray(
 											[
 												$author$project$Vega$vScale('yScale'),
 												$author$project$Vega$vField(
-												$author$project$Vega$field('IMDB_Rating'))
+												$author$project$Vega$field('IMDB Rating'))
 											])),
 										$author$project$Vega$maFillOpacity(
 										_List_fromArray(
@@ -18864,7 +18873,7 @@ var $author$project$GalleryDist$regression2 = function () {
 									$author$project$Vega$faGroupBy(
 									_List_fromArray(
 										[
-											$author$project$Vega$field('Major_Genre')
+											$author$project$Vega$field('Major Genre')
 										]))
 								]))
 						])),
@@ -18882,7 +18891,7 @@ var $author$project$GalleryDist$regression2 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$trFilter(
-						$author$project$Vega$expr('datum.Rotten_Tomatoes_Rating != null && datum.IMDB_Rating != null'))
+						$author$project$Vega$expr('datum[\'Rotten Tomatoes Rating\'] != null && datum[\'IMDB Rating\'] != null'))
 					]),
 				A2(
 					$author$project$Vega$data,
@@ -18890,7 +18899,7 @@ var $author$project$GalleryDist$regression2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/movies.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'movies.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -18898,14 +18907,14 @@ var $author$project$GalleryDist$regression2 = function () {
 					[
 						A3(
 						$author$project$Vega$trLoess,
-						$author$project$Vega$field('Rotten_Tomatoes_Rating'),
-						$author$project$Vega$field('IMDB_Rating'),
+						$author$project$Vega$field('Rotten Tomatoes Rating'),
+						$author$project$Vega$field('IMDB Rating'),
 						_List_fromArray(
 							[
 								$author$project$Vega$lsGroupBy(
 								_List_fromArray(
 									[
-										$author$project$Vega$fSignal('groupby === \'genre\' ? \'Major_Genre\' : \'foo\'')
+										$author$project$Vega$fSignal('groupby === \'genre\' ? \'Major Genre\' : \'foo\'')
 									])),
 								$author$project$Vega$lsBandwidth(
 								$author$project$Vega$numSignal('bandwidth')),
@@ -19144,7 +19153,7 @@ var $author$project$GalleryDist$scatter1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'cars.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -19543,7 +19552,7 @@ var $author$project$GalleryDist$timeUnits1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/flights-20k.json')),
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'flights-20k.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[$author$project$Vega$json, $author$project$Vega$parseAuto]))
@@ -20062,7 +20071,7 @@ var $author$project$GalleryDist$violinplot1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/iris.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'iris.json'))
 						])))
 			]));
 	var cf = $author$project$Vega$config(
@@ -20347,7 +20356,7 @@ var $author$project$GalleryDist$wheat1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/normal-2d.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'normal-2d.json'))
 						])))
 			]));
 	var ax = A2(
@@ -20610,7 +20619,7 @@ var $author$project$GalleryDist$window1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$trFilter(
-						$author$project$Vega$expr('datum.Director != null && datum.Worldwide_Gross != null')),
+						$author$project$Vega$expr('datum.Director != null && datum[\'Worldwide Gross\'] != null')),
 						$author$project$Vega$trAggregate(
 						_List_fromArray(
 							[
@@ -20627,7 +20636,7 @@ var $author$project$GalleryDist$window1 = function () {
 								$author$project$Vega$agFields(
 								_List_fromArray(
 									[
-										$author$project$Vega$field('Worldwide_Gross')
+										$author$project$Vega$field('Worldwide Gross')
 									])),
 								$author$project$Vega$agAs(
 								_List_fromArray(
@@ -20658,7 +20667,7 @@ var $author$project$GalleryDist$window1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/movies.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'movies.json'))
 						])))
 			]));
 	var ax = A2(
@@ -20881,7 +20890,7 @@ var $author$project$GalleryDist$window2 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$trFilter(
-						$author$project$Vega$expr('datum.Director != null && datum.Worldwide_Gross != null'))
+						$author$project$Vega$expr('datum.Director != null && datum[\'Worldwide Gross\'] != null'))
 					]),
 				A2(
 					$author$project$Vega$data,
@@ -20889,7 +20898,7 @@ var $author$project$GalleryDist$window2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/movies.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'movies.json'))
 						]))),
 				A2(
 				$author$project$Vega$transform,
@@ -20911,7 +20920,7 @@ var $author$project$GalleryDist$window2 = function () {
 								$author$project$Vega$agFields(
 								_List_fromArray(
 									[
-										$author$project$Vega$field('Worldwide_Gross')
+										$author$project$Vega$field('Worldwide Gross')
 									])),
 								$author$project$Vega$agAs(
 								_List_fromArray(
@@ -20978,7 +20987,7 @@ var $author$project$GalleryDist$window2 = function () {
 								$author$project$Vega$agFields(
 								_List_fromArray(
 									[
-										$author$project$Vega$field('Worldwide_Gross')
+										$author$project$Vega$field('Worldwide Gross')
 									])),
 								$author$project$Vega$agAs(
 								_List_fromArray(

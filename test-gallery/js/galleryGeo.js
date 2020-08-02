@@ -5151,6 +5151,7 @@ var $elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
+var $author$project$GalleryGeo$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DaFormat = function (a) {
 	return {$: 0, a: a};
 };
@@ -6283,44 +6284,52 @@ var $author$project$Vega$valIfElse = F4(
 		}
 	});
 var $author$project$Vega$valRef = function (vs) {
-	_v0$2:
+	_v0$3:
 	while (true) {
-		if (vs.b && (!vs.b.b)) {
-			switch (vs.a.$) {
-				case 21:
-					var _v1 = vs.a;
-					var ex = _v1.a;
-					var ifs = _v1.b;
-					var elses = _v1.c;
-					return A2(
-						$elm$json$Json$Encode$list,
-						$elm$core$Basics$identity,
-						A4(
-							$author$project$Vega$valIfElse,
-							ex,
-							ifs,
-							elses,
-							_List_fromArray(
-								[
-									$elm$json$Json$Encode$object(
-									A2(
-										$elm$core$List$cons,
-										_Utils_Tuple2(
-											'test',
-											$elm$json$Json$Encode$string(ex)),
-										A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
-								])));
-				case 12:
-					var _v2 = vs.a;
-					var v = _v2.a;
-					var gps = _v2.b;
-					return $author$project$Vega$valueSpec(
-						A2($author$project$Vega$VGradientScale, v, gps));
-				default:
-					break _v0$2;
-			}
+		if (!vs.b) {
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2('value', $elm$json$Json$Encode$null)
+					]));
 		} else {
-			break _v0$2;
+			if (!vs.b.b) {
+				switch (vs.a.$) {
+					case 21:
+						var _v1 = vs.a;
+						var ex = _v1.a;
+						var ifs = _v1.b;
+						var elses = _v1.c;
+						return A2(
+							$elm$json$Json$Encode$list,
+							$elm$core$Basics$identity,
+							A4(
+								$author$project$Vega$valIfElse,
+								ex,
+								ifs,
+								elses,
+								_List_fromArray(
+									[
+										$elm$json$Json$Encode$object(
+										A2(
+											$elm$core$List$cons,
+											_Utils_Tuple2(
+												'test',
+												$elm$json$Json$Encode$string(ex)),
+											A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
+									])));
+					case 12:
+						var _v2 = vs.a;
+						var v = _v2.a;
+						var gps = _v2.b;
+						return $author$project$Vega$valueSpec(
+							A2($author$project$Vega$VGradientScale, v, gps));
+					default:
+						break _v0$3;
+				}
+			} else {
+				break _v0$3;
+			}
 		}
 	}
 	return $elm$json$Json$Encode$object(
@@ -12739,7 +12748,7 @@ var $author$project$GalleryGeo$geo1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/unemployment.tsv')),
+						$author$project$Vega$str($author$project$GalleryGeo$dPath + 'unemployment.tsv')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[$author$project$Vega$tsv]))
@@ -12773,7 +12782,7 @@ var $author$project$GalleryGeo$geo1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/us-10m.json')),
+							$author$project$Vega$str($author$project$GalleryGeo$dPath + 'us-10m.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -15476,7 +15485,7 @@ var $author$project$GalleryGeo$geo10 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/annual-precip.json'))
+						$author$project$Vega$str($author$project$GalleryGeo$dPath + 'annual-precip.json'))
 					])),
 				A2(
 				$author$project$Vega$transform,
@@ -15502,7 +15511,7 @@ var $author$project$GalleryGeo$geo10 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
+						$author$project$Vega$str($author$project$GalleryGeo$dPath + 'world-110m.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -15922,7 +15931,7 @@ var $author$project$GalleryGeo$geo2 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/us-10m.json')),
+						$author$project$Vega$str($author$project$GalleryGeo$dPath + 'us-10m.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -15958,7 +15967,7 @@ var $author$project$GalleryGeo$geo2 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/obesity.json'))
+							$author$project$Vega$str($author$project$GalleryGeo$dPath + 'obesity.json'))
 						])))
 			]));
 	var cf = $author$project$Vega$config(
@@ -15989,6 +15998,10 @@ var $author$project$GalleryGeo$geo2 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$Vega$BooSignal = function (a) {
+	return {$: 2, a: a};
+};
+var $author$project$Vega$booSignal = $author$project$Vega$BooSignal;
 var $author$project$Vega$VEncode = 16;
 var $author$project$Vega$encode = function (eps) {
 	return _Utils_Tuple2(
@@ -16111,40 +16124,76 @@ var $author$project$GalleryGeo$geo3 = function () {
 													$elm$core$Basics$composeL,
 													A2(
 														$elm$core$Basics$composeL,
-														$author$project$Vega$signals,
+														A2(
+															$elm$core$Basics$composeL,
+															A2(
+																$elm$core$Basics$composeL,
+																$author$project$Vega$signals,
+																A2(
+																	$author$project$Vega$signal,
+																	'pType',
+																	_List_fromArray(
+																		[
+																			$author$project$Vega$siValue(
+																			$author$project$Vega$projectionValue($author$project$Vega$equalEarth)),
+																			$author$project$Vega$siBind(
+																			$author$project$Vega$iSelect(
+																				_List_fromArray(
+																					[
+																						$author$project$Vega$inOptions($author$project$GalleryGeo$standardProjections)
+																					])))
+																		]))),
+															A2(
+																$author$project$Vega$signal,
+																'pScale',
+																_List_fromArray(
+																	[
+																		$author$project$Vega$siValue(
+																		$author$project$Vega$vNum(150)),
+																		$author$project$Vega$siBind(
+																		$author$project$Vega$iRange(
+																			_List_fromArray(
+																				[
+																					$author$project$Vega$inMin(1),
+																					$author$project$Vega$inMax(2000),
+																					$author$project$Vega$inStep(0.1)
+																				])))
+																	]))),
 														A2(
 															$author$project$Vega$signal,
-															'pType',
+															'pRotate0',
 															_List_fromArray(
 																[
 																	$author$project$Vega$siValue(
-																	$author$project$Vega$projectionValue($author$project$Vega$equalEarth)),
+																	$author$project$Vega$vNum(0)),
 																	$author$project$Vega$siBind(
-																	$author$project$Vega$iSelect(
+																	$author$project$Vega$iRange(
 																		_List_fromArray(
 																			[
-																				$author$project$Vega$inOptions($author$project$GalleryGeo$standardProjections)
+																				$author$project$Vega$inMin(-180),
+																				$author$project$Vega$inMax(180),
+																				$author$project$Vega$inStep(1)
 																			])))
 																]))),
 													A2(
 														$author$project$Vega$signal,
-														'pScale',
+														'pRotate1',
 														_List_fromArray(
 															[
 																$author$project$Vega$siValue(
-																$author$project$Vega$vNum(150)),
+																$author$project$Vega$vNum(0)),
 																$author$project$Vega$siBind(
 																$author$project$Vega$iRange(
 																	_List_fromArray(
 																		[
-																			$author$project$Vega$inMin(1),
-																			$author$project$Vega$inMax(2000),
-																			$author$project$Vega$inStep(0.1)
+																			$author$project$Vega$inMin(-90),
+																			$author$project$Vega$inMax(90),
+																			$author$project$Vega$inStep(1)
 																		])))
 															]))),
 												A2(
 													$author$project$Vega$signal,
-													'pRotate0',
+													'pRotate2',
 													_List_fromArray(
 														[
 															$author$project$Vega$siValue(
@@ -16160,7 +16209,7 @@ var $author$project$GalleryGeo$geo3 = function () {
 														]))),
 											A2(
 												$author$project$Vega$signal,
-												'pRotate1',
+												'pCentre0',
 												_List_fromArray(
 													[
 														$author$project$Vega$siValue(
@@ -16169,14 +16218,14 @@ var $author$project$GalleryGeo$geo3 = function () {
 														$author$project$Vega$iRange(
 															_List_fromArray(
 																[
-																	$author$project$Vega$inMin(-90),
-																	$author$project$Vega$inMax(90),
+																	$author$project$Vega$inMin(-180),
+																	$author$project$Vega$inMax(180),
 																	$author$project$Vega$inStep(1)
 																])))
 													]))),
 										A2(
 											$author$project$Vega$signal,
-											'pRotate2',
+											'pCentre1',
 											_List_fromArray(
 												[
 													$author$project$Vega$siValue(
@@ -16185,102 +16234,84 @@ var $author$project$GalleryGeo$geo3 = function () {
 													$author$project$Vega$iRange(
 														_List_fromArray(
 															[
-																$author$project$Vega$inMin(-180),
-																$author$project$Vega$inMax(180),
+																$author$project$Vega$inMin(-90),
+																$author$project$Vega$inMax(90),
 																$author$project$Vega$inStep(1)
 															])))
 												]))),
 									A2(
 										$author$project$Vega$signal,
-										'pCentre0',
+										'pTranslate0',
 										_List_fromArray(
 											[
-												$author$project$Vega$siValue(
-												$author$project$Vega$vNum(0)),
-												$author$project$Vega$siBind(
-												$author$project$Vega$iRange(
-													_List_fromArray(
-														[
-															$author$project$Vega$inMin(-180),
-															$author$project$Vega$inMax(180),
-															$author$project$Vega$inStep(1)
-														])))
+												$author$project$Vega$siUpdate('width /2')
 											]))),
 								A2(
 									$author$project$Vega$signal,
-									'pCentre1',
+									'pTranslate1',
 									_List_fromArray(
 										[
-											$author$project$Vega$siValue(
-											$author$project$Vega$vNum(0)),
-											$author$project$Vega$siBind(
-											$author$project$Vega$iRange(
-												_List_fromArray(
-													[
-														$author$project$Vega$inMin(-90),
-														$author$project$Vega$inMax(90),
-														$author$project$Vega$inStep(1)
-													])))
+											$author$project$Vega$siUpdate('height /2')
 										]))),
 							A2(
 								$author$project$Vega$signal,
-								'pTranslate0',
+								'graticuleDash',
 								_List_fromArray(
 									[
-										$author$project$Vega$siUpdate('width /2')
+										$author$project$Vega$siValue(
+										$author$project$Vega$vNum(0)),
+										$author$project$Vega$siBind(
+										$author$project$Vega$iRadio(
+											_List_fromArray(
+												[
+													$author$project$Vega$inOptions(
+													$author$project$Vega$vNums(
+														_List_fromArray(
+															[0, 3, 5, 10])))
+												])))
 									]))),
 						A2(
 							$author$project$Vega$signal,
-							'pTranslate1',
+							'borderWidth',
 							_List_fromArray(
 								[
-									$author$project$Vega$siUpdate('height /2')
+									$author$project$Vega$siValue(
+									$author$project$Vega$vNum(1)),
+									$author$project$Vega$siBind(
+									$author$project$Vega$iText(_List_Nil))
 								]))),
 					A2(
 						$author$project$Vega$signal,
-						'graticuleDash',
+						'background',
 						_List_fromArray(
 							[
 								$author$project$Vega$siValue(
-								$author$project$Vega$vNum(0)),
+								$author$project$Vega$vStr('#ffffff')),
 								$author$project$Vega$siBind(
-								$author$project$Vega$iRadio(
-									_List_fromArray(
-										[
-											$author$project$Vega$inOptions(
-											$author$project$Vega$vNums(
-												_List_fromArray(
-													[0, 3, 5, 10])))
-										])))
+								$author$project$Vega$iColor(_List_Nil))
 							]))),
 				A2(
 					$author$project$Vega$signal,
-					'borderWidth',
+					'invert',
 					_List_fromArray(
 						[
-							$author$project$Vega$siValue(
-							$author$project$Vega$vNum(1)),
+							$author$project$Vega$siValue($author$project$Vega$vFalse),
 							$author$project$Vega$siBind(
-							$author$project$Vega$iText(_List_Nil))
+							$author$project$Vega$iCheckbox(_List_Nil))
 						]))),
 			A2(
 				$author$project$Vega$signal,
-				'background',
+				'reflY',
 				_List_fromArray(
 					[
-						$author$project$Vega$siValue(
-						$author$project$Vega$vStr('#ffffff')),
-						$author$project$Vega$siBind(
-						$author$project$Vega$iColor(_List_Nil))
+						$author$project$Vega$siUpdate('pType == \'identity\'')
 					]))),
 		A2(
 			$author$project$Vega$signal,
-			'invert',
+			'scCoeff',
 			_List_fromArray(
 				[
-					$author$project$Vega$siValue($author$project$Vega$vFalse),
-					$author$project$Vega$siBind(
-					$author$project$Vega$iCheckbox(_List_Nil))
+					$author$project$Vega$siUpdate('pType == \'identity\' ? 0.01 : 1')
 				])));
 	var pr = A2(
 		$elm$core$Basics$composeL,
@@ -16293,7 +16324,7 @@ var $author$project$GalleryGeo$geo3 = function () {
 					$author$project$Vega$prType(
 					$author$project$Vega$prSignal('pType')),
 					$author$project$Vega$prScale(
-					$author$project$Vega$numSignal('pScale')),
+					$author$project$Vega$numSignal('pScale * scCoeff')),
 					$author$project$Vega$prRotate(
 					$author$project$Vega$numSignals(
 						_List_fromArray(
@@ -16306,7 +16337,8 @@ var $author$project$GalleryGeo$geo3 = function () {
 					$author$project$Vega$numSignals(
 						_List_fromArray(
 							['pTranslate0', 'pTranslate1']))),
-					$author$project$Vega$prReflectY($author$project$Vega$true)
+					$author$project$Vega$prReflectY(
+					$author$project$Vega$booSignal('reflY'))
 				])));
 	var mk = A2(
 		$elm$core$Basics$composeL,
@@ -16440,7 +16472,7 @@ var $author$project$GalleryGeo$geo3 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
+						$author$project$Vega$str($author$project$GalleryGeo$dPath + 'world-110m.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -16738,7 +16770,7 @@ var $author$project$GalleryGeo$geo4 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
+						$author$project$Vega$str($author$project$GalleryGeo$dPath + 'world-110m.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -16752,7 +16784,7 @@ var $author$project$GalleryGeo$geo4 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/earthquakes.json')),
+						$author$project$Vega$str($author$project$GalleryGeo$dPath + 'earthquakes.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -17486,7 +17518,7 @@ var $author$project$GalleryGeo$geo5 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
+						$author$project$Vega$str($author$project$GalleryGeo$dPath + 'world-110m.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -17971,7 +18003,7 @@ var $author$project$GalleryGeo$geo6 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
+						$author$project$Vega$str($author$project$GalleryGeo$dPath + 'world-110m.json')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -18387,7 +18419,7 @@ var $author$project$GalleryGeo$geo7 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
+							$author$project$Vega$str($author$project$GalleryGeo$dPath + 'world-110m.json')),
 							$author$project$Vega$daFormat(
 							_List_fromArray(
 								[
@@ -18417,10 +18449,6 @@ var $author$project$GalleryGeo$geo7 = function () {
 				mk(_List_Nil)
 			]));
 }();
-var $author$project$Vega$BooSignal = function (a) {
-	return {$: 2, a: a};
-};
-var $author$project$Vega$booSignal = $author$project$Vega$BooSignal;
 var $author$project$Vega$ICScale = function (a) {
 	return {$: 7, a: a};
 };
@@ -18564,7 +18592,7 @@ var $author$project$GalleryGeo$geo8 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/volcano.json'))
+						$author$project$Vega$str($author$project$GalleryGeo$dPath + 'volcano.json'))
 					])),
 				A2(
 				$author$project$Vega$transform,
@@ -18850,7 +18878,7 @@ var $author$project$GalleryGeo$geo9 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/windvectors.csv')),
+						$author$project$Vega$str($author$project$GalleryGeo$dPath + 'windvectors.csv')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[$author$project$Vega$csv, $author$project$Vega$parseAuto]))

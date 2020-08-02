@@ -5955,44 +5955,52 @@ var $author$project$Vega$valIfElse = F4(
 		}
 	});
 var $author$project$Vega$valRef = function (vs) {
-	_v0$2:
+	_v0$3:
 	while (true) {
-		if (vs.b && (!vs.b.b)) {
-			switch (vs.a.$) {
-				case 21:
-					var _v1 = vs.a;
-					var ex = _v1.a;
-					var ifs = _v1.b;
-					var elses = _v1.c;
-					return A2(
-						$elm$json$Json$Encode$list,
-						$elm$core$Basics$identity,
-						A4(
-							$author$project$Vega$valIfElse,
-							ex,
-							ifs,
-							elses,
-							_List_fromArray(
-								[
-									$elm$json$Json$Encode$object(
-									A2(
-										$elm$core$List$cons,
-										_Utils_Tuple2(
-											'test',
-											$elm$json$Json$Encode$string(ex)),
-										A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
-								])));
-				case 12:
-					var _v2 = vs.a;
-					var v = _v2.a;
-					var gps = _v2.b;
-					return $author$project$Vega$valueSpec(
-						A2($author$project$Vega$VGradientScale, v, gps));
-				default:
-					break _v0$2;
-			}
+		if (!vs.b) {
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2('value', $elm$json$Json$Encode$null)
+					]));
 		} else {
-			break _v0$2;
+			if (!vs.b.b) {
+				switch (vs.a.$) {
+					case 21:
+						var _v1 = vs.a;
+						var ex = _v1.a;
+						var ifs = _v1.b;
+						var elses = _v1.c;
+						return A2(
+							$elm$json$Json$Encode$list,
+							$elm$core$Basics$identity,
+							A4(
+								$author$project$Vega$valIfElse,
+								ex,
+								ifs,
+								elses,
+								_List_fromArray(
+									[
+										$elm$json$Json$Encode$object(
+										A2(
+											$elm$core$List$cons,
+											_Utils_Tuple2(
+												'test',
+												$elm$json$Json$Encode$string(ex)),
+											A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifs)))
+									])));
+					case 12:
+						var _v2 = vs.a;
+						var v = _v2.a;
+						var gps = _v2.b;
+						return $author$project$Vega$valueSpec(
+							A2($author$project$Vega$VGradientScale, v, gps));
+					default:
+						break _v0$3;
+				}
+			} else {
+				break _v0$3;
+			}
 		}
 	}
 	return $elm$json$Json$Encode$object(
@@ -7520,6 +7528,7 @@ var $elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
+var $author$project$GalleryInteraction$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -13068,7 +13077,7 @@ var $author$project$GalleryInteraction$interaction1 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/flights-200k.json'))
+							$author$project$Vega$str($author$project$GalleryInteraction$dPath + 'flights-200k.json'))
 						])))
 			]));
 	var axGenerator = function (core) {
@@ -13725,7 +13734,7 @@ var $author$project$GalleryInteraction$interaction2 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/sp500.csv')),
+						$author$project$Vega$str($author$project$GalleryInteraction$dPath + 'sp500.csv')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
@@ -16036,6 +16045,10 @@ var $author$project$Vega$TCross = function (a) {
 	return {$: 5, a: a};
 };
 var $author$project$Vega$trCross = $author$project$Vega$TCross;
+var $author$project$Vega$TFilter = function (a) {
+	return {$: 12, a: a};
+};
+var $author$project$Vega$trFilter = $author$project$Vega$TFilter;
 var $author$project$Vega$AlwaysUpdate = 1;
 var $author$project$Vega$TFormula = F3(
 	function (a, b, c) {
@@ -16452,7 +16465,7 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 						$author$project$Vega$doData(
 							_List_fromArray(
 								[
-									$author$project$Vega$daDataset('iris'),
+									$author$project$Vega$daDataset('penguins'),
 									$author$project$Vega$daField(
 									$author$project$Vega$field(_var))
 								])))
@@ -16530,19 +16543,19 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 													$author$project$Vega$doData(
 														_List_fromArray(
 															[
-																$author$project$Vega$daDataset('iris'),
+																$author$project$Vega$daDataset('penguins'),
 																$author$project$Vega$daField(
-																$author$project$Vega$field('species'))
+																$author$project$Vega$field('Species'))
 															])))
 												]))),
-									A2(scGenerator, 'petalWidth', 'X')),
-								A2(scGenerator, 'petalLength', 'X')),
-							A2(scGenerator, 'sepalWidth', 'X')),
-						A2(scGenerator, 'sepalLength', 'X')),
-					A2(scGenerator, 'petalWidth', 'Y')),
-				A2(scGenerator, 'petalLength', 'Y')),
-			A2(scGenerator, 'sepalWidth', 'Y')),
-		A2(scGenerator, 'sepalLength', 'Y'));
+									A2(scGenerator, 'Beak Length (mm)', 'X')),
+								A2(scGenerator, 'Beak Depth (mm)', 'X')),
+							A2(scGenerator, 'Flipper Length (mm)', 'X')),
+						A2(scGenerator, 'Body Mass (g)', 'X')),
+					A2(scGenerator, 'Beak Length (mm)', 'Y')),
+				A2(scGenerator, 'Beak Depth (mm)', 'Y')),
+			A2(scGenerator, 'Flipper Length (mm)', 'Y')),
+		A2(scGenerator, 'Body Mass (g)', 'Y'));
 	var mk1 = A2(
 		$elm$core$Basics$composeL,
 		$author$project$Vega$marks,
@@ -16555,7 +16568,7 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$srData(
-							$author$project$Vega$str('iris'))
+							$author$project$Vega$str('penguins'))
 						])),
 					$author$project$Vega$mInteractive($author$project$Vega$false),
 					$author$project$Vega$mEncode(
@@ -16610,7 +16623,7 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 												[
 													$author$project$Vega$vScale('cScale'),
 													$author$project$Vega$vField(
-													$author$project$Vega$field('species'))
+													$author$project$Vega$field('Species'))
 												]),
 											_List_fromArray(
 												[
@@ -16811,13 +16824,20 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 		_List_fromArray(
 			[
 				A2(
-				$author$project$Vega$data,
-				'iris',
+				$author$project$Vega$transform,
 				_List_fromArray(
 					[
-						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/iris.json'))
-					])),
+						$author$project$Vega$trFilter(
+						$author$project$Vega$expr('datum[\'Beak Length (mm)\'] > 0 '))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'penguins',
+					_List_fromArray(
+						[
+							$author$project$Vega$daUrl(
+							$author$project$Vega$str($author$project$GalleryInteraction$dPath + 'penguins.json'))
+						]))),
 				A2(
 				$author$project$Vega$data,
 				'fields',
@@ -16826,7 +16846,7 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 						$author$project$Vega$daValue(
 						$author$project$Vega$vStrs(
 							_List_fromArray(
-								['petalWidth', 'petalLength', 'sepalWidth', 'sepalLength'])))
+								['Beak Length (mm)', 'Beak Depth (mm)', 'Flipper Length (mm)', 'Body Mass (g)'])))
 					])),
 				A2(
 				$author$project$Vega$transform,
@@ -16879,12 +16899,12 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 									$author$project$Vega$axes,
 									A3(
 										$author$project$Vega$axis,
-										'petalWidthY',
+										'Beak Length (mm)Y',
 										$author$project$Vega$siLeft,
 										_List_fromArray(
 											[
 												$author$project$Vega$axTitle(
-												$author$project$Vega$str('Petal Width')),
+												$author$project$Vega$str('Beak Length (mm)')),
 												$author$project$Vega$axPosition(
 												$author$project$Vega$vSignal('3 * chartStep')),
 												$author$project$Vega$axMinExtent(
@@ -16895,12 +16915,12 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 											]))),
 								A3(
 									$author$project$Vega$axis,
-									'petalLengthY',
+									'Beak Depth (mm)Y',
 									$author$project$Vega$siLeft,
 									_List_fromArray(
 										[
 											$author$project$Vega$axTitle(
-											$author$project$Vega$str('Petal Length')),
+											$author$project$Vega$str('Beak Depth (mm)')),
 											$author$project$Vega$axPosition(
 											$author$project$Vega$vSignal('2 * chartStep')),
 											$author$project$Vega$axMinExtent(
@@ -16911,12 +16931,12 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 										]))),
 							A3(
 								$author$project$Vega$axis,
-								'sepalWidthY',
+								'Flipper Length (mm)Y',
 								$author$project$Vega$siLeft,
 								_List_fromArray(
 									[
 										$author$project$Vega$axTitle(
-										$author$project$Vega$str('Sepal Width')),
+										$author$project$Vega$str('Flipper Length (mm)')),
 										$author$project$Vega$axPosition(
 										$author$project$Vega$vSignal('1 * chartStep')),
 										$author$project$Vega$axMinExtent(
@@ -16927,12 +16947,12 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 									]))),
 						A3(
 							$author$project$Vega$axis,
-							'sepalLengthY',
+							'Body Mass (g)Y',
 							$author$project$Vega$siLeft,
 							_List_fromArray(
 								[
 									$author$project$Vega$axTitle(
-									$author$project$Vega$str('Sepal Length')),
+									$author$project$Vega$str('Body Mass (g)')),
 									$author$project$Vega$axMinExtent(
 									$author$project$Vega$vNum(25)),
 									$author$project$Vega$axTickCount(
@@ -16941,12 +16961,12 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 								]))),
 					A3(
 						$author$project$Vega$axis,
-						'petalWidthX',
+						'Beak Length (mm)X',
 						$author$project$Vega$siBottom,
 						_List_fromArray(
 							[
 								$author$project$Vega$axTitle(
-								$author$project$Vega$str('Petal Width')),
+								$author$project$Vega$str('Beak Length (mm)')),
 								$author$project$Vega$axOffset(
 								$author$project$Vega$vSignal('-chartPad')),
 								$author$project$Vega$axTickCount(
@@ -16955,12 +16975,12 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 							]))),
 				A3(
 					$author$project$Vega$axis,
-					'petalLengthX',
+					'Beak Depth (mm)X',
 					$author$project$Vega$siBottom,
 					_List_fromArray(
 						[
 							$author$project$Vega$axTitle(
-							$author$project$Vega$str('Petal Length')),
+							$author$project$Vega$str('Beak Depth (mm)')),
 							$author$project$Vega$axPosition(
 							$author$project$Vega$vSignal('1 * chartStep')),
 							$author$project$Vega$axOffset(
@@ -16971,12 +16991,12 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 						]))),
 			A3(
 				$author$project$Vega$axis,
-				'sepalWidthX',
+				'Flipper Length (mm)X',
 				$author$project$Vega$siBottom,
 				_List_fromArray(
 					[
 						$author$project$Vega$axTitle(
-						$author$project$Vega$str('Sepal Width')),
+						$author$project$Vega$str('Flipper Length (mm)')),
 						$author$project$Vega$axPosition(
 						$author$project$Vega$vSignal('2 * chartStep')),
 						$author$project$Vega$axOffset(
@@ -16987,12 +17007,12 @@ var $author$project$GalleryInteraction$interaction3 = function () {
 					]))),
 		A3(
 			$author$project$Vega$axis,
-			'sepalLengthX',
+			'Body Mass (g)X',
 			$author$project$Vega$siBottom,
 			_List_fromArray(
 				[
 					$author$project$Vega$axTitle(
-					$author$project$Vega$str('Sepal Length')),
+					$author$project$Vega$str('Body Mass (g)')),
 					$author$project$Vega$axPosition(
 					$author$project$Vega$vSignal('3 * chartStep')),
 					$author$project$Vega$axOffset(
@@ -17767,7 +17787,7 @@ var $author$project$GalleryInteraction$interaction4 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/normal-2d.json'))
+							$author$project$Vega$str($author$project$GalleryInteraction$dPath + 'normal-2d.json'))
 						])))
 			]));
 	var cf = $author$project$Vega$config(
@@ -18052,10 +18072,6 @@ var $author$project$Vega$TCollect = function (a) {
 	return {$: 2, a: a};
 };
 var $author$project$Vega$trCollect = $author$project$Vega$TCollect;
-var $author$project$Vega$TFilter = function (a) {
-	return {$: 12, a: a};
-};
-var $author$project$Vega$trFilter = $author$project$Vega$TFilter;
 var $author$project$Vega$TLookup = F4(
 	function (a, b, c, d) {
 		return {$: 36, a: a, b: b, c: c, d: d};
@@ -19028,7 +19044,7 @@ var $author$project$GalleryInteraction$interaction5 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/gapminder.json'))
+						$author$project$Vega$str($author$project$GalleryInteraction$dPath + 'gapminder.json'))
 					])),
 				table(_List_Nil),
 				A2(
@@ -20086,7 +20102,7 @@ var $author$project$GalleryInteraction$interaction6 = function () {
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
+							$author$project$Vega$str($author$project$GalleryInteraction$dPath + 'cars.json'))
 						]))),
 				A2(
 				$author$project$Vega$data,
@@ -20592,7 +20608,7 @@ var $author$project$GalleryInteraction$interaction7 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$daUrl(
-						$author$project$Vega$str('https://vega.github.io/vega/data/stocks.csv')),
+						$author$project$Vega$str($author$project$GalleryInteraction$dPath + 'stocks.csv')),
 						$author$project$Vega$daFormat(
 						_List_fromArray(
 							[
