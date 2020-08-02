@@ -13,6 +13,11 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 interaction1 : Spec
 interaction1 =
     let
@@ -182,7 +187,7 @@ interaction1 =
         ds =
             dataSource
                 [ data "flights"
-                    [ daUrl (str "https://vega.github.io/vega/data/flights-200k.json") ]
+                    [ daUrl (str (dPath ++ "flights-200k.json")) ]
                     |> transform
                         [ trBin (field "delay") (numSignal "delayExtent") [ bnStep (numSignal "delayStep"), bnAs "delay0" "delay1" ]
                         , trBin (field "time") (numSignal "timeExtent") [ bnStep (numSignal "timeStep"), bnAs "time0" "time1" ]
@@ -227,7 +232,7 @@ interaction2 =
         ds =
             dataSource
                 [ data "sp500"
-                    [ daUrl (str "https://vega.github.io/vega/data/sp500.csv")
+                    [ daUrl (str (dPath ++ "sp500.csv"))
                     , daFormat [ csv, parse [ ( "price", foNum ), ( "date", foDate "" ) ] ]
                     ]
                 ]
@@ -428,7 +433,7 @@ interaction3 =
                 [ scZero false
                 , scNice niTrue
                 , scRange ra
-                , scDomain (doData [ daDataset "iris", daField (field var) ])
+                , scDomain (doData [ daDataset "penguins", daField (field var) ])
                 ]
 
         cf =
@@ -436,8 +441,9 @@ interaction3 =
 
         ds =
             dataSource
-                [ data "iris" [ daUrl (str "https://vega.github.io/vega/data/iris.json") ]
-                , data "fields" [ daValue (vStrs [ "petalWidth", "petalLength", "sepalWidth", "sepalLength" ]) ]
+                [ data "penguins" [ daUrl (str (dPath ++ "penguins.json")) ]
+                    |> transform [ trFilter (expr "datum['Beak Length (mm)'] > 0 ") ]
+                , data "fields" [ daValue (vStrs [ "Beak Length (mm)", "Beak Depth (mm)", "Flipper Length (mm)", "Body Mass (g)" ]) ]
                 , data "cross" [ daSource "fields" ]
                     |> transform
                         [ trCross [ crAs "x" "y" ]
@@ -524,27 +530,27 @@ interaction3 =
                 << scale "cScale"
                     [ scType scOrdinal
                     , scRange raCategory
-                    , scDomain (doData [ daDataset "iris", daField (field "species") ])
+                    , scDomain (doData [ daDataset "penguins", daField (field "Species") ])
                     ]
-                << scGenerator "petalWidth" "X"
-                << scGenerator "petalLength" "X"
-                << scGenerator "sepalWidth" "X"
-                << scGenerator "sepalLength" "X"
-                << scGenerator "petalWidth" "Y"
-                << scGenerator "petalLength" "Y"
-                << scGenerator "sepalWidth" "Y"
-                << scGenerator "sepalLength" "Y"
+                << scGenerator "Beak Length (mm)" "X"
+                << scGenerator "Beak Depth (mm)" "X"
+                << scGenerator "Flipper Length (mm)" "X"
+                << scGenerator "Body Mass (g)" "X"
+                << scGenerator "Beak Length (mm)" "Y"
+                << scGenerator "Beak Depth (mm)" "Y"
+                << scGenerator "Flipper Length (mm)" "Y"
+                << scGenerator "Body Mass (g)" "Y"
 
         ax =
             axes
-                << axis "petalWidthY" siLeft [ axTitle (str "Petal Width"), axPosition (vSignal "3 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
-                << axis "petalLengthY" siLeft [ axTitle (str "Petal Length"), axPosition (vSignal "2 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
-                << axis "sepalWidthY" siLeft [ axTitle (str "Sepal Width"), axPosition (vSignal "1 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
-                << axis "sepalLengthY" siLeft [ axTitle (str "Sepal Length"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
-                << axis "petalWidthX" siBottom [ axTitle (str "Petal Width"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
-                << axis "petalLengthX" siBottom [ axTitle (str "Petal Length"), axPosition (vSignal "1 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
-                << axis "sepalWidthX" siBottom [ axTitle (str "Sepal Width"), axPosition (vSignal "2 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
-                << axis "sepalLengthX" siBottom [ axTitle (str "Sepal Length"), axPosition (vSignal "3 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+                << axis "Beak Length (mm)Y" siLeft [ axTitle (str "Beak Length (mm)"), axPosition (vSignal "3 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "Beak Depth (mm)Y" siLeft [ axTitle (str "Beak Depth (mm)"), axPosition (vSignal "2 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "Flipper Length (mm)Y" siLeft [ axTitle (str "Flipper Length (mm)"), axPosition (vSignal "1 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "Body Mass (g)Y" siLeft [ axTitle (str "Body Mass (g)"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "Beak Length (mm)X" siBottom [ axTitle (str "Beak Length (mm)"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+                << axis "Beak Depth (mm)X" siBottom [ axTitle (str "Beak Depth (mm)"), axPosition (vSignal "1 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+                << axis "Flipper Length (mm)X" siBottom [ axTitle (str "Flipper Length (mm)"), axPosition (vSignal "2 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+                << axis "Body Mass (g)X" siBottom [ axTitle (str "Body Mass (g)"), axPosition (vSignal "3 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
 
         le =
             legends
@@ -610,7 +616,7 @@ interaction3 =
         mk1 =
             marks
                 << mark symbol
-                    [ mFrom [ srData (str "iris") ]
+                    [ mFrom [ srData (str "penguins") ]
                     , mInteractive false
                     , mEncode
                         [ enEnter
@@ -622,7 +628,7 @@ interaction3 =
                         , enUpdate
                             [ maFill
                                 [ ifElse "!cell || inrange(datum[cell.datum.x.data], rangeX) && inrange(datum[cell.datum.y.data], rangeY)"
-                                    [ vScale "cScale", vField (field "species") ]
+                                    [ vScale "cScale", vField (field "Species") ]
                                     [ vStr "#ddd" ]
                                 ]
                             ]
@@ -648,7 +654,7 @@ interaction4 =
 
         ds =
             dataSource
-                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
+                [ data "points" [ daUrl (str (dPath ++ "normal-2d.json")) ]
                     |> transform
                         [ trExtentAsSignal (field "u") "xExt"
                         , trExtentAsSignal (field "v") "yExt"
@@ -807,7 +813,7 @@ interaction5 =
 
         ds =
             dataSource
-                [ data "gapminder" [ daUrl (str "https://vega.github.io/vega/data/gapminder.json") ]
+                [ data "gapminder" [ daUrl (str (dPath ++ "gapminder.json")) ]
                 , table []
                 , data "country_timeline" [ daSource "gapminder" ]
                     |> transform
@@ -1031,7 +1037,7 @@ interaction6 =
     let
         ds =
             dataSource
-                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
+                [ data "source" [ daUrl (str (dPath ++ "cars.json")) ]
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Origin'] != null") ]
                 , data "selected"
                     [ daOn
@@ -1258,7 +1264,7 @@ interaction7 =
         ds =
             dataSource
                 [ data "stocks"
-                    [ daUrl (str "https://vega.github.io/vega/data/stocks.csv")
+                    [ daUrl (str (dPath ++ "stocks.csv"))
                     , daFormat [ csv, parse [ ( "price", foNum ), ( "date", foDate "" ) ] ]
                     ]
                 , data "index"
