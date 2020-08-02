@@ -9,6 +9,11 @@ import Json.Encode
 import Vega exposing (..)
 
 
+dPath : String
+dPath =
+    "https://gicentre.github.io/data/geoTutorials/"
+
+
 geoTest1 : Spec
 geoTest1 =
     let
@@ -60,7 +65,7 @@ geoTest2 =
     let
         ds =
             dataSource
-                [ data "mapData" [ daUrl (str "https://gicentre.github.io/data/geoTutorials/geoJson1.json") ]
+                [ data "mapData" [ daUrl (str (dPath ++ "geoJson1.json")) ]
                 ]
 
         pr =
@@ -163,7 +168,7 @@ geoTest3 =
         ds =
             dataSource
                 [ data "mapData"
-                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson3.json")
+                    [ daUrl (str (dPath ++ "topoJson3.json"))
                     , daFormat [ topojsonFeature (str "myRegions") ]
                     ]
                 ]
@@ -177,7 +182,7 @@ geoTest4 =
         ds =
             dataSource
                 [ data "mapData"
-                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson6.json")
+                    [ daUrl (str (dPath ++ "topoJson6.json"))
                     , daFormat [ topojsonFeature (str "myRegions") ]
                     ]
                 ]
@@ -191,7 +196,7 @@ geoTest5 =
         ds =
             dataSource
                 [ data "mapData"
-                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson6.json")
+                    [ daUrl (str (dPath ++ "topoJson6.json"))
                     , daFormat [ topojsonMesh (str "myRegions") ]
                     ]
                 ]
@@ -205,7 +210,7 @@ geoTest6 =
         ds =
             dataSource
                 [ data "mapData"
-                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson6.json")
+                    [ daUrl (str (dPath ++ "topoJson6.json"))
                     , daFormat [ topojsonMeshInterior (str "myRegions") ]
                     ]
                 ]
@@ -219,7 +224,7 @@ geoTest7 =
         ds =
             dataSource
                 [ data "mapData"
-                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson6.json")
+                    [ daUrl (str (dPath ++ "topoJson6.json"))
                     , daFormat [ topojsonMeshExterior (str "myRegions") ]
                     ]
                 ]
@@ -233,15 +238,15 @@ geoTest8 =
         ds =
             dataSource
                 [ data "featureData"
-                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/londonBoroughs.json")
+                    [ daUrl (str (dPath ++ "londonBoroughs.json"))
                     , daFormat [ topojsonFeature (str "boroughs") ]
                     ]
                 , data "interiorData"
-                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/londonBoroughs.json")
+                    [ daUrl (str (dPath ++ "londonBoroughs.json"))
                     , daFormat [ topojsonMeshInterior (str "boroughs") ]
                     ]
                 , data "exteriorData"
-                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/londonBoroughs.json")
+                    [ daUrl (str (dPath ++ "londonBoroughs.json"))
                     , daFormat [ topojsonMeshExterior (str "boroughs") ]
                     ]
                 ]

@@ -9,6 +9,11 @@ import Json.Encode
 import Vega exposing (..)
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 
 {- This test is converted from 'Projections Example' on the offical Vega site:
    https://vega.github.io/vega/examples/projections/
@@ -55,9 +60,7 @@ projTest =
                         )
                     ]
                 , data "world"
-                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
-                    , daFormat [ topojsonFeature (str "countries") ]
-                    ]
+                    [ daUrl (str (dPath ++ "world-110m.json")), daFormat [ topojsonFeature (str "countries") ] ]
                 , data "graticule" [] |> transform [ trGraticule [] ]
                 , dataFromRows "sphere" [] (dataRow [ ( "type", vStr "Sphere" ) ] [])
                 , (dataFromColumns "labelOffsets" []

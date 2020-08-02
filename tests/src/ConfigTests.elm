@@ -9,6 +9,11 @@ import Json.Encode
 import Vega exposing (..)
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 scatter : List TitleProperty -> ( VProperty, Spec ) -> Spec
 scatter tps cf =
     let
@@ -18,7 +23,7 @@ scatter tps cf =
 
         ds =
             dataSource
-                [ data "cars" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
+                [ data "cars" [ daUrl (str (dPath ++ "cars.json")) ]
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
                 ]
 

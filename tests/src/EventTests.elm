@@ -9,6 +9,11 @@ import Json.Encode
 import Vega exposing (..)
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 
 {- These tests converted from the examples under 'Marks' on the offical Vega site:
    https://vega.github.io/vega/docs/marks/

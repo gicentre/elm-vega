@@ -9,13 +9,18 @@ import Json.Encode
 import Vega exposing (..)
 
 
+dPath : String
+dPath =
+    "https://gicentre.github.io/data/"
+
+
 temporalTest1 : Spec
 temporalTest1 =
     let
         ds =
             dataSource
                 [ data "timeData"
-                    [ daUrl (str "https://gicentre.github.io/data/timeTest.tsv")
+                    [ daUrl (str (dPath ++ "timeTest.tsv"))
                     , daFormat [ tsv, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
                     ]
                     |> transform
@@ -85,7 +90,7 @@ temporalTest2 =
         ds =
             dataSource
                 [ data "timeData"
-                    [ daUrl (str "https://gicentre.github.io/data/timeTest.tsv")
+                    [ daUrl (str (dPath ++ "timeTest.tsv"))
                     , daFormat [ tsv, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
                     ]
                     |> transform
@@ -151,7 +156,7 @@ temporalTest3 =
         ds =
             dataSource
                 [ data "timeData"
-                    [ daUrl (str "https://gicentre.github.io/data/timeTest.tsv")
+                    [ daUrl (str (dPath ++ "timeTest.tsv"))
                     , daFormat [ tsv, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
                     ]
                     |> transform
@@ -208,7 +213,7 @@ temporalTest4 =
         ds =
             dataSource
                 [ data "timeData"
-                    [ daUrl (str "https://gicentre.github.io/data/timeTest.tsv")
+                    [ daUrl (str (dPath ++ "timeTest.tsv"))
                     , daFormat [ tsv, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
                     ]
                 , data "binned" [ daSource "timeData" ]

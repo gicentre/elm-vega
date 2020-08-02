@@ -9,6 +9,11 @@ import Json.Encode
 import Vega exposing (..)
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 colorTest1 : Spec
 colorTest1 =
     let

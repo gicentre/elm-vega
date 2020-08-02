@@ -9,6 +9,16 @@ import Json.Encode
 import Vega exposing (..)
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
+giCentrePath : String
+giCentrePath =
+    "https://gicentre.github.io/data/uk/"
+
+
 packTest1 : Spec
 packTest1 =
     let
@@ -185,11 +195,11 @@ forceTest1 =
         ds =
             dataSource
                 [ data "node-data"
-                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
+                    [ daUrl (str (dPath ++ "miserables.json"))
                     , daFormat [ jsonProperty (str "nodes") ]
                     ]
                 , data "link-data"
-                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
+                    [ daUrl (str (dPath ++ "miserables.json"))
                     , daFormat [ jsonProperty (str "links") ]
                     ]
                 ]
@@ -472,12 +482,12 @@ voronoiTest1 =
         ds =
             dataSource
                 [ data "hull"
-                    [ daUrl (str "https://gicentre.github.io/data/uk/ukConvexHull.json")
+                    [ daUrl (str (giCentrePath ++ "ukConvexHull.json"))
                     , daFormat [ topojsonFeature (str "convexHull") ]
                     ]
                     |> transform [ trGeoPath "projection" [] ]
                 , data "centroids"
-                    [ daUrl (str "https://gicentre.github.io/data/uk/constituencyCentroids.csv")
+                    [ daUrl (str (giCentrePath ++ "constituencyCentroids.csv"))
                     , daFormat [ csv, parseAuto ]
                     ]
                     |> transform
@@ -537,12 +547,12 @@ voronoiTest2 =
         ds =
             dataSource
                 [ data "regions"
-                    [ daUrl (str "https://gicentre.github.io/data/uk/ukConstituencies.json")
+                    [ daUrl (str (giCentrePath ++ "ukConstituencies.json"))
                     , daFormat [ topojsonFeature (str "constituencies") ]
                     ]
                     |> transform [ trGeoPath "projection" [] ]
                 , data "hull"
-                    [ daUrl (str "https://gicentre.github.io/data/uk/ukConvexHull.json")
+                    [ daUrl (str (giCentrePath ++ "ukConvexHull.json"))
                     , daFormat [ topojsonFeature (str "convexHull") ]
                     ]
                     |> transform [ trGeoPath "projection" [] ]
@@ -564,13 +574,13 @@ voronoiTest2 =
         si =
             signals
                 << signal "centroidFile"
-                    [ siValue (vStr "https://gicentre.github.io/data/uk/constituencyCentroidsWithSpacers.csv")
+                    [ siValue (vStr (giCentrePath ++ "constituencyCentroidsWithSpacers.csv"))
                     , siBind
                         (iSelect
                             [ inOptions
                                 (vStrs
-                                    [ "https://gicentre.github.io/data/uk/constituencyCentroidsWithSpacers.csv"
-                                    , "https://gicentre.github.io/data/uk/constituencySpacedCentroidsWithSpacers.csv"
+                                    [ giCentrePath ++ "constituencyCentroidsWithSpacers.csv"
+                                    , giCentrePath ++ "constituencySpacedCentroidsWithSpacers.csv"
                                     ]
                                 )
                             ]
@@ -660,7 +670,7 @@ contourTest1 =
 
         ds =
             dataSource
-                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
+                [ data "source" [ daUrl (str (dPath ++ "cars.json")) ]
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null") ]
                 , data "contours" [ daSource "source" ]
                     |> transform
@@ -758,7 +768,7 @@ densityTest1 =
     let
         ds =
             dataSource
-                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
+                [ data "points" [ daUrl (str (dPath ++ "normal-2d.json")) ]
                 , data "summary" [ daSource "points" ]
                     |> transform
                         [ trAggregate
@@ -861,7 +871,7 @@ kdeTest1 =
     let
         ds =
             dataSource
-                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
+                [ data "points" [ daUrl (str (dPath ++ "normal-2d.json")) ]
                 , data "density" [ daSource "points" ]
                     |> transform
                         [ trKde (field "u")

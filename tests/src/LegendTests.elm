@@ -9,15 +9,18 @@ import Json.Encode
 import Vega exposing (..)
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 chartCore : ( VProperty, Spec ) -> (List Spec -> ( VProperty, Spec )) -> Spec
 chartCore cf le =
     let
         ds =
             dataSource
                 [ data "cars"
-                    [ daUrl (str "https://vega.github.io/vega-lite/data/cars.json")
-                    , daFormat [ json ]
-                    ]
+                    [ daUrl (str (dPath ++ "cars.json")), daFormat [ json ] ]
                 ]
 
         sc =

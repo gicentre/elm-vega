@@ -4,15 +4,18 @@ import Platform
 import Vega exposing (..)
 
 
+dPath : String
+dPath =
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+
+
 arrow1 : Spec
 arrow1 =
     let
         ds =
             dataSource
                 [ data "flights"
-                    [ daUrl (str "https://vega.github.io/vega-datasets/data/flights-200k.arrow")
-                    , daFormat [ arrow ]
-                    ]
+                    [ daUrl (str (dPath ++ "flights-200k.arrow")), daFormat [ arrow ] ]
                     |> transform
                         [ trExtentAsSignal (fSignal "field") "extent"
                         , trBin (fSignal "field") (numSignal "extent") [ bnMaxBins (numSignal "maxbins") ]

@@ -4,13 +4,18 @@ import Platform
 import Vega exposing (..)
 
 
+dPath : String
+dPath =
+    "https://gicentre.github.io/data/uk/"
+
+
 voronoi : Spec
 voronoi =
     let
         ds =
             dataSource
                 [ data "centroids"
-                    [ daUrl (str "https://gicentre.github.io/data/uk/constituencySpacedCentroidsWithSpacers.csv")
+                    [ daUrl (str (dPath ++ "constituencySpacedCentroidsWithSpacers.csv"))
                     , daFormat [ csv, parseAuto ]
                     ]
                     |> transform
