@@ -9640,7 +9640,11 @@ fpDistanceMin =
 
 
 {-| Data field for a node’s unique identifier. If provided, the source and target
-fields of each link should use these values to indicate nodes.
+fields of each link should use these values to indicate nodes. The field name
+should be prefaced with `datum.`. For example,
+
+    fpId (field "datum.myNodeId")
+
 -}
 fpId : Field -> ForceProperty
 fpId =
