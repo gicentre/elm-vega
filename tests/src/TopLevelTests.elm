@@ -1,17 +1,12 @@
 port module TopLevelTests exposing (elmToJS)
 
 import Browser
-import Dict exposing (Dict)
+import Dict
 import Html exposing (Html)
 import Html.Attributes
 import Html.Events
 import Json.Encode
 import Vega exposing (..)
-
-
-dPath : String
-dPath =
-    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
 
 
 topLevelTest1 : Spec
@@ -176,7 +171,6 @@ specs =
 
 type Msg
     = NewSource String
-    | NoSource
 
 
 main : Program () Spec Msg
@@ -207,13 +201,10 @@ view spec =
 
 
 update : Msg -> Spec -> ( Spec, Cmd Msg )
-update msg model =
+update msg _ =
     case msg of
         NewSource srcName ->
             ( specs |> Dict.fromList |> Dict.get srcName |> Maybe.withDefault Json.Encode.null, Cmd.none )
-
-        NoSource ->
-            ( Json.Encode.null, Cmd.none )
 
 
 port elmToJS : Spec -> Cmd msg
