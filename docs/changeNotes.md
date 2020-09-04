@@ -4,13 +4,13 @@
 
 ## V5.5.0 ➡ V5.5.1
 
-_Patch release with updated data sources and bug fix for empty mark property lists_
+_Patch release with updated data sources and bug fix for empty mark property lists._
 
-## Bug Fixes
+### V5.5.1 Bug Fixes
 
 - Empty mark properties now generate null values rather than empty objects for schema compatibility.
 
-## Other changes
+### V5.5.1 Other changes
 
 - Use versioned Vega data sets for examples and tests.
 
@@ -20,51 +20,51 @@ _Patch release with updated data sources and bug fix for empty mark property lis
 
 ## V5.4 ➡ V5.5
 
-_Minor release supporting Vega releases up to and including 5.13.x_
+_Minor release supporting Vega releases up to and including 5.13.x._
 
-### Additions
+### V5.5 Additions
 
 - `cfeGlobalCursor` for setting global or local cursor properties (V5.13)
 
 - `cfLocale` and associated properties `loDecimal`, `loThousands`, `loGrouping`, `loCurrency`, `loNumerals`, `loPercent`, `loMinus`, `loNan`, `loDateTime`, `loDate`, `loTime`, `loPeriods`, `loDays`, `loShortDays`, `loMonths` and `loShortMonths` for specifying locales (V5.12).
 
-* `dayOfYear` time unit (V5.11).
+- `dayOfYear` time unit (V5.11).
 
 - `axDomainCap`, `axGridCap` and `axTickCap` with convenience function `strokeCapStr` for axis line cap styling (V5.11).
 
-* `axAria`, `leAria`, `mAria` with associated properties `arEnable`, `arDisable` and `arDescription` for setting ARIA support on a per axis/legend/mark basis (V5.11).
+- `axAria`, `leAria`, `mAria` with associated properties `arEnable`, `arDisable` and `arDescription` for setting ARIA support on a per axis/legend/mark basis (V5.11).
 
 - `tiAria` for setting/unsetting ARIA description from title (V5.11).
 
-* `maBlend` and associated convenience methods `bmLighten`, `bmDarken` etc.) for setting the blend mode for overlaying drawing (V5.10).
+- `maBlend` and associated convenience methods `bmLighten`, `bmDarken` etc.) for setting the blend mode for overlaying drawing (V5.10).
 
 - `vaLineTop` and `vaLineBottom` for vertical alignment relative to line height (V5.10).
 
-* `axLabelLineHeight` for multi-lined or line-aligned axis labels (V5.10).
+- `axLabelLineHeight` for multi-lined or line-aligned axis labels (V5.10).
 
 - `axLabelOffset` for displacing axis labels relative to tick marks (V5.10).
 
-* `widthSignal`, `heightSignal` and `paddingSignal` to allow dimensions and padding to be specified via signal expressions that are used as the `update` property (V5.10).
+- `widthSignal`, `heightSignal` and `paddingSignal` to allow dimensions and padding to be specified via signal expressions that are used as the `update` property (V5.10).
 
 - `cfPadding`, `cfPaddings` and `cfPaddingSignal` for configuring default padding (V5.10).
 
-* `cfWidth`, `cfWidthSignal`, `cfHeight` and `cfHeightSignal` for configuring default dimensions (V5.10).
+- `cfWidth`, `cfWidthSignal`, `cfHeight` and `cfHeightSignal` for configuring default dimensions (V5.10).
 
 - `cfDescription` for configuring default ARIA-friendly description for visualizations (V5.10).
 
-* `cfLineBreak` for setting default line break character(s) (V5.10).
+- `cfLineBreak` for setting default line break character(s) (V5.10).
 
 - `opProduct` for aggregation of numeric values by their product (V5.10).
 
 ---
 
-# V5.3 ➡ V5.4
+## V5.3 ➡ V5.4
 
 _Minor release supporting Vega releases 5.8 and 5.9._
 
-## Additions
+### V5.4 Additions
 
-### New transforms
+#### New transforms
 
 - `trTimeUnit` transform and associated time binning parameterisation functions `tbUnits`, `tbStep`, `tbTimezone`, `tzLocal`, `tzUtc`, `tzSignal`, `tbInterval`, `tbExtent`, `dtMillis`, `dtExpr`, `tbMaxBins`, `tbSignal`, and `tbAs`.
 - `quarter` and `date` added as time units.
@@ -73,7 +73,7 @@ _Minor release supporting Vega releases 5.8 and 5.9._
 - `trHeatmap` transform and associated property functions `hmField`, `hmColor`, `hmOpacity`, `hmResolve` and `hmAs`
 - `trFlattenWithIndex` and `trFlattenWithIndexAs` for nested array flattening that output the array index of flattened data.
 
-### New properties
+#### New properties
 
 - `axTickBand` for aligning ticks on band scales (Vega 5.8).
 - `axTranslate` for moving axes relative to main plot area (Vega 5.8).
@@ -89,26 +89,26 @@ _Minor release supporting Vega releases 5.8 and 5.9._
 - `mollweide` map projection (Vega 5.9).
 - `inLabels` for providing input element labels that may differ from their option values (Vega 5.9).
 
-## Bug Fixes
+### V5.4 Bug Fixes
 
 - correct `tiFrame` output that was previously generating 'fame' output.
 
-## Deprecations
+### V5.4 Deprecations
 
 - `trContour` and its associated `cn` property functions are now deprecated in favour of `trIsocontour` (Vega 5.8)
 
-## Other Changes
+### V5.4 Other Changes
 
 - Additional tests and gallery examples to reflect new additions.
 - Internal refactoring of time unit handling.
 
 ---
 
-# V5.2 ➡ V5.3
+## V5.2 ➡ V5.3
 
 _Minor release supporting Vega 5.7._
 
-## Additions
+### V5.3 Additions
 
 - Multi-line titles and spacing (`tiLineHeight`, `axTitleLineHeight`, `leTitleLineHeight`).
 - Subtitles and associated customisation (`tiSubtitle`, `tiSubtitleColor`, `tiSubtitleFont`, `tiSubtitleFontSize`, `tiSubtitleFontStyle`, `tiSubtitleFontWeight`, `tiSubtitleLineHeight` and `tiSubtitlePadding`).
@@ -118,11 +118,11 @@ _Minor release supporting Vega 5.7._
 - `trDotBin` transform and associated property functions (`dbroupBy`, `dbStep`, `dbSmooth`, `dbSignal`, `dbAs`) for dotplot binning.
 - `trQuantile` transform and associated property functions (`quGroupBy`, `quProbs`, `quStep`, `quAs`) for quantile generation.
 
-## Deprecations
+### V5.3 Deprecations
 
 - `tiEncode` deprecated in favour of `tiEncodeElements`.
 
-## Other Changes
+### V5.3 Other Changes
 
 - Restructured API documentation to use better thematic grouping of functions with tables of contents.
 - Documentation indicates titles can span multiple lines via a `strs` array.
@@ -130,11 +130,11 @@ _Minor release supporting Vega 5.7._
 
 ---
 
-# V5.1 ➡ V5.2
+## V5.1 ➡ V5.2
 
 _Minor release supporting Vega 5.6._
 
-## Additions
+### V5.2 Additions
 
 - `kdResolve` and associated `reShared` and `reIndependent` functions for resolving multiple densities in a KDE transform.
 - `bnSpan` for setting the span over which bins are calculated.
@@ -146,15 +146,15 @@ _Minor release supporting Vega 5.6._
 - `description` top-level metadata option (previously inadvertently hidden).
 - `userMeta` top-level custom metadata options.
 
-## Deprecations
+### V5.2 Deprecations
 
 - `cfEvents` deprecated in favour of `cfEventHandling [cfeDefaults ...]`
 
-## Bug Fixes
+### V5.2 Bug Fixes
 
 - `cfGroup` mark properties now correctly create literals rather than objects (e.g. `"fill": "#eee"` rather than `"fill":{"value":"#eee"}`).
 
-## Other Changes
+### V5.2 Other Changes
 
 - Minor improvements to the API documentation.
 - Update examples to use Vega-embed 5 and Vega 5.5 runtimes
@@ -162,11 +162,11 @@ _Minor release supporting Vega 5.6._
 
 ---
 
-# V5.0 ➡ V5.1
+## V5.0 ➡ V5.1
 
 _Minor release to align with Vega 5.4._
 
-## Additions
+### V5.1 Additions
 
 - `leX` and `leY` for top level legend positioning.
 - `topojsonMeshInterior` and `topojsonMeshExterior` for interior and exterior filtering of topoJSON meshes.
@@ -178,27 +178,27 @@ _Minor release to align with Vega 5.4._
 - `woPrevValue` and `woNextValue` for previous and next value window value operations.
 - `arrow` file format indicator for loading binary apache arrow files.
 
-## Other Changes
+### V5.1 Other Changes
 
 - Regression examples added to gallery
 - Tests for new functions
 
 ---
 
-# V4.3.1 ➡ V5.0
+## V4.3.1 ➡ V5.0
 
 _Major release to align with Vega 5.3._
 
-## Breaking Changes
+### V5.0 Breaking Changes
 
-_These reflect breaking changes from Vega 4 -> Vega 5_
+_These reflect breaking changes from Vega 4 -> Vega 5._
 
 - `scBinLinear` removed. Use `scLinear` with the new `scBins` instead.
 - `leStrokeWidth` now takes the name of scale for mapping legend stroke width rather than a numeric literal. For legend border configuration, use the new `leBorderStrokeWidth`.
 - `leTitlePadding`, `leOffset` and `lePadding` now take a number rather than value (for consistency with other legend numeric parameters).
 - While not an API change, continuous color schemes no longer support discrete variants as part of the scheme name. Replace `raScheme (str "blues-7") []` with `raScheme (str "blues") [csCount (num 7)]`
 
-## Additions
+### V5.0 Additions
 
 - `scBins` for specifying the bin boundaries for a bin scaling. Associated functions `bsBins`, `bsNums` and `bsSignal` for customising bin boundaries.
 - `scSymLog` and `scConstant` for symmetrical log scaling of data that may contain zero or negative values.
@@ -207,11 +207,11 @@ _These reflect breaking changes from Vega 4 -> Vega 5_
 - New axis configurations (`axDomainDash`, `axDomainDashOffset`, `axFormatAsNum`, `axFormatAsTemporal`, `axGridDashOffset`, `axLabelFontStyle`, `axLabelSeparation`, `axTickDash`, `axTickDashOffset`, `axTickMinStep`, `axTitleAnchor` and `axTitleFontStyle`.)
 - New legend configurations (`leBorderStrokeWidth`, `leFormatAsNum`, `leFormatAsTemporal`, `leLabelFontStyle`, `leLabelSeparation`, `leSymbolDash`, `leSymbolDashOffset`, `leTickMinStep`, `leTitleAnchor`, `leTitleFontStyle` and `leTitleOrient`.)
 
-## Deprecations
+### V5.0 Deprecations
 
 `scSequential` in favour of `scLinear`.
 
-## Documentation / Asset Changes
+### V5.0 Documentation / Asset Changes
 
 - Wind vector example added to test-gallery
 - Other examples updated to reflect latest API
