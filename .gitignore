@@ -7,3 +7,5 @@ elm-stuff
 repl-temp-*
 # Skinny release folder
 release
+# VS Code Settings
+.vscode/
