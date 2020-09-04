@@ -1,4 +1,23 @@
-# Pending changes
+# Vega Changes
+
+## Pending changes
+
+None.
+
+---
+
+## V5.5.1 ➡ V5.6.0
+
+_Minor release exposing convenience functions and internal refactoring to align with Vega 5.15._
+
+### V5.6 Additions
+
+- `blendModeValue` convenience function for typesafe blend mode specification.
+- `strList` for mixed string lists (e.g. string literals and signals).
+
+### V5.6 Bug Fixes
+
+- `cuNWSEResize` now specifies the correct resizing cursor.
 
 ---
 
