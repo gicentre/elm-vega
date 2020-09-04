@@ -5906,7 +5906,6 @@ var $author$project$Vega$valueProperties = function (val) {
 		default:
 			var ex = val.a;
 			var ifs = val.b;
-			var elses = val.c;
 			return A2(
 				$elm$core$List$cons,
 				_Utils_Tuple2(
@@ -6245,16 +6244,16 @@ var $author$project$Vega$VGradientScale = F2(
 		return {$: 12, a: a, b: b};
 	});
 var $author$project$Vega$valIfElse = F4(
-	function (ex, ifVals, elseVals, ifSpecs) {
+	function (_v3, _v4, elseVals, ifSpecs) {
 		valIfElse:
 		while (true) {
 			if ((elseVals.b && (elseVals.a.$ === 21)) && (!elseVals.b.b)) {
-				var _v4 = elseVals.a;
-				var ex2 = _v4.a;
-				var ifVals2 = _v4.b;
-				var elseVals2 = _v4.c;
-				var $temp$ex = ex2,
-					$temp$ifVals = ifVals2,
+				var _v6 = elseVals.a;
+				var ex2 = _v6.a;
+				var ifVals2 = _v6.b;
+				var elseVals2 = _v6.c;
+				var $temp$_v3 = ex2,
+					$temp$_v4 = ifVals2,
 					$temp$elseVals = elseVals2,
 					$temp$ifSpecs = _Utils_ap(
 					ifSpecs,
@@ -6268,8 +6267,8 @@ var $author$project$Vega$valIfElse = F4(
 									$elm$json$Json$Encode$string(ex2)),
 								A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, ifVals2)))
 						]));
-				ex = $temp$ex;
-				ifVals = $temp$ifVals;
+				_v3 = $temp$_v3;
+				_v4 = $temp$_v4;
 				elseVals = $temp$elseVals;
 				ifSpecs = $temp$ifSpecs;
 				continue valIfElse;
@@ -7201,7 +7200,6 @@ var $author$project$Vega$timeUnitSpecShort = function (tUnit) {
 			case 10:
 				return 'millisecond';
 			default:
-				var sig = tu.a;
 				return '';
 		}
 	};
@@ -8362,30 +8360,6 @@ var $author$project$Vega$binProperty = function (bnProp) {
 						'steps',
 						$author$project$Vega$numSpec(ns));
 			}
-		case 10:
-			var ns = bnProp.a;
-			switch (ns.$) {
-				case 0:
-					return _Utils_Tuple2(
-						'bins',
-						A2(
-							$elm$json$Json$Encode$list,
-							$author$project$Vega$numSpec,
-							_List_fromArray(
-								[ns])));
-				case 2:
-					return _Utils_Tuple2(
-						'bins',
-						A2(
-							$elm$json$Json$Encode$list,
-							$author$project$Vega$numSpec,
-							_List_fromArray(
-								[ns])));
-				default:
-					return _Utils_Tuple2(
-						'bins',
-						$author$project$Vega$numSpec(ns));
-			}
 		case 7:
 			var n = bnProp.a;
 			return _Utils_Tuple2(
@@ -8406,7 +8380,7 @@ var $author$project$Vega$binProperty = function (bnProp) {
 			return _Utils_Tuple2(
 				'nice',
 				$author$project$Vega$booSpec(b));
-		case 11:
+		case 10:
 			var s = bnProp.a;
 			return _Utils_Tuple2(
 				'signal',
@@ -8728,16 +8702,6 @@ var $author$project$Vega$dotBinProperty = function (dbp) {
 };
 var $author$project$Vega$forceProperty = function (fp) {
 	switch (fp.$) {
-		case 2:
-			var f = fp.a;
-			return _Utils_Tuple2(
-				'x',
-				$author$project$Vega$fieldSpec(f));
-		case 3:
-			var f = fp.a;
-			return _Utils_Tuple2(
-				'y',
-				$author$project$Vega$fieldSpec(f));
 		case 0:
 			var n = fp.a;
 			return _Utils_Tuple2(
@@ -8748,42 +8712,42 @@ var $author$project$Vega$forceProperty = function (fp) {
 			return _Utils_Tuple2(
 				'y',
 				$author$project$Vega$numSpec(n));
-		case 4:
+		case 2:
 			var n = fp.a;
 			return _Utils_Tuple2(
 				'radius',
 				$author$project$Vega$numSpec(n));
-		case 5:
+		case 3:
 			var n = fp.a;
 			return _Utils_Tuple2(
 				'strength',
 				$author$project$Vega$numSpec(n));
-		case 6:
+		case 4:
 			var n = fp.a;
 			return _Utils_Tuple2(
 				'iterations',
 				$author$project$Vega$numSpec(n));
-		case 7:
+		case 5:
 			var n = fp.a;
 			return _Utils_Tuple2(
 				'theta',
 				$author$project$Vega$numSpec(n));
-		case 8:
+		case 6:
 			var n = fp.a;
 			return _Utils_Tuple2(
 				'distanceMin',
 				$author$project$Vega$numSpec(n));
-		case 9:
+		case 7:
 			var n = fp.a;
 			return _Utils_Tuple2(
 				'distanceMax',
 				$author$project$Vega$numSpec(n));
-		case 10:
+		case 8:
 			var s = fp.a;
 			return _Utils_Tuple2(
 				'links',
 				$author$project$Vega$strSpec(s));
-		case 11:
+		case 9:
 			var f = fp.a;
 			return _Utils_Tuple2(
 				'id',
@@ -9575,7 +9539,6 @@ var $author$project$Vega$reModelLabel = function (m) {
 		case 5:
 			return 'poly';
 		default:
-			var sig = m.a;
 			return '';
 	}
 };
@@ -11380,14 +11343,6 @@ var $author$project$Vega$topMarkProperty = function (mProp) {
 					'on',
 					A2($elm$json$Json$Encode$list, $elm$core$Basics$identity, triggers))
 				]);
-		case 13:
-			var s = mProp.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'role',
-					$elm$json$Json$Encode$string(s))
-				]);
 		case 10:
 			var comp = mProp.a;
 			return _List_fromArray(
@@ -11405,7 +11360,7 @@ var $author$project$Vega$topMarkProperty = function (mProp) {
 					'transform',
 					A2($elm$json$Json$Encode$list, $author$project$Vega$transformSpec, trans))
 				]);
-		case 14:
+		case 13:
 			var ss = mProp.a;
 			return _List_fromArray(
 				[
@@ -11413,7 +11368,7 @@ var $author$project$Vega$topMarkProperty = function (mProp) {
 					'style',
 					A2($elm$json$Json$Encode$list, $elm$json$Json$Encode$string, ss))
 				]);
-		case 15:
+		case 14:
 			var props = mProp.a;
 			return A2(
 				$elm$core$List$map,
@@ -11501,10 +11456,8 @@ var $author$project$Vega$projectionLabel = function (pr) {
 		case 16:
 			return 'transverseMercator';
 		case 17:
-			var s = pr.a;
 			return '';
 		default:
-			var sig = pr.a;
 			return '';
 	}
 };
@@ -15567,7 +15520,7 @@ var $author$project$Vega$FCollide = function (a) {
 	return {$: 1, a: a};
 };
 var $author$project$Vega$FpRadius = function (a) {
-	return {$: 4, a: a};
+	return {$: 2, a: a};
 };
 var $author$project$Vega$foCollide = F2(
 	function (r, fps) {
@@ -17169,7 +17122,7 @@ var $author$project$Vega$LPadding = function (a) {
 };
 var $author$project$Vega$loPadding = $author$project$Vega$LPadding;
 var $author$project$Vega$MGroup = function (a) {
-	return {$: 15, a: a};
+	return {$: 14, a: a};
 };
 var $author$project$Vega$mGroup = $author$project$Vega$MGroup;
 var $author$project$Vega$MdX = function (a) {
