@@ -3,10 +3,10 @@
 ![elm-vega banner](https://raw.githubusercontent.com/gicentre/elm-vega/master/images/banner.jpg)
 
 [![elm version](https://img.shields.io/badge/Elm-v0.19-blue.svg?style=flat-square)](https://elm-lang.org)
-[![vega version](https://img.shields.io/badge/Vega-v5.13-purple.svg?style=flat-square)](https://vega.github.io/vega/)
+[![vega version](https://img.shields.io/badge/Vega-v5.15-purple.svg?style=flat-square)](https://vega.github.io/vega/)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
-_Declarative visualization for Elm_
+_Declarative visualization for Elm._
 
 This package allows you to create [Vega](https://vega.github.io/vega/) specifications in Elm providing a pure functional approach to declarative visualization.
 It does not generate graphical output directly, but instead allows you to create JSON _specifications_ that can be sent to the Vega runtime to create the output.
@@ -80,7 +80,7 @@ There is a [demand for good visualization packages with Elm](https://package.elm
 elm-vega provides a typed functional mapping of Vega, so affording the advantages of the Elm language in building up higher level visualization functions.
 Because Vega is widely used, you can take advantage of the many thousands of visualizations already shared in the Vega language.
 
-**Characteristics of elm-vega**
+**Characteristics of elm-vega.**
 
 - Built upon the widely used [Vega](https://vega.github.io/vega/) specification that has an academic robustness and momentum behind its development.
 
@@ -88,7 +88,7 @@ Because Vega is widely used, you can take advantage of the many thousands of vis
 
 - Strict typing and friendly error messages means "the compiler is your friend" when building and debugging complex visualizations.
 
-### A rationale for data visualisers
+### A rationale for data visualizers
 
 In using JSON to fully encode a visualization specification Vega is portable across a range of platforms and sits well in the JavaScript / Web ecosystem.
 Yet JSON is really an interchange format rather than one suited directly for visualization design and construction.
