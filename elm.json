@@ -3,7 +3,7 @@
     "name": "gicentre/elm-vega",
     "summary": "Declarative visualization with Elm and Vega",
     "license": "BSD-3-Clause",
-    "version": "5.6.0",
+    "version": "5.6.1",
     "exposed-modules": [
         "Vega"
     ],
