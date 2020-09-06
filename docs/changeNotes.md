@@ -6,6 +6,12 @@ None.
 
 ---
 
+## V5.6.0 ➡ V5.6.1
+
+_Patch release that uses `main` rather than `master` GitHub branch. See [github.com/github/renaming](https://github.com/github/renaming)_
+
+---
+
 ## V5.5.1 ➡ V5.6.0
 
 _Minor release exposing convenience functions and internal refactoring to align with Vega 5.15._
