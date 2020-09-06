@@ -2,15 +2,11 @@
 
 ## 1. One-time setup of Elm
 
-If you already have [Elm](http://elm-lang.org) installed, you can skip this section.
-If not, you can install Elm by following [these instructions](https://guide.elm-lang.org/install.html).
-While not strictly necessary, I would strongly recommend configuring your favourite text editor to be able to format, syntax highlight and lint Elm code (details in the installation guide above).
-My preferred editor that accepts Elm-specific plug-ins is [Atom](https://atom.io), but any text editor will do.
+If you already have [Elm](http://elm-lang.org) installed, you can skip this section. If not, you can install Elm by following [these instructions](https://guide.elm-lang.org/install.html). While not strictly necessary, I would strongly recommend configuring your favourite text editor to be able to format, syntax highlight and lint Elm code (details in the installation guide above). My preferred editor that accepts Elm-specific plug-ins is [VSCode](https://code.visualstudio.com), but any text editor will do.
 
 ## 2. Create HTML/JavaScript page to link with Elm
 
-The easiest way to get Elm-Vega to produce graphical output is to write a skeleton Elm program that sends some Vega to an HTML page.
-That HTML page will contain some JavaScript that turns a Vega specification into graphics.
+The easiest way to get Elm-Vega to produce graphical output is to write a skeleton Elm program that sends some Vega to an HTML page. That HTML page will contain some JavaScript that turns a Vega specification into graphics.
 
 To get started, copy this example to a file `helloWorld.html` somewhere on your machine:
 
@@ -36,7 +32,7 @@ To get started, copy this example to a file `helloWorld.html` somewhere on your 
     <script>
       // This function grabs the specifications from Elm (here called namedSpecs).
       // Replace 'HelloWorld' in line below with name of your Elm module when you write your own.
-      Elm.HelloWorld.init().ports.elmToJS.subscribe(function(namedSpecs) {
+      Elm.HelloWorld.init().ports.elmToJS.subscribe(function (namedSpecs) {
         for (let name of Object.keys(namedSpecs)) {
           vegaEmbed(`#${name}`, namedSpecs[name], { actions: false }).catch(
             console.warn
@@ -63,8 +59,7 @@ The key elements are:
 
 ## 3. Create an Elm-Vega Program
 
-Create a file called `HelloWorld.elm` in the same location as `helloWorld.html`.
-Copy the following code into it.
+Create a file called `HelloWorld.elm` in the same location as `helloWorld.html`. Copy the following code into it.
 
 ```elm
 port module HelloWorld exposing (elmToJS)
@@ -124,34 +119,30 @@ main =
 port elmToJS : Spec -> Cmd msg
 ```
 
-This creates a working Elm-program whose job is to send a Vega specification as a JSON file via an Elm _port_ to the JavaScript seen in the HTML file above.
-For convenience, we will always call this port `elmToJS` so it need not be changed when creating new programs.
-The only code you need to modify as you write your own Elm-Vega is the function that generates a `Spec`, here called `helloWorld`, and the name of the module, here called `HelloWorld`.
-You can add multiple Vega specifications to the same page by creating new `Spec` functions and adding their names to `combineSpecs` where each tuple comprises the name of the spec that can be referenced by the HTML and its corresponding elm function that generates the spec.
-Typically, to avoid confusion, both will share the same name (`( "helloWord", helloWorld )` in this example).
+This creates a working Elm-program whose job is to send a Vega specification as a JSON file via an Elm _port_ to the JavaScript seen in the HTML file above. For convenience, we will always call this port `elmToJS` so it need not be changed when creating new programs. The only code you need to modify as you write your own Elm-Vega is the function that generates a `Spec`, here called `helloWorld`, and the name of the module, here called `HelloWorld`.
+
+You can add multiple Vega specifications to the same page by creating new `Spec` functions and adding their names to `combineSpecs` where each tuple comprises the name of the spec that can be referenced by the HTML and its corresponding elm function that generates the spec. Typically, to avoid confusion, both will share the same name (`( "helloWord", helloWorld )` in this example).
 
 This Vega example creates a simple data source called `myData` comprising a single row (`"label" : "Hello from Vega"`) and a single text mark that displays the label defined in the data source.
 
 ## 4. Compile the Elm-Vega into JavaScript
 
-The final task is to convert the Elm file into JavaScript so it can be used by the HTML.
-To do this, open a command line window (e.g. a Terminal on MacOS or PowerShell on Windows), change to the directory containing your HTML and Elm files and type
+The final task is to convert the Elm file into JavaScript so it can be used by the HTML. To do this, open a command line window (e.g. a Terminal on MacOS or PowerShell on Windows), change to the directory containing your HTML and Elm files and type
 
-    elm make helloWorld.elm --output=js/helloWorld.js --optimize
+```bash
+elm make helloWorld.elm --output=js/helloWorld.js --optimize
+```
 
 This should create the `helloWorld.js` file required by the HTML.
 
 Opening `helloWorld.html` in the browser should display a page showing the text "Hello from Vega".
 
-_Note that in this example the data used in the visualization is generated entirely inline and does not rely on external files.
-Typical Elm-Vega programs will however load data from external .json, .csv or other files and so normal JavaScript file loading restrictions apply.
-As such you would more typically test your applications with a local web server (such as generated by `python -m http.server` or `elm-reactor`) rather than load directly from your file system._
+_Note that in this example the data used in the visualization is generated entirely inline and does not rely on external files. Typical Elm-Vega programs will however load data from external .json, .csv or other files and so normal JavaScript file loading restrictions apply. As such you would more typically test your applications with a local web server (such as generated by `python -m http.server` or `elm-reactor`) rather than load directly from your file system._
 
 ## 5. Next Steps
 
-Most of the setup described above varies little between applications.
-To understand more about how Elm-Vega can generate Vega specifications, see
+Most of the setup described above varies little between applications. To understand more about how Elm-Vega can generate Vega specifications, see
 
 - [creating a simple bar chart](../barChart/README.md),
-- the [simple Vega examples](../../vExamples) included in the `vExamples` folder,
-- the [vTest-gallery](../../vTest-gallery) for a full range of examples.
+- the [simple Vega examples](../../examples/) included in the `examples` folder,
+- the [test-gallery](../../test-gallery/) for a full range of examples.

@@ -16,7 +16,6 @@ _Note: If you wish to create Vega-Lite specifications, use the sister-package [e
 ## Example
 
 Visualizing a set of geospatial centroids as a Voronoi diagram:
-f
 
 ```elm
 let
