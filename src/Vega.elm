@@ -233,6 +233,7 @@ module Vega exposing
     , diKde
     , diMixture
     , trKde
+    , trLabel
     , kdGroupBy
     , kdCumulative
     , kdCounts
@@ -2146,12 +2147,23 @@ See the
 @docs grPrecision
 
 
+### Voronoi Diagrams
+
+See the
+[Vega Voronoi documentation](https://vega.github.io/vega/docs/transforms/voronoi/).
+
+@docs trVoronoi
+@docs voSize
+@docs voExtent
+@docs voAs
+
 ## 4.3 Layout Transforms
 
   - [Link paths](#link-paths)
   - [Angular layouts](#angular-layouts)
   - [Stacked layouts](#stacked-layouts)
   - [Force generated layouts](#force-generated-layouts)
+  - [Non-overlapping label layouts](#non-overlapping-label-layouts)
   - [Word cloud layouts](#word-cloud-layouts)
 
 
@@ -2240,15 +2252,10 @@ See the
 @docs fpId
 
 
-### Voronoi Diagrams
+### Non-overlapping label layouts
 
 See the
-[Vega Voronoi documentation](https://vega.github.io/vega/docs/transforms/voronoi/).
-
-@docs trVoronoi
-@docs voSize
-@docs voExtent
-@docs voAs
+[Vega Label transform documentation](https://vega.github.io/vega/docs/transforms/label/).
 
 
 ### Word Cloud Layouts
