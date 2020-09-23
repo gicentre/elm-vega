@@ -1455,7 +1455,7 @@ regression1 =
         ds =
             dataSource
                 [ data "movies" [ daUrl (str (dPath ++ "movies.json")) ]
-                    |> transform [ trFilter (expr "datum.['Rotten Tomatoes Rating'] != null && datum['IMDB Rating'] != null") ]
+                    |> transform [ trFilter (expr "datum['Rotten Tomatoes Rating'] != null && datum['IMDB Rating'] != null") ]
                 , data "trend" [ daSource "movies" ]
                     |> transform
                         [ trRegression (field "Rotten Tomatoes Rating")
@@ -1695,7 +1695,7 @@ timeUnits1 =
 
 sourceExample : Spec
 sourceExample =
-    timeUnits1
+    regression1
 
 
 
