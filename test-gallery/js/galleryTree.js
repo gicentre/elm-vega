@@ -8065,6 +8065,140 @@ var $author$project$Vega$kdeProperty = function (kp) {
 						[s1, s2])));
 	}
 };
+var $author$project$Vega$End = {$: 2};
+var $author$project$Vega$anchorSpec = function (anchor) {
+	switch (anchor.$) {
+		case 0:
+			return $elm$json$Json$Encode$string('start');
+		case 1:
+			return $elm$json$Json$Encode$string('middle');
+		case 2:
+			return $elm$json$Json$Encode$string('end');
+		default:
+			var sigName = anchor.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						$author$project$Vega$signalReferenceProperty(sigName)
+					]));
+	}
+};
+var $author$project$Vega$labelAnchorSpec = function (orient) {
+	switch (orient) {
+		case 0:
+			return $elm$json$Json$Encode$string('left');
+		case 1:
+			return $elm$json$Json$Encode$string('top-left');
+		case 2:
+			return $elm$json$Json$Encode$string('top');
+		case 3:
+			return $elm$json$Json$Encode$string('top-right');
+		case 4:
+			return $elm$json$Json$Encode$string('right');
+		case 5:
+			return $elm$json$Json$Encode$string('bottom-right');
+		case 6:
+			return $elm$json$Json$Encode$string('bottom');
+		case 7:
+			return $elm$json$Json$Encode$string('bottom-left');
+		default:
+			return $elm$json$Json$Encode$string('middle');
+	}
+};
+var $author$project$Vega$labelMethodSpec = function (m) {
+	switch (m) {
+		case 0:
+			return $elm$json$Json$Encode$string('floodfill');
+		case 1:
+			return $elm$json$Json$Encode$string('reduced-search');
+		default:
+			return $elm$json$Json$Encode$string('naive');
+	}
+};
+var $author$project$Vega$labelOverlapProperty = function (lop) {
+	switch (lop.$) {
+		case 0:
+			var aps = lop.a;
+			return _Utils_Tuple2(
+				'anchor',
+				A2($elm$json$Json$Encode$list, $author$project$Vega$labelAnchorSpec, aps));
+		case 1:
+			var ms = lop.a;
+			return _Utils_Tuple2(
+				'avoidMarks',
+				A2($elm$json$Json$Encode$list, $elm$json$Json$Encode$string, ms));
+		case 2:
+			var b = lop.a;
+			return _Utils_Tuple2(
+				'avoidBaseMark',
+				$author$project$Vega$booSpec(b));
+		case 3:
+			var an = lop.a;
+			if (an.$ === 1) {
+				return _Utils_Tuple2(
+					'lineAnchor',
+					$author$project$Vega$anchorSpec($author$project$Vega$End));
+			} else {
+				return _Utils_Tuple2(
+					'lineAnchor',
+					$author$project$Vega$anchorSpec(an));
+			}
+		case 4:
+			var n = lop.a;
+			return _Utils_Tuple2(
+				'markIndex',
+				$author$project$Vega$numSpec(n));
+		case 5:
+			var m = lop.a;
+			return _Utils_Tuple2(
+				'method',
+				$author$project$Vega$labelMethodSpec(m));
+		case 6:
+			var off = lop.a;
+			if (!off.$) {
+				return _Utils_Tuple2(
+					'offset',
+					A2(
+						$elm$json$Json$Encode$list,
+						$author$project$Vega$numSpec,
+						_List_fromArray(
+							[off])));
+			} else {
+				return _Utils_Tuple2(
+					'offset',
+					$author$project$Vega$numSpec(off));
+			}
+		case 7:
+			var n = lop.a;
+			return _Utils_Tuple2(
+				'padding',
+				$author$project$Vega$numSpec(n));
+		case 8:
+			var f = lop.a;
+			return _Utils_Tuple2(
+				'sort',
+				$elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							'field',
+							$author$project$Vega$fieldSpec(f))
+						])));
+		default:
+			var x = lop.a;
+			var y = lop.b;
+			var op = lop.c;
+			var al = lop.d;
+			var bl = lop.e;
+			return _Utils_Tuple2(
+				'as',
+				A2(
+					$elm$json$Json$Encode$list,
+					$elm$json$Json$Encode$string,
+					_List_fromArray(
+						[x, y, op, al, bl])));
+	}
+};
 var $author$project$Vega$linkShapeSpec = function (ls) {
 	switch (ls.$) {
 		case 0:
@@ -9187,7 +9321,27 @@ var $author$project$Vega$transformSpec = function (trans) {
 							'field',
 							$author$project$Vega$fieldSpec(f)),
 						A2($elm$core$List$map, $author$project$Vega$dotBinProperty, dbps))));
-		case 35:
+		case 34:
+			var w = trans.a;
+			var h = trans.b;
+			var lops = trans.c;
+			return $elm$json$Json$Encode$object(
+				A2(
+					$elm$core$List$cons,
+					_Utils_Tuple2(
+						'type',
+						$elm$json$Json$Encode$string('label')),
+					A2(
+						$elm$core$List$cons,
+						_Utils_Tuple2(
+							'size',
+							A2(
+								$elm$json$Json$Encode$list,
+								$author$project$Vega$numSpec,
+								_List_fromArray(
+									[w, h]))),
+						A2($elm$core$List$map, $author$project$Vega$labelOverlapProperty, lops))));
+		case 36:
 			var x = trans.a;
 			var y = trans.b;
 			var lps = trans.c;
@@ -9208,7 +9362,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'y',
 								$author$project$Vega$fieldSpec(y)),
 							A2($elm$core$List$map, $author$project$Vega$loessProperty, lps)))));
-		case 44:
+		case 45:
 			var x = trans.a;
 			var y = trans.b;
 			var rps = trans.c;
@@ -9229,7 +9383,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'y',
 								$author$project$Vega$fieldSpec(y)),
 							A2($elm$core$List$map, $author$project$Vega$regressionProperty, rps)))));
-		case 51:
+		case 52:
 			var f = trans.a;
 			var tbps = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -9476,7 +9630,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('joinaggregate')),
 					A2($elm$core$List$map, $author$project$Vega$joinAggregateProperty, japs)));
-		case 36:
+		case 37:
 			var from = trans.a;
 			var key = trans.b;
 			var fields = trans.c;
@@ -9550,7 +9704,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 									'y',
 									$author$project$Vega$fieldSpec(yf)),
 								A2($elm$core$List$map, $author$project$Vega$kde2Property, kps))))));
-		case 41:
+		case 42:
 			var f = trans.a;
 			var v = trans.b;
 			var pps = trans.c;
@@ -9571,7 +9725,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'value',
 								$author$project$Vega$fieldSpec(v)),
 							A2($elm$core$List$map, $author$project$Vega$pivotProperty, pps)))));
-		case 42:
+		case 43:
 			var fns = trans.a;
 			var _v6 = $elm$core$List$unzip(fns);
 			var fields = _v6.a;
@@ -9589,7 +9743,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'as',
 						A2($elm$json$Json$Encode$list, $elm$json$Json$Encode$string, names))
 					]));
-		case 43:
+		case 44:
 			var f = trans.a;
 			var qps = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -9604,7 +9758,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 							'field',
 							$author$project$Vega$fieldSpec(f)),
 						A2($elm$core$List$map, $author$project$Vega$quantileProperty, qps))));
-		case 46:
+		case 47:
 			var n = trans.a;
 			return $elm$json$Json$Encode$object(
 				_List_fromArray(
@@ -9616,7 +9770,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'size',
 						$author$project$Vega$numSpec(n))
 					]));
-		case 47:
+		case 48:
 			var start = trans.a;
 			var stop = trans.b;
 			var step = trans.c;
@@ -9672,7 +9826,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 							$author$project$Vega$numSpec(stop))
 						]),
 					stepProp));
-		case 48:
+		case 49:
 			var start = trans.a;
 			var stop = trans.b;
 			var step = trans.c;
@@ -9732,7 +9886,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 							$elm$json$Json$Encode$string(out))
 						]),
 					stepProp));
-		case 56:
+		case 57:
 			var wos = trans.a;
 			var wps = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -9892,7 +10046,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('graticule')),
 					A2($elm$core$List$map, $author$project$Vega$graticuleProperty, grps)));
-		case 34:
+		case 35:
 			var lpps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -9901,7 +10055,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('linkpath')),
 					A2($elm$core$List$map, $author$project$Vega$linkPathProperty, lpps)));
-		case 40:
+		case 41:
 			var pps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -9910,7 +10064,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('pie')),
 					A2($elm$core$List$map, $author$project$Vega$pieProperty, pps)));
-		case 49:
+		case 50:
 			var sps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -9928,7 +10082,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('force')),
 					A2($elm$core$List$map, $author$project$Vega$forceSimulationProperty, fps)));
-		case 55:
+		case 56:
 			var x = trans.a;
 			var y = trans.b;
 			var vps = trans.c;
@@ -9949,7 +10103,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'y',
 								$author$project$Vega$fieldSpec(y)),
 							A2($elm$core$List$map, $author$project$Vega$voronoiProperty, vps)))));
-		case 57:
+		case 58:
 			var wcps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -9958,7 +10112,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('wordcloud')),
 					A2($elm$core$List$map, $author$project$Vega$wordcloudProperty, wcps)));
-		case 37:
+		case 38:
 			var fs = trans.a;
 			var b = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -9974,7 +10128,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'generate',
 						$author$project$Vega$booSpec(b))
 					]));
-		case 50:
+		case 51:
 			var key = trans.a;
 			var parent = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -9990,7 +10144,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'parentKey',
 						$author$project$Vega$fieldSpec(parent))
 					]));
-		case 53:
+		case 54:
 			return $elm$json$Json$Encode$object(
 				_List_fromArray(
 					[
@@ -9998,7 +10152,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('treelinks'))
 					]));
-		case 38:
+		case 39:
 			var pps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -10007,7 +10161,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('pack')),
 					A2($elm$core$List$map, $author$project$Vega$packProperty, pps)));
-		case 39:
+		case 40:
 			var pps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -10016,7 +10170,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('partition')),
 					A2($elm$core$List$map, $author$project$Vega$partitionProperty, pps)));
-		case 52:
+		case 53:
 			var tps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -10025,7 +10179,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('tree')),
 					A2($elm$core$List$map, $author$project$Vega$treeProperty, tps)));
-		case 54:
+		case 55:
 			var tps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -11329,19 +11483,19 @@ var $author$project$Vega$toVega = function (spec) {
 				spec)));
 };
 var $author$project$Vega$TLinkPath = function (a) {
-	return {$: 34, a: a};
+	return {$: 35, a: a};
 };
 var $author$project$Vega$trLinkPath = $author$project$Vega$TLinkPath;
 var $author$project$Vega$TStratify = F2(
 	function (a, b) {
-		return {$: 50, a: a, b: b};
+		return {$: 51, a: a, b: b};
 	});
 var $author$project$Vega$trStratify = $author$project$Vega$TStratify;
 var $author$project$Vega$TTree = function (a) {
-	return {$: 52, a: a};
+	return {$: 53, a: a};
 };
 var $author$project$Vega$trTree = $author$project$Vega$TTree;
-var $author$project$Vega$TTreeLinks = {$: 53};
+var $author$project$Vega$TTreeLinks = {$: 54};
 var $author$project$Vega$trTreeLinks = $author$project$Vega$TTreeLinks;
 var $author$project$Vega$transform = F2(
 	function (transforms, dTable) {
@@ -12281,7 +12435,7 @@ var $author$project$Vega$TFilter = function (a) {
 };
 var $author$project$Vega$trFilter = $author$project$Vega$TFilter;
 var $author$project$Vega$TTreemap = function (a) {
-	return {$: 54, a: a};
+	return {$: 55, a: a};
 };
 var $author$project$Vega$trTreemap = $author$project$Vega$TTreemap;
 var $author$project$Vega$transparent = $author$project$Vega$vStr('transparent');
@@ -12683,7 +12837,7 @@ var $author$project$Vega$PaSort = function (a) {
 };
 var $author$project$Vega$paSort = $author$project$Vega$PaSort;
 var $author$project$Vega$TPack = function (a) {
-	return {$: 38, a: a};
+	return {$: 39, a: a};
 };
 var $author$project$Vega$trPack = $author$project$Vega$TPack;
 var $author$project$GalleryTree$tree4 = function () {
@@ -12877,7 +13031,7 @@ var $author$project$Vega$PtSort = function (a) {
 };
 var $author$project$Vega$ptSort = $author$project$Vega$PtSort;
 var $author$project$Vega$TPartition = function (a) {
-	return {$: 39, a: a};
+	return {$: 40, a: a};
 };
 var $author$project$Vega$trPartition = $author$project$Vega$TPartition;
 var $author$project$GalleryTree$tree5 = function () {

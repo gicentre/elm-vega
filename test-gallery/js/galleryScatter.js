@@ -10019,6 +10019,123 @@ var $author$project$Vega$kdeProperty = function (kp) {
 						[s1, s2])));
 	}
 };
+var $author$project$Vega$End = {$: 2};
+var $author$project$Vega$labelAnchorSpec = function (orient) {
+	switch (orient) {
+		case 0:
+			return $elm$json$Json$Encode$string('left');
+		case 1:
+			return $elm$json$Json$Encode$string('top-left');
+		case 2:
+			return $elm$json$Json$Encode$string('top');
+		case 3:
+			return $elm$json$Json$Encode$string('top-right');
+		case 4:
+			return $elm$json$Json$Encode$string('right');
+		case 5:
+			return $elm$json$Json$Encode$string('bottom-right');
+		case 6:
+			return $elm$json$Json$Encode$string('bottom');
+		case 7:
+			return $elm$json$Json$Encode$string('bottom-left');
+		default:
+			return $elm$json$Json$Encode$string('middle');
+	}
+};
+var $author$project$Vega$labelMethodSpec = function (m) {
+	switch (m) {
+		case 0:
+			return $elm$json$Json$Encode$string('floodfill');
+		case 1:
+			return $elm$json$Json$Encode$string('reduced-search');
+		default:
+			return $elm$json$Json$Encode$string('naive');
+	}
+};
+var $author$project$Vega$labelOverlapProperty = function (lop) {
+	switch (lop.$) {
+		case 0:
+			var aps = lop.a;
+			return _Utils_Tuple2(
+				'anchor',
+				A2($elm$json$Json$Encode$list, $author$project$Vega$labelAnchorSpec, aps));
+		case 1:
+			var ms = lop.a;
+			return _Utils_Tuple2(
+				'avoidMarks',
+				A2($elm$json$Json$Encode$list, $elm$json$Json$Encode$string, ms));
+		case 2:
+			var b = lop.a;
+			return _Utils_Tuple2(
+				'avoidBaseMark',
+				$author$project$Vega$booSpec(b));
+		case 3:
+			var an = lop.a;
+			if (an.$ === 1) {
+				return _Utils_Tuple2(
+					'lineAnchor',
+					$author$project$Vega$anchorSpec($author$project$Vega$End));
+			} else {
+				return _Utils_Tuple2(
+					'lineAnchor',
+					$author$project$Vega$anchorSpec(an));
+			}
+		case 4:
+			var n = lop.a;
+			return _Utils_Tuple2(
+				'markIndex',
+				$author$project$Vega$numSpec(n));
+		case 5:
+			var m = lop.a;
+			return _Utils_Tuple2(
+				'method',
+				$author$project$Vega$labelMethodSpec(m));
+		case 6:
+			var off = lop.a;
+			if (!off.$) {
+				return _Utils_Tuple2(
+					'offset',
+					A2(
+						$elm$json$Json$Encode$list,
+						$author$project$Vega$numSpec,
+						_List_fromArray(
+							[off])));
+			} else {
+				return _Utils_Tuple2(
+					'offset',
+					$author$project$Vega$numSpec(off));
+			}
+		case 7:
+			var n = lop.a;
+			return _Utils_Tuple2(
+				'padding',
+				$author$project$Vega$numSpec(n));
+		case 8:
+			var f = lop.a;
+			return _Utils_Tuple2(
+				'sort',
+				$elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							'field',
+							$author$project$Vega$fieldSpec(f))
+						])));
+		default:
+			var x = lop.a;
+			var y = lop.b;
+			var op = lop.c;
+			var al = lop.d;
+			var bl = lop.e;
+			return _Utils_Tuple2(
+				'as',
+				A2(
+					$elm$json$Json$Encode$list,
+					$elm$json$Json$Encode$string,
+					_List_fromArray(
+						[x, y, op, al, bl])));
+	}
+};
 var $author$project$Vega$linkShapeSpec = function (ls) {
 	switch (ls.$) {
 		case 0:
@@ -11123,7 +11240,27 @@ var $author$project$Vega$transformSpec = function (trans) {
 							'field',
 							$author$project$Vega$fieldSpec(f)),
 						A2($elm$core$List$map, $author$project$Vega$dotBinProperty, dbps))));
-		case 35:
+		case 34:
+			var w = trans.a;
+			var h = trans.b;
+			var lops = trans.c;
+			return $elm$json$Json$Encode$object(
+				A2(
+					$elm$core$List$cons,
+					_Utils_Tuple2(
+						'type',
+						$elm$json$Json$Encode$string('label')),
+					A2(
+						$elm$core$List$cons,
+						_Utils_Tuple2(
+							'size',
+							A2(
+								$elm$json$Json$Encode$list,
+								$author$project$Vega$numSpec,
+								_List_fromArray(
+									[w, h]))),
+						A2($elm$core$List$map, $author$project$Vega$labelOverlapProperty, lops))));
+		case 36:
 			var x = trans.a;
 			var y = trans.b;
 			var lps = trans.c;
@@ -11144,7 +11281,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'y',
 								$author$project$Vega$fieldSpec(y)),
 							A2($elm$core$List$map, $author$project$Vega$loessProperty, lps)))));
-		case 44:
+		case 45:
 			var x = trans.a;
 			var y = trans.b;
 			var rps = trans.c;
@@ -11165,7 +11302,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'y',
 								$author$project$Vega$fieldSpec(y)),
 							A2($elm$core$List$map, $author$project$Vega$regressionProperty, rps)))));
-		case 51:
+		case 52:
 			var f = trans.a;
 			var tbps = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -11412,7 +11549,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('joinaggregate')),
 					A2($elm$core$List$map, $author$project$Vega$joinAggregateProperty, japs)));
-		case 36:
+		case 37:
 			var from = trans.a;
 			var key = trans.b;
 			var fields = trans.c;
@@ -11486,7 +11623,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 									'y',
 									$author$project$Vega$fieldSpec(yf)),
 								A2($elm$core$List$map, $author$project$Vega$kde2Property, kps))))));
-		case 41:
+		case 42:
 			var f = trans.a;
 			var v = trans.b;
 			var pps = trans.c;
@@ -11507,7 +11644,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'value',
 								$author$project$Vega$fieldSpec(v)),
 							A2($elm$core$List$map, $author$project$Vega$pivotProperty, pps)))));
-		case 42:
+		case 43:
 			var fns = trans.a;
 			var _v6 = $elm$core$List$unzip(fns);
 			var fields = _v6.a;
@@ -11525,7 +11662,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'as',
 						A2($elm$json$Json$Encode$list, $elm$json$Json$Encode$string, names))
 					]));
-		case 43:
+		case 44:
 			var f = trans.a;
 			var qps = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -11540,7 +11677,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 							'field',
 							$author$project$Vega$fieldSpec(f)),
 						A2($elm$core$List$map, $author$project$Vega$quantileProperty, qps))));
-		case 46:
+		case 47:
 			var n = trans.a;
 			return $elm$json$Json$Encode$object(
 				_List_fromArray(
@@ -11552,7 +11689,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'size',
 						$author$project$Vega$numSpec(n))
 					]));
-		case 47:
+		case 48:
 			var start = trans.a;
 			var stop = trans.b;
 			var step = trans.c;
@@ -11608,7 +11745,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 							$author$project$Vega$numSpec(stop))
 						]),
 					stepProp));
-		case 48:
+		case 49:
 			var start = trans.a;
 			var stop = trans.b;
 			var step = trans.c;
@@ -11668,7 +11805,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 							$elm$json$Json$Encode$string(out))
 						]),
 					stepProp));
-		case 56:
+		case 57:
 			var wos = trans.a;
 			var wps = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -11828,7 +11965,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('graticule')),
 					A2($elm$core$List$map, $author$project$Vega$graticuleProperty, grps)));
-		case 34:
+		case 35:
 			var lpps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -11837,7 +11974,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('linkpath')),
 					A2($elm$core$List$map, $author$project$Vega$linkPathProperty, lpps)));
-		case 40:
+		case 41:
 			var pps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -11846,7 +11983,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('pie')),
 					A2($elm$core$List$map, $author$project$Vega$pieProperty, pps)));
-		case 49:
+		case 50:
 			var sps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -11864,7 +12001,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('force')),
 					A2($elm$core$List$map, $author$project$Vega$forceSimulationProperty, fps)));
-		case 55:
+		case 56:
 			var x = trans.a;
 			var y = trans.b;
 			var vps = trans.c;
@@ -11885,7 +12022,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'y',
 								$author$project$Vega$fieldSpec(y)),
 							A2($elm$core$List$map, $author$project$Vega$voronoiProperty, vps)))));
-		case 57:
+		case 58:
 			var wcps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -11894,7 +12031,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('wordcloud')),
 					A2($elm$core$List$map, $author$project$Vega$wordcloudProperty, wcps)));
-		case 37:
+		case 38:
 			var fs = trans.a;
 			var b = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -11910,7 +12047,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'generate',
 						$author$project$Vega$booSpec(b))
 					]));
-		case 50:
+		case 51:
 			var key = trans.a;
 			var parent = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -11926,7 +12063,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'parentKey',
 						$author$project$Vega$fieldSpec(parent))
 					]));
-		case 53:
+		case 54:
 			return $elm$json$Json$Encode$object(
 				_List_fromArray(
 					[
@@ -11934,7 +12071,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('treelinks'))
 					]));
-		case 38:
+		case 39:
 			var pps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -11943,7 +12080,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('pack')),
 					A2($elm$core$List$map, $author$project$Vega$packProperty, pps)));
-		case 39:
+		case 40:
 			var pps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -11952,7 +12089,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('partition')),
 					A2($elm$core$List$map, $author$project$Vega$partitionProperty, pps)));
-		case 52:
+		case 53:
 			var tps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -11961,7 +12098,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('tree')),
 					A2($elm$core$List$map, $author$project$Vega$treeProperty, tps)));
-		case 54:
+		case 55:
 			var tps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -16706,6 +16843,309 @@ var $author$project$GalleryScatter$scatterplot5 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$Vega$APad = {$: 5};
+var $author$project$Vega$asPad = $author$project$Vega$APad;
+var $author$project$Vega$VAutosize = 5;
+var $author$project$Vega$autosize = function (aus) {
+	return _Utils_Tuple2(
+		5,
+		$elm$json$Json$Encode$object(
+			A2($elm$core$List$map, $author$project$Vega$autosizeProperty, aus)));
+};
+var $author$project$Vega$LABottom = 6;
+var $author$project$Vega$laBottom = 6;
+var $author$project$Vega$LALeft = 0;
+var $author$project$Vega$laLeft = 0;
+var $author$project$Vega$LARight = 4;
+var $author$project$Vega$laRight = 4;
+var $author$project$Vega$LATop = 2;
+var $author$project$Vega$laTop = 2;
+var $author$project$Vega$LBAnchor = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$lbAnchor = $author$project$Vega$LBAnchor;
+var $author$project$Vega$LBAvoidMarks = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$lbAvoidMarks = $author$project$Vega$LBAvoidMarks;
+var $author$project$Vega$MTransform = function (a) {
+	return {$: 12, a: a};
+};
+var $author$project$Vega$mTransform = $author$project$Vega$MTransform;
+var $author$project$Vega$numSignal = $author$project$Vega$NumSignal;
+var $author$project$Vega$ReAs = F2(
+	function (a, b) {
+		return {$: 5, a: a, b: b};
+	});
+var $author$project$Vega$reAs = $author$project$Vega$ReAs;
+var $author$project$Vega$ReMethod = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$reMethod = $author$project$Vega$ReMethod;
+var $author$project$Vega$ReQuad = {$: 4};
+var $author$project$Vega$reQuad = $author$project$Vega$ReQuad;
+var $author$project$Vega$TLabel = F3(
+	function (a, b, c) {
+		return {$: 34, a: a, b: b, c: c};
+	});
+var $author$project$Vega$trLabel = $author$project$Vega$TLabel;
+var $author$project$Vega$TRegression = F3(
+	function (a, b, c) {
+		return {$: 45, a: a, b: b, c: c};
+	});
+var $author$project$Vega$trRegression = $author$project$Vega$TRegression;
+var $author$project$GalleryScatter$scatterplot6 = function () {
+	var sc = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$scales,
+			A2(
+				$author$project$Vega$scale,
+				'xScale',
+				_List_fromArray(
+					[
+						$author$project$Vega$scRange($author$project$Vega$raWidth),
+						$author$project$Vega$scDomain(
+						$author$project$Vega$doData(
+							_List_fromArray(
+								[
+									$author$project$Vega$daDataset('movies'),
+									$author$project$Vega$daField(
+									$author$project$Vega$field('Rotten Tomatoes Rating'))
+								])))
+					]))),
+		A2(
+			$author$project$Vega$scale,
+			'yScale',
+			_List_fromArray(
+				[
+					$author$project$Vega$scRange($author$project$Vega$raHeight),
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doData(
+						_List_fromArray(
+							[
+								$author$project$Vega$daDataset('movies'),
+								$author$project$Vega$daField(
+								$author$project$Vega$field('IMDB Rating'))
+							])))
+				])));
+	var mk = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
+				$author$project$Vega$marks,
+				A2(
+					$author$project$Vega$mark,
+					$author$project$Vega$symbol,
+					_List_fromArray(
+						[
+							$author$project$Vega$mName('points'),
+							$author$project$Vega$mFrom(
+							_List_fromArray(
+								[
+									$author$project$Vega$srData(
+									$author$project$Vega$str('movies'))
+								])),
+							$author$project$Vega$mEncode(
+							_List_fromArray(
+								[
+									$author$project$Vega$enEnter(
+									_List_fromArray(
+										[
+											$author$project$Vega$maX(
+											_List_fromArray(
+												[
+													$author$project$Vega$vScale('xScale'),
+													$author$project$Vega$vField(
+													$author$project$Vega$field('Rotten Tomatoes Rating'))
+												])),
+											$author$project$Vega$maY(
+											_List_fromArray(
+												[
+													$author$project$Vega$vScale('yScale'),
+													$author$project$Vega$vField(
+													$author$project$Vega$field('IMDB Rating'))
+												])),
+											$author$project$Vega$maFillOpacity(
+											_List_fromArray(
+												[
+													$author$project$Vega$vNum(0.5)
+												])),
+											$author$project$Vega$maSize(
+											_List_fromArray(
+												[
+													$author$project$Vega$vNum(25)
+												]))
+										]))
+								]))
+						]))),
+			A2(
+				$author$project$Vega$mark,
+				$author$project$Vega$line,
+				_List_fromArray(
+					[
+						$author$project$Vega$mName('trend'),
+						$author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								$author$project$Vega$srData(
+								$author$project$Vega$str('fit'))
+							])),
+						$author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								$author$project$Vega$enEnter(
+								_List_fromArray(
+									[
+										$author$project$Vega$maX(
+										_List_fromArray(
+											[
+												$author$project$Vega$vScale('xScale'),
+												$author$project$Vega$vField(
+												$author$project$Vega$field('u'))
+											])),
+										$author$project$Vega$maY(
+										_List_fromArray(
+											[
+												$author$project$Vega$vScale('yScale'),
+												$author$project$Vega$vField(
+												$author$project$Vega$field('v'))
+											])),
+										$author$project$Vega$maStroke(
+										_List_fromArray(
+											[
+												$author$project$Vega$vStr('firebrick')
+											]))
+									]))
+							]))
+					]))),
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$text,
+			_List_fromArray(
+				[
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('points'))
+						])),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									$author$project$Vega$maText(
+									_List_fromArray(
+										[
+											$author$project$Vega$vField(
+											$author$project$Vega$field('datum.Title'))
+										])),
+									$author$project$Vega$maFontSize(
+									_List_fromArray(
+										[
+											$author$project$Vega$vNum(8)
+										]))
+								]))
+						])),
+					$author$project$Vega$mTransform(
+					_List_fromArray(
+						[
+							A3(
+							$author$project$Vega$trLabel,
+							$author$project$Vega$numSignal('width+60'),
+							$author$project$Vega$numSignal('height'),
+							_List_fromArray(
+								[
+									$author$project$Vega$lbAnchor(
+									_List_fromArray(
+										[$author$project$Vega$laTop, $author$project$Vega$laBottom, $author$project$Vega$laRight, $author$project$Vega$laLeft])),
+									$author$project$Vega$lbAvoidMarks(_List_Nil)
+								]))
+						]))
+				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						$author$project$Vega$trFilter(
+						$author$project$Vega$expr('datum[\'Rotten Tomatoes Rating\'] != null && datum[\'IMDB Rating\'] != null'))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'movies',
+					_List_fromArray(
+						[
+							$author$project$Vega$daUrl(
+							$author$project$Vega$str($author$project$GalleryScatter$dPath + 'movies.json'))
+						]))),
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A3(
+						$author$project$Vega$trRegression,
+						$author$project$Vega$field('Rotten Tomatoes Rating'),
+						$author$project$Vega$field('IMDB Rating'),
+						_List_fromArray(
+							[
+								$author$project$Vega$reMethod($author$project$Vega$reQuad),
+								A2($author$project$Vega$reAs, 'u', 'v')
+							]))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'fit',
+					_List_fromArray(
+						[
+							$author$project$Vega$daSource('movies')
+						])))
+			]));
+	var ax = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$axes,
+			A3(
+				$author$project$Vega$axis,
+				'yScale',
+				$author$project$Vega$siLeft,
+				_List_fromArray(
+					[
+						$author$project$Vega$axTitle(
+						$author$project$Vega$str('Rotten Tomatoes Rating'))
+					]))),
+		A3(
+			$author$project$Vega$axis,
+			'xScale',
+			$author$project$Vega$siBottom,
+			_List_fromArray(
+				[
+					$author$project$Vega$axTitle(
+					$author$project$Vega$str('IMDB Rating'))
+				])));
+	return $author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				$author$project$Vega$width(800),
+				$author$project$Vega$height(600),
+				$author$project$Vega$padding(5),
+				$author$project$Vega$autosize(
+				_List_fromArray(
+					[$author$project$Vega$asPad])),
+				ds,
+				sc(_List_Nil),
+				ax(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var $author$project$GalleryScatter$mySpecs = $author$project$Vega$combineSpecs(
 	_List_fromArray(
 		[
@@ -16713,7 +17153,8 @@ var $author$project$GalleryScatter$mySpecs = $author$project$Vega$combineSpecs(
 			_Utils_Tuple2('scatterplot2', $author$project$GalleryScatter$scatterplot2),
 			_Utils_Tuple2('scatterplot3', $author$project$GalleryScatter$scatterplot3),
 			_Utils_Tuple2('scatterplot4', $author$project$GalleryScatter$scatterplot4),
-			_Utils_Tuple2('scatterplot5', $author$project$GalleryScatter$scatterplot5)
+			_Utils_Tuple2('scatterplot5', $author$project$GalleryScatter$scatterplot5),
+			_Utils_Tuple2('scatterplot6', $author$project$GalleryScatter$scatterplot6)
 		]));
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -16729,7 +17170,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $author$project$GalleryScatter$sourceExample = $author$project$GalleryScatter$scatterplot5;
+var $author$project$GalleryScatter$sourceExample = $author$project$GalleryScatter$scatterplot6;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$GalleryScatter$view = function (spec) {
