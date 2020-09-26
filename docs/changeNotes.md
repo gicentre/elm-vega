@@ -2,7 +2,11 @@
 
 ## Pending changes
 
-None.
+## V5.6.1 ➡ V5.7.0
+
+### V5.7 Additions
+
+- `trLabel` and associated methods `lbAnchor`, `lbAvoidMarks`, `lbAvoidBaseMark`, `lbLineAnchor`, `lbMarkIndex`, `lbMethod`, `lbOffset`, `lbPadding`, `lbSort` and `lbAs` for non-overlapping label placement (Vega 5.16).
 
 ---
 

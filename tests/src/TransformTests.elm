@@ -1126,6 +1126,76 @@ heatmapTest1 =
         [ width 500, height 400, padding 5, autosize [ asPad ], ds, si [], sc [], mk [] ]
 
 
+labelTest1 : Spec
+labelTest1 =
+    let
+        ds =
+            let
+                table =
+                    dataFromColumns "table" []
+                        << dataColumn "col" (vNums [ 1, 2, 3, 1, 2, 3, 1, 2, 3 ])
+                        << dataColumn "row" (vNums [ 1, 1, 1, 2, 2, 2, 3, 3, 3 ])
+                        << dataColumn "lbl" (vStrs [ "top-left", "top-centre", "top-right", "middle-left", "middle-centre", "middle-right", "bottom-left", "bottom-centre", "bottom-right" ])
+            in
+            dataSource [ table [] ]
+
+        si =
+            signals
+                << signal "fontSize"
+                    [ siValue (vNum 18)
+                    , siBind (iRange [ inMin 6, inMax 40, inStep 0.1 ])
+                    ]
+
+        sc =
+            scales
+                << scale "xScale" [ scDomain (doNums (nums [ 0, 4 ])), scRange raWidth ]
+                << scale "yScale" [ scDomain (doNums (nums [ 0, 4 ])), scReverse true, scRange raHeight ]
+
+        mk =
+            marks
+                << mark symbol
+                    [ mName "points"
+                    , mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "col") ]
+                            , maY [ vScale "yScale", vField (field "row") ]
+                            , maSize [ vNum 3000 ]
+                            ]
+                        ]
+                    ]
+                << mark text
+                    [ mFrom [ srData (str "points") ]
+                    , mEncode
+                        [ enEnter
+                            [ maText [ vField (field "datum.lbl") ]
+                            ]
+                        , enUpdate
+                            [ maFontSize [ vSignal "fontSize" ]
+                            , maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trLabel (numSignal "width")
+                            (numSignal "height")
+                            [ lbAnchor [ laTop, laBottom, laLeft, laRight ]
+                            , lbAvoidMarks [ "points" ]
+                            , lbAvoidBaseMark true
+                            , lbLineAnchor anStart -- Ignored as base isn't a line mark
+                            , lbMarkIndex (num 1) -- Ignored as base isn't a group mark.
+                            , lbMethod lmReducedSearch -- Ingored as base isn't an area mark
+                            , lbOffset (nums [ 1, 2, 3, 4 ])
+                            , lbPadding (num 150)
+                            , lbSort (field "x")
+                            , lbAs "x" "y" "opacity" "align" "baseline"
+                            ]
+                        ]
+                    ]
+    in
+    toVega [ width 300, height 300, ds, si [], sc [], mk [] ]
+
+
 
 {- This list comprises the specifications to be provided to the Vega runtime. -}
 
@@ -1145,6 +1215,7 @@ specs =
     , ( "kdeTest2", kdeTest2 )
     , ( "timeUnitTest1", timeUnitTest1 )
     , ( "heatmapTest1", heatmapTest1 )
+    , ( "labelTest1", labelTest1 )
     ]
 
 

@@ -595,9 +595,83 @@ scatterplot5 =
         [ width 200, padding 5, ds, si [], sc [], ax [], le [], mk [] ]
 
 
+scatterplot6 : Spec
+scatterplot6 =
+    let
+        ds =
+            dataSource
+                [ data "movies" [ daUrl (str (dPath ++ "movies.json")) ]
+                    |> transform [ trFilter (expr "datum['Rotten Tomatoes Rating'] != null && datum['IMDB Rating'] != null") ]
+                , data "fit" [ daSource "movies" ]
+                    |> transform
+                        [ trRegression (field "Rotten Tomatoes Rating") (field "IMDB Rating") [ reMethod reQuad, reAs "u" "v" ] ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scRange raWidth
+                    , scDomain (doData [ daDataset "movies", daField (field "Rotten Tomatoes Rating") ])
+                    ]
+                << scale "yScale"
+                    [ scRange raHeight
+                    , scDomain (doData [ daDataset "movies", daField (field "IMDB Rating") ])
+                    ]
+
+        ax =
+            axes
+                << axis "yScale" siLeft [ axTitle (str "Rotten Tomatoes Rating") ]
+                << axis "xScale" siBottom [ axTitle (str "IMDB Rating") ]
+
+        mk =
+            marks
+                << mark symbol
+                    [ mName "points"
+                    , mFrom [ srData (str "movies") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "Rotten Tomatoes Rating") ]
+                            , maY [ vScale "yScale", vField (field "IMDB Rating") ]
+                            , maFillOpacity [ vNum 0.5 ]
+                            , maSize [ vNum 25 ]
+                            ]
+                        ]
+                    ]
+                << mark line
+                    [ mName "trend"
+                    , mFrom [ srData (str "fit") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "u") ]
+                            , maY [ vScale "yScale", vField (field "v") ]
+                            , maStroke [ vStr "firebrick" ]
+                            ]
+                        ]
+                    ]
+                << mark text
+                    [ mFrom [ srData (str "points") ]
+                    , mEncode
+                        [ enEnter
+                            [ maText [ vField (field "datum.Title") ]
+                            , maFontSize [ vNum 8 ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trLabel (numSignal "width+60")
+                            (numSignal "height")
+                            [ lbAnchor [ laTop, laBottom, laRight, laLeft ]
+                            , lbAvoidMarks []
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 800, height 600, padding 5, autosize [ asPad ], ds, sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    scatterplot5
+    scatterplot6
 
 
 
@@ -612,6 +686,7 @@ mySpecs =
         , ( "scatterplot3", scatterplot3 )
         , ( "scatterplot4", scatterplot4 )
         , ( "scatterplot5", scatterplot5 )
+        , ( "scatterplot6", scatterplot6 )
         ]
 
 
