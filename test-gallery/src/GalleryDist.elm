@@ -329,45 +329,49 @@ boxplot1 =
 
         ds =
             dataSource
-                [ data "iris" [ daUrl (str (dPath ++ "iris.json")) ]
-                    |> transform [ trFoldAs [ fSignal "fields" ] "organ" "value" ]
+                [ data "penguins" [ daUrl (str (dPath ++ "penguins.json")) ]
+                    |> transform [ trFilter (expr "datum.Species != null && datum['Body Mass (g)'] != null") ]
                 ]
 
         si =
             signals
-                << signal "fields" [ siValue (vStrs [ "petalWidth", "petalLength", "sepalWidth", "sepalLength" ]) ]
                 << signal "plotWidth" [ siValue (vNum 60) ]
-                << signal "height" [ siUpdate "(plotWidth + 10) * length(fields)" ]
+                << signal "height" [ siUpdate "(plotWidth+10)*3" ]
 
         sc =
             scales
                 << scale "layout"
                     [ scType scBand
                     , scRange raHeight
-                    , scDomain (doData [ daDataset "iris", daField (field "organ") ])
+                    , scDomain (doData [ daDataset "penguins", daField (field "Species") ])
                     ]
                 << scale "xScale"
                     [ scType scLinear
                     , scRange raWidth
                     , scRound true
-                    , scDomain (doData [ daDataset "iris", daField (field "value") ])
-                    , scZero true
+                    , scDomain (doData [ daDataset "penguins", daField (field "Body Mass (g)") ])
+                    , scDomainMin (num 2000)
+                    , scZero false
                     , scNice niTrue
                     ]
-                << scale "cScale" [ scType scOrdinal, scRange raCategory ]
+                << scale "cScale"
+                    [ scType scOrdinal
+                    , scRange raCategory
+                    , scDomain (doData [ daDataset "penguins", daField (field "Species") ])
+                    ]
 
         ax =
             axes
-                << axis "xScale" siBottom [ axZIndex (num 1) ]
+                << axis "xScale" siBottom [ axZIndex (num 1), axTitle (str "Body Mass (g)") ]
                 << axis "layout" siLeft [ axTickCount (num 5), axZIndex (num 1) ]
 
         mk =
             marks
                 << mark group
-                    [ mFrom [ srFacet (str "iris") "organs" [ faGroupBy [ field "organ" ] ] ]
+                    [ mFrom [ srFacet (str "penguins") "species" [ faGroupBy [ field "Species" ] ] ]
                     , mEncode
                         [ enEnter
-                            [ maYC [ vScale "layout", vField (field "organ"), vBand (num 0.5) ]
+                            [ maYC [ vScale "layout", vField (field "Species"), vBand (num 0.5) ]
                             , maHeight [ vSignal "plotWidth" ]
                             , maWidth [ vSignal "width" ]
                             ]
@@ -377,10 +381,10 @@ boxplot1 =
 
         nestedDs =
             dataSource
-                [ data "summary" [ daSource "organs" ]
+                [ data "summary" [ daSource "species" ]
                     |> transform
                         [ trAggregate
-                            [ agFields (List.repeat 5 (field "value"))
+                            [ agFields (List.repeat 5 (field "Body Mass (g)"))
                             , agOps [ opMin, opQ1, opMedian, opQ3, opMax ]
                             , agAs [ "min", "q1", "median", "q3", "max" ]
                             ]
@@ -407,7 +411,7 @@ boxplot1 =
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vStr "steelblue" ]
+                            [ maFill [ vScale "cScale", vField (fParent (field "Species")) ]
                             , maCornerRadius [ vNum 4 ]
                             ]
                         , enUpdate
@@ -445,95 +449,95 @@ violinplot1 =
 
         ds =
             dataSource
-                [ data "iris" [ daUrl (str (dPath ++ "iris.json")) ]
-                    |> transform [ trFoldAs [ fSignal "fields" ] "organ" "value" ]
-                ]
-
-        si =
-            signals
-                << signal "fields" [ siValue (vStrs [ "petalWidth", "petalLength", "sepalWidth", "sepalLength" ]) ]
-                << signal "plotWidth" [ siValue (vNum 60) ]
-                << signal "height" [ siUpdate "(plotWidth + 10) * length(fields)" ]
-                << signal "bandWidth" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 0.5, inStep 0.005 ]) ]
-                << signal "steps" [ siValue (vNum 100), siBind (iRange [ inMin 10, inMax 500, inStep 1 ]) ]
-
-        sc =
-            scales
-                << scale "layout"
-                    [ scType scBand
-                    , scRange raHeight
-                    , scDomain (doData [ daDataset "iris", daField (field "organ") ])
-                    ]
-                << scale "xScale"
-                    [ scType scLinear
-                    , scRange raWidth
-                    , scRound true
-                    , scDomain (doData [ daDataset "iris", daField (field "value") ])
-                    , scZero true
-                    , scNice niTrue
-                    ]
-                << scale "cScale" [ scType scOrdinal, scRange raCategory ]
-
-        ax =
-            axes
-                << axis "xScale" siBottom [ axZIndex (num 1) ]
-                << axis "layout" siLeft [ axTickCount (num 5), axZIndex (num 1) ]
-
-        mk =
-            marks
-                << mark group
-                    [ mFrom [ srFacet (str "iris") "organs" [ faGroupBy [ field "organ" ] ] ]
-                    , mEncode
-                        [ enEnter
-                            [ maYC [ vScale "layout", vField (field "organ"), vBand (num 0.5) ]
-                            , maHeight [ vSignal "plotWidth" ]
-                            , maWidth [ vSignal "width" ]
-                            ]
-                        ]
-                    , mGroup [ nestedDs, nestedSc [], nestedMk [] ]
-                    ]
-
-        nestedDs =
-            dataSource
-                [ data "density" []
+                [ data "penguins" [ daUrl (str (dPath ++ "penguins.json")) ]
+                    |> transform [ trFilter (expr "datum.Species != null && datum['Body Mass (g)'] != null") ]
+                , data "density" [ daSource "penguins" ]
                     |> transform
-                        [ trDensity (diKde "organs" (field "value") (numSignal "bandWidth"))
-                            [ dnSteps (numSignal "steps") ]
-                        , trStack
-                            [ stGroupBy [ field "value" ]
-                            , stField (field "density")
-                            , stOffset stCenter
-                            , stAs "y0" "y1"
+                        [ trKde (field "Body Mass (g)")
+                            [ kdGroupBy [ field "Species" ]
+                            , kdBandwidth (numSignal "bandwidth")
+                            , kdExtent (numSignal "trim ? null : [2000, 6500]")
                             ]
                         ]
-                , data "summary" [ daSource "organs" ]
+                , data "stats" [ daSource "penguins" ]
                     |> transform
                         [ trAggregate
-                            [ agFields (List.map field [ "value", "value", "value" ])
+                            [ agFields (List.repeat 3 (field "Body Mass (g)"))
                             , agOps [ opQ1, opMedian, opQ3 ]
                             , agAs [ "q1", "median", "q3" ]
                             ]
                         ]
                 ]
 
-        nestedSc =
+        si =
+            signals
+                << signal "plotWidth" [ siValue (vNum 60) ]
+                << signal "height" [ siUpdate "(plotWidth+10)*3" ]
+                << signal "trim" [ siValue vTrue, siBind (iCheckbox []) ]
+                << signal "bandwidth" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+
+        sc =
             scales
-                << scale "yScale"
+                << scale "layout"
+                    [ scType scBand
+                    , scRange raHeight
+                    , scDomain (doData [ daDataset "penguins", daField (field "Species") ])
+                    ]
+                << scale "xScale"
+                    [ scType scLinear
+                    , scRange raWidth
+                    , scRound true
+                    , scDomain (doData [ daDataset "penguins", daField (field "Body Mass (g)") ])
+                    , scDomainMin (num 2000)
+                    , scZero true
+                    , scNice niTrue
+                    ]
+                << scale "hScale"
                     [ scType scLinear
                     , scRange (raValues [ vNum 0, vSignal "plotWidth" ])
                     , scDomain (doData [ daDataset "density", daField (field "density") ])
                     ]
+                << scale "cScale"
+                    [ scType scOrdinal
+                    , scRange raCategory
+                    , scDomain (doData [ daDataset "penguins", daField (field "Species") ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom [ axZIndex (num 1), axTitle (str "Body Mass (g)") ]
+                << axis "layout" siLeft [ axTickCount (num 5), axZIndex (num 1) ]
+
+        mk =
+            marks
+                << mark group
+                    [ mFrom [ srFacet (str "density") "violin" [ faGroupBy [ field "Species" ] ] ]
+                    , mEncode
+                        [ enEnter
+                            [ maYC [ vScale "layout", vField (field "Species"), vBand (num 0.5) ]
+                            , maHeight [ vSignal "plotWidth" ]
+                            , maWidth [ vSignal "width" ]
+                            ]
+                        ]
+                    , mGroup [ nestedDs, nestedMk [] ]
+                    ]
+
+        nestedDs =
+            dataSource
+                [ data "summary" [ daSource "stats" ]
+                    |> transform [ trFilter (expr "datum.Species === parent.Species") ]
+                ]
 
         nestedMk =
             marks
                 << mark area
-                    [ mFrom [ srData (str "density") ]
+                    [ mFrom [ srData (str "violin") ]
                     , mEncode
-                        [ enEnter [ maFill [ vScale "cScale", vField (fParent (field "organ")) ] ]
+                        [ enEnter [ maFill [ vScale "cScale", vField (fParent (field "Species")) ] ]
                         , enUpdate
                             [ maX [ vScale "xScale", vField (field "value") ]
-                            , maY [ vScale "yScale", vField (field "y0") ]
-                            , maY2 [ vScale "yScale", vField (field "y1") ]
+                            , maYC [ vSignal "plotWidth/2" ]
+                            , maHeight [ vScale "hScale", vField (field "density") ]
                             ]
                         ]
                     ]
@@ -545,7 +549,7 @@ violinplot1 =
                             , maHeight [ vNum 2 ]
                             ]
                         , enUpdate
-                            [ maYC [ vSignal "plotWidth / 2" ]
+                            [ maYC [ vSignal "plotWidth/2" ]
                             , maX [ vScale "xScale", vField (field "q1") ]
                             , maX2 [ vScale "xScale", vField (field "q3") ]
                             ]
@@ -1695,7 +1699,7 @@ timeUnits1 =
 
 sourceExample : Spec
 sourceExample =
-    regression1
+    violinplot1
 
 
 

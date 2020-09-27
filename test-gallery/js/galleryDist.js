@@ -5103,6 +5103,10 @@ var $author$project$Vega$AxTickOffset = function (a) {
 	return {$: 57, a: a};
 };
 var $author$project$Vega$axTickOffset = $author$project$Vega$AxTickOffset;
+var $author$project$Vega$AxTitle = function (a) {
+	return {$: 62, a: a};
+};
+var $author$project$Vega$axTitle = $author$project$Vega$AxTitle;
 var $author$project$Vega$AxZIndex = function (a) {
 	return {$: 80, a: a};
 };
@@ -9963,14 +9967,18 @@ var $author$project$Vega$Update = function (a) {
 	return {$: 1, a: a};
 };
 var $author$project$Vega$enUpdate = $author$project$Vega$Update;
-var $author$project$Vega$FSignal = function (a) {
-	return {$: 2, a: a};
+var $author$project$Vega$FParent = function (a) {
+	return {$: 5, a: a};
 };
-var $author$project$Vega$fSignal = $author$project$Vega$FSignal;
+var $author$project$Vega$fParent = $author$project$Vega$FParent;
 var $author$project$Vega$FaGroupBy = function (a) {
 	return {$: 4, a: a};
 };
 var $author$project$Vega$faGroupBy = $author$project$Vega$FaGroupBy;
+var $author$project$Vega$Boo = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$false = $author$project$Vega$Boo(false);
 var $author$project$Vega$FName = function (a) {
 	return {$: 0, a: a};
 };
@@ -13540,6 +13548,10 @@ var $author$project$Vega$SDomain = function (a) {
 	return {$: 1, a: a};
 };
 var $author$project$Vega$scDomain = $author$project$Vega$SDomain;
+var $author$project$Vega$SDomainMin = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Vega$scDomainMin = $author$project$Vega$SDomainMin;
 var $author$project$Vega$ScLinear = {$: 0};
 var $author$project$Vega$scLinear = $author$project$Vega$ScLinear;
 var $author$project$Vega$SNice = function (a) {
@@ -14497,11 +14509,10 @@ var $author$project$Vega$TAggregate = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Vega$trAggregate = $author$project$Vega$TAggregate;
-var $author$project$Vega$TFoldAs = F3(
-	function (a, b, c) {
-		return {$: 18, a: a, b: b, c: c};
-	});
-var $author$project$Vega$trFoldAs = $author$project$Vega$TFoldAs;
+var $author$project$Vega$TFilter = function (a) {
+	return {$: 12, a: a};
+};
+var $author$project$Vega$trFilter = $author$project$Vega$TFilter;
 var $author$project$Vega$transform = F2(
 	function (transforms, dTable) {
 		return _Utils_ap(
@@ -14513,9 +14524,6 @@ var $author$project$Vega$transform = F2(
 					A2($elm$json$Json$Encode$list, $author$project$Vega$transformSpec, transforms))
 				]));
 	});
-var $author$project$Vega$Boo = function (a) {
-	return {$: 0, a: a};
-};
 var $author$project$Vega$true = $author$project$Vega$Boo(true);
 var $author$project$Vega$VBand = function (a) {
 	return {$: 15, a: a};
@@ -14544,10 +14552,6 @@ var $author$project$Vega$VSignal = function (a) {
 	return {$: 9, a: a};
 };
 var $author$project$Vega$vSignal = $author$project$Vega$VSignal;
-var $author$project$Vega$VStrs = function (a) {
-	return {$: 1, a: a};
-};
-var $author$project$Vega$vStrs = $author$project$Vega$VStrs;
 var $author$project$Vega$VWidth = 2;
 var $author$project$Vega$width = function (w) {
 	return _Utils_Tuple2(
@@ -14559,19 +14563,7 @@ var $author$project$GalleryDist$boxplot1 = function () {
 		$elm$core$Basics$composeL,
 		A2(
 			$elm$core$Basics$composeL,
-			A2(
-				$elm$core$Basics$composeL,
-				$author$project$Vega$signals,
-				A2(
-					$author$project$Vega$signal,
-					'fields',
-					_List_fromArray(
-						[
-							$author$project$Vega$siValue(
-							$author$project$Vega$vStrs(
-								_List_fromArray(
-									['petalWidth', 'petalLength', 'sepalWidth', 'sepalLength'])))
-						]))),
+			$author$project$Vega$signals,
 			A2(
 				$author$project$Vega$signal,
 				'plotWidth',
@@ -14585,7 +14577,7 @@ var $author$project$GalleryDist$boxplot1 = function () {
 			'height',
 			_List_fromArray(
 				[
-					$author$project$Vega$siUpdate('(plotWidth + 10) * length(fields)')
+					$author$project$Vega$siUpdate('(plotWidth+10)*3')
 				])));
 	var sc = A2(
 		$elm$core$Basics$composeL,
@@ -14605,9 +14597,9 @@ var $author$project$GalleryDist$boxplot1 = function () {
 							$author$project$Vega$doData(
 								_List_fromArray(
 									[
-										$author$project$Vega$daDataset('iris'),
+										$author$project$Vega$daDataset('penguins'),
 										$author$project$Vega$daField(
-										$author$project$Vega$field('organ'))
+										$author$project$Vega$field('Species'))
 									])))
 						]))),
 			A2(
@@ -14622,11 +14614,13 @@ var $author$project$GalleryDist$boxplot1 = function () {
 						$author$project$Vega$doData(
 							_List_fromArray(
 								[
-									$author$project$Vega$daDataset('iris'),
+									$author$project$Vega$daDataset('penguins'),
 									$author$project$Vega$daField(
-									$author$project$Vega$field('value'))
+									$author$project$Vega$field('Body Mass (g)'))
 								]))),
-						$author$project$Vega$scZero($author$project$Vega$true),
+						$author$project$Vega$scDomainMin(
+						$author$project$Vega$num(2000)),
+						$author$project$Vega$scZero($author$project$Vega$false),
 						$author$project$Vega$scNice($author$project$Vega$niTrue)
 					]))),
 		A2(
@@ -14635,7 +14629,15 @@ var $author$project$GalleryDist$boxplot1 = function () {
 			_List_fromArray(
 				[
 					$author$project$Vega$scType($author$project$Vega$scOrdinal),
-					$author$project$Vega$scRange($author$project$Vega$raCategory)
+					$author$project$Vega$scRange($author$project$Vega$raCategory),
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doData(
+						_List_fromArray(
+							[
+								$author$project$Vega$daDataset('penguins'),
+								$author$project$Vega$daField(
+								$author$project$Vega$field('Species'))
+							])))
 				])));
 	var nestedMk = A2(
 		$elm$core$Basics$composeL,
@@ -14717,7 +14719,10 @@ var $author$project$GalleryDist$boxplot1 = function () {
 										$author$project$Vega$maFill(
 										_List_fromArray(
 											[
-												$author$project$Vega$vStr('steelblue')
+												$author$project$Vega$vScale('cScale'),
+												$author$project$Vega$vField(
+												$author$project$Vega$fParent(
+													$author$project$Vega$field('Species')))
 											])),
 										$author$project$Vega$maCornerRadius(
 										_List_fromArray(
@@ -14820,7 +14825,7 @@ var $author$project$GalleryDist$boxplot1 = function () {
 								A2(
 									$elm$core$List$repeat,
 									5,
-									$author$project$Vega$field('value'))),
+									$author$project$Vega$field('Body Mass (g)'))),
 								$author$project$Vega$agOps(
 								_List_fromArray(
 									[$author$project$Vega$opMin, $author$project$Vega$opQ1, $author$project$Vega$opMedian, $author$project$Vega$opQ3, $author$project$Vega$opMax])),
@@ -14834,7 +14839,7 @@ var $author$project$GalleryDist$boxplot1 = function () {
 					'summary',
 					_List_fromArray(
 						[
-							$author$project$Vega$daSource('organs')
+							$author$project$Vega$daSource('species')
 						])))
 			]));
 	var mk = A2(
@@ -14850,14 +14855,14 @@ var $author$project$GalleryDist$boxplot1 = function () {
 						[
 							A3(
 							$author$project$Vega$srFacet,
-							$author$project$Vega$str('iris'),
-							'organs',
+							$author$project$Vega$str('penguins'),
+							'species',
 							_List_fromArray(
 								[
 									$author$project$Vega$faGroupBy(
 									_List_fromArray(
 										[
-											$author$project$Vega$field('organ')
+											$author$project$Vega$field('Species')
 										]))
 								]))
 						])),
@@ -14872,7 +14877,7 @@ var $author$project$GalleryDist$boxplot1 = function () {
 										[
 											$author$project$Vega$vScale('layout'),
 											$author$project$Vega$vField(
-											$author$project$Vega$field('organ')),
+											$author$project$Vega$field('Species')),
 											$author$project$Vega$vBand(
 											$author$project$Vega$num(0.5))
 										])),
@@ -14902,22 +14907,16 @@ var $author$project$GalleryDist$boxplot1 = function () {
 				$author$project$Vega$transform,
 				_List_fromArray(
 					[
-						A3(
-						$author$project$Vega$trFoldAs,
-						_List_fromArray(
-							[
-								$author$project$Vega$fSignal('fields')
-							]),
-						'organ',
-						'value')
+						$author$project$Vega$trFilter(
+						$author$project$Vega$expr('datum.Species != null && datum[\'Body Mass (g)\'] != null'))
 					]),
 				A2(
 					$author$project$Vega$data,
-					'iris',
+					'penguins',
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str($author$project$GalleryDist$dPath + 'iris.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'penguins.json'))
 						])))
 			]));
 	var cf = $author$project$Vega$config(
@@ -14947,7 +14946,9 @@ var $author$project$GalleryDist$boxplot1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$axZIndex(
-						$author$project$Vega$num(1))
+						$author$project$Vega$num(1)),
+						$author$project$Vega$axTitle(
+						$author$project$Vega$str('Body Mass (g)'))
 					]))),
 		A3(
 			$author$project$Vega$axis,
@@ -14993,10 +14994,6 @@ var $author$project$Vega$AxGrid = function (a) {
 	return {$: 16, a: a};
 };
 var $author$project$Vega$axGrid = $author$project$Vega$AxGrid;
-var $author$project$Vega$AxTitle = function (a) {
-	return {$: 62, a: a};
-};
-var $author$project$Vega$axTitle = $author$project$Vega$AxTitle;
 var $author$project$Vega$AxTitlePadding = function (a) {
 	return {$: 75, a: a};
 };
@@ -15017,7 +15014,6 @@ var $author$project$Vega$FExpr = function (a) {
 	return {$: 1, a: a};
 };
 var $author$project$Vega$fExpr = $author$project$Vega$FExpr;
-var $author$project$Vega$false = $author$project$Vega$Boo(false);
 var $author$project$Vega$GeField = function (a) {
 	return {$: 0, a: a};
 };
@@ -15167,10 +15163,6 @@ var $author$project$Vega$Descending = {$: 1};
 var $author$project$Vega$soDescending = $author$project$Vega$Descending;
 var $author$project$Vega$Symbol = 9;
 var $author$project$Vega$symbol = 9;
-var $author$project$Vega$TFilter = function (a) {
-	return {$: 12, a: a};
-};
-var $author$project$Vega$trFilter = $author$project$Vega$TFilter;
 var $author$project$Vega$TGeoPath = F2(
 	function (a, b) {
 		return {$: 22, a: a, b: b};
@@ -15193,6 +15185,10 @@ var $author$project$Vega$VBoo = function (a) {
 	return {$: 4, a: a};
 };
 var $author$project$Vega$vFalse = $author$project$Vega$VBoo(false);
+var $author$project$Vega$VStrs = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$vStrs = $author$project$Vega$VStrs;
 var $author$project$Vega$vTrue = $author$project$Vega$VBoo(true);
 var $author$project$GalleryDist$contour1 = function () {
 	var si = A2(
@@ -18382,6 +18378,10 @@ var $author$project$GalleryDist$quantile1 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$Vega$FSignal = function (a) {
+	return {$: 2, a: a};
+};
+var $author$project$Vega$fSignal = $author$project$Vega$FSignal;
 var $author$project$Vega$ReAs = F2(
 	function (a, b) {
 		return {$: 5, a: a, b: b};
@@ -19693,28 +19693,23 @@ var $author$project$GalleryDist$timeUnits1 = function () {
 				mk(_List_Nil)
 			]));
 }();
-var $author$project$Vega$FParent = function (a) {
-	return {$: 5, a: a};
-};
-var $author$project$Vega$fParent = $author$project$Vega$FParent;
-var $author$project$Vega$StAs = F2(
-	function (a, b) {
-		return {$: 4, a: a, b: b};
-	});
-var $author$project$Vega$stAs = F2(
-	function (y0, y1) {
-		return A2($author$project$Vega$StAs, y0, y1);
-	});
-var $author$project$Vega$OfCenter = {$: 1};
-var $author$project$Vega$stCenter = $author$project$Vega$OfCenter;
-var $author$project$Vega$StField = function (a) {
-	return {$: 0, a: a};
-};
-var $author$project$Vega$stField = $author$project$Vega$StField;
-var $author$project$Vega$StOffset = function (a) {
+var $author$project$Vega$KdBandwidth = function (a) {
 	return {$: 3, a: a};
 };
-var $author$project$Vega$stOffset = $author$project$Vega$StOffset;
+var $author$project$Vega$kdBandwidth = $author$project$Vega$KdBandwidth;
+var $author$project$Vega$KdExtent = function (a) {
+	return {$: 4, a: a};
+};
+var $author$project$Vega$kdExtent = $author$project$Vega$KdExtent;
+var $author$project$Vega$KdGroupBy = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$kdGroupBy = $author$project$Vega$KdGroupBy;
+var $author$project$Vega$TKde = F2(
+	function (a, b) {
+		return {$: 32, a: a, b: b};
+	});
+var $author$project$Vega$trKde = $author$project$Vega$TKde;
 var $author$project$GalleryDist$violinplot1 = function () {
 	var si = A2(
 		$elm$core$Basics$composeL,
@@ -19724,19 +19719,7 @@ var $author$project$GalleryDist$violinplot1 = function () {
 				$elm$core$Basics$composeL,
 				A2(
 					$elm$core$Basics$composeL,
-					A2(
-						$elm$core$Basics$composeL,
-						$author$project$Vega$signals,
-						A2(
-							$author$project$Vega$signal,
-							'fields',
-							_List_fromArray(
-								[
-									$author$project$Vega$siValue(
-									$author$project$Vega$vStrs(
-										_List_fromArray(
-											['petalWidth', 'petalLength', 'sepalWidth', 'sepalLength'])))
-								]))),
+					$author$project$Vega$signals,
 					A2(
 						$author$project$Vega$signal,
 						'plotWidth',
@@ -19750,37 +19733,30 @@ var $author$project$GalleryDist$violinplot1 = function () {
 					'height',
 					_List_fromArray(
 						[
-							$author$project$Vega$siUpdate('(plotWidth + 10) * length(fields)')
+							$author$project$Vega$siUpdate('(plotWidth+10)*3')
 						]))),
 			A2(
 				$author$project$Vega$signal,
-				'bandWidth',
+				'trim',
 				_List_fromArray(
 					[
-						$author$project$Vega$siValue(
-						$author$project$Vega$vNum(0)),
+						$author$project$Vega$siValue($author$project$Vega$vTrue),
 						$author$project$Vega$siBind(
-						$author$project$Vega$iRange(
-							_List_fromArray(
-								[
-									$author$project$Vega$inMin(0),
-									$author$project$Vega$inMax(0.5),
-									$author$project$Vega$inStep(0.005)
-								])))
+						$author$project$Vega$iCheckbox(_List_Nil))
 					]))),
 		A2(
 			$author$project$Vega$signal,
-			'steps',
+			'bandwidth',
 			_List_fromArray(
 				[
 					$author$project$Vega$siValue(
-					$author$project$Vega$vNum(100)),
+					$author$project$Vega$vNum(0)),
 					$author$project$Vega$siBind(
 					$author$project$Vega$iRange(
 						_List_fromArray(
 							[
-								$author$project$Vega$inMin(10),
-								$author$project$Vega$inMax(500),
+								$author$project$Vega$inMin(0),
+								$author$project$Vega$inMax(200),
 								$author$project$Vega$inStep(1)
 							])))
 				])));
@@ -19790,41 +19766,67 @@ var $author$project$GalleryDist$violinplot1 = function () {
 			$elm$core$Basics$composeL,
 			A2(
 				$elm$core$Basics$composeL,
-				$author$project$Vega$scales,
+				A2(
+					$elm$core$Basics$composeL,
+					$author$project$Vega$scales,
+					A2(
+						$author$project$Vega$scale,
+						'layout',
+						_List_fromArray(
+							[
+								$author$project$Vega$scType($author$project$Vega$scBand),
+								$author$project$Vega$scRange($author$project$Vega$raHeight),
+								$author$project$Vega$scDomain(
+								$author$project$Vega$doData(
+									_List_fromArray(
+										[
+											$author$project$Vega$daDataset('penguins'),
+											$author$project$Vega$daField(
+											$author$project$Vega$field('Species'))
+										])))
+							]))),
 				A2(
 					$author$project$Vega$scale,
-					'layout',
+					'xScale',
 					_List_fromArray(
 						[
-							$author$project$Vega$scType($author$project$Vega$scBand),
-							$author$project$Vega$scRange($author$project$Vega$raHeight),
+							$author$project$Vega$scType($author$project$Vega$scLinear),
+							$author$project$Vega$scRange($author$project$Vega$raWidth),
+							$author$project$Vega$scRound($author$project$Vega$true),
 							$author$project$Vega$scDomain(
 							$author$project$Vega$doData(
 								_List_fromArray(
 									[
-										$author$project$Vega$daDataset('iris'),
+										$author$project$Vega$daDataset('penguins'),
 										$author$project$Vega$daField(
-										$author$project$Vega$field('organ'))
-									])))
+										$author$project$Vega$field('Body Mass (g)'))
+									]))),
+							$author$project$Vega$scDomainMin(
+							$author$project$Vega$num(2000)),
+							$author$project$Vega$scZero($author$project$Vega$true),
+							$author$project$Vega$scNice($author$project$Vega$niTrue)
 						]))),
 			A2(
 				$author$project$Vega$scale,
-				'xScale',
+				'hScale',
 				_List_fromArray(
 					[
 						$author$project$Vega$scType($author$project$Vega$scLinear),
-						$author$project$Vega$scRange($author$project$Vega$raWidth),
-						$author$project$Vega$scRound($author$project$Vega$true),
+						$author$project$Vega$scRange(
+						$author$project$Vega$raValues(
+							_List_fromArray(
+								[
+									$author$project$Vega$vNum(0),
+									$author$project$Vega$vSignal('plotWidth')
+								]))),
 						$author$project$Vega$scDomain(
 						$author$project$Vega$doData(
 							_List_fromArray(
 								[
-									$author$project$Vega$daDataset('iris'),
+									$author$project$Vega$daDataset('density'),
 									$author$project$Vega$daField(
-									$author$project$Vega$field('value'))
-								]))),
-						$author$project$Vega$scZero($author$project$Vega$true),
-						$author$project$Vega$scNice($author$project$Vega$niTrue)
+									$author$project$Vega$field('density'))
+								])))
 					]))),
 		A2(
 			$author$project$Vega$scale,
@@ -19832,31 +19834,14 @@ var $author$project$GalleryDist$violinplot1 = function () {
 			_List_fromArray(
 				[
 					$author$project$Vega$scType($author$project$Vega$scOrdinal),
-					$author$project$Vega$scRange($author$project$Vega$raCategory)
-				])));
-	var nestedSc = A2(
-		$elm$core$Basics$composeL,
-		$author$project$Vega$scales,
-		A2(
-			$author$project$Vega$scale,
-			'yScale',
-			_List_fromArray(
-				[
-					$author$project$Vega$scType($author$project$Vega$scLinear),
-					$author$project$Vega$scRange(
-					$author$project$Vega$raValues(
-						_List_fromArray(
-							[
-								$author$project$Vega$vNum(0),
-								$author$project$Vega$vSignal('plotWidth')
-							]))),
+					$author$project$Vega$scRange($author$project$Vega$raCategory),
 					$author$project$Vega$scDomain(
 					$author$project$Vega$doData(
 						_List_fromArray(
 							[
-								$author$project$Vega$daDataset('density'),
+								$author$project$Vega$daDataset('penguins'),
 								$author$project$Vega$daField(
-								$author$project$Vega$field('density'))
+								$author$project$Vega$field('Species'))
 							])))
 				])));
 	var nestedMk = A2(
@@ -19875,7 +19860,7 @@ var $author$project$GalleryDist$violinplot1 = function () {
 							_List_fromArray(
 								[
 									$author$project$Vega$srData(
-									$author$project$Vega$str('density'))
+									$author$project$Vega$str('violin'))
 								])),
 							$author$project$Vega$mEncode(
 							_List_fromArray(
@@ -19889,7 +19874,7 @@ var $author$project$GalleryDist$violinplot1 = function () {
 													$author$project$Vega$vScale('cScale'),
 													$author$project$Vega$vField(
 													$author$project$Vega$fParent(
-														$author$project$Vega$field('organ')))
+														$author$project$Vega$field('Species')))
 												]))
 										])),
 									$author$project$Vega$enUpdate(
@@ -19902,19 +19887,17 @@ var $author$project$GalleryDist$violinplot1 = function () {
 													$author$project$Vega$vField(
 													$author$project$Vega$field('value'))
 												])),
-											$author$project$Vega$maY(
+											$author$project$Vega$maYC(
 											_List_fromArray(
 												[
-													$author$project$Vega$vScale('yScale'),
-													$author$project$Vega$vField(
-													$author$project$Vega$field('y0'))
+													$author$project$Vega$vSignal('plotWidth/2')
 												])),
-											$author$project$Vega$maY2(
+											$author$project$Vega$maHeight(
 											_List_fromArray(
 												[
-													$author$project$Vega$vScale('yScale'),
+													$author$project$Vega$vScale('hScale'),
 													$author$project$Vega$vField(
-													$author$project$Vega$field('y1'))
+													$author$project$Vega$field('density'))
 												]))
 										]))
 								]))
@@ -19951,7 +19934,7 @@ var $author$project$GalleryDist$violinplot1 = function () {
 										$author$project$Vega$maYC(
 										_List_fromArray(
 											[
-												$author$project$Vega$vSignal('plotWidth / 2')
+												$author$project$Vega$vSignal('plotWidth/2')
 											])),
 										$author$project$Vega$maX(
 										_List_fromArray(
@@ -20026,60 +20009,15 @@ var $author$project$GalleryDist$violinplot1 = function () {
 				$author$project$Vega$transform,
 				_List_fromArray(
 					[
-						A2(
-						$author$project$Vega$trDensity,
-						A3(
-							$author$project$Vega$diKde,
-							'organs',
-							$author$project$Vega$field('value'),
-							$author$project$Vega$numSignal('bandWidth')),
-						_List_fromArray(
-							[
-								$author$project$Vega$dnSteps(
-								$author$project$Vega$numSignal('steps'))
-							])),
-						$author$project$Vega$trStack(
-						_List_fromArray(
-							[
-								$author$project$Vega$stGroupBy(
-								_List_fromArray(
-									[
-										$author$project$Vega$field('value')
-									])),
-								$author$project$Vega$stField(
-								$author$project$Vega$field('density')),
-								$author$project$Vega$stOffset($author$project$Vega$stCenter),
-								A2($author$project$Vega$stAs, 'y0', 'y1')
-							]))
-					]),
-				A2($author$project$Vega$data, 'density', _List_Nil)),
-				A2(
-				$author$project$Vega$transform,
-				_List_fromArray(
-					[
-						$author$project$Vega$trAggregate(
-						_List_fromArray(
-							[
-								$author$project$Vega$agFields(
-								A2(
-									$elm$core$List$map,
-									$author$project$Vega$field,
-									_List_fromArray(
-										['value', 'value', 'value']))),
-								$author$project$Vega$agOps(
-								_List_fromArray(
-									[$author$project$Vega$opQ1, $author$project$Vega$opMedian, $author$project$Vega$opQ3])),
-								$author$project$Vega$agAs(
-								_List_fromArray(
-									['q1', 'median', 'q3']))
-							]))
+						$author$project$Vega$trFilter(
+						$author$project$Vega$expr('datum.Species === parent.Species'))
 					]),
 				A2(
 					$author$project$Vega$data,
 					'summary',
 					_List_fromArray(
 						[
-							$author$project$Vega$daSource('organs')
+							$author$project$Vega$daSource('stats')
 						])))
 			]));
 	var mk = A2(
@@ -20095,14 +20033,14 @@ var $author$project$GalleryDist$violinplot1 = function () {
 						[
 							A3(
 							$author$project$Vega$srFacet,
-							$author$project$Vega$str('iris'),
-							'organs',
+							$author$project$Vega$str('density'),
+							'violin',
 							_List_fromArray(
 								[
 									$author$project$Vega$faGroupBy(
 									_List_fromArray(
 										[
-											$author$project$Vega$field('organ')
+											$author$project$Vega$field('Species')
 										]))
 								]))
 						])),
@@ -20117,7 +20055,7 @@ var $author$project$GalleryDist$violinplot1 = function () {
 										[
 											$author$project$Vega$vScale('layout'),
 											$author$project$Vega$vField(
-											$author$project$Vega$field('organ')),
+											$author$project$Vega$field('Species')),
 											$author$project$Vega$vBand(
 											$author$project$Vega$num(0.5))
 										])),
@@ -20137,7 +20075,6 @@ var $author$project$GalleryDist$violinplot1 = function () {
 					_List_fromArray(
 						[
 							nestedDs,
-							nestedSc(_List_Nil),
 							nestedMk(_List_Nil)
 						]))
 				])));
@@ -20148,22 +20085,70 @@ var $author$project$GalleryDist$violinplot1 = function () {
 				$author$project$Vega$transform,
 				_List_fromArray(
 					[
-						A3(
-						$author$project$Vega$trFoldAs,
-						_List_fromArray(
-							[
-								$author$project$Vega$fSignal('fields')
-							]),
-						'organ',
-						'value')
+						$author$project$Vega$trFilter(
+						$author$project$Vega$expr('datum.Species != null && datum[\'Body Mass (g)\'] != null'))
 					]),
 				A2(
 					$author$project$Vega$data,
-					'iris',
+					'penguins',
 					_List_fromArray(
 						[
 							$author$project$Vega$daUrl(
-							$author$project$Vega$str($author$project$GalleryDist$dPath + 'iris.json'))
+							$author$project$Vega$str($author$project$GalleryDist$dPath + 'penguins.json'))
+						]))),
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2(
+						$author$project$Vega$trKde,
+						$author$project$Vega$field('Body Mass (g)'),
+						_List_fromArray(
+							[
+								$author$project$Vega$kdGroupBy(
+								_List_fromArray(
+									[
+										$author$project$Vega$field('Species')
+									])),
+								$author$project$Vega$kdBandwidth(
+								$author$project$Vega$numSignal('bandwidth')),
+								$author$project$Vega$kdExtent(
+								$author$project$Vega$numSignal('trim ? null : [2000, 6500]'))
+							]))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'density',
+					_List_fromArray(
+						[
+							$author$project$Vega$daSource('penguins')
+						]))),
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						$author$project$Vega$trAggregate(
+						_List_fromArray(
+							[
+								$author$project$Vega$agFields(
+								A2(
+									$elm$core$List$repeat,
+									3,
+									$author$project$Vega$field('Body Mass (g)'))),
+								$author$project$Vega$agOps(
+								_List_fromArray(
+									[$author$project$Vega$opQ1, $author$project$Vega$opMedian, $author$project$Vega$opQ3])),
+								$author$project$Vega$agAs(
+								_List_fromArray(
+									['q1', 'median', 'q3']))
+							]))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'stats',
+					_List_fromArray(
+						[
+							$author$project$Vega$daSource('penguins')
 						])))
 			]));
 	var cf = $author$project$Vega$config(
@@ -20193,7 +20178,9 @@ var $author$project$GalleryDist$violinplot1 = function () {
 				_List_fromArray(
 					[
 						$author$project$Vega$axZIndex(
-						$author$project$Vega$num(1))
+						$author$project$Vega$num(1)),
+						$author$project$Vega$axTitle(
+						$author$project$Vega$str('Body Mass (g)'))
 					]))),
 		A3(
 			$author$project$Vega$axis,
@@ -21163,7 +21150,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $author$project$GalleryDist$sourceExample = $author$project$GalleryDist$regression1;
+var $author$project$GalleryDist$sourceExample = $author$project$GalleryDist$violinplot1;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$GalleryDist$view = function (spec) {
