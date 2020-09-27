@@ -92,6 +92,16 @@
     </p>
     <div id="beeswarm1" class="view"></div>
 
+    <p>
+      A calendar visualization of daily changes to the S&P 500 since 2000.
+      Adapted from a
+      <a href="https://observablehq.com/@d3/calendar-view" target="_blank"
+        >Calendar View</a
+      >
+      by Mike Bostock.
+    </p>
+    <div id="calendar1" class="view"></div>
+
     <h2>Source</h2>
     <details
       ><summary>click to see code</summary>
@@ -100,12 +110,12 @@
 
     <script>
       Elm.GalleryOther.init({
-        node: document.getElementById("elmContainer")
-      }).ports.elmToJS.subscribe(function(namedSpecs) {
+        node: document.getElementById("elmContainer"),
+      }).ports.elmToJS.subscribe(function (namedSpecs) {
         for (let name of Object.keys(namedSpecs)) {
           vegaEmbed(`#${name}`, namedSpecs[name], {
             actions: true,
-            logLevel: vega.Warn
+            logLevel: vega.Warn,
           }).catch(console.warn);
         }
       });

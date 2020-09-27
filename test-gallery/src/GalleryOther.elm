@@ -595,7 +595,8 @@ beeswarm1 =
                     ]
 
         ax =
-            axes << axis "xScale" siBottom []
+            axes
+                << axis "xScale" siBottom []
 
         mk =
             marks
@@ -637,9 +638,182 @@ beeswarm1 =
         [ width 800, height 100, paddings 5 0 5 20, autosize [ asNone ], ds, si [], sc [], ax [], mk [] ]
 
 
+calendar1 : Spec
+calendar1 =
+    let
+        ds =
+            dataSource
+                [ data "sp500"
+                    [ -- daUrl (str (dPath ++ "sp500-2000.csv"))
+                      -- TODO: Replace with standard path once data are released to data repo
+                      daUrl (str "https://raw.githubusercontent.com/vega/vega/master/docs/data/sp500-2000.csv")
+                    , daFormat [ csv, parse [ ( "close", foNum ), ( "date", foDate "" ) ] ]
+                    ]
+                    |> transform
+                        [ trWindow
+                            [ wnOperationOn woLag Nothing (Just (field "close")) "prev" ]
+                            [ wnSort [ ( field "date", ascend ) ] ]
+                        , trFormula "datum.prev ? (datum.close - datum.prev) / datum.prev : 0" "value"
+                        , trFormula "year(datum.date)" "year"
+                        , trTimeUnit (field "date") [ tbUnits [ year, week ], tbAs "w0" "w1" ]
+                        , trFormula "timeOffset('day', datum.w0)" "w0"
+                        , trTimeUnit (field "date") [ tbUnits [ day ], tbAs "d0" "d1" ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "step" [ siValue (vNum 16) ]
+                << signal "offset" [ siValue (vNum 10) ]
+                << signal "width" [ siUpdate "step*52 + offset*11" ]
+                << signal "height" [ siUpdate "step*5" ]
+                << signal "scheme"
+                    [ siValue (vStr "pinkyellowgreen")
+                    , siBind
+                        (iSelect
+                            [ inOptions
+                                (vStrs
+                                    [ "pinkyellowgreen"
+                                    , "blueorange"
+                                    , "brownbluegreen"
+                                    , "purplegreen"
+                                    , "purpleorange"
+                                    , "redblue"
+                                    , "redgrey"
+                                    , "redyellowblue"
+                                    , "redyellowgreen"
+                                    , "spectral"
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+
+        lo =
+            layout [ loColumns (num 1), loPadding (num 15) ]
+
+        sc =
+            scales
+                << scale "yScale"
+                    [ scType scBand
+                    , scRange (raStep (vSignal "step"))
+                    , scDomain (doData [ daDataset "sp500", daField (field "d0"), daSort [] ])
+                    ]
+                << scale "cScale"
+                    [ scType scLinear
+                    , scClamp true
+                    , scRange (raScheme (strSignal "scheme") [])
+                    , scDomain (doNums (nums [ -0.06, 0, 0.06 ]))
+                    ]
+
+        le =
+            legends
+                << legend
+                    [ leFill "cScale"
+                    , leTitle (str "Daily Change, S&P 500")
+                    , leTitleFontSize (num 12)
+                    , leTitlePadding (num 20)
+                    , leOffset (num 15)
+                    , leOrient loTop
+                    , leType ltGradient
+                    , leDirection orHorizontal
+                    , leGradientLength (num 250)
+                    , leGradientThickness (num 10)
+                    , leFormat (str "%")
+                    ]
+
+        mk =
+            marks
+                << mark group
+                    [ mFrom [ srFacet (str "sp500") "values" [ faGroupBy [ field "year" ] ] ]
+                    , mSort [ ( field "datum.year", descend ) ]
+                    , mGroup [ nestedDs, nestedSc [], nestedAx [], nestedMk [] ]
+                    ]
+
+        nestedDs =
+            dataSource
+                [ data "max" [ daSource "values" ]
+                    |> transform [ trAggregate [ agOps [ opMax ], agFields [ field "date" ] ] ]
+                , data "weeks" []
+                    |> transform
+                        [ trSequenceAs (num 0) (num 53) (num 1) "weeknum"
+                        , trFormula "datetime(parent.year, 0, 1 + datum.weeknum * 7)" "date"
+                        , trTimeUnit (field "date") [ tbUnits [ year, week ], tbAs "w0" "w1" ]
+                        , trFormula "timeOffset('day', datum.w0)" "w0"
+                        , trFilter (expr "datum.date < data('max')[0].max_date")
+                        ]
+                ]
+
+        nestedSc =
+            scales
+                << scale "xScale"
+                    [ scType scBand
+                    , scRange (raStep (vSignal "step"))
+                    , scDomain (doData [ daDataset "weeks", daField (field "w0"), daSort [] ])
+                    ]
+
+        nestedAx =
+            axes
+                << axis "yScale"
+                    siLeft
+                    [ axTicks false
+                    , axDomain false
+                    , axLabelPadding (num 8)
+                    , axFormatAsTemporal
+                    , axFormat (str "%a")
+                    , axTitle (strSignal "parent.year")
+                    , axTitleAngle (num 0)
+                    , axTitleAlign haRight
+                    , axTitleX (num -8)
+                    , axTitleY (num -2)
+                    , axTitleFontSize (num 10)
+                    ]
+                << axis "xScale"
+                    siTop
+                    [ axTicks false
+                    , axDomain false
+                    , axFormatAsTemporal
+                    , axFormat (str "%b")
+                    , axLabelAlign haLeft
+                    , axEncode
+                        [ ( aeLabels
+                          , [ enUpdate
+                                [ maX
+                                    [ vField (field "value")
+                                    , vBand (num 0)
+                                    , vOffset (vSignal "month(datum.value) * offset")
+                                    ]
+                                , maOpacity [ vSignal "date(datum.value) < 8 ? 1 : 0" ]
+                                ]
+                            ]
+                          )
+                        ]
+                    ]
+
+        nestedMk =
+            marks
+                << mark rect
+                    [ mFrom [ srData (str "values") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "w0"), vOffset (vSignal "month(datum.date) * offset") ]
+                            , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -1) ]
+                            , maY [ vScale "yScale", vField (field "d0") ]
+                            , maHeight [ vScale "yScale", vBand (num 1), vOffset (vNum -1) ]
+                            , maCornerRadius [ vNum 2 ]
+                            , maTooltip [ vSignal "timeFormat(datum.date, '%a %b %d, %Y') + '\\n' + format(datum.value, '+.2%')" ]
+                            ]
+                        , enUpdate [ maFill [ vScale "cScale", vField (field "value") ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ lo, padding 5, ds, si [], sc [], le [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    beeswarm1
+    calendar1
 
 
 
@@ -655,6 +829,7 @@ mySpecs =
         , ( "wordcloud1", wordcloud1 )
         , ( "timeline1", timeline1 )
         , ( "beeswarm1", beeswarm1 )
+        , ( "calendar1", calendar1 )
         ]
 
 
