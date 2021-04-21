@@ -6,6 +6,12 @@ _None._
 
 ---
 
+## V5.7.0 ➡ V5.7.1
+
+_Minor code cleaning and update of dependencies in examples_
+
+---
+
 ## V5.6.1 ➡ V5.7.0
 
 _Minor release to support Vega 5.16 with new non-overlapping label placement._
