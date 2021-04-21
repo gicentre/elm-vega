@@ -11,7 +11,7 @@
 
     <!-- These scripts link to the Vega runtime -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
     <!-- The following is only needed when using custom D3 projections. -->
     <script src="https://d3js.org/d3-array.v1.min.js"></script>
@@ -143,8 +143,8 @@
     <div id="geo10" class="view"></div>
 
     <h2>Source</h2>
-    <details
-      ><summary>click to see code</summary>
+    <details>
+      <summary>click to see code</summary>
       <div id="elmContainer"></div>
     </details>
 
@@ -195,12 +195,12 @@
 
     <script>
       Elm.GalleryGeo.init({
-        node: document.getElementById("elmContainer")
-      }).ports.elmToJS.subscribe(function(namedSpecs) {
+        node: document.getElementById("elmContainer"),
+      }).ports.elmToJS.subscribe(function (namedSpecs) {
         for (let name of Object.keys(namedSpecs)) {
           vegaEmbed(`#${name}`, namedSpecs[name], {
             actions: true,
-            logLevel: vega.Warn
+            logLevel: vega.Warn,
           }).catch(console.warn);
         }
       });

@@ -17,7 +17,7 @@
 
     <!-- These scripts link to the Vega runtime -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="https://cdn.jsdelivr.net/npm/apache-arrow"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-loader-arrow"></script>
 
@@ -56,18 +56,16 @@
 
     <h2>Flight Data Example</h2>
 
-    <p>
-      Data source contains 200,000 flight records as a binary arrow file.
-    </p>
+    <p>Data source contains 200,000 flight records as a binary arrow file.</p>
 
     <div id="arrow1"></div>
 
     <script>
-      Elm.ApacheArrow.init().ports.elmToJS.subscribe(function(namedSpecs) {
+      Elm.ApacheArrow.init().ports.elmToJS.subscribe(function (namedSpecs) {
         for (let name of Object.keys(namedSpecs)) {
           vegaEmbed(`#${name}`, namedSpecs[name], {
             actions: false,
-            logLevel: vega.Warn
+            logLevel: vega.Warn,
           }).catch(console.warn);
         }
       });

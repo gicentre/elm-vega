@@ -6,7 +6,7 @@
 
     <!-- These scripts link to the Vega runtime -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
     <!-- This is the script generated from Elm -->
     <script src="js/helloWorld.js"></script>
@@ -19,7 +19,7 @@
     <script>
       // This function grabs the specifications from Elm (here called namedSpecs).
       // Replace 'HelloWorld' in line below with name of your Elm module when you write your own.
-      Elm.HelloWorld.init().ports.elmToJS.subscribe(function(namedSpecs) {
+      Elm.HelloWorld.init().ports.elmToJS.subscribe(function (namedSpecs) {
         for (let name of Object.keys(namedSpecs)) {
           vegaEmbed(`#${name}`, namedSpecs[name], { actions: false }).catch(
             console.warn
