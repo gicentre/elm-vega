@@ -5165,7 +5165,7 @@ var $author$project$Vega$Proj = function (a) {
 	return {$: 17, a: a};
 };
 var $author$project$Vega$customProjection = $author$project$Vega$Proj;
-var $author$project$ProjectionTests$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
+var $author$project$ProjectionTests$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2/data/';
 var $author$project$Vega$DaFormat = function (a) {
 	return {$: 0, a: a};
 };
@@ -12154,7 +12154,7 @@ var $author$project$ProjectionTests$projTest = function () {
 						$author$project$Vega$daValue(
 						$author$project$Vega$vStrs(
 							_List_fromArray(
-								['azimuthalEquidistant', 'conicConformal', 'mercator', 'orthographic', 'equalEarth', 'naturalEarth1', 'mollweide', 'stereographic', 'gnomonic', 'airy', 'armadillo', 'baker', 'berghaus', 'bottomley', 'collignon', 'eckert1', 'guyou', 'hammer', 'littrow', 'mollweide', 'wagner6', 'wiechel', 'winkel3', 'interruptedSinusoidal', 'interruptedMollweide', 'interruptedMollweideHemispheres', 'polyhedralButterfly', 'peirceQuincuncial'])))
+								['airy', 'aitoff', 'albers', 'armadillo', 'august', 'azimuthalEqualArea', 'azimuthalEquidistant', 'baker', 'berghaus', 'bertin1953', 'boggs', 'bonne', 'bottomley', 'collignon', 'conicConformal', 'conicEqualArea', 'conicEquidistant', 'craig', 'cylindricalequalarea', 'eckert1', 'eckert3', 'eckert5', 'eisenlohr', 'equalEarth', 'equirectangular', 'fahey', 'foucaut', 'gingery', 'gnomonic', 'guyou', 'hammer', 'interruptedMollweide', 'interruptedMollweideHemispheres', 'interruptedSinusoidal', 'littrow', 'mercator', 'mollweide', 'naturalEarth1', 'orthographic', 'peirceQuincuncial', 'polyhedralButterfly', 'stereographic', 'wagner6', 'wiechel', 'winkel3'])))
 					])),
 				A2(
 				$author$project$Vega$data,

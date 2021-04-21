@@ -16,7 +16,7 @@ import Vega exposing (..)
 
 dPath : String
 dPath =
-    "https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/"
+    "https://cdn.jsdelivr.net/npm/vega-datasets@2/data/"
 
 
 standardProjections : Value
