@@ -1,4 +1,4 @@
-# Vega Test gallery
+# Vega gallery
 
 elm-vega implementation of all examples in the [Vega Examples Gallery](https://vega.github.io/vega/examples).
 
