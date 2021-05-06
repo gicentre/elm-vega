@@ -11972,6 +11972,14 @@ loNone =
     None
 
 
+{-| List of 10 symbols to replace the numerals 0–9 as part of a locale specification.
+Use [strs](#strs) to represent the list.
+-}
+loNumerals : Str -> LocaleProperty
+loNumerals =
+    LNumerals
+
+
 {-| Orthogonal offset in pixels by which to displace grid header, footer
 and title cells from their position along the edge of a grid layout.
 -}
@@ -12002,14 +12010,6 @@ specified separately.
 loPaddingRC : Num -> Num -> LayoutProperty
 loPaddingRC r c =
     LPaddingRC r c
-
-
-{-| List of 10 symbols to replace the numerals 0–9 as part of a locale specification.
-Use [strs](#strs) to represent the list.
--}
-loNumerals : Str -> LocaleProperty
-loNumerals =
-    LNumerals
 
 
 {-| Symbol used to indicate percentages as part of a locale specification.
