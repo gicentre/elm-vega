@@ -11933,19 +11933,19 @@ loLeft =
     Left
 
 
+{-| Symbol used to indicate minus/negative as part of a locale specification.
+-}
+loMinus : Str -> LocaleProperty
+loMinus =
+    LMinus
+
+
 {-| List of the text representing the 12 months of the year (starting January) as
 part of a locale specification. Use [strs](#strs) to represent the list.
 -}
 loMonths : Str -> LocaleProperty
 loMonths =
     LMonths
-
-
-{-| Symbol used to indicate minus/negative as part of a locale specification.
--}
-loMinus : Str -> LocaleProperty
-loMinus =
-    LMinus
 
 
 {-| Symbol used to indicate a 'not-a-number' value, as part of a locale specification.
