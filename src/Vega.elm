@@ -11020,6 +11020,7 @@ lbOffset =
 
 
 {-| Padding in pixels (default 0) by which a label may extend past the chart bounding box.
+If [numNull](#numNull), label is allowed an unlimited extent.
 -}
 lbPadding : Num -> LabelOverlapProperty
 lbPadding =

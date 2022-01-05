@@ -8,7 +8,7 @@ _None._
 
 ## V5.7.0 ➡ V5.7.1
 
-_Minor code cleaning and update of dependencies in examples_
+_Minor code cleaning and update of dependencies in examples._
 
 ---
 
