@@ -1,8 +1,8 @@
 # Vega Changes
 
-## Pending changes
+## V5.7.1 ➡ V5.7.2 (pending)
 
-_None._
+_Minor code cleaning, updating of data dependencies and additional examples in gallery._
 
 ---
 

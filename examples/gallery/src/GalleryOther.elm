@@ -811,9 +811,96 @@ calendar1 =
         [ lo, padding 5, ds, si [], sc [], le [], mk [] ]
 
 
+bubble1 : Spec
+bubble1 =
+    let
+        
+        tbl =
+            dataFromColumns "table" []
+                << dataColumn "category" (vStrs [ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P" ])
+                << dataColumn "amount" (vNums [ 0.28, 0.55, 0.43, 0.91, 0.81, 0.53, 0.19, 0.87, 0.28, 0.55, 0.43, 0.91, 0.81, 0.53, 0.19, 0.87 ])
+
+        ds =
+            dataSource [ tbl [] ]
+
+        si =
+            signals
+                << signal "cx" [ siUpdate "width / 2" ]
+                << signal "cy" [ siUpdate "height / 2" ]
+                << signal "gravityX" [ siValue (vNum 0.2), siBind (iRange [ inMin 0, inMax 1 ]) ]
+                << signal "gravityY" [ siValue (vNum 0.1), siBind (iRange [ inMin 0, inMax 1 ]) ]
+
+        sc =
+            scales
+                << scale "sScale"
+                    [ 
+                      scRange (raNums [ 0, 10000] )
+                    , scDomain (doData [ daDataset "table", daField (field "amount") ])
+                    ]
+                << scale "cScale"
+                    [ scType scOrdinal
+                    , scRange (raRamp)
+                    , scDomain (doData [ daDataset "table", daField (field "category") ])
+                    ]
+
+      
+        mk =
+            marks
+                << mark symbol
+                    [ mName "nodes"
+                    , mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vScale "cScale", vField (field "category") ]
+                            , maCustom "xfocus" [ vSignal "cx" ]
+                            , maCustom "yfocus" [ vSignal "cy" ]
+                            ]
+                        , enUpdate
+                            [ maSize [ vSignal "datum.amount", vScale "sScale" ]
+                            , maStroke [ white ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maTooltip [ vSignal "datum" ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trForce
+                            [ fsIterations (num 100)
+                            , fsStatic false
+                            , fsForces
+                                [ foCollide (numExpr (expr "sqrt(datum.size)/2")) [ fpIterations (num 2) ]
+                                , foCenter (numSignal "cx") (numSignal "cy" )
+                                , foX (field "xfocus") [ fpStrength (numSignal "gravityX") ]
+                                , foY (field "yfocus") [ fpStrength (numSignal "gravityY") ]
+                                ]
+                            ]
+                        ]
+                    ]
+                << mark text
+                    [ mFrom [ srData (str "nodes") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ white ]
+                            , maAlign [ hCenter ]
+                            , maBaseline [ vMiddle ]
+                            , maFontSize [ vNum 15 ]
+                            , maFontWeight [ vStr "bold" ]
+                            , maText [ vField (field "datum.category") ]
+                            ]
+                        , enUpdate
+                            [ maX [ vField (field "x") ] 
+                            , maY[ vField (field "y") ] 
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 800, height 500, paddings 5 20 5 0, autosize [ asNone ], ds, si [], sc [], mk [] ]
+
+
+
 sourceExample : Spec
 sourceExample =
-    calendar1
+    bubble1
 
 
 
@@ -830,6 +917,7 @@ mySpecs =
         , ( "timeline1", timeline1 )
         , ( "beeswarm1", beeswarm1 )
         , ( "calendar1", calendar1 )
+        , ( "bubble1", bubble1 )
         ]
 
 
