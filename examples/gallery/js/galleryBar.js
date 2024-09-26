@@ -14243,7 +14243,7 @@ var $author$project$Vega$AxFormat = function (a) {
 	return {$: 12, a: a};
 };
 var $author$project$Vega$axFormat = $author$project$Vega$AxFormat;
-var $author$project$GalleryBar$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
+var $author$project$GalleryBar$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.9/data/';
 var $author$project$Vega$DaUrl = function (a) {
 	return {$: 6, a: a};
 };

@@ -13488,7 +13488,7 @@ var $author$project$Vega$AxTickSize = function (a) {
 	return {$: 60, a: a};
 };
 var $author$project$Vega$axTickSize = $author$project$Vega$AxTickSize;
-var $author$project$GalleryLineArea$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
+var $author$project$GalleryLineArea$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.9/data/';
 var $author$project$Vega$DaSource = function (a) {
 	return {$: 1, a: a};
 };

@@ -9828,7 +9828,7 @@ var $author$project$Vega$cursorValue = function (cur) {
 			return $author$project$Vega$vStr('grabbing');
 	}
 };
-var $author$project$GalleryCustom$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
+var $author$project$GalleryCustom$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.9/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };

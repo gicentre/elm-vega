@@ -9729,7 +9729,7 @@ var $author$project$Vega$config = function (cps) {
 		$elm$json$Json$Encode$object(
 			A2($elm$core$List$map, $author$project$Vega$configProperty, cps)));
 };
-var $author$project$GalleryDist$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.1/data/';
+var $author$project$GalleryDist$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.9/data/';
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };

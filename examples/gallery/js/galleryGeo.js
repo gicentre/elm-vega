@@ -5151,7 +5151,7 @@ var $elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
-var $author$project$GalleryGeo$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2/data/';
+var $author$project$GalleryGeo$dPath = 'https://cdn.jsdelivr.net/npm/vega-datasets@2.9/data/';
 var $author$project$Vega$DaFormat = function (a) {
 	return {$: 0, a: a};
 };
