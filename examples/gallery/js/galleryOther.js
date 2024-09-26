@@ -12810,6 +12810,561 @@ var $author$project$GalleryOther$beeswarm1 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$Vega$dataColumn = F2(
+	function (colName, val) {
+		switch (val.$) {
+			case 3:
+				var ns = val.a;
+				return $elm$core$List$cons(
+					A2(
+						$elm$core$List$map,
+						function (n) {
+							return _Utils_Tuple2(
+								colName,
+								$elm$json$Json$Encode$float(n));
+						},
+						ns));
+			case 2:
+				var n = val.a;
+				return $elm$core$List$cons(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							colName,
+							$elm$json$Json$Encode$float(n))
+						]));
+			case 5:
+				var bs = val.a;
+				return $elm$core$List$cons(
+					A2(
+						$elm$core$List$map,
+						function (b) {
+							return _Utils_Tuple2(
+								colName,
+								$elm$json$Json$Encode$bool(b));
+						},
+						bs));
+			case 4:
+				var b = val.a;
+				return $elm$core$List$cons(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							colName,
+							$elm$json$Json$Encode$bool(b))
+						]));
+			case 1:
+				var ss = val.a;
+				return $elm$core$List$cons(
+					A2(
+						$elm$core$List$map,
+						function (s) {
+							return _Utils_Tuple2(
+								colName,
+								$elm$json$Json$Encode$string(s));
+						},
+						ss));
+			case 0:
+				var s = val.a;
+				return $elm$core$List$cons(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							colName,
+							$elm$json$Json$Encode$string(s))
+						]));
+			case 6:
+				var vals = val.a;
+				return $elm$core$List$cons(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							colName,
+							$elm$json$Json$Encode$object(
+								A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, vals)))
+						]));
+			case 8:
+				var vals = val.a;
+				return $elm$core$List$cons(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							colName,
+							A2($elm$json$Json$Encode$list, $author$project$Vega$valueSpec, vals))
+						]));
+			default:
+				return $elm$core$List$cons(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(colName, $elm$json$Json$Encode$null)
+						]));
+		}
+	});
+var $elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$core$List$repeatHelp = F3(
+	function (result, n, value) {
+		repeatHelp:
+		while (true) {
+			if (n <= 0) {
+				return result;
+			} else {
+				var $temp$result = A2($elm$core$List$cons, value, result),
+					$temp$n = n - 1,
+					$temp$value = value;
+				result = $temp$result;
+				n = $temp$n;
+				value = $temp$value;
+				continue repeatHelp;
+			}
+		}
+	});
+var $elm$core$List$repeat = F2(
+	function (n, value) {
+		return A3($elm$core$List$repeatHelp, _List_Nil, n, value);
+	});
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (!maybe.$) {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $author$project$Vega$transpose = function (xss) {
+	var numCols = A2(
+		$elm$core$Basics$composeR,
+		$elm$core$List$head,
+		A2(
+			$elm$core$Basics$composeR,
+			$elm$core$Maybe$withDefault(_List_Nil),
+			$elm$core$List$length));
+	return A3(
+		$elm$core$List$foldr,
+		$elm$core$List$map2($elm$core$List$cons),
+		A2(
+			$elm$core$List$repeat,
+			numCols(xss),
+			_List_Nil),
+		xss);
+};
+var $author$project$Vega$dataFromColumns = F3(
+	function (name, fmts, cols) {
+		var fmt = _Utils_eq(fmts, _List_Nil) ? _List_Nil : _List_fromArray(
+			[
+				_Utils_Tuple2(
+				'format',
+				$elm$json$Json$Encode$object(
+					A2($elm$core$List$concatMap, $author$project$Vega$formatProperty, fmts)))
+			]);
+		var dataArray = A2(
+			$elm$json$Json$Encode$list,
+			$elm$json$Json$Encode$object,
+			$author$project$Vega$transpose(cols));
+		return _Utils_ap(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(
+					'name',
+					$elm$json$Json$Encode$string(name)),
+					_Utils_Tuple2('values', dataArray)
+				]),
+			fmt);
+	});
+var $author$project$Vega$Boo = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$false = $author$project$Vega$Boo(false);
+var $author$project$Vega$FCenter = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$FpCx = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$FpCy = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$foCenter = F2(
+	function (x, y) {
+		return $author$project$Vega$FCenter(
+			_List_fromArray(
+				[
+					$author$project$Vega$FpCx(x),
+					$author$project$Vega$FpCy(y)
+				]));
+	});
+var $author$project$Vega$hCenter = $author$project$Vega$vStr('center');
+var $author$project$Vega$MAlign = function (a) {
+	return {$: 24, a: a};
+};
+var $author$project$Vega$maAlign = $author$project$Vega$MAlign;
+var $author$project$Vega$MBaseline = function (a) {
+	return {$: 25, a: a};
+};
+var $author$project$Vega$maBaseline = $author$project$Vega$MBaseline;
+var $author$project$Vega$MFontSize = function (a) {
+	return {$: 59, a: a};
+};
+var $author$project$Vega$maFontSize = $author$project$Vega$MFontSize;
+var $author$project$Vega$MFontWeight = function (a) {
+	return {$: 60, a: a};
+};
+var $author$project$Vega$maFontWeight = $author$project$Vega$MFontWeight;
+var $author$project$Vega$MText = function (a) {
+	return {$: 66, a: a};
+};
+var $author$project$Vega$maText = $author$project$Vega$MText;
+var $author$project$Vega$MTooltip = function (a) {
+	return {$: 22, a: a};
+};
+var $author$project$Vega$maTooltip = $author$project$Vega$MTooltip;
+var $author$project$Vega$MX = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$maX = $author$project$Vega$MX;
+var $author$project$Vega$MY = function (a) {
+	return {$: 4, a: a};
+};
+var $author$project$Vega$maY = $author$project$Vega$MY;
+var $author$project$Vega$NumExpr = function (a) {
+	return {$: 5, a: a};
+};
+var $author$project$Vega$numExpr = $author$project$Vega$NumExpr;
+var $author$project$Vega$RaNums = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$raNums = $author$project$Vega$RaNums;
+var $author$project$Vega$RaRamp = {$: 12};
+var $author$project$Vega$raRamp = $author$project$Vega$RaRamp;
+var $author$project$Vega$Text = 10;
+var $author$project$Vega$text = 10;
+var $author$project$Vega$vMiddle = $author$project$Vega$vStr('middle');
+var $author$project$Vega$VNums = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Vega$vNums = $author$project$Vega$VNums;
+var $author$project$Vega$VStrs = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$vStrs = $author$project$Vega$VStrs;
+var $author$project$GalleryOther$bubble1 = function () {
+	var tbl = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2($author$project$Vega$dataFromColumns, 'table', _List_Nil),
+			A2(
+				$author$project$Vega$dataColumn,
+				'category',
+				$author$project$Vega$vStrs(
+					_List_fromArray(
+						['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'])))),
+		A2(
+			$author$project$Vega$dataColumn,
+			'amount',
+			$author$project$Vega$vNums(
+				_List_fromArray(
+					[0.28, 0.55, 0.43, 0.91, 0.81, 0.53, 0.19, 0.87, 0.28, 0.55, 0.43, 0.91, 0.81, 0.53, 0.19, 0.87]))));
+	var si = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
+				A2(
+					$elm$core$Basics$composeL,
+					$author$project$Vega$signals,
+					A2(
+						$author$project$Vega$signal,
+						'cx',
+						_List_fromArray(
+							[
+								$author$project$Vega$siUpdate('width / 2')
+							]))),
+				A2(
+					$author$project$Vega$signal,
+					'cy',
+					_List_fromArray(
+						[
+							$author$project$Vega$siUpdate('height / 2')
+						]))),
+			A2(
+				$author$project$Vega$signal,
+				'gravityX',
+				_List_fromArray(
+					[
+						$author$project$Vega$siValue(
+						$author$project$Vega$vNum(0.2)),
+						$author$project$Vega$siBind(
+						$author$project$Vega$iRange(
+							_List_fromArray(
+								[
+									$author$project$Vega$inMin(0),
+									$author$project$Vega$inMax(1)
+								])))
+					]))),
+		A2(
+			$author$project$Vega$signal,
+			'gravityY',
+			_List_fromArray(
+				[
+					$author$project$Vega$siValue(
+					$author$project$Vega$vNum(0.1)),
+					$author$project$Vega$siBind(
+					$author$project$Vega$iRange(
+						_List_fromArray(
+							[
+								$author$project$Vega$inMin(0),
+								$author$project$Vega$inMax(1)
+							])))
+				])));
+	var sc = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$scales,
+			A2(
+				$author$project$Vega$scale,
+				'sScale',
+				_List_fromArray(
+					[
+						$author$project$Vega$scRange(
+						$author$project$Vega$raNums(
+							_List_fromArray(
+								[0, 10000]))),
+						$author$project$Vega$scDomain(
+						$author$project$Vega$doData(
+							_List_fromArray(
+								[
+									$author$project$Vega$daDataset('table'),
+									$author$project$Vega$daField(
+									$author$project$Vega$field('amount'))
+								])))
+					]))),
+		A2(
+			$author$project$Vega$scale,
+			'cScale',
+			_List_fromArray(
+				[
+					$author$project$Vega$scType($author$project$Vega$scOrdinal),
+					$author$project$Vega$scRange($author$project$Vega$raRamp),
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doData(
+						_List_fromArray(
+							[
+								$author$project$Vega$daDataset('table'),
+								$author$project$Vega$daField(
+								$author$project$Vega$field('category'))
+							])))
+				])));
+	var mk = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$marks,
+			A2(
+				$author$project$Vega$mark,
+				$author$project$Vega$symbol,
+				_List_fromArray(
+					[
+						$author$project$Vega$mName('nodes'),
+						$author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								$author$project$Vega$srData(
+								$author$project$Vega$str('table'))
+							])),
+						$author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								$author$project$Vega$enEnter(
+								_List_fromArray(
+									[
+										$author$project$Vega$maFill(
+										_List_fromArray(
+											[
+												$author$project$Vega$vScale('cScale'),
+												$author$project$Vega$vField(
+												$author$project$Vega$field('category'))
+											])),
+										A2(
+										$author$project$Vega$maCustom,
+										'xfocus',
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('cx')
+											])),
+										A2(
+										$author$project$Vega$maCustom,
+										'yfocus',
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('cy')
+											]))
+									])),
+								$author$project$Vega$enUpdate(
+								_List_fromArray(
+									[
+										$author$project$Vega$maSize(
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('datum.amount'),
+												$author$project$Vega$vScale('sScale')
+											])),
+										$author$project$Vega$maStroke(
+										_List_fromArray(
+											[$author$project$Vega$white])),
+										$author$project$Vega$maStrokeWidth(
+										_List_fromArray(
+											[
+												$author$project$Vega$vNum(1)
+											])),
+										$author$project$Vega$maTooltip(
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('datum')
+											]))
+									]))
+							])),
+						$author$project$Vega$mTransform(
+						_List_fromArray(
+							[
+								$author$project$Vega$trForce(
+								_List_fromArray(
+									[
+										$author$project$Vega$fsIterations(
+										$author$project$Vega$num(100)),
+										$author$project$Vega$fsStatic($author$project$Vega$false),
+										$author$project$Vega$fsForces(
+										_List_fromArray(
+											[
+												A2(
+												$author$project$Vega$foCollide,
+												$author$project$Vega$numExpr(
+													$author$project$Vega$expr('sqrt(datum.size)/2')),
+												_List_fromArray(
+													[
+														$author$project$Vega$fpIterations(
+														$author$project$Vega$num(2))
+													])),
+												A2(
+												$author$project$Vega$foCenter,
+												$author$project$Vega$numSignal('cx'),
+												$author$project$Vega$numSignal('cy')),
+												A2(
+												$author$project$Vega$foX,
+												$author$project$Vega$field('xfocus'),
+												_List_fromArray(
+													[
+														$author$project$Vega$fpStrength(
+														$author$project$Vega$numSignal('gravityX'))
+													])),
+												A2(
+												$author$project$Vega$foY,
+												$author$project$Vega$field('yfocus'),
+												_List_fromArray(
+													[
+														$author$project$Vega$fpStrength(
+														$author$project$Vega$numSignal('gravityY'))
+													]))
+											]))
+									]))
+							]))
+					]))),
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$text,
+			_List_fromArray(
+				[
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('nodes'))
+						])),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									$author$project$Vega$maFill(
+									_List_fromArray(
+										[$author$project$Vega$white])),
+									$author$project$Vega$maAlign(
+									_List_fromArray(
+										[$author$project$Vega$hCenter])),
+									$author$project$Vega$maBaseline(
+									_List_fromArray(
+										[$author$project$Vega$vMiddle])),
+									$author$project$Vega$maFontSize(
+									_List_fromArray(
+										[
+											$author$project$Vega$vNum(15)
+										])),
+									$author$project$Vega$maFontWeight(
+									_List_fromArray(
+										[
+											$author$project$Vega$vStr('bold')
+										])),
+									$author$project$Vega$maText(
+									_List_fromArray(
+										[
+											$author$project$Vega$vField(
+											$author$project$Vega$field('datum.category'))
+										]))
+								])),
+							$author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									$author$project$Vega$maX(
+									_List_fromArray(
+										[
+											$author$project$Vega$vField(
+											$author$project$Vega$field('x'))
+										])),
+									$author$project$Vega$maY(
+									_List_fromArray(
+										[
+											$author$project$Vega$vField(
+											$author$project$Vega$field('y'))
+										]))
+								]))
+						]))
+				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				tbl(_List_Nil)
+			]));
+	return $author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				$author$project$Vega$width(800),
+				$author$project$Vega$height(500),
+				A4($author$project$Vega$paddings, 5, 20, 5, 0),
+				$author$project$Vega$autosize(
+				_List_fromArray(
+					[$author$project$Vega$asNone])),
+				ds,
+				si(_List_Nil),
+				sc(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var $author$project$Vega$ELabels = 3;
 var $author$project$Vega$aeLabels = 3;
 var $author$project$Vega$AgFields = function (a) {
@@ -12890,10 +13445,6 @@ var $author$project$Vega$FaGroupBy = function (a) {
 	return {$: 4, a: a};
 };
 var $author$project$Vega$faGroupBy = $author$project$Vega$FaGroupBy;
-var $author$project$Vega$Boo = function (a) {
-	return {$: 0, a: a};
-};
-var $author$project$Vega$false = $author$project$Vega$Boo(false);
 var $author$project$Vega$FoDate = function (a) {
 	return {$: 2, a: a};
 };
@@ -14112,22 +14663,10 @@ var $author$project$Vega$MOpacity = function (a) {
 	return {$: 8, a: a};
 };
 var $author$project$Vega$maOpacity = $author$project$Vega$MOpacity;
-var $author$project$Vega$MTooltip = function (a) {
-	return {$: 22, a: a};
-};
-var $author$project$Vega$maTooltip = $author$project$Vega$MTooltip;
 var $author$project$Vega$MWidth = function (a) {
 	return {$: 3, a: a};
 };
 var $author$project$Vega$maWidth = $author$project$Vega$MWidth;
-var $author$project$Vega$MX = function (a) {
-	return {$: 0, a: a};
-};
-var $author$project$Vega$maX = $author$project$Vega$MX;
-var $author$project$Vega$MY = function (a) {
-	return {$: 4, a: a};
-};
-var $author$project$Vega$maY = $author$project$Vega$MY;
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
@@ -14233,10 +14772,6 @@ var $author$project$Vega$VOffset = function (a) {
 	return {$: 18, a: a};
 };
 var $author$project$Vega$vOffset = $author$project$Vega$VOffset;
-var $author$project$Vega$VStrs = function (a) {
-	return {$: 1, a: a};
-};
-var $author$project$Vega$vStrs = $author$project$Vega$VStrs;
 var $author$project$Vega$Week = {$: 4};
 var $author$project$Vega$week = $author$project$Vega$Week;
 var $author$project$Vega$WnOperation = F4(
@@ -14743,10 +15278,6 @@ var $author$project$Vega$combineSpecs = function (specs) {
 };
 var $author$project$Vega$Middle = {$: 1};
 var $author$project$Vega$anMiddle = $author$project$Vega$Middle;
-var $author$project$Vega$MText = function (a) {
-	return {$: 66, a: a};
-};
-var $author$project$Vega$maText = $author$project$Vega$MText;
 var $author$project$Vega$NTrue = {$: 9};
 var $author$project$Vega$niTrue = $author$project$Vega$NTrue;
 var $author$project$Vega$RaHeight = {$: 7};
@@ -15390,10 +15921,6 @@ var $author$project$Vega$TKde2 = F5(
 		return {$: 33, a: a, b: b, c: c, d: d, e: e};
 	});
 var $author$project$Vega$trKde2d = $author$project$Vega$TKde2;
-var $author$project$Vega$VNums = function (a) {
-	return {$: 3, a: a};
-};
-var $author$project$Vega$vNums = $author$project$Vega$VNums;
 var $author$project$GalleryOther$heatmap2 = function () {
 	var si = A2(
 		$elm$core$Basics$composeL,
@@ -16993,180 +17520,6 @@ var $author$project$Vega$DFields = function (a) {
 	return {$: 2, a: a};
 };
 var $author$project$Vega$daFields = $author$project$Vega$DFields;
-var $author$project$Vega$dataColumn = F2(
-	function (colName, val) {
-		switch (val.$) {
-			case 3:
-				var ns = val.a;
-				return $elm$core$List$cons(
-					A2(
-						$elm$core$List$map,
-						function (n) {
-							return _Utils_Tuple2(
-								colName,
-								$elm$json$Json$Encode$float(n));
-						},
-						ns));
-			case 2:
-				var n = val.a;
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							colName,
-							$elm$json$Json$Encode$float(n))
-						]));
-			case 5:
-				var bs = val.a;
-				return $elm$core$List$cons(
-					A2(
-						$elm$core$List$map,
-						function (b) {
-							return _Utils_Tuple2(
-								colName,
-								$elm$json$Json$Encode$bool(b));
-						},
-						bs));
-			case 4:
-				var b = val.a;
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							colName,
-							$elm$json$Json$Encode$bool(b))
-						]));
-			case 1:
-				var ss = val.a;
-				return $elm$core$List$cons(
-					A2(
-						$elm$core$List$map,
-						function (s) {
-							return _Utils_Tuple2(
-								colName,
-								$elm$json$Json$Encode$string(s));
-						},
-						ss));
-			case 0:
-				var s = val.a;
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							colName,
-							$elm$json$Json$Encode$string(s))
-						]));
-			case 6:
-				var vals = val.a;
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							colName,
-							$elm$json$Json$Encode$object(
-								A2($elm$core$List$concatMap, $author$project$Vega$valueProperties, vals)))
-						]));
-			case 8:
-				var vals = val.a;
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							colName,
-							A2($elm$json$Json$Encode$list, $author$project$Vega$valueSpec, vals))
-						]));
-			default:
-				return $elm$core$List$cons(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(colName, $elm$json$Json$Encode$null)
-						]));
-		}
-	});
-var $elm$core$Basics$composeR = F3(
-	function (f, g, x) {
-		return g(
-			f(x));
-	});
-var $elm$core$List$head = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(x);
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
-var $elm$core$List$repeatHelp = F3(
-	function (result, n, value) {
-		repeatHelp:
-		while (true) {
-			if (n <= 0) {
-				return result;
-			} else {
-				var $temp$result = A2($elm$core$List$cons, value, result),
-					$temp$n = n - 1,
-					$temp$value = value;
-				result = $temp$result;
-				n = $temp$n;
-				value = $temp$value;
-				continue repeatHelp;
-			}
-		}
-	});
-var $elm$core$List$repeat = F2(
-	function (n, value) {
-		return A3($elm$core$List$repeatHelp, _List_Nil, n, value);
-	});
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (!maybe.$) {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
-		}
-	});
-var $author$project$Vega$transpose = function (xss) {
-	var numCols = A2(
-		$elm$core$Basics$composeR,
-		$elm$core$List$head,
-		A2(
-			$elm$core$Basics$composeR,
-			$elm$core$Maybe$withDefault(_List_Nil),
-			$elm$core$List$length));
-	return A3(
-		$elm$core$List$foldr,
-		$elm$core$List$map2($elm$core$List$cons),
-		A2(
-			$elm$core$List$repeat,
-			numCols(xss),
-			_List_Nil),
-		xss);
-};
-var $author$project$Vega$dataFromColumns = F3(
-	function (name, fmts, cols) {
-		var fmt = _Utils_eq(fmts, _List_Nil) ? _List_Nil : _List_fromArray(
-			[
-				_Utils_Tuple2(
-				'format',
-				$elm$json$Json$Encode$object(
-					A2($elm$core$List$concatMap, $author$project$Vega$formatProperty, fmts)))
-			]);
-		var dataArray = A2(
-			$elm$json$Json$Encode$list,
-			$elm$json$Json$Encode$object,
-			$author$project$Vega$transpose(cols));
-		return _Utils_ap(
-			_List_fromArray(
-				[
-					_Utils_Tuple2(
-					'name',
-					$elm$json$Json$Encode$string(name)),
-					_Utils_Tuple2('values', dataArray)
-				]),
-			fmt);
-	});
 var $author$project$Vega$FGroup = function (a) {
 	return {$: 4, a: a};
 };
@@ -17175,10 +17528,6 @@ var $author$project$Vega$MAngle = function (a) {
 	return {$: 53, a: a};
 };
 var $author$project$Vega$maAngle = $author$project$Vega$MAngle;
-var $author$project$Vega$MFontSize = function (a) {
-	return {$: 59, a: a};
-};
-var $author$project$Vega$maFontSize = $author$project$Vega$MFontSize;
 var $author$project$Vega$MX2 = function (a) {
 	return {$: 1, a: a};
 };
@@ -17187,8 +17536,6 @@ var $author$project$Vega$RaValues = function (a) {
 	return {$: 2, a: a};
 };
 var $author$project$Vega$raValues = $author$project$Vega$RaValues;
-var $author$project$Vega$Text = 10;
-var $author$project$Vega$text = 10;
 var $author$project$GalleryOther$timeline1 = function () {
 	var sc = A2(
 		$elm$core$Basics$composeL,
@@ -17622,15 +17969,6 @@ var $author$project$Vega$ExField = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Vega$exField = $author$project$Vega$ExField;
-var $author$project$Vega$hCenter = $author$project$Vega$vStr('center');
-var $author$project$Vega$MAlign = function (a) {
-	return {$: 24, a: a};
-};
-var $author$project$Vega$maAlign = $author$project$Vega$MAlign;
-var $author$project$Vega$MBaseline = function (a) {
-	return {$: 25, a: a};
-};
-var $author$project$Vega$maBaseline = $author$project$Vega$MBaseline;
 var $author$project$Vega$MDir = function (a) {
 	return {$: 54, a: a};
 };
@@ -17639,10 +17977,6 @@ var $author$project$Vega$MFillOpacity = function (a) {
 	return {$: 10, a: a};
 };
 var $author$project$Vega$maFillOpacity = $author$project$Vega$MFillOpacity;
-var $author$project$Vega$NumExpr = function (a) {
-	return {$: 5, a: a};
-};
-var $author$project$Vega$numExpr = $author$project$Vega$NumExpr;
 var $author$project$Vega$RaStrs = function (a) {
 	return {$: 1, a: a};
 };
@@ -17868,7 +18202,8 @@ var $author$project$GalleryOther$mySpecs = $author$project$Vega$combineSpecs(
 			_Utils_Tuple2('wordcloud1', $author$project$GalleryOther$wordcloud1),
 			_Utils_Tuple2('timeline1', $author$project$GalleryOther$timeline1),
 			_Utils_Tuple2('beeswarm1', $author$project$GalleryOther$beeswarm1),
-			_Utils_Tuple2('calendar1', $author$project$GalleryOther$calendar1)
+			_Utils_Tuple2('calendar1', $author$project$GalleryOther$calendar1),
+			_Utils_Tuple2('bubble1', $author$project$GalleryOther$bubble1)
 		]));
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -17884,7 +18219,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $author$project$GalleryOther$sourceExample = $author$project$GalleryOther$calendar1;
+var $author$project$GalleryOther$sourceExample = $author$project$GalleryOther$bubble1;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$GalleryOther$view = function (spec) {
