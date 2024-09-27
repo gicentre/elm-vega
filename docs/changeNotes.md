@@ -4,6 +4,9 @@
 
 _Minor code cleaning, updating of data dependencies and additional examples in gallery._
 
+- Added zoomable circle packing example (Vega 5.27 )
+- Added packed bubble chart example (Vega 5.22)
+
 ---
 
 ## V5.7.0 ➡ V5.7.1

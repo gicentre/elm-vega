@@ -1581,10 +1581,166 @@ interaction8 =
     toVega
         [ cf, height 380, padding 5, autosize [ asPad ], ds, si [], sc [], lo, mk [] ]
 
+interaction9 : Spec
+interaction9 =
+    let
+        si =
+            signals
+                << signal "duration" [ siInit "750" , siOn [ evHandler [ esObject [ esType etClick ] ] [ evUpdate "(event.metaKey || event.ctrlKey ? 4 : 1) *750" ] ] ]
+                << signal "k" [ siValue (vNum 1) , siOn [ evHandler [ esSignal "focus" ] [ evUpdate "focus ? width/(focus.r*2) : 1" ] ] ]
+                << signal "root" [ siUpdate "{'id': data('tree')[0]['id'], 'x': data('tree')[0]['x'], 'y': data('tree')[0]['y'], 'r': data('tree')[0]['r'], 'k': 1, 'children': data('tree')[0]['children']}" ]
+                << signal "focus"
+                    [ siInit "root"
+                    , siOn
+                        [ 
+                            evHandler [ esObject [ esType etClick ,esMarkName "background"] ] [ evUpdate "{id: root['id'], 'x': root['x'], 'y': root['y'], 'r': root['r'], 'k': 1,'children': root['children']}" ] 
+                        ,   evHandler [ esObject [ esType etClick ,esMarkName "circles"] ] [ evUpdate "(focus['x'] === datum['x'] && focus['y'] === datum['y'] && focus['r'] === datum['r'] && focus['r'] !== root['r']) ? {'id': root['id'], 'x': root['x'], 'y': root['y'], 'r': root['r'], 'k': 1, 'children': root['children']} : {'id': datum['id'], 'x': datum['x'], 'y': datum['y'], 'r': datum['r'], 'k': k, 'children': datum['children']}" ] 
+                        ]
+                    ]
+                << signal "focus0" [ siUpdate "data('focus0') && length(data('focus0'))>0 ? data('focus0')[0] : focus" ]
+                << signal "timer" [ siValue (vNum 1), siOn [ evHandler [esObject [ esType etTimer ] ] [ evUpdate ("now()") ] ] ]
+                << signal "interpolateTime" [ siOn [ evHandler [ esObject [ esType etClick ] ] [ evUpdate "{'start': timer, 'end': timer+duration}" ] ] ]
+                << signal "t" [ siUpdate "interpolateTime ? clamp((timer-interpolateTime.start)/(interpolateTime.end-interpolateTime.start), 0, 1): null" ]
+                << signal "tEase" [ siUpdate "t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1" ]
+                << signal "interpolateTimeDelayed" [ siOn [ evHandler [ esSignal "interpolateTime" ] [ evUpdate "{'start': interpolateTime['end'], 'end': interpolateTime['end']+duration}" ] ] ]
+                << signal "tDelayed" [ siUpdate "interpolateTimeDelayed ? clamp((timer-interpolateTimeDelayed.start)/(interpolateTimeDelayed.end-interpolateTimeDelayed.start), 0, 1) : null" ]
+                << signal "tEaseDelayed" [ siUpdate "tDelayed < 0.5 ? 4 * tDelayed * tDelayed * tDelayed : (tDelayed - 1) * (2 * tDelayed - 2) * (2 * tDelayed - 2) + 1" ]
+                << signal "showDetails"
+                    [ siValue vFalse
+                    , siOn
+                        [ 
+                            evHandler [ esObject [ esType etClick, esMarkName "circles", esFilter [ "!event.altKey && !event.shiftKey", "event.button === 0" ] ] ] [ evUpdate "!(focus['children'] > 0 || datum['id'] === root['id'] || (focus0['id'] !== root['id'] && focus['id'] === root['id']))" ] 
+                        ,   evHandler [ esObject [ esType etClick, esFilter [ "event.altKey || event.shiftKey", "event.button === 0" ] ] ] [ evUpdate "focus0['id'] === focus['id'] ? !showDetails : true" ] 
+                        ]
+                    ]
+
+        ds =
+            dataSource
+                [ data "source" [ daUrl (str (dPath ++ "flare.json")) ]
+                    |> transform
+                        [ trFormula "isValid(datum['parent']) ? datum['parent'] : null" "parent"
+                        , trFormula "isValid(datum['size']) ? datum['size'] : null" "size"
+                        ]
+                , data "tree" [ daSource "source" ]
+                    |> transform
+                        [ trStratify (field "id") (field "parent")
+                        , trPack
+                            [ paField (field "size")
+                            , paSort [ ( field "value", ascend ) ]
+                            , paSize (numSignals [ "width", "height" ])
+                            ]
+                        ]
+                , data "focus0" [daOn [ trigger "focus" [ tgInsert "focus" ] ] ]
+                    |> transform
+                        [ trFormula "now()" "now"
+                        , trWindow [ wnOperation woRowNumber "row" ] [ wnSort [ ( field "now", descend ) ] ]
+                        , trFilter (expr "datum['row'] ? datum['row'] == 2 : true")
+                        , trProject ([ "id", "x", "y", "r", "children" ] |> List.map (\f -> (field f, f)))
+                        , trFormula "width/(datum['r']*2)" "k"
+                        ]
+                , data "details_data" [ daSource "tree" ]
+                    |> transform
+                        [ trFilter (expr "datum['id'] === focus['id'] && showDetails")
+                        , trFormula "['hierarchy depth: ' + datum['depth'], 'children count: ' + datum['children'],isValid( datum['size']) ? 'size: ' + datum['size'] + ' bytes' : '']" "details"
+                        ]
+                ]
+
+        sc =
+            scales << scale "cScale" [ scType scOrdinal, scRange (raScheme (str "magma") []), scDomain (doData [daDataset "tree", daField (field "depth") ]) ]
+
+        mk =
+            marks
+                << mark rect
+                    [ mName "background"
+                    , mEncode
+                        [
+                            enEnter
+                              [ maX [ vSignal "-padding['left']" ]
+                              , maY [ vSignal "-padding['top']" ]
+                              , maWidth[ vSignal "width+padding['left']+padding['right']" ]
+                              , maHeight [ vSignal "height+padding['top']+padding['bottom']" ]
+                              , maFillOpacity [ vNum 0 ]
+                              ]
+                        ]
+                    ]
+                << mark symbol
+                    [ mName "circles"
+                    , mFrom [ srData (str "tree") ]
+                    , mEncode
+                        [ enEnter
+                            [ maShape [ vStr "circle" ]
+                            , maFill [ vScale "cScale", vField (field "depth") ]
+                            , maCursor [ cursorValue cuPointer ]
+                            , maTooltip [ vField (field "name") ]
+                            ]
+                        , enUpdate
+                            [ maX [ vSignal "lerp([root['x']+ (datum['x'] - focus0['x']) * focus0['k'], root['x'] + (datum['x'] - focus['x']) * k], tEase)" ]
+                            , maY [ vSignal "lerp([ root['y'] + (datum['y'] - focus0['y']) * focus0['k'],  root['y'] + (datum['y'] - focus['y']) * k], tEase)" ]
+                            , maSize [ vSignal "pow(2*(datum['r'] * lerp([focus0['k'], k],tEase)),2)" ]
+                            , maFill [ vSignal "showDetails && focus['id'] === datum['id'] ? '#fff' : scale('cScale',datum['depth'])" ]
+                            , maZIndex [ vSignal "!showDetails ? 1 : (focus['id'] === root['id'] && isValid(datum['parent'])) ? -99 : indexof(pluck(treeAncestors('tree', datum['id']), 'id'), focus['id']) > 0 ? -99 : 1" ]
+                            , maStroke [ vSignal "showDetails ? scale('cScale', datum['depth']) : luminance(scale('cScale', datum['depth'])) > 0.5 ?  'black' : 'white'" ]
+                            , maStrokeWidth [ vSignal "focus['id'] === datum['id'] && showDetails ? 20 : 0.5" ]
+                            , maStrokeOpacity [ vSignal "!showDetails ? 0.5 : focus['id'] === root['id'] ? min(tEase, 0.35) : min(tEaseDelayed, 0.35)" ]
+                            ]
+                        , enHover [ maStrokeWidth [ vNum 2 ] ]
+                        ]
+                    ]
+                << mark text
+                    [ mName "details_title"
+                    , mFrom [ srData (str "details_data") ] 
+                    , mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maText [ vSignal "datum['name']" ]
+                            , maFill [ vScale "cScale", vField (field "depth") ]
+                            , maFontSize [ vSignal "0.055*width" ]
+                            , maAlign [ hCenter ]
+                            , maX [ vSignal "width/2" ]
+                            , maY [ vSignal "height/4" ]
+                            , maOpacity [ vNum 0 ]
+                            ]
+                        , enUpdate [ maOpacity [ vSignal "!showDetails ? 0 : focus['id'] === root['id'] ? tEase : tEaseDelayed" ] ]
+                        ]
+                    ]
+                << mark text
+                    [ mName "details"
+                    , mFrom [srData (str "details_data") ]
+                    , mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maText [ vSignal "datum['details']" ] 
+                            , maFontSize [ vSignal "0.045*width" ]
+                            , maAlign [ hCenter ]
+                            , maX [ vSignal "width/2" ]
+                            , maY [ vSignal "height/3" ]
+                            , maFill [ vStr "gray" ]
+                            , maOpacity [ vNum 0 ]
+                            ]
+                        , enUpdate [ maOpacity [ vSignal "!showDetails ? 0 : focus['id'] === root['id'] ? tEase : tEaseDelayed" ] ]
+                        ]
+                    ]
+                 << mark text
+                    [ mName "helper_text"
+                    , mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maText [ vSignal "['interactivity instructions:', '• click on a node to zoom-in','• for nodes with children, shift + click to see details for that node', '• to slow down animations, ⌘ + click (Mac) / ⊞ + click (Windows)']" ] 
+                            , maFontSize [ vNum 14 ]
+                            , maY [ vSignal "height+5" ]
+                            ]
+                        , enUpdate [ maOpacity [ vSignal "ceil(k) === 1 ? isValid(t) ? tEaseDelayed : 1 : 0" ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 600, height 600, padding 5, si[], ds, sc [], mk [] ]
+
+
 
 sourceExample : Spec
 sourceExample =
-    interaction8
+    interaction9
 
 
 
@@ -1602,6 +1758,7 @@ mySpecs =
         , ( "interaction6", interaction6 )
         , ( "interaction7", interaction7 )
         , ( "interaction8", interaction8 )
+        , ( "interaction9", interaction9 )
         ]
 
 
