@@ -21811,6 +21811,822 @@ var $author$project$GalleryInteraction$interaction8 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$Vega$CPointer = 5;
+var $author$project$Vega$cuPointer = 5;
+var $author$project$Vega$Descend = {$: 1};
+var $author$project$Vega$descend = $author$project$Vega$Descend;
+var $author$project$Vega$ESMarkName = function (a) {
+	return {$: 6, a: a};
+};
+var $author$project$Vega$esMarkName = $author$project$Vega$ESMarkName;
+var $author$project$Vega$Click = 0;
+var $author$project$Vega$etClick = 0;
+var $author$project$Vega$Timer = 18;
+var $author$project$Vega$etTimer = 18;
+var $author$project$Vega$MStrokeOpacity = function (a) {
+	return {$: 13, a: a};
+};
+var $author$project$Vega$maStrokeOpacity = $author$project$Vega$MStrokeOpacity;
+var $author$project$Vega$MTooltip = function (a) {
+	return {$: 22, a: a};
+};
+var $author$project$Vega$maTooltip = $author$project$Vega$MTooltip;
+var $author$project$Vega$MZIndex = function (a) {
+	return {$: 23, a: a};
+};
+var $author$project$Vega$maZIndex = $author$project$Vega$MZIndex;
+var $author$project$Vega$numSignals = $author$project$Vega$NumSignals;
+var $author$project$Vega$PaField = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$paField = $author$project$Vega$PaField;
+var $author$project$Vega$PaSize = function (a) {
+	return {$: 2, a: a};
+};
+var $author$project$Vega$paSize = function (n) {
+	return $author$project$Vega$PaSize(n);
+};
+var $author$project$Vega$PaSort = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$paSort = $author$project$Vega$PaSort;
+var $author$project$Vega$SiInit = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Vega$siInit = $author$project$Vega$SiInit;
+var $author$project$Vega$TPack = function (a) {
+	return {$: 39, a: a};
+};
+var $author$project$Vega$trPack = $author$project$Vega$TPack;
+var $author$project$Vega$TProject = function (a) {
+	return {$: 43, a: a};
+};
+var $author$project$Vega$trProject = $author$project$Vega$TProject;
+var $author$project$Vega$TStratify = F2(
+	function (a, b) {
+		return {$: 51, a: a, b: b};
+	});
+var $author$project$Vega$trStratify = $author$project$Vega$TStratify;
+var $author$project$Vega$WnOperation = F4(
+	function (a, b, c, d) {
+		return {$: 0, a: a, b: b, c: c, d: d};
+	});
+var $author$project$Vega$wnOperation = F2(
+	function (op, outField) {
+		return A4($author$project$Vega$WnOperation, op, $elm$core$Maybe$Nothing, $elm$core$Maybe$Nothing, outField);
+	});
+var $author$project$Vega$WnSort = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$wnSort = $author$project$Vega$WnSort;
+var $author$project$Vega$RowNumber = {$: 0};
+var $author$project$Vega$woRowNumber = $author$project$Vega$RowNumber;
+var $author$project$GalleryInteraction$interaction9 = function () {
+	var si = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
+				A2(
+					$elm$core$Basics$composeL,
+					A2(
+						$elm$core$Basics$composeL,
+						A2(
+							$elm$core$Basics$composeL,
+							A2(
+								$elm$core$Basics$composeL,
+								A2(
+									$elm$core$Basics$composeL,
+									A2(
+										$elm$core$Basics$composeL,
+										A2(
+											$elm$core$Basics$composeL,
+											A2(
+												$elm$core$Basics$composeL,
+												A2(
+													$elm$core$Basics$composeL,
+													A2(
+														$elm$core$Basics$composeL,
+														$author$project$Vega$signals,
+														A2(
+															$author$project$Vega$signal,
+															'duration',
+															_List_fromArray(
+																[
+																	$author$project$Vega$siInit('750'),
+																	$author$project$Vega$siOn(
+																	_List_fromArray(
+																		[
+																			A2(
+																			$author$project$Vega$evHandler,
+																			_List_fromArray(
+																				[
+																					$author$project$Vega$esObject(
+																					_List_fromArray(
+																						[
+																							$author$project$Vega$esType($author$project$Vega$etClick)
+																						]))
+																				]),
+																			_List_fromArray(
+																				[
+																					$author$project$Vega$evUpdate('(event.metaKey || event.ctrlKey ? 4 : 1) *750')
+																				]))
+																		]))
+																]))),
+													A2(
+														$author$project$Vega$signal,
+														'k',
+														_List_fromArray(
+															[
+																$author$project$Vega$siValue(
+																$author$project$Vega$vNum(1)),
+																$author$project$Vega$siOn(
+																_List_fromArray(
+																	[
+																		A2(
+																		$author$project$Vega$evHandler,
+																		_List_fromArray(
+																			[
+																				$author$project$Vega$esSignal('focus')
+																			]),
+																		_List_fromArray(
+																			[
+																				$author$project$Vega$evUpdate('focus ? width/(focus.r*2) : 1')
+																			]))
+																	]))
+															]))),
+												A2(
+													$author$project$Vega$signal,
+													'root',
+													_List_fromArray(
+														[
+															$author$project$Vega$siUpdate('{\'id\': data(\'tree\')[0][\'id\'], \'x\': data(\'tree\')[0][\'x\'], \'y\': data(\'tree\')[0][\'y\'], \'r\': data(\'tree\')[0][\'r\'], \'k\': 1, \'children\': data(\'tree\')[0][\'children\']}')
+														]))),
+											A2(
+												$author$project$Vega$signal,
+												'focus',
+												_List_fromArray(
+													[
+														$author$project$Vega$siInit('root'),
+														$author$project$Vega$siOn(
+														_List_fromArray(
+															[
+																A2(
+																$author$project$Vega$evHandler,
+																_List_fromArray(
+																	[
+																		$author$project$Vega$esObject(
+																		_List_fromArray(
+																			[
+																				$author$project$Vega$esType($author$project$Vega$etClick),
+																				$author$project$Vega$esMarkName('background')
+																			]))
+																	]),
+																_List_fromArray(
+																	[
+																		$author$project$Vega$evUpdate('{id: root[\'id\'], \'x\': root[\'x\'], \'y\': root[\'y\'], \'r\': root[\'r\'], \'k\': 1,\'children\': root[\'children\']}')
+																	])),
+																A2(
+																$author$project$Vega$evHandler,
+																_List_fromArray(
+																	[
+																		$author$project$Vega$esObject(
+																		_List_fromArray(
+																			[
+																				$author$project$Vega$esType($author$project$Vega$etClick),
+																				$author$project$Vega$esMarkName('circles')
+																			]))
+																	]),
+																_List_fromArray(
+																	[
+																		$author$project$Vega$evUpdate('(focus[\'x\'] === datum[\'x\'] && focus[\'y\'] === datum[\'y\'] && focus[\'r\'] === datum[\'r\'] && focus[\'r\'] !== root[\'r\']) ? {\'id\': root[\'id\'], \'x\': root[\'x\'], \'y\': root[\'y\'], \'r\': root[\'r\'], \'k\': 1, \'children\': root[\'children\']} : {\'id\': datum[\'id\'], \'x\': datum[\'x\'], \'y\': datum[\'y\'], \'r\': datum[\'r\'], \'k\': k, \'children\': datum[\'children\']}')
+																	]))
+															]))
+													]))),
+										A2(
+											$author$project$Vega$signal,
+											'focus0',
+											_List_fromArray(
+												[
+													$author$project$Vega$siUpdate('data(\'focus0\') && length(data(\'focus0\'))>0 ? data(\'focus0\')[0] : focus')
+												]))),
+									A2(
+										$author$project$Vega$signal,
+										'timer',
+										_List_fromArray(
+											[
+												$author$project$Vega$siValue(
+												$author$project$Vega$vNum(1)),
+												$author$project$Vega$siOn(
+												_List_fromArray(
+													[
+														A2(
+														$author$project$Vega$evHandler,
+														_List_fromArray(
+															[
+																$author$project$Vega$esObject(
+																_List_fromArray(
+																	[
+																		$author$project$Vega$esType($author$project$Vega$etTimer)
+																	]))
+															]),
+														_List_fromArray(
+															[
+																$author$project$Vega$evUpdate('now()')
+															]))
+													]))
+											]))),
+								A2(
+									$author$project$Vega$signal,
+									'interpolateTime',
+									_List_fromArray(
+										[
+											$author$project$Vega$siOn(
+											_List_fromArray(
+												[
+													A2(
+													$author$project$Vega$evHandler,
+													_List_fromArray(
+														[
+															$author$project$Vega$esObject(
+															_List_fromArray(
+																[
+																	$author$project$Vega$esType($author$project$Vega$etClick)
+																]))
+														]),
+													_List_fromArray(
+														[
+															$author$project$Vega$evUpdate('{\'start\': timer, \'end\': timer+duration}')
+														]))
+												]))
+										]))),
+							A2(
+								$author$project$Vega$signal,
+								't',
+								_List_fromArray(
+									[
+										$author$project$Vega$siUpdate('interpolateTime ? clamp((timer-interpolateTime.start)/(interpolateTime.end-interpolateTime.start), 0, 1): null')
+									]))),
+						A2(
+							$author$project$Vega$signal,
+							'tEase',
+							_List_fromArray(
+								[
+									$author$project$Vega$siUpdate('t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1')
+								]))),
+					A2(
+						$author$project$Vega$signal,
+						'interpolateTimeDelayed',
+						_List_fromArray(
+							[
+								$author$project$Vega$siOn(
+								_List_fromArray(
+									[
+										A2(
+										$author$project$Vega$evHandler,
+										_List_fromArray(
+											[
+												$author$project$Vega$esSignal('interpolateTime')
+											]),
+										_List_fromArray(
+											[
+												$author$project$Vega$evUpdate('{\'start\': interpolateTime[\'end\'], \'end\': interpolateTime[\'end\']+duration}')
+											]))
+									]))
+							]))),
+				A2(
+					$author$project$Vega$signal,
+					'tDelayed',
+					_List_fromArray(
+						[
+							$author$project$Vega$siUpdate('interpolateTimeDelayed ? clamp((timer-interpolateTimeDelayed.start)/(interpolateTimeDelayed.end-interpolateTimeDelayed.start), 0, 1) : null')
+						]))),
+			A2(
+				$author$project$Vega$signal,
+				'tEaseDelayed',
+				_List_fromArray(
+					[
+						$author$project$Vega$siUpdate('tDelayed < 0.5 ? 4 * tDelayed * tDelayed * tDelayed : (tDelayed - 1) * (2 * tDelayed - 2) * (2 * tDelayed - 2) + 1')
+					]))),
+		A2(
+			$author$project$Vega$signal,
+			'showDetails',
+			_List_fromArray(
+				[
+					$author$project$Vega$siValue($author$project$Vega$vFalse),
+					$author$project$Vega$siOn(
+					_List_fromArray(
+						[
+							A2(
+							$author$project$Vega$evHandler,
+							_List_fromArray(
+								[
+									$author$project$Vega$esObject(
+									_List_fromArray(
+										[
+											$author$project$Vega$esType($author$project$Vega$etClick),
+											$author$project$Vega$esMarkName('circles'),
+											$author$project$Vega$esFilter(
+											_List_fromArray(
+												['!event.altKey && !event.shiftKey', 'event.button === 0']))
+										]))
+								]),
+							_List_fromArray(
+								[
+									$author$project$Vega$evUpdate('!(focus[\'children\'] > 0 || datum[\'id\'] === root[\'id\'] || (focus0[\'id\'] !== root[\'id\'] && focus[\'id\'] === root[\'id\']))')
+								])),
+							A2(
+							$author$project$Vega$evHandler,
+							_List_fromArray(
+								[
+									$author$project$Vega$esObject(
+									_List_fromArray(
+										[
+											$author$project$Vega$esType($author$project$Vega$etClick),
+											$author$project$Vega$esFilter(
+											_List_fromArray(
+												['event.altKey || event.shiftKey', 'event.button === 0']))
+										]))
+								]),
+							_List_fromArray(
+								[
+									$author$project$Vega$evUpdate('focus0[\'id\'] === focus[\'id\'] ? !showDetails : true')
+								]))
+						]))
+				])));
+	var sc = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$scales,
+		A2(
+			$author$project$Vega$scale,
+			'cScale',
+			_List_fromArray(
+				[
+					$author$project$Vega$scType($author$project$Vega$scOrdinal),
+					$author$project$Vega$scRange(
+					A2(
+						$author$project$Vega$raScheme,
+						$author$project$Vega$str('magma'),
+						_List_Nil)),
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doData(
+						_List_fromArray(
+							[
+								$author$project$Vega$daDataset('tree'),
+								$author$project$Vega$daField(
+								$author$project$Vega$field('depth'))
+							])))
+				])));
+	var mk = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
+				A2(
+					$elm$core$Basics$composeL,
+					A2(
+						$elm$core$Basics$composeL,
+						$author$project$Vega$marks,
+						A2(
+							$author$project$Vega$mark,
+							$author$project$Vega$rect,
+							_List_fromArray(
+								[
+									$author$project$Vega$mName('background'),
+									$author$project$Vega$mEncode(
+									_List_fromArray(
+										[
+											$author$project$Vega$enEnter(
+											_List_fromArray(
+												[
+													$author$project$Vega$maX(
+													_List_fromArray(
+														[
+															$author$project$Vega$vSignal('-padding[\'left\']')
+														])),
+													$author$project$Vega$maY(
+													_List_fromArray(
+														[
+															$author$project$Vega$vSignal('-padding[\'top\']')
+														])),
+													$author$project$Vega$maWidth(
+													_List_fromArray(
+														[
+															$author$project$Vega$vSignal('width+padding[\'left\']+padding[\'right\']')
+														])),
+													$author$project$Vega$maHeight(
+													_List_fromArray(
+														[
+															$author$project$Vega$vSignal('height+padding[\'top\']+padding[\'bottom\']')
+														])),
+													$author$project$Vega$maFillOpacity(
+													_List_fromArray(
+														[
+															$author$project$Vega$vNum(0)
+														]))
+												]))
+										]))
+								]))),
+					A2(
+						$author$project$Vega$mark,
+						$author$project$Vega$symbol,
+						_List_fromArray(
+							[
+								$author$project$Vega$mName('circles'),
+								$author$project$Vega$mFrom(
+								_List_fromArray(
+									[
+										$author$project$Vega$srData(
+										$author$project$Vega$str('tree'))
+									])),
+								$author$project$Vega$mEncode(
+								_List_fromArray(
+									[
+										$author$project$Vega$enEnter(
+										_List_fromArray(
+											[
+												$author$project$Vega$maShape(
+												_List_fromArray(
+													[
+														$author$project$Vega$vStr('circle')
+													])),
+												$author$project$Vega$maFill(
+												_List_fromArray(
+													[
+														$author$project$Vega$vScale('cScale'),
+														$author$project$Vega$vField(
+														$author$project$Vega$field('depth'))
+													])),
+												$author$project$Vega$maCursor(
+												_List_fromArray(
+													[
+														$author$project$Vega$cursorValue($author$project$Vega$cuPointer)
+													])),
+												$author$project$Vega$maTooltip(
+												_List_fromArray(
+													[
+														$author$project$Vega$vField(
+														$author$project$Vega$field('name'))
+													]))
+											])),
+										$author$project$Vega$enUpdate(
+										_List_fromArray(
+											[
+												$author$project$Vega$maX(
+												_List_fromArray(
+													[
+														$author$project$Vega$vSignal('lerp([root[\'x\']+ (datum[\'x\'] - focus0[\'x\']) * focus0[\'k\'], root[\'x\'] + (datum[\'x\'] - focus[\'x\']) * k], tEase)')
+													])),
+												$author$project$Vega$maY(
+												_List_fromArray(
+													[
+														$author$project$Vega$vSignal('lerp([ root[\'y\'] + (datum[\'y\'] - focus0[\'y\']) * focus0[\'k\'],  root[\'y\'] + (datum[\'y\'] - focus[\'y\']) * k], tEase)')
+													])),
+												$author$project$Vega$maSize(
+												_List_fromArray(
+													[
+														$author$project$Vega$vSignal('pow(2*(datum[\'r\'] * lerp([focus0[\'k\'], k],tEase)),2)')
+													])),
+												$author$project$Vega$maFill(
+												_List_fromArray(
+													[
+														$author$project$Vega$vSignal('showDetails && focus[\'id\'] === datum[\'id\'] ? \'#fff\' : scale(\'cScale\',datum[\'depth\'])')
+													])),
+												$author$project$Vega$maZIndex(
+												_List_fromArray(
+													[
+														$author$project$Vega$vSignal('!showDetails ? 1 : (focus[\'id\'] === root[\'id\'] && isValid(datum[\'parent\'])) ? -99 : indexof(pluck(treeAncestors(\'tree\', datum[\'id\']), \'id\'), focus[\'id\']) > 0 ? -99 : 1')
+													])),
+												$author$project$Vega$maStroke(
+												_List_fromArray(
+													[
+														$author$project$Vega$vSignal('showDetails ? scale(\'cScale\', datum[\'depth\']) : luminance(scale(\'cScale\', datum[\'depth\'])) > 0.5 ?  \'black\' : \'white\'')
+													])),
+												$author$project$Vega$maStrokeWidth(
+												_List_fromArray(
+													[
+														$author$project$Vega$vSignal('focus[\'id\'] === datum[\'id\'] && showDetails ? 20 : 0.5')
+													])),
+												$author$project$Vega$maStrokeOpacity(
+												_List_fromArray(
+													[
+														$author$project$Vega$vSignal('!showDetails ? 0.5 : focus[\'id\'] === root[\'id\'] ? min(tEase, 0.35) : min(tEaseDelayed, 0.35)')
+													]))
+											])),
+										$author$project$Vega$enHover(
+										_List_fromArray(
+											[
+												$author$project$Vega$maStrokeWidth(
+												_List_fromArray(
+													[
+														$author$project$Vega$vNum(2)
+													]))
+											]))
+									]))
+							]))),
+				A2(
+					$author$project$Vega$mark,
+					$author$project$Vega$text,
+					_List_fromArray(
+						[
+							$author$project$Vega$mName('details_title'),
+							$author$project$Vega$mFrom(
+							_List_fromArray(
+								[
+									$author$project$Vega$srData(
+									$author$project$Vega$str('details_data'))
+								])),
+							$author$project$Vega$mInteractive($author$project$Vega$false),
+							$author$project$Vega$mEncode(
+							_List_fromArray(
+								[
+									$author$project$Vega$enEnter(
+									_List_fromArray(
+										[
+											$author$project$Vega$maText(
+											_List_fromArray(
+												[
+													$author$project$Vega$vSignal('datum[\'name\']')
+												])),
+											$author$project$Vega$maFill(
+											_List_fromArray(
+												[
+													$author$project$Vega$vScale('cScale'),
+													$author$project$Vega$vField(
+													$author$project$Vega$field('depth'))
+												])),
+											$author$project$Vega$maFontSize(
+											_List_fromArray(
+												[
+													$author$project$Vega$vSignal('0.055*width')
+												])),
+											$author$project$Vega$maAlign(
+											_List_fromArray(
+												[$author$project$Vega$hCenter])),
+											$author$project$Vega$maX(
+											_List_fromArray(
+												[
+													$author$project$Vega$vSignal('width/2')
+												])),
+											$author$project$Vega$maY(
+											_List_fromArray(
+												[
+													$author$project$Vega$vSignal('height/4')
+												])),
+											$author$project$Vega$maOpacity(
+											_List_fromArray(
+												[
+													$author$project$Vega$vNum(0)
+												]))
+										])),
+									$author$project$Vega$enUpdate(
+									_List_fromArray(
+										[
+											$author$project$Vega$maOpacity(
+											_List_fromArray(
+												[
+													$author$project$Vega$vSignal('!showDetails ? 0 : focus[\'id\'] === root[\'id\'] ? tEase : tEaseDelayed')
+												]))
+										]))
+								]))
+						]))),
+			A2(
+				$author$project$Vega$mark,
+				$author$project$Vega$text,
+				_List_fromArray(
+					[
+						$author$project$Vega$mName('details'),
+						$author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								$author$project$Vega$srData(
+								$author$project$Vega$str('details_data'))
+							])),
+						$author$project$Vega$mInteractive($author$project$Vega$false),
+						$author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								$author$project$Vega$enEnter(
+								_List_fromArray(
+									[
+										$author$project$Vega$maText(
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('datum[\'details\']')
+											])),
+										$author$project$Vega$maFontSize(
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('0.045*width')
+											])),
+										$author$project$Vega$maAlign(
+										_List_fromArray(
+											[$author$project$Vega$hCenter])),
+										$author$project$Vega$maX(
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('width/2')
+											])),
+										$author$project$Vega$maY(
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('height/3')
+											])),
+										$author$project$Vega$maFill(
+										_List_fromArray(
+											[
+												$author$project$Vega$vStr('gray')
+											])),
+										$author$project$Vega$maOpacity(
+										_List_fromArray(
+											[
+												$author$project$Vega$vNum(0)
+											]))
+									])),
+								$author$project$Vega$enUpdate(
+								_List_fromArray(
+									[
+										$author$project$Vega$maOpacity(
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('!showDetails ? 0 : focus[\'id\'] === root[\'id\'] ? tEase : tEaseDelayed')
+											]))
+									]))
+							]))
+					]))),
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$text,
+			_List_fromArray(
+				[
+					$author$project$Vega$mName('helper_text'),
+					$author$project$Vega$mInteractive($author$project$Vega$false),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									$author$project$Vega$maText(
+									_List_fromArray(
+										[
+											$author$project$Vega$vSignal('[\'interactivity instructions:\', \'• click on a node to zoom-in\',\'• for nodes with children, shift + click to see details for that node\', \'• to slow down animations, ⌘ + click (Mac) / ⊞ + click (Windows)\']')
+										])),
+									$author$project$Vega$maFontSize(
+									_List_fromArray(
+										[
+											$author$project$Vega$vNum(14)
+										])),
+									$author$project$Vega$maY(
+									_List_fromArray(
+										[
+											$author$project$Vega$vSignal('height+5')
+										]))
+								])),
+							$author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									$author$project$Vega$maOpacity(
+									_List_fromArray(
+										[
+											$author$project$Vega$vSignal('ceil(k) === 1 ? isValid(t) ? tEaseDelayed : 1 : 0')
+										]))
+								]))
+						]))
+				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2($author$project$Vega$trFormula, 'isValid(datum[\'parent\']) ? datum[\'parent\'] : null', 'parent'),
+						A2($author$project$Vega$trFormula, 'isValid(datum[\'size\']) ? datum[\'size\'] : null', 'size')
+					]),
+				A2(
+					$author$project$Vega$data,
+					'source',
+					_List_fromArray(
+						[
+							$author$project$Vega$daUrl(
+							$author$project$Vega$str($author$project$GalleryInteraction$dPath + 'flare.json'))
+						]))),
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2(
+						$author$project$Vega$trStratify,
+						$author$project$Vega$field('id'),
+						$author$project$Vega$field('parent')),
+						$author$project$Vega$trPack(
+						_List_fromArray(
+							[
+								$author$project$Vega$paField(
+								$author$project$Vega$field('size')),
+								$author$project$Vega$paSort(
+								_List_fromArray(
+									[
+										_Utils_Tuple2(
+										$author$project$Vega$field('value'),
+										$author$project$Vega$ascend)
+									])),
+								$author$project$Vega$paSize(
+								$author$project$Vega$numSignals(
+									_List_fromArray(
+										['width', 'height'])))
+							]))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'tree',
+					_List_fromArray(
+						[
+							$author$project$Vega$daSource('source')
+						]))),
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2($author$project$Vega$trFormula, 'now()', 'now'),
+						A2(
+						$author$project$Vega$trWindow,
+						_List_fromArray(
+							[
+								A2($author$project$Vega$wnOperation, $author$project$Vega$woRowNumber, 'row')
+							]),
+						_List_fromArray(
+							[
+								$author$project$Vega$wnSort(
+								_List_fromArray(
+									[
+										_Utils_Tuple2(
+										$author$project$Vega$field('now'),
+										$author$project$Vega$descend)
+									]))
+							])),
+						$author$project$Vega$trFilter(
+						$author$project$Vega$expr('datum[\'row\'] ? datum[\'row\'] == 2 : true')),
+						$author$project$Vega$trProject(
+						A2(
+							$elm$core$List$map,
+							function (f) {
+								return _Utils_Tuple2(
+									$author$project$Vega$field(f),
+									f);
+							},
+							_List_fromArray(
+								['id', 'x', 'y', 'r', 'children']))),
+						A2($author$project$Vega$trFormula, 'width/(datum[\'r\']*2)', 'k')
+					]),
+				A2(
+					$author$project$Vega$data,
+					'focus0',
+					_List_fromArray(
+						[
+							$author$project$Vega$daOn(
+							_List_fromArray(
+								[
+									A2(
+									$author$project$Vega$trigger,
+									'focus',
+									_List_fromArray(
+										[
+											$author$project$Vega$tgInsert('focus')
+										]))
+								]))
+						]))),
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						$author$project$Vega$trFilter(
+						$author$project$Vega$expr('datum[\'id\'] === focus[\'id\'] && showDetails')),
+						A2($author$project$Vega$trFormula, '[\'hierarchy depth: \' + datum[\'depth\'], \'children count: \' + datum[\'children\'],isValid( datum[\'size\']) ? \'size: \' + datum[\'size\'] + \' bytes\' : \'\']', 'details')
+					]),
+				A2(
+					$author$project$Vega$data,
+					'details_data',
+					_List_fromArray(
+						[
+							$author$project$Vega$daSource('tree')
+						])))
+			]));
+	return $author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				$author$project$Vega$width(600),
+				$author$project$Vega$height(600),
+				$author$project$Vega$padding(5),
+				si(_List_Nil),
+				ds,
+				sc(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var $author$project$GalleryInteraction$mySpecs = $author$project$Vega$combineSpecs(
 	_List_fromArray(
 		[
@@ -21821,7 +22637,8 @@ var $author$project$GalleryInteraction$mySpecs = $author$project$Vega$combineSpe
 			_Utils_Tuple2('interaction5', $author$project$GalleryInteraction$interaction5),
 			_Utils_Tuple2('interaction6', $author$project$GalleryInteraction$interaction6),
 			_Utils_Tuple2('interaction7', $author$project$GalleryInteraction$interaction7),
-			_Utils_Tuple2('interaction8', $author$project$GalleryInteraction$interaction8)
+			_Utils_Tuple2('interaction8', $author$project$GalleryInteraction$interaction8),
+			_Utils_Tuple2('interaction9', $author$project$GalleryInteraction$interaction9)
 		]));
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -21837,7 +22654,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $author$project$GalleryInteraction$sourceExample = $author$project$GalleryInteraction$interaction8;
+var $author$project$GalleryInteraction$sourceExample = $author$project$GalleryInteraction$interaction9;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$GalleryInteraction$view = function (spec) {
