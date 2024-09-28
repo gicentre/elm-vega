@@ -14320,42 +14320,47 @@ var $author$project$Vega$SiName = function (a) {
 };
 var $author$project$Vega$inputProperty = function (prop) {
 	switch (prop.$) {
-		case 4:
+		case 0:
+			var s = prop.a;
+			return _Utils_Tuple2(
+				'name',
+				$elm$json$Json$Encode$string(s));
+		case 5:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'min',
 				$elm$json$Json$Encode$float(x));
-		case 5:
+		case 6:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'max',
 				$elm$json$Json$Encode$float(x));
-		case 6:
+		case 7:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'step',
 				$elm$json$Json$Encode$float(x));
-		case 0:
+		case 1:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'debounce',
 				$elm$json$Json$Encode$float(x));
-		case 2:
+		case 3:
 			var opts = prop.a;
 			return _Utils_Tuple2(
 				'options',
 				$author$project$Vega$valueSpec(opts));
-		case 3:
+		case 4:
 			var labels = prop.a;
 			return _Utils_Tuple2(
 				'labels',
 				$author$project$Vega$valueSpec(labels));
-		case 7:
+		case 8:
 			var el = prop.a;
 			return _Utils_Tuple2(
 				'placeholder',
 				$elm$json$Json$Encode$string(el));
-		case 1:
+		case 2:
 			var el = prop.a;
 			return _Utils_Tuple2(
 				'element',
@@ -18853,6 +18858,299 @@ var $author$project$GalleryCustom$custom6 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$Vega$IRange = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$iRange = $author$project$Vega$IRange;
+var $author$project$Vega$InMax = function (a) {
+	return {$: 6, a: a};
+};
+var $author$project$Vega$inMax = $author$project$Vega$InMax;
+var $author$project$Vega$InMin = function (a) {
+	return {$: 5, a: a};
+};
+var $author$project$Vega$inMin = $author$project$Vega$InMin;
+var $author$project$Vega$InName = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$inName = $author$project$Vega$InName;
+var $author$project$Vega$InStep = function (a) {
+	return {$: 7, a: a};
+};
+var $author$project$Vega$inStep = $author$project$Vega$InStep;
+var $author$project$Vega$SiBind = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$siBind = $author$project$Vega$SiBind;
+var $author$project$Vega$SiInit = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Vega$siInit = $author$project$Vega$SiInit;
+var $author$project$GalleryCustom$custom7 = function () {
+	var si = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$signals,
+		A2(
+			$author$project$Vega$signal,
+			'width',
+			_List_fromArray(
+				[
+					$author$project$Vega$siInit('width'),
+					$author$project$Vega$siBind(
+					$author$project$Vega$iRange(
+						_List_fromArray(
+							[
+								$author$project$Vega$inName('straight width'),
+								$author$project$Vega$inMin(0),
+								$author$project$Vega$inMax(2000),
+								$author$project$Vega$inStep(1)
+							])))
+				])));
+	var sc = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
+				$author$project$Vega$scales,
+				A2(
+					$author$project$Vega$scale,
+					'xScale',
+					_List_fromArray(
+						[
+							$author$project$Vega$scType($author$project$Vega$scLinear),
+							$author$project$Vega$scRange($author$project$Vega$raWidth),
+							$author$project$Vega$scDomain(
+							$author$project$Vega$doNums(
+								$author$project$Vega$nums(
+									_List_fromArray(
+										[1565, 1825])))),
+							$author$project$Vega$scZero($author$project$Vega$false)
+						]))),
+			A2(
+				$author$project$Vega$scale,
+				'yScale',
+				_List_fromArray(
+					[
+						$author$project$Vega$scType($author$project$Vega$scLinear),
+						$author$project$Vega$scRange($author$project$Vega$raHeight),
+						$author$project$Vega$scZero($author$project$Vega$true),
+						$author$project$Vega$scDomain(
+						$author$project$Vega$doData(
+							_List_fromArray(
+								[
+									$author$project$Vega$daDataset('wheat'),
+									$author$project$Vega$daField(
+									$author$project$Vega$field('wheat'))
+								])))
+					]))),
+		A2(
+			$author$project$Vega$scale,
+			'cScale',
+			_List_fromArray(
+				[
+					$author$project$Vega$scType($author$project$Vega$scOrdinal),
+					$author$project$Vega$scRange(
+					$author$project$Vega$raStrs(
+						_List_fromArray(
+							['black', 'white']))),
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doData(
+						_List_fromArray(
+							[
+								$author$project$Vega$daDataset('monarchs'),
+								$author$project$Vega$daField(
+								$author$project$Vega$field('commonwealth'))
+							])))
+				])));
+	var mk = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$marks,
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$rect,
+			_List_fromArray(
+				[
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('wheat'))
+						])),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									$author$project$Vega$maX(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('xScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$field('year'))
+										])),
+									$author$project$Vega$maWidth(
+									_List_fromArray(
+										[
+											$author$project$Vega$vNum(17)
+										])),
+									$author$project$Vega$maY(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('yScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$field('wheat'))
+										])),
+									$author$project$Vega$maY2(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('yScale'),
+											$author$project$Vega$vNum(0)
+										])),
+									$author$project$Vega$maFill(
+									_List_fromArray(
+										[
+											$author$project$Vega$vStr('#aaa')
+										])),
+									$author$project$Vega$maStroke(
+									_List_fromArray(
+										[
+											$author$project$Vega$vStr('#5d5d5d')
+										])),
+									$author$project$Vega$maStrokeWidth(
+									_List_fromArray(
+										[
+											$author$project$Vega$vNum(0.25)
+										]))
+								]))
+						]))
+				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				$author$project$Vega$data,
+				'wheat',
+				_List_fromArray(
+					[
+						$author$project$Vega$daUrl(
+						$author$project$Vega$str($author$project$GalleryCustom$dPath + 'wheat.json'))
+					])),
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						$author$project$Vega$trFilter(
+						$author$project$Vega$expr('!!datum.wages'))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'wheat-filtered',
+					_List_fromArray(
+						[
+							$author$project$Vega$daSource('wheat')
+						]))),
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2($author$project$Vega$trFormula, '((!datum.commonwealth && datum.index % 2) ? -1: 1) * 2 + 95', 'offset')
+					]),
+				A2(
+					$author$project$Vega$data,
+					'monarchs',
+					_List_fromArray(
+						[
+							$author$project$Vega$daUrl(
+							$author$project$Vega$str($author$project$GalleryCustom$dPath + 'monarchs.json'))
+						])))
+			]));
+	var ax = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$axes,
+			A3(
+				$author$project$Vega$axis,
+				'xScale',
+				$author$project$Vega$siBottom,
+				_List_fromArray(
+					[
+						$author$project$Vega$axTickCount(
+						$author$project$Vega$num(5)),
+						$author$project$Vega$axFormat(
+						$author$project$Vega$str('04d'))
+					]))),
+		A3(
+			$author$project$Vega$axis,
+			'yScale',
+			$author$project$Vega$siRight,
+			_List_fromArray(
+				[
+					$author$project$Vega$axGrid($author$project$Vega$true),
+					$author$project$Vega$axDomain($author$project$Vega$false),
+					$author$project$Vega$axZIndex(
+					$author$project$Vega$num(1)),
+					$author$project$Vega$axTickCount(
+					$author$project$Vega$num(5)),
+					$author$project$Vega$axOffset(
+					$author$project$Vega$vNum(5)),
+					$author$project$Vega$axTickSize(
+					$author$project$Vega$num(0)),
+					$author$project$Vega$axEncode(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							$author$project$Vega$aeGrid,
+							_List_fromArray(
+								[
+									$author$project$Vega$enEnter(
+									_List_fromArray(
+										[
+											$author$project$Vega$maStroke(
+											_List_fromArray(
+												[$author$project$Vega$white])),
+											$author$project$Vega$maStrokeWidth(
+											_List_fromArray(
+												[
+													$author$project$Vega$vNum(1)
+												])),
+											$author$project$Vega$maStrokeOpacity(
+											_List_fromArray(
+												[
+													$author$project$Vega$vNum(0.25)
+												]))
+										]))
+								])),
+							_Utils_Tuple2(
+							$author$project$Vega$aeLabels,
+							_List_fromArray(
+								[
+									$author$project$Vega$enEnter(
+									_List_fromArray(
+										[
+											$author$project$Vega$maFontStyle(
+											_List_fromArray(
+												[
+													$author$project$Vega$vStr('italic')
+												]))
+										]))
+								]))
+						]))
+				])));
+	return $author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				$author$project$Vega$width(300),
+				$author$project$Vega$padding(15),
+				si(_List_Nil),
+				ds,
+				sc(_List_Nil),
+				ax(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var $author$project$GalleryCustom$mySpecs = $author$project$Vega$combineSpecs(
 	_List_fromArray(
 		[
@@ -18861,7 +19159,8 @@ var $author$project$GalleryCustom$mySpecs = $author$project$Vega$combineSpecs(
 			_Utils_Tuple2('custom3', $author$project$GalleryCustom$custom3),
 			_Utils_Tuple2('custom4', $author$project$GalleryCustom$custom4),
 			_Utils_Tuple2('custom5', $author$project$GalleryCustom$custom5),
-			_Utils_Tuple2('custom6', $author$project$GalleryCustom$custom6)
+			_Utils_Tuple2('custom6', $author$project$GalleryCustom$custom6),
+			_Utils_Tuple2('custom7', $author$project$GalleryCustom$custom7)
 		]));
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -18877,7 +19176,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $author$project$GalleryCustom$sourceExample = $author$project$GalleryCustom$custom6;
+var $author$project$GalleryCustom$sourceExample = $author$project$GalleryCustom$custom7;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$GalleryCustom$view = function (spec) {

@@ -10010,7 +10010,7 @@ var $author$project$Vega$ifElse = F3(
 		return A3($author$project$Vega$VIfElse, condition, thenVals, elseVals);
 	});
 var $author$project$Vega$InOptions = function (a) {
-	return {$: 2, a: a};
+	return {$: 3, a: a};
 };
 var $author$project$Vega$inOptions = $author$project$Vega$InOptions;
 var $author$project$Vega$LeFill = function (a) {
@@ -14164,42 +14164,47 @@ var $author$project$Vega$SiName = function (a) {
 };
 var $author$project$Vega$inputProperty = function (prop) {
 	switch (prop.$) {
-		case 4:
+		case 0:
+			var s = prop.a;
+			return _Utils_Tuple2(
+				'name',
+				$elm$json$Json$Encode$string(s));
+		case 5:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'min',
 				$elm$json$Json$Encode$float(x));
-		case 5:
+		case 6:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'max',
 				$elm$json$Json$Encode$float(x));
-		case 6:
+		case 7:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'step',
 				$elm$json$Json$Encode$float(x));
-		case 0:
+		case 1:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'debounce',
 				$elm$json$Json$Encode$float(x));
-		case 2:
+		case 3:
 			var opts = prop.a;
 			return _Utils_Tuple2(
 				'options',
 				$author$project$Vega$valueSpec(opts));
-		case 3:
+		case 4:
 			var labels = prop.a;
 			return _Utils_Tuple2(
 				'labels',
 				$author$project$Vega$valueSpec(labels));
-		case 7:
+		case 8:
 			var el = prop.a;
 			return _Utils_Tuple2(
 				'placeholder',
 				$elm$json$Json$Encode$string(el));
-		case 1:
+		case 2:
 			var el = prop.a;
 			return _Utils_Tuple2(
 				'element',
@@ -14949,15 +14954,15 @@ var $author$project$Vega$IRange = function (a) {
 };
 var $author$project$Vega$iRange = $author$project$Vega$IRange;
 var $author$project$Vega$InMax = function (a) {
-	return {$: 5, a: a};
+	return {$: 6, a: a};
 };
 var $author$project$Vega$inMax = $author$project$Vega$InMax;
 var $author$project$Vega$InMin = function (a) {
-	return {$: 4, a: a};
+	return {$: 5, a: a};
 };
 var $author$project$Vega$inMin = $author$project$Vega$InMin;
 var $author$project$Vega$InStep = function (a) {
-	return {$: 6, a: a};
+	return {$: 7, a: a};
 };
 var $author$project$Vega$inStep = $author$project$Vega$InStep;
 var $author$project$Vega$LeOffset = function (a) {
@@ -17908,7 +17913,7 @@ var $author$project$Vega$FSignal = function (a) {
 };
 var $author$project$Vega$fSignal = $author$project$Vega$FSignal;
 var $author$project$Vega$InLabels = function (a) {
-	return {$: 3, a: a};
+	return {$: 4, a: a};
 };
 var $author$project$Vega$inLabels = $author$project$Vega$InLabels;
 var $author$project$Vega$on = F2(
