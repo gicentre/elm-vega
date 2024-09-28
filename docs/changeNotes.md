@@ -1,8 +1,14 @@
 # Vega Changes
 
-## V5.7.1 ➡ V5.7.2 (pending)
+## V5.7.1 ➡ V5.8.0 (pending)
 
-_Minor code cleaning, updating of data dependencies and additional examples in gallery._
+_Align with Vega 5.30._
+
+### V5.8 API Additions
+
+- `inName` option added to input elements for custom labelling.
+
+### V5.8 Other changes
 
 - Added zoomable circle packing example (Vega 5.27 )
 - Added packed bubble chart example (Vega 5.22)
